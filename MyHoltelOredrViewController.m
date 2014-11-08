@@ -13,7 +13,6 @@
 #import "MyHotelOredeDetailTableViewController.h"
 #import "EntainDetailViewController.h"
 #import "OrderViewController.h"
-//#import "MyLineOrderDetailTableViewController.h"
 #import "MyEntainOrderDetailTableViewController.h"
 
 static const int pageSize = 10;
@@ -453,8 +452,12 @@ postRequestAgency(datas)
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *currentDic = tableArr[indexPath.section];
-    if ([self.title isEqualToString:@"导游/租车订单"] && [[currentDic valueForKey:@"ProdType"]intValue] == 1) {
-        return 235 + 45;
+    if ([self.title isEqualToString:@"导游/租车订单"]) {
+        if ([[currentDic valueForKey:@"ProdType"]intValue] == 1) {
+            return 235 + 45;
+        }else {
+            return 235;
+        }
     }else {
         return 235;
     }
