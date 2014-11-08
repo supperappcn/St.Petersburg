@@ -823,6 +823,7 @@
 		0A041E8419F64B7900320F8E /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		0A041E8619F64B7900320F8E /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
 		0A041E8719F64B7900320F8E /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
+		0A04D6B41A0E11E200AF5F4B /* St.Petersburg-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "St.Petersburg-Prefix.pch"; sourceTree = "<group>"; };
 		0A0682761A0CC03F0047B87F /* hotelCarenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotelCarenderViewController.h; sourceTree = SOURCE_ROOT; };
 		0A0682771A0CC03F0047B87F /* hotelCarenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotelCarenderViewController.m; sourceTree = SOURCE_ROOT; };
 		0A06827A1A0CC1210047B87F /* GCCalenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCCalenderViewController.h; sourceTree = "<group>"; };
@@ -2729,6 +2730,7 @@
 		C49D176F18A5DAB70001E371 /* St.Petersburg */ = {
 			isa = PBXGroup;
 			children = (
+				0A04D6B41A0E11E200AF5F4B /* St.Petersburg-Prefix.pch */,
 				C49D177818A5DAB70001E371 /* AppDelegate.h */,
 				C49D177918A5DAB70001E371 /* AppDelegate.m */,
 				C49D177B18A5DAB70001E371 /* Images.xcassets */,

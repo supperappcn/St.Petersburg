@@ -453,9 +453,11 @@ postRequestAgency(datas)
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *currentDic = tableArr[indexPath.section];
     if ([self.title isEqualToString:@"导游/租车订单"]) {
-        if ([[currentDic valueForKey:@"ProdType"]intValue] == 1) {
+        if ([[currentDic valueForKey:@"ProdType"]intValue] == 1)
+        {
             return 235 + 45;
-        }else {
+        }else
+        {
             return 235;
         }
     }else {
