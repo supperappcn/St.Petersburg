@@ -79,9 +79,13 @@ static NSString* cellIdentifier = @"Cell";
         self.headerView.backgroundColor = color;
         [self.view addSubview:self.headerView];
     }else if (self.prodClass.intValue == 5) {
-        
+        self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 127+150+122)];
+        self.headerView.backgroundColor = color;
+        [self.view addSubview:self.headerView];
     }else if (self.prodClass.intValue == 6) {
-        
+        self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 127+105+122)];
+        self.headerView.backgroundColor = color;
+        [self.view addSubview:self.headerView];
     }
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -348,15 +352,106 @@ static NSString* cellIdentifier = @"Cell";
         jianTouIV.image = [UIImage imageNamed:@"cellJianTou.png"];
         [titleView addSubview:jianTouIV];
     }else if (self.prodClass.intValue == 5) {//导游（个人）订单详情
-//        infoLab.text = @"导游信息";
-        
-        
+        self.infoViewHeight = 150;
+        self.infoView = [[UIView alloc]initWithFrame:CGRectMake(0, self.topView.frame.size.height, self.view.frame.size.width, self.infoViewHeight)];
+        self.infoView.backgroundColor = color;
+        [self.headerView addSubview:self.infoView];
+        UILabel* infoLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 78, 20)];
+        infoLab.text = @"导游信息";
+        infoLab.font = [UIFont systemFontOfSize:12];
+        [self.infoView addSubview:infoLab];
+        UIView* titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, 110)];
+        titleView.backgroundColor = [UIColor whiteColor];
+        [self.infoView addSubview:titleView];
+        UIImageView* line1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
+        line1.image = [UIImage imageNamed:@"links.png"];
+        [titleView addSubview:line1];
+        UIImageView* headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 90)];
+        headIV.image = self.headImage;
+        [titleView addSubview:headIV];
+        UILabel* titleLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, DeviceWidth - 80 - 17, 21)];
+        NSString* sex = @"";
+        NSString* guideName = [self.currentDic valueForKey:@"GuideName"];
+        NSString* guideClass = [self.currentDic valueForKey:@"GuideClass"];
+        if ([[self.currentDic valueForKey:@"Sex"]intValue] == 1) { //男
+            sex = @"男";
+        }else if ([[self.currentDic valueForKey:@"Sex"]intValue] == 2) { //女
+            sex = @"女";
+        }
+        NSString* russiaTitle = [NSString stringWithFormat:@"%@ %@ %@",guideName, sex, guideClass];
+        NSMutableAttributedString* russiaStr = [[NSMutableAttributedString alloc]initWithString:russiaTitle];
+        [russiaStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:[russiaTitle rangeOfString:sex]];
+        [russiaStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.047 green:0.345 blue:0.663 alpha:1] range:[russiaTitle rangeOfString:guideClass]];
+        titleLab.attributedText = russiaStr;
+        titleLab.font = font;
+        [titleView addSubview:titleLab];
+        UILabel* languageTitle = [[UILabel alloc]initWithFrame:CGRectMake(80, 30, 40, 21)];
+        languageTitle.text = @"语言：";
+        languageTitle.textColor = grayColor;
+        languageTitle.font = [UIFont systemFontOfSize:12];
+        [titleView addSubview:languageTitle];
+        UILabel* languageLab = [[UILabel alloc]initWithFrame:CGRectMake(120, 30, DeviceWidth - 120 -17, 21)];
+        languageLab.text = self.currentDic[@"Language"];
+        languageLab.font = [UIFont systemFontOfSize:12];
+        [titleView addSubview:languageLab];
+        UILabel* shanChangTitle = [[UILabel alloc]initWithFrame:CGRectMake(80, 50, 60, 21)];
+        shanChangTitle.text = @"擅长讲解：";
+        shanChangTitle.textColor = grayColor;
+        shanChangTitle.font = [UIFont systemFontOfSize:12];
+        [titleView addSubview:shanChangTitle];
+        RTLabel* shanChangLab = [[RTLabel alloc]initWithFrame:CGRectMake(140, 52, DeviceWidth - 150 - 17, 21)];
+        shanChangLab.text = self.currentDic[@"JiangJie"];
+        float height = shanChangLab.optimumSize.height;
+        height = height>21?height:21;
+        shanChangLab.frame = CGRectMake(140, 52, DeviceWidth - 150 - 17, height);
+        shanChangLab.font = [UIFont systemFontOfSize:12];
+        [titleView addSubview:shanChangLab];
+        UIImageView* jianTouIV = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 17, 24, 17, 17)];
+        jianTouIV.image = [UIImage imageNamed:@"cellJianTou.png"];
+        [titleView addSubview:jianTouIV];
     }else if (self.prodClass.intValue == 6) {//租车（个人）订单详情
-//        infoLab.text = @"租车信息";
-        
-        
+        self.infoViewHeight = 105;
+        self.infoView = [[UIView alloc]initWithFrame:CGRectMake(0, self.topView.frame.size.height, self.view.frame.size.width, self.infoViewHeight)];
+        self.infoView.backgroundColor = color;
+        [self.headerView addSubview:self.infoView];
+        UILabel* infoLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 78, 20)];
+        infoLab.text = @"租车信息";
+        infoLab.font = [UIFont systemFontOfSize:12];
+        [self.infoView addSubview:infoLab];
+        UIView* titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, 65)];
+        titleView.backgroundColor = [UIColor whiteColor];
+        [self.infoView addSubview:titleView];
+        UIImageView* line1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
+        line1.image = [UIImage imageNamed:@"links.png"];
+        [titleView addSubview:line1];
+        UIImageView* headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
+        headIV.image = self.headImage;
+        [titleView addSubview:headIV];
+        UILabel* titleLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, DeviceWidth - 80 - 17, 21)];
+        NSString* sex = @"";
+        NSString* guideName = [self.currentDic valueForKey:@"GuideName"];
+        NSString* guideClass = [self.currentDic valueForKey:@"GuideClass"];
+        if ([[self.currentDic valueForKey:@"Sex"]intValue] == 1) { //男
+            sex = @"男";
+        }else if ([[self.currentDic valueForKey:@"Sex"]intValue] == 2) { //女
+            sex = @"女";
+        }
+        NSString* russiaTitle = [NSString stringWithFormat:@"%@ %@ %@",guideName, sex, guideClass];
+        NSMutableAttributedString* russiaStr = [[NSMutableAttributedString alloc]initWithString:russiaTitle];
+        [russiaStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:[russiaTitle rangeOfString:sex]];
+        [russiaStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.047 green:0.345 blue:0.663 alpha:1] range:[russiaTitle rangeOfString:guideClass]];
+        titleLab.attributedText = russiaStr;
+        titleLab.font = font;
+        [titleView addSubview:titleLab];
+        UILabel* carInfoLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 30, DeviceWidth - 80 - 17, 21)];
+        carInfoLab.text = [NSString stringWithFormat:@"%@人座 %@ %@", self.currentDic[@"SeatCount"], self.currentDic[@"CarType"], self.currentDic[@"JiCheng"]];
+        carInfoLab.textColor = [UIColor colorWithRed:0.047 green:0.345 blue:0.663 alpha:1];
+        carInfoLab.font = [UIFont systemFontOfSize:12];
+        [titleView addSubview:carInfoLab];
+        UIImageView* jianTouIV = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 17, 24, 17, 17)];
+        jianTouIV.image = [UIImage imageNamed:@"cellJianTou.png"];
+        [titleView addSubview:jianTouIV];
     }
-    
 }
 
 -(void)addOrderInfoView {
@@ -535,13 +630,97 @@ static NSString* cellIdentifier = @"Cell";
         peopleCountLab.font = font;
         [orderView addSubview:peopleCountLab];
     }else if (self.prodClass.intValue == 5) {//导游（个人）订单详情
-        
-        
-        
+        self.orderInfoViewHeight = 122;
+        self.orderInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, self.topView.frame.size.height+self.infoViewHeight, self.view.frame.size.width, self.orderInfoViewHeight)];
+        self.orderInfoView.backgroundColor = color;
+        [self.headerView addSubview:self.orderInfoView];
+        UILabel* orderInfoLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 78, 20)];
+        orderInfoLab.text = @"订单信息";
+        orderInfoLab.font = [UIFont systemFontOfSize:12];
+        [self.orderInfoView addSubview:orderInfoLab];
+        UIView* orderView = [[UIView alloc]initWithFrame:CGRectMake(0, 45, self.view.frame.size.width, 82)];
+        orderView.backgroundColor = [UIColor whiteColor];
+        [self.orderInfoView addSubview:orderView];
+        UIImageView* startdayIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 12, 18, 18)];
+        startdayIV.image = [UIImage imageNamed:@"住宿预订第1步_03.png"];
+        [orderView addSubview:startdayIV];
+        UILabel* startdayTitle = [[UILabel alloc]initWithFrame:CGRectMake(38, 10, 70, 21)];
+        startdayTitle.text = @"选择日期";
+        startdayTitle.textColor = grayColor;
+        startdayTitle.font = font;
+        [orderView addSubview:startdayTitle];
+        RTLabel* startdayLab = [[RTLabel alloc]initWithFrame:CGRectMake(120, 12, self.view.frame.size.width - 120 - 10, 21)];
+        startdayLab.text = self.currentDic[@"Startdate"];
+        float height = startdayLab.optimumSize.height;
+        height = height>21?height:21;
+        startdayLab.frame = CGRectMake(120, 12, DeviceWidth - 120 - 10, height);
+        startdayLab.font = font;
+        [orderView addSubview:startdayLab];
+        UIImageView* link = [[UIImageView alloc]initWithFrame:CGRectMake(10, 41 + height - 21, self.view.frame.size.width - 10, 1)];
+        link.image = [UIImage imageNamed:@"links.png"];
+        [orderView addSubview:link];
+        UIImageView* peopleCountIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 53 + height - 21, 18, 18)];
+        peopleCountIV.image = [UIImage imageNamed:@"住宿预订第1步_03-09.png"];
+        [orderView addSubview:peopleCountIV];
+        UILabel* peopleCountTitle = [[UILabel alloc]initWithFrame:CGRectMake(38, 51 + height - 21, 70, 21)];
+        peopleCountTitle.text = @"游客人数";
+        peopleCountTitle.textColor = grayColor;
+        peopleCountTitle.font = font;
+        [orderView addSubview:peopleCountTitle];
+        UILabel* peopleCountLab = [[UILabel alloc]initWithFrame:CGRectMake(120, 51 + height - 21, self.view.frame.size.width - 120 - 10, 21)];
+        peopleCountLab.text = [NSString stringWithFormat:@"%@", [self.currentDic valueForKey:@"PCount"]];
+        peopleCountLab.font = font;
+        [orderView addSubview:peopleCountLab];
+        orderView.frame = CGRectMake(orderView.frame.origin.x, orderView.frame.origin.y, orderView.frame.size.width, orderView.frame.size.height + height - 21);
+        self.orderInfoViewHeight = 122 + height - 21;
+        self.orderInfoView.frame = CGRectMake(self.orderInfoView.frame.origin.x, self.orderInfoView.frame.origin.y, self.orderInfoView.frame.size.width, self.orderInfoView.frame.size.height + height - 21);
+        self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y, self.headerView.frame.size.width, self.headerView.frame.size.height + height - 21);
     }else if (self.prodClass.intValue == 6) {//租车（个人）订单详情
-        
-        
-        
+        self.orderInfoViewHeight = 122;
+        self.orderInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, self.topView.frame.size.height+self.infoViewHeight, self.view.frame.size.width, self.orderInfoViewHeight)];
+        self.orderInfoView.backgroundColor = color;
+        [self.headerView addSubview:self.orderInfoView];
+        UILabel* orderInfoLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 78, 20)];
+        orderInfoLab.text = @"订单信息";
+        orderInfoLab.font = [UIFont systemFontOfSize:12];
+        [self.orderInfoView addSubview:orderInfoLab];
+        UIView* orderView = [[UIView alloc]initWithFrame:CGRectMake(0, 45, self.view.frame.size.width, 82)];
+        orderView.backgroundColor = [UIColor whiteColor];
+        [self.orderInfoView addSubview:orderView];
+        UIImageView* startdayIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 12, 18, 18)];
+        startdayIV.image = [UIImage imageNamed:@"住宿预订第1步_03.png"];
+        [orderView addSubview:startdayIV];
+        UILabel* startdayTitle = [[UILabel alloc]initWithFrame:CGRectMake(38, 10, 70, 21)];
+        startdayTitle.text = @"选择日期";
+        startdayTitle.textColor = grayColor;
+        startdayTitle.font = font;
+        [orderView addSubview:startdayTitle];
+        RTLabel* startdayLab = [[RTLabel alloc]initWithFrame:CGRectMake(120, 12, self.view.frame.size.width - 120 - 10, 21)];
+        startdayLab.text = self.currentDic[@"Startdate"];
+        float height = startdayLab.optimumSize.height;
+        height = height>21?height:21;
+        startdayLab.frame = CGRectMake(120, 12, DeviceWidth - 120 - 10, height);
+        startdayLab.font = font;
+        [orderView addSubview:startdayLab];
+        UIImageView* link = [[UIImageView alloc]initWithFrame:CGRectMake(10, 41 + height - 21, self.view.frame.size.width - 10, 1)];
+        link.image = [UIImage imageNamed:@"links.png"];
+        [orderView addSubview:link];
+        UIImageView* peopleCountIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 53 + height - 21, 18, 18)];
+        peopleCountIV.image = [UIImage imageNamed:@"住宿预订第1步_03-09.png"];
+        [orderView addSubview:peopleCountIV];
+        UILabel* peopleCountTitle = [[UILabel alloc]initWithFrame:CGRectMake(38, 51 + height - 21, 70, 21)];
+        peopleCountTitle.text = @"游客人数";
+        peopleCountTitle.textColor = grayColor;
+        peopleCountTitle.font = font;
+        [orderView addSubview:peopleCountTitle];
+        UILabel* peopleCountLab = [[UILabel alloc]initWithFrame:CGRectMake(120, 51 + height - 21, self.view.frame.size.width - 120 - 10, 21)];
+        peopleCountLab.text = [NSString stringWithFormat:@"%@", [self.currentDic valueForKey:@"PCount"]];
+        peopleCountLab.font = font;
+        [orderView addSubview:peopleCountLab];
+        orderView.frame = CGRectMake(orderView.frame.origin.x, orderView.frame.origin.y, orderView.frame.size.width, orderView.frame.size.height + height - 21);
+        self.orderInfoViewHeight = 122 + height - 21;
+        self.orderInfoView.frame = CGRectMake(self.orderInfoView.frame.origin.x, self.orderInfoView.frame.origin.y, self.orderInfoView.frame.size.width, self.orderInfoView.frame.size.height + height - 21);
+        self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y, self.headerView.frame.size.width, self.headerView.frame.size.height + height - 21);
     }
 }
 

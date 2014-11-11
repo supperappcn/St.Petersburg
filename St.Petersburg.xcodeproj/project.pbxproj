@@ -27,6 +27,7 @@
 		0A0CB7A119F4F1A00013D763 /* calenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB79F19F4F1A00013D763 /* calenderView.m */; };
 		0A0CB7A419F4F3490013D763 /* WriteMyTravelingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB7A319F4F3490013D763 /* WriteMyTravelingViewController.m */; };
 		0A0CB7A719F4F37A0013D763 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB7A619F4F37A0013D763 /* GCPlaceholderTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0A0EBE671A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EBE661A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m */; };
 		0A6414761A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6414741A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m */; };
 		0A6414771A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A6414751A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib */; };
 		18650E9519E6655900209EB6 /* libQYHMethod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E8D19E6652900209EB6 /* libQYHMethod.a */; };
@@ -823,7 +824,6 @@
 		0A041E8419F64B7900320F8E /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		0A041E8619F64B7900320F8E /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
 		0A041E8719F64B7900320F8E /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
-		0A04D6B41A0E11E200AF5F4B /* St.Petersburg-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "St.Petersburg-Prefix.pch"; sourceTree = "<group>"; };
 		0A0682761A0CC03F0047B87F /* hotelCarenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotelCarenderViewController.h; sourceTree = SOURCE_ROOT; };
 		0A0682771A0CC03F0047B87F /* hotelCarenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotelCarenderViewController.m; sourceTree = SOURCE_ROOT; };
 		0A06827A1A0CC1210047B87F /* GCCalenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCCalenderViewController.h; sourceTree = "<group>"; };
@@ -843,6 +843,8 @@
 		0A0CB7A319F4F3490013D763 /* WriteMyTravelingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteMyTravelingViewController.m; sourceTree = "<group>"; };
 		0A0CB7A519F4F37A0013D763 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
 		0A0CB7A619F4F37A0013D763 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
+		0A0EBE651A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGuideAndCarOrderDetailTableViewCell.h; sourceTree = "<group>"; };
+		0A0EBE661A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGuideAndCarOrderDetailTableViewCell.m; sourceTree = "<group>"; };
 		0A6414731A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLineOrderDetailTableViewCell.h; sourceTree = "<group>"; };
 		0A6414741A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLineOrderDetailTableViewCell.m; sourceTree = "<group>"; };
 		0A6414751A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyLineOrderDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -853,7 +855,6 @@
 		18650E9019E6652900209EB6 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCWeiboSDK.a; sourceTree = "<group>"; };
 		18650E9119E6652900209EB6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		18650E9219E6652900209EB6 /* libYixinSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYixinSDK.a; sourceTree = "<group>"; };
-		18D824641A0E107B0052145D /* St.Petersburg-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "St.Petersburg-Prefix.pch"; sourceTree = "<group>"; };
 		C400545C18EA6B0000E130B6 /* day1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day1.png; sourceTree = "<group>"; };
 		C400545D18EA6B0000E130B6 /* day2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day2.png; sourceTree = "<group>"; };
 		C400545E18EA6B0000E130B6 /* day3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day3.png; sourceTree = "<group>"; };
@@ -2579,6 +2580,8 @@
 				C47F753B198659D500B358FE /* MyHotelOrederListTableViewCell.h */,
 				C47F753C198659D500B358FE /* MyHotelOrederListTableViewCell.m */,
 				C47F753D198659D500B358FE /* MyHotelOrederListTableViewCell.xib */,
+				0A0EBE651A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.h */,
+				0A0EBE661A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m */,
 				C47F74C51988DD4C000A640D /* MyHotelOredeDetailTableViewController.h */,
 				C47F74C61988DD4C000A640D /* MyHotelOredeDetailTableViewController.m */,
 				C47F74C71988DD4C000A640D /* MyHotelOredeDetailTableViewController.xib */,
@@ -2658,7 +2661,6 @@
 		C49D175D18A5DAB70001E371 = {
 			isa = PBXGroup;
 			children = (
-				18D824641A0E107B0052145D /* St.Petersburg-Prefix.pch */,
 				0A0682791A0CC1210047B87F /* guideAndCar */,
 				0A041E6B19F64B7900320F8E /* alipay */,
 				0A0CB79B19F4F1A00013D763 /* 日历 */,
@@ -2730,7 +2732,6 @@
 		C49D176F18A5DAB70001E371 /* St.Petersburg */ = {
 			isa = PBXGroup;
 			children = (
-				0A04D6B41A0E11E200AF5F4B /* St.Petersburg-Prefix.pch */,
 				C49D177818A5DAB70001E371 /* AppDelegate.h */,
 				C49D177918A5DAB70001E371 /* AppDelegate.m */,
 				C49D177B18A5DAB70001E371 /* Images.xcassets */,
@@ -4453,6 +4454,7 @@
 				C4E19BD11911981C00CE7B61 /* BestViewController.m in Sources */,
 				C4E816E818B33CF3005C20D7 /* TelephoneViewController.m in Sources */,
 				C40A78BA18BC462D00596B24 /* LineCustomCell.m in Sources */,
+				0A0EBE671A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m in Sources */,
 				C42C5CA018B7584200C31C7C /* NSAttributedString+Attributes.m in Sources */,
 				C4FE85B018ADB58E00A579AE /* CountryViewController.m in Sources */,
 				C4EF9D22196FE65C00CFF415 /* LineReseverClass.m in Sources */,
