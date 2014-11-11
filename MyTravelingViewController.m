@@ -110,7 +110,7 @@ backButton
 }
 NetChange(noNetButton)
 GO_NET
-static int a = 0 ;
+//static int a = 0 ;
 - (void)send{
     [self.navigationController pushViewController:[WriteMyTravelingViewController new] animated:YES];
     

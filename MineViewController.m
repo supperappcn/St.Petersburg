@@ -685,6 +685,11 @@
     locationManager.delegate=self;
  
 }
+
+
+
+
+
 NetChange(noNetButton)
 GO_NET
 -(void)touch:(UIButton*)sender
