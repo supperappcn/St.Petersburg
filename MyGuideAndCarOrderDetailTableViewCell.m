@@ -154,7 +154,7 @@
     [self.cellSubviews addObject:self.statusLab];
     
     self.goBtn = [[UIButton alloc]initWithFrame:CGRectMake(245, 195 + selectTimeHeight - 21, 70, 21)];
-    self.goBtn.titleLabel.textColor = [UIColor colorWithRed:0.047 green:0.345 blue:0.663 alpha:1];
+    [self.goBtn setTitleColor:[UIColor colorWithRed:0.047 green:0.345 blue:0.663 alpha:1] forState:UIControlStateNormal];
     self.goBtn.titleLabel.font = font;
     self.goBtn.hidden = YES;
     [self addSubview:self.goBtn];

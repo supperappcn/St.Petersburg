@@ -519,7 +519,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     //娱乐
     if (self.tag==1)
     {
-        detail.navName=@"介绍";
+        detail.navName=@"娱乐介绍";
         detail.classID=4;
         detail.tag=1;
         if ([_array isEqualToArray:headerArray])

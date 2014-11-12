@@ -12,6 +12,7 @@
 #import "OrderViewController.h"
 #import "RTLabel.h"
 #import "MyHotelOredeDetailCell.h"
+#import "GuideDetailViewController.h"
 
 @interface MyEntainOrderDetailTableViewController ()
 @property (strong, nonatomic)UIView* topView;//“订单号”->“订单状态”这一部分视图   高度固定为127
@@ -971,11 +972,44 @@ static NSString* cellIdentifier = @"Cell";
 //        ovc.productName = [NSString stringWithFormat:@"%@ %@", self.chineseTitleLab.text, self.subheadLab.text];
 //        [self.navigationController pushViewController:ovc animated:NO];
     }else if ([sender.currentTitle isEqualToString:@"重新预订"]) {
-        NSLog(@"重新预订，跳转到预订界面");
-//        EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
-//        entainDetailVC.hotelID = self.hotelID;
-//        entainDetailVC.navName = @"酒店介绍";
-//        [self.navigationController pushViewController:entainDetailVC animated:YES];
+        if (self.prodClass.intValue == 1) {
+            EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
+            entainDetailVC.fromeImage = self.headImage;
+            entainDetailVC.hotelID = self.hotelID;
+//            entainDetailVC.classID =
+            entainDetailVC.navName = @"线路介绍";
+            [self.navigationController pushViewController:entainDetailVC animated:YES];
+        }else if (self.prodClass.intValue == 2) {
+            EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
+//            entainDetailVC.fromeImage = self.headImage;
+            entainDetailVC.hotelID = self.hotelID;
+            entainDetailVC.classID = 7;
+            entainDetailVC.navName = @"景点介绍";
+            [self.navigationController pushViewController:entainDetailVC animated:YES];
+        }else if (self.prodClass.intValue == 3) {
+            EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
+            entainDetailVC.hotelID = self.hotelID;
+            entainDetailVC.classID = 3;
+            entainDetailVC.navName = @"酒店介绍";
+            [self.navigationController pushViewController:entainDetailVC animated:YES];
+        }else if (self.prodClass.intValue == 4) {
+            EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
+            entainDetailVC.hotelID = self.hotelID;
+            entainDetailVC.classID = 4;
+            entainDetailVC.tag = 1;
+            entainDetailVC.navName = @"娱乐介绍";
+            [self.navigationController pushViewController:entainDetailVC animated:YES];
+        }else if (self.prodClass.intValue == 5 || self.prodClass.intValue == 6) {
+            GuideDetailViewController* guideDetailVC = [GuideDetailViewController new];
+            guideDetailVC.gudieID = [NSString stringWithFormat:@"%d", self.hotelID];
+            guideDetailVC.picImage = self.headImage;
+            if ([[self.currentDic valueForKey:@"ProdType"]intValue] == 1) {
+                guideDetailVC.title = @"导游介绍";
+            }else if ([[self.currentDic valueForKey:@"ProdType"]intValue] == 2) {
+                guideDetailVC.title = @"租车介绍";
+            }
+            [self.navigationController pushViewController:guideDetailVC animated:YES];
+        }
     }else if ([sender.currentTitle isEqualToString:@"去点评"]) {
         NSLog(@"去点评，跳转到点评界面");
         

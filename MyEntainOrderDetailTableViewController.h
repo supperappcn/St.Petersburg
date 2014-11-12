@@ -13,11 +13,11 @@
 @property (retain, nonatomic)NSDictionary* currentDic;
 @property (strong, nonatomic)NSMutableArray *tableArr;//存放有多少游客信息的
 @property (copy, nonatomic)NSString* prodClass;//prodclass：1线路、2景点、3酒店、4门票、5导游、6租车
+@property (assign, nonatomic)int hotelID;//XXID，重新预订时需要用到
 
 //topView中各项的值
-@property (copy, nonatomic)NSAttributedString* orderPrice;
+@property (copy, nonatomic)NSAttributedString* orderPrice;//订单金额
 @property (copy, nonatomic)NSString* payStr;//支付方式
-
 @property (strong, nonatomic)UIImage* headImage;
 
 @end

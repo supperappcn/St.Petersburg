@@ -20,6 +20,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
     Navbar *bar = (Navbar *)self.navigationController.navigationBar;
     bar.cusBarStyele = UIBarStyleBlackOpaque;
  
@@ -99,7 +100,7 @@
     [super viewDidLoad];
     Navbar *bar = (Navbar *)self.navigationController.navigationBar;
     bar.cusBarStyele = UIBarStyleBlackOpaque;
-    bar.stateBarColor = [UIColor blackColor];
+//    bar.stateBarColor = [UIColor blackColor];
     
 
      self.navigationController.navigationBar.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"top.png"]];
