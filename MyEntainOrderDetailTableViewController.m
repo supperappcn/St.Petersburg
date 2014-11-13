@@ -125,10 +125,10 @@ static NSString* cellIdentifier = @"Cell";
     orderPriceTitle.textColor = grayColor;
     orderPriceTitle.font = font;
     [self.topView addSubview:orderPriceTitle];
-    UILabel* orderPriceLab = [[UILabel alloc]initWithFrame:CGRectMake(96, 34, 175, 21)];
-    orderPriceLab.attributedText = self.orderPrice;
-    orderPriceLab.font = font;
-    [self.topView addSubview:orderPriceLab];
+    self.orderPriceLab = [[UILabel alloc]initWithFrame:CGRectMake(96, 34, 175, 21)];
+    self.orderPriceLab.attributedText = self.orderPrice;
+    self.orderPriceLab.font = font;
+    [self.topView addSubview:self.orderPriceLab];
     UILabel* orderTimeTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 58, 78, 21)];
     orderTimeTitle.text = @"下单时间：";
     orderTimeTitle.textColor = grayColor;
@@ -883,10 +883,10 @@ static NSString* cellIdentifier = @"Cell";
             cell = [[[NSBundle mainBundle]loadNibNamed:@"MyLineOrderDetailTableViewCell" owner:self options:nil]lastObject];
         }
         cell.headLab.text = [NSString stringWithFormat:@"第%d位游客信息",indexPath.row+1];
-        cell.cLastName.text = self.tableArr[indexPath.row][0];
-        cell.cFirstName.text = self.tableArr[indexPath.row][1];
-        cell.eLastName.text = self.tableArr[indexPath.row][2];
-        cell.eFirstName.text = self.tableArr[indexPath.row][3];
+        cell.cLastName.text = self.tableArr[indexPath.section][0];
+        cell.cFirstName.text = self.tableArr[indexPath.section][1];
+        cell.eLastName.text = self.tableArr[indexPath.section][2];
+        cell.eFirstName.text = self.tableArr[indexPath.section][3];//把indexPath.row改成了indexPath.section
         if ([self.tableArr[indexPath.row][0] isEqualToString:@"男士"]) {
             cell.sex.text = @"男";
         }else {
@@ -963,14 +963,48 @@ static NSString* cellIdentifier = @"Cell";
         });
     }else if ([sender.currentTitle isEqualToString:@"去支付"]) {
         NSLog(@"去支付，跳转到支付界面");
-//        OrderViewController* ovc = [OrderViewController sharedOrderViewController];
-//        ovc.presentWay = 2;
-//        ovc.prodClass = 3;
-//        ovc.orderNumber = _orderNumLab.text;
-//        ovc.productDescription = self.roomFacilityLab.text;
-//        ovc.mhodTVC = self;
-//        ovc.productName = [NSString stringWithFormat:@"%@ %@", self.chineseTitleLab.text, self.subheadLab.text];
-//        [self.navigationController pushViewController:ovc animated:NO];
+        OrderViewController* ovc = [OrderViewController sharedOrderViewController];
+        ovc.meodTVC = self;
+        ovc.presentWay = 2;
+        ovc.orderNumber = self.currentDic[@"OrderID"];
+        if (self.prodClass.intValue == 1) {
+            ovc.prodClass = 1;
+            ovc.productName = self.currentDic[@"Title"];
+            ovc.productDescription = self.currentDic[@"LineType"];
+        }else if (self.prodClass.intValue == 2) {
+            ovc.prodClass = 2;
+            ovc.productName = self.currentDic[@"ViewCNName"];
+            ovc.productDescription = self.currentDic[@"ViewName"];
+        }else if (self.prodClass.intValue == 3) {
+            ovc.prodClass = 3;
+            ovc.productName = self.currentDic[@"HotelCNName"];
+            NSString *fittleStr=@"";
+            if ([[self.currentDic valueForKey:@"Ftitle"] length]>0) {
+                fittleStr = [NSString stringWithFormat:@"-%@",[self.currentDic valueForKey:@"Ftitle"]];
+            }
+            ovc.productDescription = [NSString stringWithFormat:@"%@%@",[self.currentDic valueForKey:@"RoomName"],fittleStr];
+        }else if (self.prodClass.intValue == 4) {
+            ovc.prodClass = 4;
+            ovc.productName = self.currentDic[@"TicketRName"];
+            ovc.productDescription = [NSString stringWithFormat:@"%@张", self.currentDic[@"TCount"]];
+        }else if (self.prodClass.intValue == 5) {
+            ovc.prodClass = 5;
+            ovc.productName = @"导游预订";
+            NSString* sex = @"";
+            NSString* guideName = [self.currentDic valueForKey:@"GuideName"];
+            NSString* guideClass = [self.currentDic valueForKey:@"GuideClass"];
+            if ([[self.currentDic valueForKey:@"Sex"]intValue] == 1) { //男
+                sex = @"男";
+            }else if ([[self.currentDic valueForKey:@"Sex"]intValue] == 2) { //女
+                sex = @"女";
+            }
+            ovc.productDescription = [NSString stringWithFormat:@"%@ %@ %@",guideName, sex, guideClass];
+        }else if (self.prodClass.intValue == 6) {
+            ovc.prodClass = 6;
+            ovc.productName = @"租车预订";
+            ovc.productDescription = [NSString stringWithFormat:@"%@人座 %@ %@", self.currentDic[@"SeatCount"], self.currentDic[@"CarType"], self.currentDic[@"JiCheng"]];;
+        }
+        [self.navigationController pushViewController:ovc animated:NO];
     }else if ([sender.currentTitle isEqualToString:@"重新预订"]) {
         if (self.prodClass.intValue == 1) {
             EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];

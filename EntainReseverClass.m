@@ -523,14 +523,15 @@ postRequestAgency(datas)
     if (result.intValue>0) {
         OrderViewController *ovc = [OrderViewController sharedOrderViewController];
         ovc.presentWay = 0;
+        ovc.prodClass = 4;
         ovc.orderNumber = result;
         ovc.RMB=_RMB;
         ovc.dollar=_dollar;
         ovc.dayCount=@"1";
         ovc.roomCount=[NSString stringWithFormat:@"%d",zhong.text.intValue];
         ovc.selectPayWay=paytype;
-        ovc.productDescription=_roomFacilityStr;
-        ovc.productName=[NSString stringWithFormat:@"%@ %@",_chineseStr,_roomTypeStr];
+        ovc.productDescription=[NSString stringWithFormat:@"%@张",zhong.text];
+        ovc.productName=_russianStr;
         [self.navigationController pushViewController:ovc animated:NO];
     }else if (result.intValue==0){
         

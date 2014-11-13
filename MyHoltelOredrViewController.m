@@ -10,7 +10,6 @@
 #import "MyHotelOrederListTableViewCell.h"
 #import "GDataXMLNode.h"
 #import "JSON.h"
-#import "MyHotelOredeDetailTableViewController.h"
 #import "OrderViewController.h"
 #import "MyEntainOrderDetailTableViewController.h"
 #import "MyGuideAndCarOrderDetailTableViewCell.h"
@@ -21,11 +20,7 @@
 static const int pageSize = 10;
 int pageindex = 1;
 @interface MyHoltelOredrViewController ()
-@property (nonatomic, retain)NSMutableArray* orderIDs;//订单号
-@property (nonatomic, retain)NSMutableArray* hotelIDs;//酒店ID
-@property (nonatomic, retain)NSMutableArray* chineseTitles;//中文名字
-@property (nonatomic, retain)NSMutableArray* subheads;//子标题（房间类型）
-@property (nonatomic, retain)NSMutableArray* roomFacilitys;//房间设备
+@property (nonatomic, retain)NSMutableArray* hotelIDs;//LineID、ViewID、HotelID、TicketID、GuideID
 @end
 
 @implementation MyHoltelOredrViewController
@@ -42,10 +37,6 @@ static NSString *identifier = @"Cell";
 }
 - (void)viewDidLoad{
     self.hotelIDs = [NSMutableArray array];
-    self.orderIDs = [NSMutableArray array];
-    self.chineseTitles = [NSMutableArray array];
-    self.subheads = [NSMutableArray array];
-    self.roomFacilitys = [NSMutableArray array];
     hideTabbar
     tableArr = [NSMutableArray array];
     pageIndexOne=1;
@@ -248,6 +239,7 @@ postRequestAgency(datas)
             [cell.goBtn removeFromSuperview];
         }
         [cell setModel:currentDic];
+        [cell.goBtn setTitleColor:[UIColor colorWithRed:0 green:0.58 blue:0.98 alpha:1] forState:UIControlStateNormal];
         cell.goBtn.tag = indexPath.section;
         if ([[currentDic valueForKey:@"Status"]length]>0) {
             //        1待支付, 2待处理, 3预订成功等待出游, 4已失效,
@@ -287,9 +279,7 @@ postRequestAgency(datas)
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"MyHotelOrederListTableViewCell" owner:self options:nil] lastObject];
         }
-        NSString* orderid = [currentDic valueForKey:@"OrderID"];
-        cell.orderNumLab.text = orderid;//订单号
-        [self.orderIDs addObject:orderid];//将酒店订单号存放数组中
+        cell.orderNumLab.text = [currentDic valueForKey:@"OrderID"];//订单号
         
         NSString *rmb = [NSString stringWithFormat:@"￥%@",[currentDic valueForKey:@"Cmoney"]];//人民币
         NSString *dollor = [NSString stringWithFormat:@"($%@)",[currentDic valueForKey:@"Umoney"]];//美元
@@ -310,6 +300,7 @@ postRequestAgency(datas)
             }
         }
         cell.goBtn.hidden = YES;
+        [cell.goBtn setTitleColor:[UIColor colorWithRed:0 green:0.58 blue:0.98 alpha:1] forState:UIControlStateNormal];
         cell.goBtn.tag = indexPath.section;
         
         
@@ -374,13 +365,11 @@ postRequestAgency(datas)
         }else if ([self.title isEqualToString:@"酒店订单"]) {
             cell.russualTitleLab.text = [currentDic valueForKey:@"HotelRUName"];//俄文名字
             cell.chineseTitleLab.text = [currentDic valueForKey:@"HotelCNName"];//中文名字
-            [self.chineseTitles addObject:cell.chineseTitleLab.text];//将酒店中文名字存数组中
             NSString *fittleStr=@"";
             if ([[currentDic valueForKey:@"Ftitle"] length]>0) {
                 fittleStr = [NSString stringWithFormat:@"-%@",[currentDic valueForKey:@"Ftitle"]];
             }
             cell.subheadLab.text = [NSString stringWithFormat:@"%@%@",[currentDic valueForKey:@"RoomName"],fittleStr];//房间类型
-            [self.subheads addObject:fittleStr];//将房间类型存数组中
             cell.dateLab.text = @"入住日期";
             cell.checkInLab.text = [currentDic valueForKey:@"Indate"];//入住日期
             if ([[currentDic valueForKey:@"Status"]length]>0) {
@@ -408,11 +397,9 @@ postRequestAgency(datas)
                     cell.goBtn.hidden = NO;
                 }
             }
-            NSString* facility = [currentDic valueForKey:@"Other"];
-            [self.roomFacilitys addObject:facility];//将房间设备存放数组中
         }else if ([self.title isEqualToString:@"娱乐订单"]) {
             cell.russualTitleLab.text = [currentDic valueForKey:@"TicketRName"];
-            cell.dateLab.text = @"观看日期";
+            cell.dateLab.text = @"预订日期";
             cell.checkInLab.text = [currentDic valueForKey:@"Viewdate"];
             if ([[currentDic valueForKey:@"Status"]length]>0) {
                 //        1待支付, 2待处理, 3预订成功等待使用, 4已失效,
@@ -514,20 +501,16 @@ postRequestAgency(datas)
                             NSString* hotelID = @"";
                             if ([self.title isEqualToString:@"线路订单"]) {
                                 hotelID = [dic valueForKey:@"LineID"];
-                                [self.hotelIDs addObject:hotelID];
                             }else if ([self.title isEqualToString:@"景点订单"]) {
                                 hotelID = [dic valueForKey:@"ViewID"];
-                                [self.hotelIDs addObject:hotelID];
                             }else if ([self.title isEqualToString:@"酒店订单"]) {
                                 hotelID = [dic valueForKey:@"HotelID"];
-                                [self.hotelIDs addObject:hotelID];
                             }else if ([self.title isEqualToString:@"娱乐订单"]) {
                                 hotelID = [dic valueForKey:@"TicketID"];
-                                [self.hotelIDs addObject:hotelID];
                             }else if ([self.title isEqualToString:@"导游/租车订单"]) {
                                 hotelID = [dic valueForKey:@"GuideID"];
-                                [self.hotelIDs addObject:hotelID];
                             }
+                            [self.hotelIDs addObject:hotelID];
                         }
                     }
                     [_myTableview reloadData];
@@ -535,9 +518,7 @@ postRequestAgency(datas)
                 [aicv2 stopAnimating];
             });
             
-        });
-        
-        
+        });        
     }
 }
 
@@ -545,20 +526,44 @@ postRequestAgency(datas)
     if ([[sender titleForState:UIControlStateNormal]isEqualToString:@"去支付"]) {
         OrderViewController* ovc = [OrderViewController sharedOrderViewController];
         ovc.presentWay = 1;
-        ovc.orderNumber = self.orderIDs[sender.tag];
-        ovc.productDescription = self.roomFacilitys[sender.tag];
-        ovc.productName = [NSString stringWithFormat:@"%@ %@", self.chineseTitles[sender.tag], self.subheads[sender.tag]];
-        if ([self.title isEqualToString:@"线路订单"]) {
-            ovc.prodClass = 1;
-        }else if ([self.title isEqualToString:@"景点订单"]) {
-            ovc.prodClass = 2;
-        }else if ([self.title isEqualToString:@"酒店订单"]) {
-            ovc.prodClass = 3;
-        }else if ([self.title isEqualToString:@"门票订单"]) {
-            ovc.prodClass = 4;
-        }else if ([self.title isEqualToString:@"导游/租车订单"]) {
-            ovc.prodClass = 5;
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
+        if ([self.title isEqualToString:@"导游/租车订单"]) {
+            MyGuideAndCarOrderDetailTableViewCell* cell = (MyGuideAndCarOrderDetailTableViewCell*)[_myTableview cellForRowAtIndexPath:indexPath];
+            ovc.orderNumber = cell.orderNumLab.text;
+            if (cell.headIV.frame.size.height == 90) {
+                ovc.prodClass = 5;
+                ovc.productName = @"导游预订";
+                ovc.productDescription = cell.titleLab.text;
+            }else if (cell.headIV.frame.size.height == 45) {
+                ovc.prodClass = 6;
+                ovc.productName = @"租车预订";
+                ovc.productDescription = cell.carInfoLab.text;
+            }
+        }else {
+            MyHotelOrederListTableViewCell* cell = (MyHotelOrederListTableViewCell*)[_myTableview cellForRowAtIndexPath:indexPath];
+            ovc.orderNumber = cell.orderNumLab.text;
+            if ([self.title isEqualToString:@"线路订单"]) {
+                ovc.prodClass = 1;
+                ovc.productName = cell.russualTitleLab.text;
+                NSDictionary* dictionary = tableArr[indexPath.section];
+                ovc.productDescription = dictionary[@"LineType"];
+            }else if ([self.title isEqualToString:@"景点订单"]) {
+                ovc.prodClass = 2;
+                ovc.productName = cell.chineseTitleLab.text;
+                ovc.productDescription = cell.subheadLab.text;
+            }else if ([self.title isEqualToString:@"酒店订单"]) {
+                ovc.prodClass = 3;
+                ovc.productName = cell.chineseTitleLab.text;
+                ovc.productDescription = cell.subheadLab.text;
+            }else if ([self.title isEqualToString:@"娱乐订单"]) {
+                ovc.prodClass = 4;
+                ovc.productName = cell.russualTitleLab.text;
+                NSDictionary* dictionary = tableArr[indexPath.section];
+                ovc.productDescription = [NSString stringWithFormat:@"%@张", dictionary[@"TCount"]];
+            }
         }
+        NSLog(@"ovc.presentWay:%d,orderNumber:%@,prodClass:%d,productName:%@,productDescription:%@",ovc.presentWay,ovc.orderNumber,ovc.prodClass,ovc.productName,ovc.productDescription);
+        
 //        1线路、2景点、3酒店、4门票、5导游、6租车
         [self.navigationController pushViewController:ovc animated:YES];
     }else if ([[sender titleForState:UIControlStateNormal]isEqualToString:@"重新预订"]) {
@@ -612,7 +617,7 @@ postRequestAgency(datas)
         }else if ([self.title isEqualToString:@"酒店订单"]) {
             
             
-        }else if ([self.title isEqualToString:@"门票订单"]) {
+        }else if ([self.title isEqualToString:@"娱乐订单"]) {
             
             
         }else if ([self.title isEqualToString:@"导游/租车订单"]) {

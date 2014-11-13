@@ -49,15 +49,15 @@ static OrderViewController* orderViewController = nil;
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //如果页面不是从 首页->住宿->酒店列表->酒店介绍 进来的
+    //如果页面不是从 首页 跳转来的  则先判断价格和数量是否发生变化
     if (self.presentWay > 0) {
         NSString* roomNumberAndPrice = [self checkOutRoomNumberAndPrice];
         if (roomNumberAndPrice.intValue == 0) { //请求失败
             UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"获取数据失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [alertView setTag:798];
             [alertView show];
-        }else if (roomNumberAndPrice.intValue == -1) {  //房间数量不够
-            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"房间数量不够，请重新预订" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新预订", nil];
+        }else if (roomNumberAndPrice.intValue == -1) {  //数量不够
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"检测到剩余数量不够，请重新预订" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新预订", nil];
             [alertView setTag:799];
             [alertView show];
         }else {
@@ -66,8 +66,8 @@ static OrderViewController* orderViewController = nil;
             self.UPrice = array[3];
             NSString* p = array[1];
             self.payWay = array[4];
-            if (p.intValue == 2) {//房间价格发生变动
-                UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"检测到订单中酒店价格已发生变化，是否继续" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续", nil];
+            if (p.intValue == 2) {//价格发生变动
+                UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"检测到订单中价格已发生变化，是否继续" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续", nil];
                 [alertView setTag:800];
                 [alertView show];
             }
@@ -114,7 +114,7 @@ static OrderViewController* orderViewController = nil;
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];self.navigationItem.leftBarButtonItem =backItem;}-(void)back{[self.navigationController popViewControllerAnimated:NO];
 }
 
-//获取房间价格是否变化、支付方式...
+//获取价格是否变化、是否支持当面支付...
 -(NSString*)checkOutRoomNumberAndPrice {
     NSMutableString* urlStr = RussiaUrl5;
     [urlStr appendString:@"getOrderNewPrice"];
@@ -172,7 +172,19 @@ static OrderViewController* orderViewController = nil;
     label.font = [UIFont systemFontOfSize:13];
     label.numberOfLines = 3;
     label.textAlignment = NSTextAlignmentLeft;
-    label.text = @"您预订的酒店房型在付款完成前，房间以及价格未做锁定，有可能产生变化，为了不影响您的入住，请及时付款。";
+    if (self.prodClass == 1) {
+        label.text = @"您预订的线路行程在付款完成前，日期以及价格未做锁定，有可能产生变化，为了不影响您的旅行，请及时付款。";
+    }else if (self.prodClass == 2) {
+        label.text = @"您预订的景点门票在付款完成前，日期以及价格未做锁定，有可能产生变化，为了不影响您的旅行，请及时付款。";
+    }else if (self.prodClass == 3) {
+        label.text = @"您预订的酒店房型在付款完成前，房间以及价格未做锁定，有可能产生变化，为了不影响您的入住，请及时付款。";
+    }else if (self.prodClass == 4) {
+        label.text = @"您预订的娱乐门票在付款完成前，日期以及价格未做锁定，有可能产生变化，为了不影响您的旅行，请及时付款。";
+    }else if (self.prodClass == 5) {
+        label.text = @"您预订的导游订单在付款完成前，日期以及价格未做锁定，有可能产生变化，为了不影响您的旅行，请及时付款。";
+    }else if (self.prodClass == 6) {
+        label.text = @"您预订的租车订单在付款完成前，日期以及价格未做锁定，有可能产生变化，为了不影响您的旅行，请及时付款。";
+    }
     [self.scrollView addSubview:label];
     self.attentionViewHeight = label.frame.size.height + 10;
 }
@@ -232,12 +244,9 @@ static OrderViewController* orderViewController = nil;
 
 - (void)addBottomBar{
     UIView* gudingView = [[UIView alloc]initWithFrame:CGRectMake(0,  DeviceHeight-64-45, 320, 45)];
-//    gudingView.backgroundColor = [UIColor whiteColor];
-//    gudingView.alpha = 0.5;
+    gudingView.backgroundColor = [UIColor whiteColor];
     UIImageView* guding=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, gudingView.frame.size.width, gudingView.frame.size.height)];
     guding.image=[UIImage imageNamed:@"guding.png"];
-    guding.backgroundColor = [UIColor blackColor];
-    guding.alpha = 0.5;
     [gudingView addSubview:guding];
     [self.view addSubview:gudingView];
     self.bottomBarHeight = gudingView.frame.size.height;
@@ -325,7 +334,7 @@ static OrderViewController* orderViewController = nil;
                     NSMutableAttributedString *Str = [[NSMutableAttributedString alloc]initWithString:allStr];
                     [Str addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:[allStr rangeOfString:rmbPrice]];
                     [Str addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:[allStr rangeOfString:dollarPrice]];
-                    self.mhodTVC.priceLab.attributedText = Str;
+                    self.meodTVC.orderPriceLab.attributedText = Str;
                 }
             }else {
                 UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"获取数据失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -365,7 +374,6 @@ static OrderViewController* orderViewController = nil;
     order.seller = SellerID;
 
     order.tradeNO = _orderNumber;
-    NSLog(@"orderNumber:%@",_orderNumber);
     order.productName = _productName;
     order.productDescription = _productDescription;
     order.amount = self.CPrice;

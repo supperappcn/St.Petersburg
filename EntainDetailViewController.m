@@ -1931,15 +1931,16 @@ GO_NET
         if ([self.title isEqualToString:@"景点介绍"]) {
             NSString *ID = [dataArray[btn.tag] objectForKey:@"ID"];
             
-            NSString *Ftitle=@"";
+//            NSString *Ftitle=@"";
             
-            if ([[[dataArray objectAtIndex:btn.tag]valueForKey:@"Ftitle"] length]>0) {
-                Ftitle = [NSString stringWithFormat:@"-%@",[[dataArray objectAtIndex:btn.tag]valueForKey:@"Ftitle"]];
-            }
+//            if ([[[dataArray objectAtIndex:btn.tag]valueForKey:@"Ftitle"] length]>0) {
+//                Ftitle = [NSString stringWithFormat:@"-%@",[[dataArray objectAtIndex:btn.tag]valueForKey:@"Ftitle"]];
+//            }
             SceneryReceverClass * rrc = [SceneryReceverClass new];
             rrc.ID=[NSString stringWithFormat:@"%@",ID];
             rrc.title = @"景点门票预订";
-            NSString *head = [NSString stringWithFormat:@"%@%@",[[dataArray objectAtIndex:btn.tag]valueForKey:@"ViewName"],Ftitle];
+//            NSString *head = [NSString stringWithFormat:@"%@%@",[[dataArray objectAtIndex:btn.tag]valueForKey:@"ViewName"],Ftitle];
+            NSString* head = [[dataArray objectAtIndex:btn.tag]valueForKey:@"ViewName"];
             rrc.roomTypeStr = head;
             rrc.russianStr = [dataDic valueForKey:@"ViewRUName"];
             // NSLog(@"%@",[dataDic valueForKey:@"HotelRUName"]);
@@ -1984,7 +1985,7 @@ GO_NET
             rrc.startDate2Str = [[dataArray objectAtIndex:btn.tag]valueForKey:@"StartDate2"];
             rrc.dataDic = dataArray[btn.tag];
             [self.navigationController pushViewController:rrc animated:NO];
-        }else if ([self.title isEqualToString:@"介绍"]){
+        }else if ([self.title isEqualToString:@"娱乐介绍"]){
             //娱乐
             
             NSString *Ftitle=@"";

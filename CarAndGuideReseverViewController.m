@@ -659,6 +659,15 @@ postRequestAgency(datas)
     NSLog(@"result %@",result);
     if (result.intValue>0) {
         OrderViewController *ovc = [OrderViewController sharedOrderViewController];
+        if (_ProdType.intValue == 1) {
+            ovc.prodClass = 5;
+            ovc.productName=@"导游预订";
+            ovc.productDescription=[NSString stringWithFormat:@"%@ %@ %@",_nameStr,_sexStr,_carAndGuideTypeStr];
+        }else if (_ProdType.intValue == 2) {
+            ovc.prodClass = 6;
+            ovc.productName=@"租车预订";
+            ovc.productDescription=[NSString stringWithFormat:@"%@ %@ %@",_peopleCountStr,_carTypeStr,_jichengStr];
+        }
         ovc.presentWay = 0;
         ovc.orderNumber = result;
         ovc.RMB=_RMB;
@@ -666,8 +675,6 @@ postRequestAgency(datas)
         ovc.dayCount=@"1";
         ovc.roomCount=[NSString stringWithFormat:@"%d",zhong.text.intValue];
         ovc.selectPayWay=paytype;
-        ovc.productDescription=_roomFacilityStr;
-//      ovc.productName=[NSString stringWithFormat:@"%@ %@",_chineseStr,_roomTypeStr];
         [self.navigationController pushViewController:ovc animated:NO];
     }else if (result.intValue==0){
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"预订失败，请重新预订。" message:nil delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil];

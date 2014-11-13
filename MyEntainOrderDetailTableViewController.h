@@ -17,6 +17,7 @@
 
 //topView中各项的值
 @property (copy, nonatomic)NSAttributedString* orderPrice;//订单金额
+@property (strong, nonatomic)UILabel* orderPriceLab;//用来显示订单的金额
 @property (copy, nonatomic)NSString* payStr;//支付方式
 @property (strong, nonatomic)UIImage* headImage;
 

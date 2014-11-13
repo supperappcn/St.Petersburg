@@ -849,14 +849,15 @@ postRequestAgency(datas)
     if (result.intValue>0) {
         OrderViewController *ovc = [OrderViewController sharedOrderViewController];
         ovc.presentWay = 0;
+        ovc.prodClass = 1;
         ovc.orderNumber = result;
         ovc.RMB=_RMB;
         ovc.dollar=_dollar;
         ovc.dayCount=_dayCount;
         ovc.roomCount=[NSString stringWithFormat:@"%d",zhong.text.intValue];
         ovc.selectPayWay=paytype;
-        ovc.productDescription=_roomFacilityStr;
-        ovc.productName=[NSString stringWithFormat:@"%@ %@",_chineseStr,_roomTypeStr];
+        ovc.productDescription=_lineTypeStr;
+        ovc.productName=_russianStr;
         [self.navigationController pushViewController:ovc animated:NO];
     }else if (result.intValue==0){
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"预订失败，请重新预订。" message:nil delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil];

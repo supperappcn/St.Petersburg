@@ -347,8 +347,6 @@
 		C47CF97418D15B4B0047F3BC /* background2_b.gif in Resources */ = {isa = PBXBuildFile; fileRef = C47CF97218D15B4B0047F3BC /* background2_b.gif */; };
 		C47CF97518D15B4B0047F3BC /* background2.gif in Resources */ = {isa = PBXBuildFile; fileRef = C47CF97318D15B4B0047F3BC /* background2.gif */; };
 		C47CF97818D160820047F3BC /* HotelRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C47CF97718D160820047F3BC /* HotelRoomCell.m */; };
-		C47F74C81988DD4C000A640D /* MyHotelOredeDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47F74C61988DD4C000A640D /* MyHotelOredeDetailTableViewController.m */; };
-		C47F74C91988DD4C000A640D /* MyHotelOredeDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C47F74C71988DD4C000A640D /* MyHotelOredeDetailTableViewController.xib */; };
 		C47F74CD1988DD79000A640D /* MyHotelOredeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C47F74CB1988DD79000A640D /* MyHotelOredeDetailCell.m */; };
 		C47F74CE1988DD79000A640D /* MyHotelOredeDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C47F74CC1988DD79000A640D /* MyHotelOredeDetailCell.xib */; };
 		C47F75331986419F00B358FE /* GetMyLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47F75311986419F00B358FE /* GetMyLocationViewController.m */; };
@@ -1227,9 +1225,6 @@
 		C47CF97318D15B4B0047F3BC /* background2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = background2.gif; sourceTree = "<group>"; };
 		C47CF97618D160820047F3BC /* HotelRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelRoomCell.h; sourceTree = "<group>"; };
 		C47CF97718D160820047F3BC /* HotelRoomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelRoomCell.m; sourceTree = "<group>"; };
-		C47F74C51988DD4C000A640D /* MyHotelOredeDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHotelOredeDetailTableViewController.h; sourceTree = "<group>"; };
-		C47F74C61988DD4C000A640D /* MyHotelOredeDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHotelOredeDetailTableViewController.m; sourceTree = "<group>"; };
-		C47F74C71988DD4C000A640D /* MyHotelOredeDetailTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyHotelOredeDetailTableViewController.xib; sourceTree = "<group>"; };
 		C47F74CA1988DD79000A640D /* MyHotelOredeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHotelOredeDetailCell.h; sourceTree = "<group>"; };
 		C47F74CB1988DD79000A640D /* MyHotelOredeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHotelOredeDetailCell.m; sourceTree = "<group>"; };
 		C47F74CC1988DD79000A640D /* MyHotelOredeDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyHotelOredeDetailCell.xib; sourceTree = "<group>"; };
@@ -1900,6 +1895,44 @@
 			path = RSA;
 			sourceTree = "<group>";
 		};
+		0A0632E41A149B79000890C5 /* 酒店订单详情cell */ = {
+			isa = PBXGroup;
+			children = (
+				C47F74CA1988DD79000A640D /* MyHotelOredeDetailCell.h */,
+				C47F74CB1988DD79000A640D /* MyHotelOredeDetailCell.m */,
+				C47F74CC1988DD79000A640D /* MyHotelOredeDetailCell.xib */,
+			);
+			name = "酒店订单详情cell";
+			sourceTree = "<group>";
+		};
+		0A0632E51A149BC6000890C5 /* 导游/租车订单cell */ = {
+			isa = PBXGroup;
+			children = (
+				0A0EBE651A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.h */,
+				0A0EBE661A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m */,
+			);
+			name = "导游/租车订单cell";
+			sourceTree = "<group>";
+		};
+		0A0632E61A149DB5000890C5 /* 线路/景点/酒店/门票订单cell */ = {
+			isa = PBXGroup;
+			children = (
+				C47F753B198659D500B358FE /* MyHotelOrederListTableViewCell.h */,
+				C47F753C198659D500B358FE /* MyHotelOrederListTableViewCell.m */,
+				C47F753D198659D500B358FE /* MyHotelOrederListTableViewCell.xib */,
+			);
+			name = "线路/景点/酒店/门票订单cell";
+			sourceTree = "<group>";
+		};
+		0A0632E71A14B003000890C5 /* 支付页面 */ = {
+			isa = PBXGroup;
+			children = (
+				C4BF07E919610C3C004E1A27 /* OrderViewController.h */,
+				C4BF07EA19610C3C004E1A27 /* OrderViewController.m */,
+			);
+			name = "支付页面";
+			sourceTree = "<group>";
+		};
 		0A0682791A0CC1210047B87F /* guideAndCar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1909,13 +1942,13 @@
 			path = guideAndCar;
 			sourceTree = "<group>";
 		};
-		0A06D28D1A09CC4A00F3256F /* 娱乐订单 */ = {
+		0A06D28D1A09CC4A00F3256F /* 订单详情 */ = {
 			isa = PBXGroup;
 			children = (
 				0A06D28E1A09CD5100F3256F /* MyEntainOrderDetailTableViewController.h */,
 				0A06D28F1A09CD5100F3256F /* MyEntainOrderDetailTableViewController.m */,
 			);
-			name = "娱乐订单";
+			name = "订单详情";
 			sourceTree = "<group>";
 		};
 		0A0CB79B19F4F1A00013D763 /* 日历 */ = {
@@ -1931,14 +1964,14 @@
 			path = "日历";
 			sourceTree = "<group>";
 		};
-		0A6414681A0780D100B5DEE6 /* 线路订单 */ = {
+		0A6414681A0780D100B5DEE6 /* 线路订单详情cell */ = {
 			isa = PBXGroup;
 			children = (
 				0A6414731A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.h */,
 				0A6414741A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m */,
 				0A6414751A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib */,
 			);
-			name = "线路订单";
+			name = "线路订单详情cell";
 			sourceTree = "<group>";
 		};
 		18650E7919E664F800209EB6 /* 点a文件 */ = {
@@ -2260,8 +2293,6 @@
 				C442A018195018BD00A6DF12 /* RoomReseverClass.h */,
 				C442A019195018BD00A6DF12 /* RoomReseverClass.m */,
 				C4BF07EC19610D33004E1A27 /* 住宿预订第2步(当面支付)_03.png */,
-				C4BF07E919610C3C004E1A27 /* OrderViewController.h */,
-				C4BF07EA19610C3C004E1A27 /* OrderViewController.m */,
 			);
 			name = "房间预订";
 			sourceTree = "<group>";
@@ -2568,7 +2599,7 @@
 			name = "会员中心图片2";
 			sourceTree = "<group>";
 		};
-		C47F753A198656D300B358FE /* 酒店订单 */ = {
+		C47F753A198656D300B358FE /* 订单列表 */ = {
 			isa = PBXGroup;
 			children = (
 				C47F754019865B9F00B358FE /* 酒店订单_02.png */,
@@ -2577,19 +2608,8 @@
 				C47F7535198656C500B358FE /* MyHoltelOredrViewController.h */,
 				C47F7536198656C500B358FE /* MyHoltelOredrViewController.m */,
 				C47F7537198656C500B358FE /* MyHoltelOredrViewController.xib */,
-				C47F753B198659D500B358FE /* MyHotelOrederListTableViewCell.h */,
-				C47F753C198659D500B358FE /* MyHotelOrederListTableViewCell.m */,
-				C47F753D198659D500B358FE /* MyHotelOrederListTableViewCell.xib */,
-				0A0EBE651A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.h */,
-				0A0EBE661A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m */,
-				C47F74C51988DD4C000A640D /* MyHotelOredeDetailTableViewController.h */,
-				C47F74C61988DD4C000A640D /* MyHotelOredeDetailTableViewController.m */,
-				C47F74C71988DD4C000A640D /* MyHotelOredeDetailTableViewController.xib */,
-				C47F74CA1988DD79000A640D /* MyHotelOredeDetailCell.h */,
-				C47F74CB1988DD79000A640D /* MyHotelOredeDetailCell.m */,
-				C47F74CC1988DD79000A640D /* MyHotelOredeDetailCell.xib */,
 			);
-			name = "酒店订单";
+			name = "订单列表";
 			sourceTree = "<group>";
 		};
 		C481C23718C4594A002C0CDA /* DefaultTheme */ = {
@@ -2820,12 +2840,16 @@
 		C49D17A018A5DBD40001E371 /* MineView */ = {
 			isa = PBXGroup;
 			children = (
+				0A0632E71A14B003000890C5 /* 支付页面 */,
 				C42B64081919E4C1008C6F28 /* 登录 */,
 				C4121F76192377F10047DEFA /* MineViewController.h */,
 				C4121F77192377F10047DEFA /* MineViewController.m */,
-				C47F753A198656D300B358FE /* 酒店订单 */,
-				0A6414681A0780D100B5DEE6 /* 线路订单 */,
-				0A06D28D1A09CC4A00F3256F /* 娱乐订单 */,
+				C47F753A198656D300B358FE /* 订单列表 */,
+				0A0632E61A149DB5000890C5 /* 线路/景点/酒店/门票订单cell */,
+				0A0632E51A149BC6000890C5 /* 导游/租车订单cell */,
+				0A06D28D1A09CC4A00F3256F /* 订单详情 */,
+				0A6414681A0780D100B5DEE6 /* 线路订单详情cell */,
+				0A0632E41A149B79000890C5 /* 酒店订单详情cell */,
 				C47F75301986419F00B358FE /* GetMyLocationViewController.h */,
 				C47F75311986419F00B358FE /* GetMyLocationViewController.m */,
 				C47F75321986419F00B358FE /* GetMyLocationViewController.xib */,
@@ -4155,7 +4179,6 @@
 				C47F75341986419F00B358FE /* GetMyLocationViewController.xib in Resources */,
 				C4DEAC1D18E13B12000607C1 /* 确定.png in Resources */,
 				C4DEAC3118E13B12000607C1 /* Coment_h.png in Resources */,
-				C47F74C91988DD4C000A640D /* MyHotelOredeDetailTableViewController.xib in Resources */,
 				C4FE8A1218C5A88500D299B0 /* travel_share.png in Resources */,
 				C4DEAC2818E13B12000607C1 /* theater_place.png in Resources */,
 				C49D177418A5DAB70001E371 /* InfoPlist.strings in Resources */,
@@ -4444,7 +4467,6 @@
 				0A0CB7A719F4F37A0013D763 /* GCPlaceholderTextView.m in Sources */,
 				C4121F89192377F10047DEFA /* ModificViewController.m in Sources */,
 				C4E9E75E19191F9900DA8A76 /* GuideDetailViewController.m in Sources */,
-				C47F74C81988DD4C000A640D /* MyHotelOredeDetailTableViewController.m in Sources */,
 				C4121F88192377F10047DEFA /* UIScrollView+UItouch.m in Sources */,
 				C4264C2918A61FDE0098B6F8 /* NSObject+SBJSON.m in Sources */,
 				C402461C18F7E7D40016B360 /* SeceneryComentCell.m in Sources */,
