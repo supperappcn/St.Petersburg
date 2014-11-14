@@ -225,7 +225,7 @@ backButton
 //            NSLog(@"checkDate = %@",self.checkDate);
             NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
             [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] ];
-            [inputFormatter setDateFormat:@"yyyy年M月d日"];
+            [inputFormatter setDateFormat:@"yyyy-M-d"];
             NSDate* inputDate = [inputFormatter dateFromString:self.checkDate];
             NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
             NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:inputDate];
@@ -396,17 +396,17 @@ backButton
         
     }
     
-    return [NSString stringWithFormat:@"%d年%@月%@日",year,MStr,dStr];
+    return [NSString stringWithFormat:@"%d-%@-%@",year,MStr,dStr];
 }
 
 
 #pragma - mark 字符串转化成date
 - (NSDate *)dateWithYear:(NSInteger)year andMonth:(NSInteger)month andDay:(NSInteger)day
 {
-    NSString* string = [NSString stringWithFormat:@"%d年%d月%d日",year,month,day];
+    NSString* string = [NSString stringWithFormat:@"%d-%d-%d",year,month,day];
     NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
     [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] ];
-    [inputFormatter setDateFormat:@"yyyy年M月d日"];
+    [inputFormatter setDateFormat:@"yyyy-M-d"];
     NSDate* inputDate = [inputFormatter dateFromString:string];
     return inputDate;
 }
