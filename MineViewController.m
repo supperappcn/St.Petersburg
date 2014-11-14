@@ -683,6 +683,8 @@
     [locationManager setDistanceFilter:100.f];
     
     locationManager.delegate=self;
+    [locationManager startUpdatingLocation];
+
  
 }
 
@@ -709,7 +711,6 @@ GO_NET
         case 8:
         {
             //开始更新范围
-            [locationManager startUpdatingLocation];
             
         }
             break;
@@ -804,15 +805,15 @@ GO_NET
     
 }
 
-
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location=[locations lastObject];
     
-    //位置反编码
+    CLLocation *thelocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude + 0.1
+        longitude:location.coordinate.longitude + 0.1];    //位置反编码
     CLGeocoder *geocoder=[[CLGeocoder alloc]init];
     
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
+    [geocoder reverseGeocodeLocation:thelocation completionHandler:^(NSArray *placemarks, NSError *error)
      {
          for (CLPlacemark *placemake in placemarks)
          {
