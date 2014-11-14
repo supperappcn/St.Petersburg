@@ -834,8 +834,7 @@ backButton
     NSDateFormatter*form=[NSDateFormatter new];
     form.dateFormat=@"YYYY-MM-dd";
   //  NSString*str=[form stringFromDate:_checkDate];
-
-#warning Changed...     把 paytype = %@，paytype改为了 paytype = %d，0
+#pragma mark  Changed...     把 paytype = %@，paytype改为了 paytype = %d，0
     NSString *argStr = [NSString stringWithFormat:@"lineprodid=%@&userid=%@&username=%@&startdate=%@&pcount=%@&hcount=%@&cmoney=%d&umoney=%d&uname=%@&phone=%@&email=%@&qq=%@&weixin=%@&paytype=%d&peopleinfo=%@",_ID,GET_USER_DEFAUT(QUSE_ID),GET_USER_DEFAUT(USER_NAME),_checkDate,zhong.text,zhong2.text,d,r,[(UITextField*)[footerView viewWithTag:101] text],[(UITextField*)[footerView viewWithTag:102] text],[(UITextField*)[footerView viewWithTag:103] text],[(UITextField*)[footerView viewWithTag:104] text],[(UITextField*)[footerView viewWithTag:105] text],0,roomInformationStr];
     NSLog(@"%@",argStr);
     

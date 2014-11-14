@@ -32,7 +32,14 @@
 backButton
 -(void)viewWillAppear:(BOOL)animated
 {
-    _picPath2 = @"hotel";
+    if ([self.navName isEqualToString:@"酒店介绍"]) {
+        _picPath2 = @"hotel";
+    }else if ([self.navName isEqualToString:@"娱乐介绍"]) {
+        _picPath2 = @"ticket";
+    }else if ([self.navName isEqualToString:@"景点介绍"]) {
+        _picPath2 = @"view";
+    }
+    
     hideTabbar;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(netChange:) name:kReachabilityChangedNotification object:nil];
 
@@ -66,9 +73,8 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     
     [[LineViewController new]endRefresh:refresh];
     NSDictionary*_dic=[[dic valueForKey:@"ds"]lastObject];
-   // NSLog(@"result %@",result);
+    
     NSLog(@"_dic=========%@",_dic);
-   // NSLog(@"result=========%@",result);
     
     if ([_dic  valueForKey:@"RoomName"]||[_dic valueForKey:@"LineDay"]||[_dic  valueForKey:@"ViewName"]||isGetComment==YES)
     {
@@ -2208,14 +2214,15 @@ GO_NET
             NSLog(@"[[_dataArr objectAtIndex:indexPath.row] objectForKey:Pic]   %@",name);
             
             NSData *pathData = [NSData dataWithContentsOfFile:PathOfFile(name)];
-            NSLog(@"pathData:%@",pathData);
+//            NSLog(@"pathData:%@",pathData);
             if (pathData.length==0) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     NSString *urlStr = [NSString stringWithFormat:@"%@/%@/%@",PicUrl,_picPath2,name];//_picPath2
-                    NSLog(@"picurl %@",urlStr);
+//                    NSLog(@"PicUrl:%@,_picPath2:%@,name:%@",PicUrl,_picPath2,name);
+//                    NSLog(@"picurl %@",urlStr);
                     NSURL *url = [NSURL URLWithString:urlStr];
                     NSData *data = [NSData dataWithContentsOfURL:url];
-                    // [NSThread sleepForTimeInterval:2];
+//                    [NSThread sleepForTimeInterval:2];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (data) {
 
