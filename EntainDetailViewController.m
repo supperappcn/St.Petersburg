@@ -2002,6 +2002,7 @@ GO_NET
             EntainReseverClass * rrc = [EntainReseverClass new];
             rrc.ID=[dataDic objectForKey:@"TicketID"];
             rrc.title = @"娱乐门票预订";
+            rrc.dataDic = dataDic;
             rrc.russianStr = [dataDic valueForKey:@"TicketRName"];
             rrc.ProdType = [dataDic valueForKey:@"PriceType"];
             rrc.payWay =[dataDic valueForKey:@"OrderType"];

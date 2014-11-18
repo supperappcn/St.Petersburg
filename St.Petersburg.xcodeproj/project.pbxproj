@@ -36,6 +36,7 @@
 		18650E9819E6655900209EB6 /* libTCWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9019E6652900209EB6 /* libTCWeiboSDK.a */; };
 		18650E9919E6655900209EB6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9119E6652900209EB6 /* libWeChatSDK.a */; };
 		18650E9A19E6655900209EB6 /* libYixinSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9219E6652900209EB6 /* libYixinSDK.a */; };
+		188CD28C1A1AE0A400D2F1CA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CD28B1A1AE0A400D2F1CA /* MapKit.framework */; };
 		C400546418EA6B0000E130B6 /* day1.png in Resources */ = {isa = PBXBuildFile; fileRef = C400545C18EA6B0000E130B6 /* day1.png */; };
 		C400546518EA6B0000E130B6 /* day2.png in Resources */ = {isa = PBXBuildFile; fileRef = C400545D18EA6B0000E130B6 /* day2.png */; };
 		C400546618EA6B0000E130B6 /* day3.png in Resources */ = {isa = PBXBuildFile; fileRef = C400545E18EA6B0000E130B6 /* day3.png */; };
@@ -856,6 +857,7 @@
 		18650E9019E6652900209EB6 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCWeiboSDK.a; sourceTree = "<group>"; };
 		18650E9119E6652900209EB6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		18650E9219E6652900209EB6 /* libYixinSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYixinSDK.a; sourceTree = "<group>"; };
+		188CD28B1A1AE0A400D2F1CA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C400545C18EA6B0000E130B6 /* day1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day1.png; sourceTree = "<group>"; };
 		C400545D18EA6B0000E130B6 /* day2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day2.png; sourceTree = "<group>"; };
 		C400545E18EA6B0000E130B6 /* day3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day3.png; sourceTree = "<group>"; };
@@ -1760,6 +1762,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188CD28C1A1AE0A400D2F1CA /* MapKit.framework in Frameworks */,
 				0A041E8B19F64B7900320F8E /* AlixPaylib_arc.a in Frameworks */,
 				0A041E9519F64B7900320F8E /* libssl.a in Frameworks */,
 				18650E9519E6655900209EB6 /* libQYHMethod.a in Frameworks */,
@@ -2741,6 +2744,7 @@
 		C49D176818A5DAB70001E371 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				188CD28B1A1AE0A400D2F1CA /* MapKit.framework */,
 				18650E8A19E6652900209EB6 /* 点a文件 */,
 				C4E558E018D6909D00C0DB51 /* MessageUI.framework */,
 				C4E558DE18D6908D00C0DB51 /* Security.framework */,
