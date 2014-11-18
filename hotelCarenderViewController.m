@@ -155,7 +155,7 @@ backButton
     GDataXMLDocument *document = [[GDataXMLDocument alloc]initWithData:datas options:0 error:&error];
     GDataXMLElement *element = [document rootElement];
     NSString *resule = [element stringValue];
-    NSLog(@"%@",resule);
+//    NSLog(@"%@",resule);
     if ([resule isEqualToString:@""])
     {
         self.prodType = 0;
@@ -170,8 +170,8 @@ backButton
         NSDictionary *dic = [[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]JSONValue];
         DataArr = [dic objectForKey:@"ds"];
     }
-    NSLog(@"dataArr = %@",DataArr);
-    NSLog(@"self.dataDic = %@",self.dataDic);
+//    NSLog(@"dataArr = %@",DataArr);
+//    NSLog(@"self.dataDic = %@",self.dataDic);
     if ([self.title isEqual:@"游玩日期"])
     {
         CPArr = [[NSArray alloc]initWithArray:[self arrayWithstr:[self.dataDic valueForKey:@"ZPrice"]]];
