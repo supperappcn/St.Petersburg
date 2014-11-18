@@ -509,7 +509,7 @@ backButton
     NSDateFormatter*form=[NSDateFormatter new];
     form.dateFormat=@"YYYY-MM-dd";
     
-#warning Changed...     把 paytype = %@，paytype改为了 paytype = %d，0
+#pragma mark  Changed...     把 paytype = %@，paytype改为了 paytype = %d，0
     NSString *argStr = [NSString stringWithFormat:@"ticketprodid=%@&userid=%@&username=%@&vdate=%@&tcount=%@&cmoney=%d&umoney=%d&uname=%@&phone=%@&email=%@&qq=%@&weixin=%@&paytype=%d&note=%@",_ID,GET_USER_DEFAUT(QUSE_ID),GET_USER_DEFAUT(USER_NAME),_checkDate,zhong.text,d,r,[(UITextField*)[footerView viewWithTag:101] text],[(UITextField*)[footerView viewWithTag:102] text],[(UITextField*)[footerView viewWithTag:103] text],[(UITextField*)[footerView viewWithTag:104] text],[(UITextField*)[footerView viewWithTag:105] text],0,[(UITextField*)[self.view viewWithTag:200] text]];
     NSLog(@"%@",argStr);
     
@@ -525,10 +525,9 @@ postRequestAgency(datas)
         ovc.presentWay = 0;
         ovc.prodClass = 4;
         ovc.orderNumber = result;
-        ovc.RMB=_RMB;
-        ovc.dollar=_dollar;
-        ovc.dayCount=@"1";
-        ovc.roomCount=[NSString stringWithFormat:@"%d",zhong.text.intValue];
+        ovc.RMB=[NSString stringWithFormat:@"%d",_RMB.intValue*zhong.text.intValue];
+        ovc.dollar=[NSString stringWithFormat:@"%d",_dollar.intValue*zhong.text.intValue];
+        NSLog(@"ovc.rmb:%@,dollar:%@",_RMB,_dollar);
         ovc.selectPayWay=paytype;
         ovc.productDescription=[NSString stringWithFormat:@"%@张",zhong.text];
         ovc.productName=_russianStr;

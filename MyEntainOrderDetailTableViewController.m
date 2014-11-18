@@ -9,6 +9,7 @@
 #import "MyEntainOrderDetailTableViewController.h"
 #import "MyLineOrderDetailTableViewCell.h"
 #import "GData/GDataXMLNode.h"
+#import "JSON.h"
 #import "OrderViewController.h"
 #import "RTLabel.h"
 #import "MyHotelOredeDetailCell.h"
@@ -29,11 +30,12 @@
 @property (assign, nonatomic)CGFloat infoViewHeight;
 @property (assign, nonatomic)CGFloat orderInfoViewHeight;
 @property (assign, nonatomic)CGFloat footerViewHeight;
+
+@property (strong, nonatomic)UIImageView* headIV;
 @end
 
 @implementation MyEntainOrderDetailTableViewController
 
-backButton
 static NSString* cellIdentifier = @"Cell";
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -45,11 +47,49 @@ static NSString* cellIdentifier = @"Cell";
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+//自定义“返回”、“我的”按钮
+-(void)viewDidLoad {
+    float height=35;
+    UIButton *backbutton = [[UIButton alloc]init];
+    backbutton.frame=CGRectMake(0, (44-height)/2, 55, height);
+    [backbutton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 15, 15)];
+    imageView.image=[UIImage imageNamed:@"_back.png"];
+    [backbutton addSubview:imageView];
+    UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 40, 35)];
+    lable.font=[UIFont systemFontOfSize:15];
+    lable.textColor=[UIColor whiteColor];
+    if (self.pushWay == 1) {
+        lable.text=@"我的";
+    }else {
+        lable.text=@"返回";
+    }
+    [backbutton addSubview:lable];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];self.navigationItem.leftBarButtonItem =backItem;
+}
+
+-(void)back{
+    if (self.pushWay == 1) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.title = @"订单详情";
     self.tableArr = [NSMutableArray array];
+    if (self.pushWay == 1) {//由“支付完成”页面push过来
+        NSMutableString* urlStr = RussiaUrl4;
+        [urlStr appendString:@"OrderDetail"];
+        NSString* argumentStr = [NSString stringWithFormat:@"ordernumber=%@&prodclass=%@", self.orderNum, self.prodClass];
+        postRequestTongBu(argumentStr, urlStr, received)
+        dicResultTongbu(received, result, dic)
+        NSLog(@"订单详情dic:%@",result);
+        NSArray* arr = [dic valueForKey:@"ds"];
+        self.currentDic = arr[0];
+    }
     UIColor* color = [UIColor colorWithRed:0.945 green:0.945 blue:0.945 alpha:1];
     if (self.prodClass.intValue == 1) {
         NSString *peopleinfo = self.currentDic[@"Peopleinfo"];
@@ -166,6 +206,8 @@ static NSString* cellIdentifier = @"Cell";
     UIColor* color = [UIColor colorWithRed:0.945 green:0.945 blue:0.945 alpha:1];
     UIColor *grayColor = [UIColor grayColor];
     UIFont* font = [UIFont systemFontOfSize:14];
+    NSString* picPath = @"";//图片路径
+    NSString* picName = @"";//图片名称
     if (self.prodClass.intValue == 1) {
         self.infoViewHeight = 177;
         self.infoView = [[UIView alloc]initWithFrame:CGRectMake(0, self.topView.frame.size.height, self.view.frame.size.width, self.infoViewHeight)];
@@ -181,9 +223,10 @@ static NSString* cellIdentifier = @"Cell";
         UIImageView* line1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
         line1.image = [UIImage imageNamed:@"links.png"];
         [titleView addSubview:line1];
-        UIImageView* headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
-        headIV.image = self.headImage;
-        [titleView addSubview:headIV];
+        self.headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
+        picPath=@"line";
+        picName=@"Pic";
+        [titleView addSubview:self.headIV];
         UILabel* titleLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 17, 193, 35)];
         titleLab.numberOfLines = 2;
         titleLab.text = self.currentDic[@"Title"];
@@ -228,9 +271,10 @@ static NSString* cellIdentifier = @"Cell";
         UIImageView* line1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
         line1.image = [UIImage imageNamed:@"links.png"];
         [titleView addSubview:line1];
-        UIImageView* headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
-        headIV.image = self.headImage;
-        [titleView addSubview:headIV];
+        self.headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
+        picPath=@"view";
+        picName=@"ViewPic";
+        [titleView addSubview:self.headIV];
         UILabel* russiaTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 12, 193, 21)];
         russiaTitleLab.text = self.currentDic[@"ViewRUName"];
         russiaTitleLab.font = font;
@@ -281,9 +325,10 @@ static NSString* cellIdentifier = @"Cell";
         UIImageView* line1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
         line1.image = [UIImage imageNamed:@"links.png"];
         [titleView addSubview:line1];
-        UIImageView* headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
-        headIV.image = self.headImage;
-        [titleView addSubview:headIV];
+        self.headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
+        picPath=@"hotel";
+        picName=@"HotelPic";
+        [titleView addSubview:self.headIV];
         UILabel* russiaTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 12, 193, 21)];
         russiaTitleLab.text = self.currentDic[@"HotelRUName"];
         russiaTitleLab.font = font;
@@ -341,9 +386,10 @@ static NSString* cellIdentifier = @"Cell";
         UIImageView* line1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
         line1.image = [UIImage imageNamed:@"links.png"];
         [titleView addSubview:line1];
-        UIImageView* headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
-        headIV.image = self.headImage;
-        [titleView addSubview:headIV];
+        self.headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
+        picPath=@"ticket";
+        picName=@"TicketCName";
+        [titleView addSubview:self.headIV];
         UILabel* titleLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 17, 193, 35)];
         titleLab.numberOfLines = 2;
         titleLab.text = self.currentDic[@"TicketRName"];
@@ -367,9 +413,10 @@ static NSString* cellIdentifier = @"Cell";
         UIImageView* line1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
         line1.image = [UIImage imageNamed:@"links.png"];
         [titleView addSubview:line1];
-        UIImageView* headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 90)];
-        headIV.image = self.headImage;
-        [titleView addSubview:headIV];
+        self.headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 90)];
+        picPath=@"guide";
+        picName=@"Pic";
+        [titleView addSubview:self.headIV];
         UILabel* titleLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, DeviceWidth - 80 - 17, 21)];
         NSString* sex = @"";
         NSString* guideName = [self.currentDic valueForKey:@"GuideName"];
@@ -425,9 +472,10 @@ static NSString* cellIdentifier = @"Cell";
         UIImageView* line1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
         line1.image = [UIImage imageNamed:@"links.png"];
         [titleView addSubview:line1];
-        UIImageView* headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
-        headIV.image = self.headImage;
-        [titleView addSubview:headIV];
+        self.headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 45)];
+        picPath=@"guide";
+        picName=@"Pic2";
+        [titleView addSubview:self.headIV];
         UILabel* titleLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, DeviceWidth - 80 - 17, 21)];
         NSString* sex = @"";
         NSString* guideName = [self.currentDic valueForKey:@"GuideName"];
@@ -452,6 +500,26 @@ static NSString* cellIdentifier = @"Cell";
         UIImageView* jianTouIV = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 17, 24, 17, 17)];
         jianTouIV.image = [UIImage imageNamed:@"cellJianTou.png"];
         [titleView addSubview:jianTouIV];
+    }
+    if (self.pushWay == 1) {
+        NSData *pathData = [NSData dataWithContentsOfFile:PathOfFile(self.currentDic[picName])];
+        if (pathData.length==0) {
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                NSString *urlStr = [NSString stringWithFormat:@"%@%@/%@", PicUrl, picPath, self.currentDic[picName]];
+                NSLog(@"self.currentDic:%@jkieur  \n  picName;%@",self.currentDic, self.currentDic[picName]);
+                NSLog(@"pictureURL:%@",urlStr);
+                NSURL *url = [NSURL URLWithString:urlStr];
+                NSData *data = [NSData dataWithContentsOfURL:url];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (data) {
+                        [data writeToFile:PathOfFile(self.currentDic[picName]) atomically:YES];
+                        self.headIV.image = [UIImage imageWithData:data];
+                    }
+                });
+            });
+        }
+    }else {
+        self.headIV.image = self.headImage;
     }
 }
 
@@ -732,7 +800,7 @@ static NSString* cellIdentifier = @"Cell";
     self.goSecondBtn = [[UIButton alloc]initWithFrame:CGRectMake((self.view.frame.size.width-70)/2, 17.5, 70, 30)];
     self.goSecondBtn.backgroundColor = [UIColor colorWithRed:0.047 green:0.345 blue:0.663 alpha:1];
     self.goSecondBtn.hidden = YES;
-    self.goSecondBtn.titleLabel.font = font;
+    self.goSecondBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     self.goSecondBtn.layer.cornerRadius = 5;
     self.goSecondBtn.layer.masksToBounds = YES;
     [self.goSecondBtn addTarget:self action:@selector(clickGoSecondButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -883,19 +951,20 @@ static NSString* cellIdentifier = @"Cell";
             cell = [[[NSBundle mainBundle]loadNibNamed:@"MyLineOrderDetailTableViewCell" owner:self options:nil]lastObject];
         }
         cell.headLab.text = [NSString stringWithFormat:@"第%d位游客信息",indexPath.row+1];
-        cell.cLastName.text = self.tableArr[indexPath.section][0];
-        cell.cFirstName.text = self.tableArr[indexPath.section][1];
-        cell.eLastName.text = self.tableArr[indexPath.section][2];
-        cell.eFirstName.text = self.tableArr[indexPath.section][3];//把indexPath.row改成了indexPath.section
-        if ([self.tableArr[indexPath.row][0] isEqualToString:@"男士"]) {
+        if (self.tableArr.count > 0) {
+            cell.cLastName.text = self.tableArr[indexPath.row][0];
+            cell.cFirstName.text = self.tableArr[indexPath.row][1];
+            cell.eLastName.text = self.tableArr[indexPath.row][2];
+            cell.eFirstName.text = self.tableArr[indexPath.row][3];
+        }
+        if ([self.tableArr[indexPath.row][4] isEqualToString:@"男士"]) {
             cell.sex.text = @"男";
-        }else {
+        }else if ([self.tableArr[indexPath.row][4] isEqualToString:@"女士"]) {
             cell.sex.text = @"女";
         }
         cell.bornDate.text = self.tableArr[indexPath.row][5];
         cell.passportNum.text = self.tableArr[indexPath.row][6];
         cell.passportDate.text = self.tableArr[indexPath.row][7];
-        
         return cell;
     }else if (self.prodClass.intValue == 3) {
         MyHotelOredeDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];

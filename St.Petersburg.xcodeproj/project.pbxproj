@@ -15,6 +15,7 @@
 		0A041E8D19F64B7900320F8E /* AlixPayResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A041E7419F64B7900320F8E /* AlixPayResult.m */; };
 		0A041E9419F64B7900320F8E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A041E8319F64B7900320F8E /* libcrypto.a */; };
 		0A041E9519F64B7900320F8E /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A041E8419F64B7900320F8E /* libssl.a */; };
+		0A0524F61A15ABC500553786 /* PaySuccessfullyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0524F51A15ABC500553786 /* PaySuccessfullyViewController.m */; };
 		0A0682781A0CC03F0047B87F /* hotelCarenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0682771A0CC03F0047B87F /* hotelCarenderViewController.m */; };
 		0A06827C1A0CC1210047B87F /* GCCalenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06827B1A0CC1210047B87F /* GCCalenderViewController.m */; };
 		0A06D2901A09CD5100F3256F /* MyEntainOrderDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06D28F1A09CD5100F3256F /* MyEntainOrderDetailTableViewController.m */; };
@@ -822,6 +823,8 @@
 		0A041E8419F64B7900320F8E /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		0A041E8619F64B7900320F8E /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
 		0A041E8719F64B7900320F8E /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
+		0A0524F41A15ABC500553786 /* PaySuccessfullyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaySuccessfullyViewController.h; sourceTree = "<group>"; };
+		0A0524F51A15ABC500553786 /* PaySuccessfullyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaySuccessfullyViewController.m; sourceTree = "<group>"; };
 		0A0682761A0CC03F0047B87F /* hotelCarenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotelCarenderViewController.h; sourceTree = SOURCE_ROOT; };
 		0A0682771A0CC03F0047B87F /* hotelCarenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotelCarenderViewController.m; sourceTree = SOURCE_ROOT; };
 		0A06827A1A0CC1210047B87F /* GCCalenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCCalenderViewController.h; sourceTree = "<group>"; };
@@ -1895,6 +1898,15 @@
 			path = RSA;
 			sourceTree = "<group>";
 		};
+		0A0524F01A15AABE00553786 /* 支付成功界面 */ = {
+			isa = PBXGroup;
+			children = (
+				0A0524F41A15ABC500553786 /* PaySuccessfullyViewController.h */,
+				0A0524F51A15ABC500553786 /* PaySuccessfullyViewController.m */,
+			);
+			name = "支付成功界面";
+			sourceTree = "<group>";
+		};
 		0A0632E41A149B79000890C5 /* 酒店订单详情cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2841,6 +2853,7 @@
 			isa = PBXGroup;
 			children = (
 				0A0632E71A14B003000890C5 /* 支付页面 */,
+				0A0524F01A15AABE00553786 /* 支付成功界面 */,
 				C42B64081919E4C1008C6F28 /* 登录 */,
 				C4121F76192377F10047DEFA /* MineViewController.h */,
 				C4121F77192377F10047DEFA /* MineViewController.m */,
@@ -4504,6 +4517,7 @@
 				0A6414761A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m in Sources */,
 				C4EF577418AE17B8009D0B52 /* TabViewViewController.m in Sources */,
 				C4E19BD81911982600CE7B61 /* lishiViewController.m in Sources */,
+				0A0524F61A15ABC500553786 /* PaySuccessfullyViewController.m in Sources */,
 				C4DBA71D18F8D5EF00668A5A /* NSData+MBBase64.m in Sources */,
 				C417C84518B60726004F613B /* SceneryViewController.m in Sources */,
 				C4F127E418BAFF9D0041960B /* WeatherViewController.m in Sources */,

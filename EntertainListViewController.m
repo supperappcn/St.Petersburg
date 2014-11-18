@@ -1529,7 +1529,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         cell2.gradeCount.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
     if ([[[_array objectAtIndex:indexPath.row]valueForKey:@"UDPrice"]integerValue]!=0)
         {
-            cell2.price.text=[NSString stringWithFormat:@"$<font size=21  color=orange>%d</font>", [[[_array objectAtIndex:indexPath.row]valueForKey:@"UDPrice"]integerValue]];;
+            cell2.price.text=[NSString stringWithFormat:@"$<font size=21  color=orange>%d</font>起", [[[_array objectAtIndex:indexPath.row]valueForKey:@"UDPrice"]integerValue]];;
 
         }
         else

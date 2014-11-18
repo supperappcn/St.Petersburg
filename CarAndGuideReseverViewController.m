@@ -10,6 +10,11 @@
 #import "GDataXMLNode.h"
 #import "OrderViewController.h"
 #import "GCCalenderViewController.h"
+
+@interface CarAndGuideReseverViewController()
+@property (assign, nonatomic)int days;
+@end
+
 @implementation CarAndGuideReseverViewController
 
 backButton
@@ -53,7 +58,7 @@ backButton
             }
            // checkLab.text = addDateStr;
                 NSLog(@"select = %@",_selectDateStr);
-            price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>",_RMB.intValue*zhong.text.intValue,_dollar.intValue*zhong.text.intValue];
+            price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>", _RMB.intValue, _dollar.intValue];//将_RMB.intValue*zhong.text.intValue,_dollar.intValue*zhong.text.intValue改成了_RMB.intValue,_dollar.intValue
             }
 //            if (_tag==2) {
     //            0, headerLab.frame.size.height+10+i*43, 320, 43
@@ -429,11 +434,12 @@ backButton
             jia2.enabled=YES;
         }
     }
-    int days=1;
     if (_selectDays) {
-        days = _selectDays.count;
+        self.days = _selectDays.count;
+    }else {
+        self.days = 1;
     }
-    price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>",_RMB.intValue*zhong.text.intValue*days ,_dollar.intValue*zhong.text.intValue*days];
+    price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>", _RMB.intValue*self.days, _dollar.intValue*self.days];//将_RMB.intValue*zhong.text.intValue*days ,_dollar.intValue*zhong.text.intValue*days改成了_RMB.intValue*self.days,_dollar.intValue*self.days
     
 }
 - (void)addLinkmanView{
@@ -622,12 +628,13 @@ backButton
     
     NSMutableString *urlStr = RussiaUrl5;
     [urlStr appendString:@"getAddGuideOrder"];
-    int days = 1;
     if (_selectDays) {
-        days=_selectDays.count;
+        self.days=_selectDays.count;
+    }else {
+        self.days = 1;
     }
-    int d = [_RMB intValue]*[zhong.text intValue]*days;
-    int r = [_dollar intValue]*[zhong.text intValue]*days;
+    int d = [_RMB intValue]*[zhong.text intValue]*self.days;
+    int r = [_dollar intValue]*[zhong.text intValue]*self.days;
     // price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>",d,r];
 //  导游/租车预订：参数（prodid：导游/租车产品ID，prodtype：1是导游订单2是租车订单，classid：预订代理商的产品类别，userid：预订人的用户ID,username：预订人的用户名,sdate：所选日期,pcount：游客数量，gcount：所需导游数/车辆数,cmoney：人民币,umoney：美元,uname：姓名,phone：电话,email：邮箱,qq：qq,weixin：微信,paytype：1微信支付，2支付宝客户端支付，3支付宝网页支付，4手机银联支付，5信用卡支付，6当面支付）
     int typeCount;
@@ -639,7 +646,7 @@ backButton
         typeCount=1;
     }else typeCount = 2;
     
-#warning Changed...     把 paytype = %@，paytype改为了 paytype = %d，0
+#pragma mark  Changed...     把 paytype = %@，paytype改为了 paytype = %d，0
     NSString *argStr = [NSString stringWithFormat:@"prodid=%@&prodtype=%d&classid=%@&userid=%@&username=%@&sdate=%@&pcount=%@&gcount=%@&cmoney=%d&umoney=%d&uname=%@&phone=%@&email=%@&qq=%@&weixin=%@&paytype=%d",_ID,
                         typeCount,
                         classStr,
@@ -656,7 +663,6 @@ backButton
 postRequestAgency(datas)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     dicResultYiBuNoDic(datas, result)
-    NSLog(@"result %@",result);
     if (result.intValue>0) {
         OrderViewController *ovc = [OrderViewController sharedOrderViewController];
         if (_ProdType.intValue == 1) {
@@ -670,10 +676,9 @@ postRequestAgency(datas)
         }
         ovc.presentWay = 0;
         ovc.orderNumber = result;
-        ovc.RMB=_RMB;
-        ovc.dollar=_dollar;
-        ovc.dayCount=@"1";
-        ovc.roomCount=[NSString stringWithFormat:@"%d",zhong.text.intValue];
+        ovc.RMB= [NSString stringWithFormat:@"%d", _RMB.intValue*self.days];
+        ovc.dollar= [NSString stringWithFormat:@"%d", _dollar.intValue*self.days];
+        NSLog(@"ovc.rmb:%@,dollar:%@",_RMB, _dollar);
         ovc.selectPayWay=paytype;
         [self.navigationController pushViewController:ovc animated:NO];
     }else if (result.intValue==0){

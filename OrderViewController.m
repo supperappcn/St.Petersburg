@@ -14,6 +14,7 @@
 #import "GDataXMLNode.h"
 #import "JSON.h"
 #import "EntainDetailViewController.h"
+#import "PaySuccessfullyViewController.h"
 
 @interface OrderViewController()
 
@@ -21,8 +22,6 @@
 @property (nonatomic, assign)float attentionViewHeight;
 @property (nonatomic, assign)float payWayViewHeight;
 @property (nonatomic, assign)float bottomBarHeight;
-@property (nonatomic, copy)NSString* UPrice;
-@property (nonatomic, copy)NSString* CPrice;
 @property (nonatomic, retain)NSArray* names;
 @property (nonatomic, retain)NSMutableArray *pointIVArr;//存放选择支付方式按钮
 
@@ -62,8 +61,8 @@ static OrderViewController* orderViewController = nil;
             [alertView show];
         }else {
             NSArray* array = [roomNumberAndPrice componentsSeparatedByString:@","];
-            self.CPrice = array[2];
-            self.UPrice = array[3];
+            self.RMB = array[2];
+            self.dollar = array[3];
             NSString* p = array[1];
             self.payWay = array[4];
             if (p.intValue == 2) {//价格发生变动
@@ -74,9 +73,6 @@ static OrderViewController* orderViewController = nil;
         }
         
     }else if (self.presentWay == 0) {   //从 首页->住宿->酒店列表 跳转过来
-        self.CPrice =[NSString stringWithFormat:@"%d", _RMB.intValue*_roomCount.intValue*_dayCount.intValue];
-        self.UPrice = [NSString stringWithFormat:@"%d", _dollar.intValue*_roomCount.intValue*_dayCount.intValue];
-        
         
     }
     
@@ -91,12 +87,13 @@ static OrderViewController* orderViewController = nil;
     //添加“去支付”按钮
     [self addBottomBar];
 
-    self.scrollView.contentSize = CGSizeMake(DeviceWidth, self.topViewHeight + self.attentionViewHeight + self.payWayViewHeight);// + 10);  payWayViewHeight最底部裕量10单独加上
+    self.scrollView.contentSize = CGSizeMake(DeviceWidth, self.topViewHeight + self.attentionViewHeight + self.payWayViewHeight + 10);//  payWayViewHeight最底部裕量10单独加上
 }
 
-//自定义“返回”按钮
+//自定义“返回”、“首页”按钮
 -(void)viewDidAppear:(BOOL)animated {
-    float height=35;UIButton *backbutton = [[UIButton alloc]init];
+    float height=35;
+    UIButton *backbutton = [[UIButton alloc]init];
     backbutton.frame=CGRectMake(0, (44-height)/2, 55, height);
     [backbutton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 15, 15)];
@@ -111,7 +108,15 @@ static OrderViewController* orderViewController = nil;
         lable.text=@"返回";
     }
     [backbutton addSubview:lable];
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];self.navigationItem.leftBarButtonItem =backItem;}-(void)back{[self.navigationController popViewControllerAnimated:NO];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];self.navigationItem.leftBarButtonItem =backItem;
+}
+
+-(void)back{
+    if (self.presentWay == 0) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 //获取价格是否变化、是否支持当面支付...
@@ -130,7 +135,7 @@ static OrderViewController* orderViewController = nil;
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64 - 45)];  //45为“去支付”背景图guding.png的高度
     self.scrollView.backgroundColor = BLACK_VIEW_COLOR;
     self.scrollView.delegate = self;
-    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.topViewHeight + self.attentionViewHeight + self.payWayViewHeight);
+//    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.topViewHeight + self.attentionViewHeight + self.payWayViewHeight);
     self.scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.scrollView];
 }
@@ -157,7 +162,7 @@ static OrderViewController* orderViewController = nil;
         }else if (i == 1) {
             self.totalPrice = [[RTLabel alloc]initWithFrame:CGRectMake(100, 15, 200, 18)];
             self.totalPrice.font = [UIFont boldSystemFontOfSize:15];
-            self.totalPrice.text = [NSString stringWithFormat:@"<font color=orange>￥%@</font><font size=12><font color=gray>($%@)</font>", self.CPrice, self.UPrice];
+            self.totalPrice.text = [NSString stringWithFormat:@"<font color=orange>￥%@</font><font size=12><font color=gray>($%@)</font>", self.RMB, self.dollar];
             [bv addSubview:self.totalPrice];
         }
         [self.scrollView addSubview:bv];
@@ -228,6 +233,7 @@ static OrderViewController* orderViewController = nil;
         }
         [bv addSubview:name];
     }
+    _selectPayWay = @"1";
 }
 
 - (void)selectPayWay:(UITapGestureRecognizer*)tap{
@@ -251,15 +257,22 @@ static OrderViewController* orderViewController = nil;
     [self.view addSubview:gudingView];
     self.bottomBarHeight = gudingView.frame.size.height;
     //"去支付"按钮////////////////////////////////////
-    UIButton*orderButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    orderButton.layer.cornerRadius=4;
-    orderButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    orderButton.frame=CGRectMake((320-70)/2, self.view.bounds.size.height - 35, 70, 25);
+    UIButton*orderButton=[[UIButton alloc]initWithFrame:CGRectMake((DeviceWidth-70)/2, 7.5, 70, 30)];
     orderButton.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"13"]];
-    orderButton.alpha = 1;
+    orderButton.layer.cornerRadius=4;
+    orderButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [orderButton addTarget:self action:@selector(goToPay) forControlEvents:UIControlEventTouchUpInside];
     [orderButton setTitle:@"去支付" forState:UIControlStateNormal];
-    [self.view addSubview:orderButton];
+    [gudingView addSubview:orderButton];
+    
+    
+#warning mark   test...
+    UIButton* testBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 45)];
+    testBtn.backgroundColor = [UIColor redColor];
+    [testBtn setTitle:@"查看详情" forState:UIControlStateNormal];
+    testBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [testBtn addTarget:self action:@selector(goToPaySuccessfullyViewController) forControlEvents:UIControlEventTouchUpInside];
+    [gudingView addSubview:testBtn];
 }
 
 #pragma mark  goToPay
@@ -328,8 +341,8 @@ static OrderViewController* orderViewController = nil;
             NSString* modifyResult = [self modifyOrderPrice];
             if (modifyResult.intValue == 1) {   //接受价格变化，继续
                 if (self.presentWay == 2) {   //将变化后的价格反向传值过去
-                    NSString* rmbPrice = [NSString stringWithFormat:@"￥%@",self.CPrice];
-                    NSString *dollarPrice = [NSString stringWithFormat:@"($%@)",self.UPrice];
+                    NSString* rmbPrice = [NSString stringWithFormat:@"￥%@",self.RMB];
+                    NSString *dollarPrice = [NSString stringWithFormat:@"($%@)",self.dollar];
                     NSString *allStr = [NSString stringWithFormat:@"%@%@",rmbPrice,dollarPrice];
                     NSMutableAttributedString *Str = [[NSMutableAttributedString alloc]initWithString:allStr];
                     [Str addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:[allStr rangeOfString:rmbPrice]];
@@ -344,7 +357,7 @@ static OrderViewController* orderViewController = nil;
         }
         
     }else if (buttonIndex == 0) {   //非支付失败 且取消时返回上一个界面
-        if (alertView.tag == 200 || alertView.tag == 123) { //支付成功 或者 取消重新支付
+        if (alertView.tag == 123) { //取消重新支付
             
         }else { //返回
             if (self.presentWay == 0) { //从首页->选择支付方式  则返回到首页
@@ -361,23 +374,22 @@ static OrderViewController* orderViewController = nil;
     [urlStr appendString:@"ModifyOrderPrice"];
     NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
     int ID = [defaults integerForKey:@"QuseID"];
-    NSString* argStr = [NSString stringWithFormat:@"ordernumber=%@&userid=%d&prodclass=%d&uprice=%@&cprice=%@",_orderNumber,ID,self.prodClass,self.UPrice,self.CPrice];
+    NSString* argStr = [NSString stringWithFormat:@"ordernumber=%@&userid=%d&prodclass=%d&uprice=%@&cprice=%@",_orderNumber,ID,self.prodClass,self.dollar,self.RMB];
     postRequestTongBu(argStr, urlStr, received);
     dicResultTongbuNoDic(received, result);
     return result;
 }
 
 -(NSString*)getOrderInfo {
-//    Product* product = [[Product alloc]init];
     AlixPayOrder* order = [[AlixPayOrder alloc]init];
     order.partner = PartnerID;
     order.seller = SellerID;
-
+    
     order.tradeNO = _orderNumber;
     order.productName = _productName;
     order.productDescription = _productDescription;
-    order.amount = self.CPrice;
-    NSLog(@"self.CPrice:%@,_orderNumber:%@, _productName:%@, _productDescription:%@", self.CPrice,_orderNumber, _productName, _productDescription);
+    order.amount = self.RMB;
+    NSLog(@"self.RMB:%@,_orderNumber:%@, _productName:%@, _productDescription:%@", self.RMB,_orderNumber, _productName, _productDescription);
     order.notifyURL = @"http://t.russia-online.cn/notify_url.aspx";
     return [order description];
 }
@@ -396,10 +408,7 @@ static OrderViewController* orderViewController = nil;
     BOOL judge2 = [self checkOutPayResult];
     if (judge1 && judge2) {
         NSLog(@"服务器、手机端显示支付完成");
-        
-        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"支付成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        alertView.tag = 200;
-        [alertView show];
+        [self goToPaySuccessfullyViewController];
     }
 }
 
@@ -410,11 +419,39 @@ static OrderViewController* orderViewController = nil;
     BOOL judge2 = [self checkOutPayResult];
     if (judge1 && judge2) {
         NSLog(@"服务器、手机端显示支付完成");
-        
-        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"支付成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        alertView.tag = 200;
-        [alertView show];
+        [self goToPaySuccessfullyViewController];
     }
+}
+
+-(void)goToPaySuccessfullyViewController {
+    PaySuccessfullyViewController* payedVC = [PaySuccessfullyViewController new];
+    payedVC.orderNum = self.orderNumber;
+    payedVC.prodClass = self.prodClass;
+    
+    NSString* testRMB = [NSString stringWithFormat:@"￥%@", self.RMB];
+    NSString* testDollar = [NSString stringWithFormat:@"($%@)", self.dollar];
+    NSString* testAllStr = [NSString stringWithFormat:@"%@%@", testRMB, testDollar];
+    NSMutableAttributedString* testPrice = [NSMutableAttributedString attributedStringWithString:testAllStr];
+    [testPrice addAttributes:@{NSForegroundColorAttributeName: [UIColor orangeColor]} range:[testAllStr rangeOfString:testRMB]];
+    [testPrice addAttributes:@{NSForegroundColorAttributeName: [UIColor grayColor]} range:[testAllStr rangeOfString:testDollar]];
+    payedVC.orderPrice = testPrice;
+    
+    NSString* zhiFuFangShi = @"";
+    if (_selectPayWay.intValue == 1) {
+        zhiFuFangShi = @"微信支付";
+    }else if (_selectPayWay.intValue == 2) {
+        zhiFuFangShi = @"支付宝客户端支付";
+    }else if (_selectPayWay.intValue == 3) {
+        zhiFuFangShi = @"支付宝网页支付";
+    }else if (_selectPayWay.intValue == 4) {
+        zhiFuFangShi = @"手机银联支付";
+    }else if (_selectPayWay.intValue == 5) {
+        zhiFuFangShi = @"信用卡支付";
+    }else if (_selectPayWay.intValue == 6) {
+        zhiFuFangShi = @"当面支付";
+    }
+    payedVC.payWay = zhiFuFangShi;
+    [self.navigationController pushViewController:payedVC animated:YES];
 }
 
 //查看支付宝给app返回结果
@@ -475,11 +512,5 @@ static OrderViewController* orderViewController = nil;
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    if (self.presentWay == 0) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-}
 
 @end

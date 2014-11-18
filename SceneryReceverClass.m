@@ -513,10 +513,9 @@ postRequestAgency(datas)
         ovc.presentWay = 0;
         ovc.prodClass = 2;
         ovc.orderNumber = result;
-        ovc.RMB=_RMB;
-        ovc.dollar=_dollar;
-        ovc.dayCount=@"1";
-        ovc.roomCount=[NSString stringWithFormat:@"%d",zhong.text.intValue];
+        ovc.RMB=[NSString stringWithFormat:@"%d", _RMB.intValue*zhong.text.intValue];
+        ovc.dollar=[NSString stringWithFormat:@"%d", _dollar.intValue*zhong.text.intValue];
+        NSLog(@"ovc.rmb:%@,dollar:%@",ovc.RMB,ovc.dollar);
         ovc.selectPayWay=paytype;
         ovc.productDescription=_roomTypeStr;
         ovc.productName=_chineseStr;

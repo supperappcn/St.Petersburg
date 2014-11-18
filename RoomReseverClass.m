@@ -657,10 +657,9 @@ postRequestAgency(datas)
         OrderViewController *ovc = [OrderViewController sharedOrderViewController];
         ovc.presentWay = 0;
         ovc.orderNumber = result;
-        ovc.RMB=_RMB;
-        ovc.dollar=_dollar;
-        ovc.dayCount=_dayCount;
-        ovc.roomCount=[NSString stringWithFormat:@"%d",zhong.text.intValue];
+        ovc.RMB=[NSString stringWithFormat:@"%d", _RMB.intValue*_dayCount.intValue*zhong.text.intValue];
+        ovc.dollar=[NSString stringWithFormat:@"%d", _dollar.intValue*_dayCount.intValue*zhong.text.intValue];
+        NSLog(@"ovc.rmb:%@,dollar:%@",ovc.RMB,ovc.dollar);
         ovc.payWay = _payWay;
         ovc.prodClass = 3;
         ovc.productDescription=_roomTypeStr;

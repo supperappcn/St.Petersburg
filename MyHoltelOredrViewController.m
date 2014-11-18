@@ -160,6 +160,7 @@ postRequestAgency(datas)
         mlodtvc.orderPrice = cell.priceLab.attributedText;
         mlodtvc.payStr=cell.payWayLab.text;
         mlodtvc.prodClass = @"1";
+        mlodtvc.pushWay = 0;
         mlodtvc.hotelID = [self.hotelIDs[indexPath.section]intValue];
         [self.navigationController pushViewController:mlodtvc animated:YES];
     }else if ([self.title isEqualToString:@"景点订单"]) {
@@ -170,6 +171,7 @@ postRequestAgency(datas)
         mvodtvc.orderPrice = cell.priceLab.attributedText;
         mvodtvc.payStr=cell.payWayLab.text;
         mvodtvc.prodClass = @"2";
+        mvodtvc.pushWay = 0;
         mvodtvc.hotelID = [self.hotelIDs[indexPath.section]intValue];
         [self.navigationController pushViewController:mvodtvc animated:YES];
     }else if ([self.title isEqualToString:@"酒店订单"]) {
@@ -180,18 +182,8 @@ postRequestAgency(datas)
         mhodtvc.orderPrice = cell.priceLab.attributedText;
         mhodtvc.payStr=cell.payWayLab.text;
         mhodtvc.prodClass = @"3";
+        mhodtvc.pushWay = 0;
         mhodtvc.hotelID = [self.hotelIDs[indexPath.section]intValue];
-        
-        /*跳转到之前的酒店订单详情页面
-        MyHotelOredeDetailTableViewController *mhdtc = [MyHotelOredeDetailTableViewController new];
-        mhdtc.currentDic = tableArr[indexPath.section];
-        MyHotelOrederListTableViewCell *cell = (MyHotelOrederListTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-        mhdtc.headImage = cell.headIV.image;
-        mhdtc.priceStr=cell.priceLab.attributedText;
-        mhdtc.payStr=cell.payWayLab.text;
-        mhdtc.subheadStr = cell.subheadLab.text;
-        mhdtc.hotelID = [self.hotelIDs[indexPath.section]intValue];
-         */
         [self.navigationController pushViewController:mhodtvc animated:YES];
     }else if ([self.title isEqualToString:@"娱乐订单"]) {
         MyEntainOrderDetailTableViewController* mtodtvc = [MyEntainOrderDetailTableViewController new];
@@ -201,6 +193,7 @@ postRequestAgency(datas)
         mtodtvc.orderPrice = cell.priceLab.attributedText;
         mtodtvc.payStr=cell.payWayLab.text;
         mtodtvc.prodClass = @"4";
+        mtodtvc.pushWay = 0;
         mtodtvc.hotelID = [self.hotelIDs[indexPath.section]intValue];
         [self.navigationController pushViewController:mtodtvc animated:YES];
     }else if ([self.title isEqualToString:@"导游/租车订单"]) {
@@ -211,6 +204,7 @@ postRequestAgency(datas)
         mgodtvc.headImage = cell.headIV.image;
         mgodtvc.orderPrice = cell.orderPriceLab.attributedText;
         mgodtvc.payStr=cell.payWayLab.text;
+        mgodtvc.pushWay = 0;
         if ([[dic valueForKey:@"ProdType"]intValue] == 1) {
             mgodtvc.prodClass = @"5";
         }else if ([[dic valueForKey:@"ProdType"]intValue] == 2) {
@@ -562,7 +556,6 @@ postRequestAgency(datas)
                 ovc.productDescription = [NSString stringWithFormat:@"%@张", dictionary[@"TCount"]];
             }
         }
-        NSLog(@"ovc.presentWay:%d,orderNumber:%@,prodClass:%d,productName:%@,productDescription:%@",ovc.presentWay,ovc.orderNumber,ovc.prodClass,ovc.productName,ovc.productDescription);
         
 //        1线路、2景点、3酒店、4门票、5导游、6租车
         [self.navigationController pushViewController:ovc animated:YES];

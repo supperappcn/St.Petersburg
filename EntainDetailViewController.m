@@ -2948,7 +2948,7 @@ GO_NET
         
         if (self.tag==1)
         {
-            lable1.text=[NSString stringWithFormat:@"$<font size=16  color=orange>%@</font>",[dataDic valueForKey:@"UDPrice"]];
+            lable1.text=[NSString stringWithFormat:@"$<font size=16  color=orange>%@</font>起",[dataDic valueForKey:@"UDPrice"]];
         }else lable1.text=[NSString stringWithFormat:@"$<font size=16  color=orange>%@</font>",[dataDic valueForKey:@"LPrice"]];
        // CGSize size=[lable1 optimumSize];
         //lable1.frame=CGRectMake(10, (order.frame.size.height-size.height)/2, 80, size.height);

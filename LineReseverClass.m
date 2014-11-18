@@ -850,10 +850,9 @@ postRequestAgency(datas)
         ovc.presentWay = 0;
         ovc.prodClass = 1;
         ovc.orderNumber = result;
-        ovc.RMB=_RMB;
-        ovc.dollar=_dollar;
-        ovc.dayCount=_dayCount;
-        ovc.roomCount=[NSString stringWithFormat:@"%d",zhong.text.intValue];
+        ovc.RMB=[NSString stringWithFormat:@"%d", _RMB.intValue*_dayCount.intValue*(zhong.text.intValue+zhong2.text.intValue)];
+        ovc.dollar=[NSString stringWithFormat:@"%d", _dollar.intValue*_dayCount.intValue*(zhong.text.intValue+zhong2.text.intValue)];
+        NSLog(@"ovc.rmb:%@,dollar:%@",ovc.RMB,ovc.dollar);
         ovc.selectPayWay=paytype;
         ovc.productDescription=_lineTypeStr;
         ovc.productName=_russianStr;
