@@ -185,7 +185,8 @@ backButton
             //headerLab.font = [UIFont boldSystemFontOfSize:18];
             [sv addSubview:headerLab];
         }
-    }else if (_tag==3){
+    }else if
+        (_tag==3){
         headerLab = [[RTLabel alloc] initWithFrame:CGRectMake(10, 5, 300, 20)];
         headerLab.text=[NSString stringWithFormat:@"<font  size=14 color=black><b>%@</b></font> <font  size=12 color=gray>%@ %@</font> <font size=12>%@ %@ %@</font>",_nameStr,_countryStr,_sexStr,_peopleCountStr,_carTypeStr,_jichengStr];
         headerLab.textColor = [UIColor colorWithRed:30.0/255 green:98.0/255 blue:167.0/255 alpha:1];
@@ -195,8 +196,8 @@ backButton
     if (_ProdType.intValue==2) {
         count = 3;
     }
-    NSArray *imageNames = @[@"住宿预订第1步_03",@"导游预订第1步（企业）_03",@"住宿预订第1步_03-09"];
-    NSArray *names = @[@"选择日期",@"预订数量",@"游客数量"];
+    NSArray *imageNames = @[@"住宿预订第1步_03",@"住宿预订第1步_03-09",@"导游预订第1步（企业）_03"];
+    NSArray *names = @[@"选择日期",@"游客数量",@"预订数量"];
     for (int i=0; i<count; i++) {
         
         UIButton *bv = [[UIButton alloc]initWithFrame:CGRectMake(0, headerLab.frame.size.height+10+i*43, 320, 43)];

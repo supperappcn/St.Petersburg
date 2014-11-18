@@ -252,7 +252,7 @@ backButton
             for (NSInteger i = 0; i < yearArr.count; i ++)
             {
                 if ([yearArr[i] integerValue] == self.calenderV.year &&
-                    [monthArr[1] integerValue] == self.calenderV.month)
+                    [monthArr[i] integerValue] == self.calenderV.month)
                 {
                     UIButton *button = (UIButton *)[self.calenderV viewWithTag:[dayArr[i] integerValue]];
                     button.userInteractionEnabled = YES;

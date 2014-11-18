@@ -69,6 +69,7 @@
             dispatch_async(dispatch_get_global_queue(2, 0), ^{
                 //http://192.168.0.156:805/upload/apps/201405231043532042.jpg
                 NSString *urlStr = [NSString stringWithFormat:@"http://t.russia-online.cn/upload/apps/%@",[_dataArr[i] objectForKey:@"AppImage2"]];//小图
+                NSLog(@"%@",urlStr);
                 NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
                 UIImage *image = [UIImage imageWithData:data];
                 NSString *tittle = [NSString stringWithFormat:@"%@",[_dataArr[i] objectForKey:@"AppName"]];

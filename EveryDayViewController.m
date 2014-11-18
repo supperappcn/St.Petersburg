@@ -10,7 +10,10 @@
 #import "JSON.h"
 #import "GDataXMLNode.h"
 @interface EveryDayViewController ()
-
+{
+    NSInteger SIflag;
+    NSMutableArray *indexarr;
+}
 @end
 
 @implementation EveryDayViewController
@@ -22,10 +25,10 @@
    dicResultYiBu(datas, result, dic)
     [navActivity stopAnimating];
     dataArray=[dic valueForKey:@"ds"];
-    NSLog(@"count======%d",dataArray.count);
+//    NSLog(@"count======%d",dataArray.count);
     for (int i=0; i<dataArray.count; i++)
     {
-                int prodID=[[[dataArray objectAtIndex:i]valueForKey:@"ProdID"] integerValue];
+        int prodID=[[[dataArray objectAtIndex:i]valueForKey:@"ProdID"] integerValue];
 
         if (prodID>0)
         {
@@ -81,13 +84,14 @@ backButton
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    SIflag = 1;
+    indexarr = [[NSMutableArray alloc]init];
     navActivity=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     navActivity.frame=CGRectMake(40+(8-4)*10, (44- navActivity.frame.size.height)/2, navActivity.frame.size.width,  navActivity.frame.size.height);
     [navActivity startAnimating];
     [self.navigationController.navigationBar addSubview:navActivity];
     [self setTitle:[NSString stringWithFormat:@"第%d天 行程清单",self.Lineday]];
-    NSLog(@"ID======%d",self.ID);
+//    NSLog(@"ID======%d",self.ID);
     
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",self.ID],@"ID",[NSString stringWithFormat:@"%d",self.Lineday],@"Lineday", nil];
     NSMutableString*str=RussiaUrl2
@@ -99,7 +103,7 @@ backButton
     _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight-44-20) style:UITableViewStylePlain];
     
        
-    _tabView.tag=1;
+    _tabView.tag=100;
     _tabView.delegate=self;
     _tabView.dataSource=self;
     _tabView.delaysContentTouches=YES;
@@ -116,6 +120,7 @@ backButton
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    NSLog(@"indexArr = %@",indexarr);
     static NSString*hotel=@"hotel";
     static NSString*scenery=@"scenery";
     
@@ -123,9 +128,9 @@ backButton
     SceneryCell*sceneryCell=[tableView dequeueReusableCellWithIdentifier:scenery];
     
     int str =[[[dataArray objectAtIndex:indexPath.row] valueForKey:@"TypeID"] integerValue];
-     int prodID=[[[dataArray objectAtIndex:indexPath.row] valueForKey:@"ProdID"] integerValue];
+    int prodID=[[[dataArray objectAtIndex:indexPath.row] valueForKey:@"ProdID"] integerValue];
     
-    NSLog(@"str======%d",str);
+//    NSLog(@"str======%d",str);
     
     if (prodID>0)
     {
@@ -136,7 +141,22 @@ backButton
         
         if (str==3)
         {
-              sceneryCell.headImage.image=[UIImage imageNamed:@"LineDetail_Scenery.png"];
+            sceneryCell.headImage.image=[UIImage imageNamed:@"LineDetail_Scenery.png"];
+            for (NSInteger i = 0; i<indexarr.count; i ++)
+            {
+                if ([indexarr[i][0] integerValue] == indexPath.row)
+                {
+                    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(8, 5, 13, 13)];
+                    label.tag = indexPath.row + 1;
+                    //            label.backgroundColor = [UIColor yellowColor];
+                    label.text = [NSString stringWithFormat:@"%@",indexarr[i][1]];
+//                    NSLog(@"label.text = %@",label.text);
+                    [label setFont:[UIFont fontWithName:@"Helvetica-Bold" size:11]];
+                    label.textColor = [UIColor whiteColor];
+                    label.textAlignment = NSTextAlignmentCenter;
+                    [sceneryCell.headImage addSubview:label];
+                }
+            }
         }
         if (str==1)
         {
@@ -144,7 +164,7 @@ backButton
                   }
         if (str==4)
         {
-              sceneryCell.headImage.image=[UIImage imageNamed:@"LineDetail_hotel.png"];
+            sceneryCell.headImage.image=[UIImage imageNamed:@"LineDetail_hotel.png"];
         }
 
        
@@ -153,10 +173,7 @@ backButton
         
         if (type==1)
         {
-            
             [LINE_VIEW_C loadPic_tableViewDataArray:dataArray objectAtIndex:indexPath.row objectForKey:@"Pic" picHeadUrlStr:PicUrl picUrlPathStr:@"rest/big" PicLoadName:sceneryCell.head.text headView:sceneryCell._imageView];
-            
-            
         }
         
         if (type==3)
@@ -197,7 +214,8 @@ backButton
         }
       
     
-    if (dataArray.count>0) {
+    if (dataArray.count>0)
+    {
         if (str==1)
         {
             [hotelCell._imageView setBackgroundImage:[UIImage imageNamed:@"LineDetail_food.png"] forState:UIControlStateNormal];
@@ -211,7 +229,21 @@ backButton
         if (str==3)
         {
             [hotelCell._imageView setBackgroundImage:[UIImage imageNamed:@"LineDetail_Scenery.png"] forState:UIControlStateNormal];
-            //             hotelCell._imageView.image=[UIImage imageNamed:@"LineDetail_bus.png"];
+            for (NSInteger i = 0; i<indexarr.count; i ++)
+            {
+                if ([indexarr[i][0] integerValue] == indexPath.row)
+                {
+                    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(8, 5, 13, 13)];
+                    label.tag = indexPath.row + 1;
+                    //            label.backgroundColor = [UIColor yellowColor];
+                    label.text = [NSString stringWithFormat:@"%@",indexarr[i][1]];
+//                    NSLog(@"label.text = %@",label.text);
+                    [label setFont:[UIFont fontWithName:@"Helvetica-Bold" size:11]];
+                    label.textColor = [UIColor whiteColor];
+                    label.textAlignment = NSTextAlignmentCenter;
+                    [hotelCell._imageView addSubview:label];
+                }
+            }
         }
         if (str==4)
         {
@@ -243,7 +275,6 @@ backButton
      int prodID=[[[dataArray objectAtIndex:indexPath.row]valueForKey:@"ProdID"] integerValue];
     int type=[[[dataArray objectAtIndex:indexPath.row]valueForKey:@"TypeID"] integerValue];
    
-    
     if (prodID>0)
     {
         if (type==1)
@@ -286,8 +317,8 @@ backButton
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     return dataArray.count;
+    
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -295,8 +326,16 @@ backButton
     if (dataArray)
     {
         int str =[[[dataArray objectAtIndex:indexPath.row] valueForKey:@"ProdID"]intValue];
-        
-        
+        int str1 =[[[dataArray objectAtIndex:indexPath.row] valueForKey:@"TypeID"] integerValue];
+
+        if (str1 == 3)
+        {
+            NSArray *arr = [[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"%d",indexPath.row],[NSString stringWithFormat:@"%d",SIflag],nil];
+            [indexarr addObject:arr];
+            SIflag ++;
+        }
+
+
         if (str==0)
         {
             HotelAndBusCell*cell=(HotelAndBusCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -305,9 +344,9 @@ backButton
             
             
         }
-        
-       else
+        else
         {
+
             SceneryCell*cell=(SceneryCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
            
               
@@ -317,7 +356,6 @@ backButton
         
 
     }
-    
     
     return 200;
     
