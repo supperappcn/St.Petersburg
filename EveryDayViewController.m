@@ -173,10 +173,7 @@ backButton
         
         if (type==1)
         {
-            
             [LINE_VIEW_C loadPic_tableViewDataArray:dataArray objectAtIndex:indexPath.row objectForKey:@"Pic" picHeadUrlStr:PicUrl picUrlPathStr:@"rest/big" PicLoadName:sceneryCell.head.text headView:sceneryCell._imageView];
-            
-            
         }
         
         if (type==3)
