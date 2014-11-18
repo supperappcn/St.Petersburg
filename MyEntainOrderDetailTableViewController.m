@@ -156,50 +156,53 @@ static NSString* cellIdentifier = @"Cell";
     orderNumTitle.textColor = grayColor;
     orderNumTitle.font = font;
     [self.topView addSubview:orderNumTitle];
-    UILabel* orderNumLab = [[UILabel alloc]initWithFrame:CGRectMake(96, 10, 200, 21)];
+    UILabel* orderNumLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, 200, 21)];
     orderNumLab.text = self.currentDic[@"OrderID"];
     orderNumLab.font = font;
     [self.topView addSubview:orderNumLab];
-    UILabel* orderPriceTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 34, 78, 21)];
+    UILabel* orderPriceTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 34, 70, 21)];
     orderPriceTitle.text = @"订单金额：";
     orderPriceTitle.textColor = grayColor;
     orderPriceTitle.font = font;
     [self.topView addSubview:orderPriceTitle];
-    self.orderPriceLab = [[UILabel alloc]initWithFrame:CGRectMake(96, 34, 175, 21)];
+    self.orderPriceLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 34, 175, 21)];
     self.orderPriceLab.attributedText = self.orderPrice;
     self.orderPriceLab.font = font;
     [self.topView addSubview:self.orderPriceLab];
-    UILabel* orderTimeTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 58, 78, 21)];
+    UILabel* orderTimeTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 58, 70, 21)];
     orderTimeTitle.text = @"下单时间：";
     orderTimeTitle.textColor = grayColor;
     orderTimeTitle.font = font;
     [self.topView addSubview:orderTimeTitle];
-    UILabel* orderTimeLab = [[UILabel alloc]initWithFrame:CGRectMake(96, 58, 175, 21)];
+    UILabel* orderTimeLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 58, 175, 21)];
     orderTimeLab.text = self.currentDic[@"PTime"];
     orderTimeLab.font = font;
     [self.topView addSubview:orderTimeLab];
-    UILabel* payWayTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 82, 78, 21)];
+    UILabel* payWayTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 82, 70, 21)];
     payWayTitle.text = @"支付方式：";
     payWayTitle.textColor = grayColor;
     payWayTitle.font = font;
     [self.topView addSubview:payWayTitle];
-    UILabel* payWayLab = [[UILabel alloc]initWithFrame:CGRectMake(96, 82, 175, 21)];
+    UILabel* payWayLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 82, 175, 21)];
     payWayLab.text = self.payStr;
     payWayLab.font = font;
     [self.topView addSubview:payWayLab];
-    UILabel* orderStatusTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 106, 78, 21)];
+    UILabel* orderStatusTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 106, 70, 21)];
     orderStatusTitle.text = @"订单状态：";
     orderStatusTitle.textColor = grayColor;
     orderStatusTitle.font = font;
     [self.topView addSubview:orderStatusTitle];
-    self.orderStatusLab = [[UILabel alloc]initWithFrame:CGRectMake(96, 106, 130, 21)];
+    self.orderStatusLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 106, 130, 21)];
     self.orderStatusLab.text = self.currentDic[@"Status"];
     self.orderStatusLab.textColor = [UIColor colorWithRed:0.192 green:0.482 blue:0.76 alpha:1];
     self.orderStatusLab.font = font;
     [self.topView addSubview:self.orderStatusLab];
-    self.statusBtn = [[UIButton alloc]initWithFrame:CGRectMake(20, 106, 70, 21)];
-    self.statusBtn.hidden = YES;
-    [self.statusBtn addTarget:self action:@selector(clickGoSecondButton:) forControlEvents:UIControlEventTouchUpInside];
+    if ([self.orderStatusLab.text isEqualToString:@"去支付"]) {
+        self.statusBtn = [[UIButton alloc]initWithFrame:CGRectMake(210, 106, 70, 21)];
+        [self.topView addSubview:self.statusBtn];
+        [self.statusBtn addTarget:self action:@selector(clickGoSecondButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
 }
 
 -(void)addInfoView {

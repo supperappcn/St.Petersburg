@@ -679,7 +679,7 @@ postRequestAgency(datas)
         ovc.orderNumber = result;
         ovc.RMB= [NSString stringWithFormat:@"%d", _RMB.intValue*self.days];
         ovc.dollar= [NSString stringWithFormat:@"%d", _dollar.intValue*self.days];
-        NSLog(@"ovc.rmb:%@,dollar:%@",_RMB, _dollar);
+        NSLog(@"ovc.rmb:%@,dollar:%@",ovc.RMB, ovc.dollar);
         ovc.selectPayWay=paytype;
         [self.navigationController pushViewController:ovc animated:NO];
     }else if (result.intValue==0){
