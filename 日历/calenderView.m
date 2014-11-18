@@ -121,19 +121,22 @@
 #pragma -mark Onbutton and nextButton
     UIButton *OnButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 15, 15)];
     [OnButton setImage:[UIImage imageNamed:@"(日历)03.png"] forState:UIControlStateNormal];
+    [OnButton addTarget:self action:@selector(clickON) forControlEvents:UIControlEventTouchUpInside];
     UIButton *OB = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
     [OB addTarget:self action:@selector(clickON) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:OB];
     [self addSubview:OnButton];
+
     
     
     UIButton *nextButton = [[UIButton alloc]initWithFrame:CGRectMake(320 - 10 - 15, 10, 15, 15)];
     [nextButton setImage:[UIImage imageNamed:@"(日历)05.png"] forState:UIControlStateNormal];
-    UIButton *NB = [[UIButton alloc]initWithFrame:CGRectMake(320 - 40, 5, 40, 40)];
+    [nextButton addTarget:self action:@selector(NEXT) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *NB = [[UIButton alloc]initWithFrame:CGRectMake(320 - 40, 0, 40, 40)];
     [NB addTarget:self action:@selector(NEXT) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:NB];
     [self addSubview:nextButton];
-    
+
     
 #pragma - mark 日期
     for (int i = 0; i< _weekNames.count; i ++)
