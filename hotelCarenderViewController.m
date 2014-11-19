@@ -1245,6 +1245,20 @@ backButton
                 CM = [NSString stringWithFormat:@"%d",cp];
             }
         }
+        if (self.CIOArr.count > 1)
+        {
+            if ([self.CIOArr[i][0] integerValue] == endY &&
+                [self.CIOArr[i][1] integerValue] == endM &&
+                [self.CIOArr[i][2] integerValue] == self.endD)
+            {
+                NSInteger date = [self GetWeekWithYear:endY andMonth:endM andDay:self.endD];
+                
+                up -= [UPArr[date - 1] integerValue];
+                UM = [NSString stringWithFormat:@"%d",up];
+                cp -= [CPArr[date - 1] integerValue];
+                CM = [NSString stringWithFormat:@"%d",cp];
+            }
+        }
         price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%@</font><font color=white>（$%@)</font>",CM,UM];
         if ([self.CIOArr[i][0] integerValue] == self.calenderV.year && [self.CIOArr[i][1] integerValue] == self.calenderV.month)
         {

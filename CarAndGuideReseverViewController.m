@@ -19,7 +19,8 @@
 
 backButton
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
 //    NSLog(@"arr = %@",self.CGArr);
     //roomInformationStr = [[NSMutableString alloc] init];
     //userConnectInformationStr = [[NSMutableString alloc] init];
@@ -56,10 +57,16 @@ backButton
                 [_selectDateStr appendString:str];
                 [addDateStr appendString:str];
             }
-           // checkLab.text = addDateStr;
-                NSLog(@"select = %@",_selectDateStr);
-            price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>", _RMB.intValue, _dollar.intValue];//将_RMB.intValue*zhong.text.intValue,_dollar.intValue*zhong.text.intValue改成了_RMB.intValue,_dollar.intValue
-            }
+        }
+        if (_CGArr.count >= 1)
+        {
+            price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>", _RMB.intValue * _CGArr.count, _dollar.intValue * _CGArr.count];
+        }
+        else
+        {
+            price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>", _RMB.intValue, _dollar.intValue];
+        }
+        //将_RMB.intValue*zhong.text.intValue,_dollar.intValue*zhong.text.intValue改成了_RMB.intValue,_dollar.intValue
 //            if (_tag==2) {
     //            0, headerLab.frame.size.height+10+i*43, 320, 43
     //            116, 13.5, 150, 16
@@ -95,7 +102,6 @@ backButton
                 NSLog(@"headViewHeight %f",headViewHeight);
                 [sv setContentSize:CGSizeMake(320, 40+43+dateBtn.frame.size.height+footerViewHeight+90+headViewHeight)];
         }
-
 //    }
 }
 -(void)viewDidLoad{

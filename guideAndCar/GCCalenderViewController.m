@@ -114,8 +114,8 @@ backButton
     {
         dataArr = (NSMutableArray *)[resule componentsSeparatedByString:@","];
     }
-    NSLog(@"dataArr = %@",dataArr);
-    NSLog(@"%@",resule);
+//    NSLog(@"dataArr = %@",dataArr);
+//    NSLog(@"%@",resule);
     [self.calenderV GetData];
     
 }
@@ -222,10 +222,11 @@ backButton
 
 - (void)clickOnReservation
 {
-    self.CGRV.dollar = UM;
-    self.CGRV.RMB = CM;
-    self.CGRV.CGArr = selectArr;
-    [self.navigationController popViewControllerAnimated:NO];
+    if (selectArr.count >= 1)
+    {
+        self.CGRV.CGArr = selectArr;
+        [self.navigationController popViewControllerAnimated:NO];
+    }
 }
 
 

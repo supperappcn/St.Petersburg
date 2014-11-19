@@ -15,6 +15,7 @@
 #import "MyCollectViewController.h"
 #import "MyHoltelOredrViewController.h"
 #import "calendarViewController.h"
+#import "locationViewController.h"
 
 #define SEVERICE_IMAGE @"serviceHeardImage"
 
@@ -664,28 +665,6 @@
     {
         noNetButton.hidden=YES;
     }
-    
-    //获取我的位置
-    locationManager=[[CLLocationManager alloc]init];
-    if ([CLLocationManager locationServicesEnabled]==YES)
-    {
-        //                NSLog(@"ok");
-    }
-    else
-    {
-        //                NSLog(@"创造一个警告框,告诉用户去设置里面开启定位服务");
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"您好，请先打开位置定位！" delegate:self cancelButtonTitle:@"好的，谢谢" otherButtonTitles: nil];
-        [alert show];
-    }
-    //精确度
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    //更新位置的范围
-    [locationManager setDistanceFilter:100.f];
-    
-    locationManager.delegate=self;
-    [locationManager startUpdatingLocation];
-
- 
 }
 
 
@@ -711,6 +690,8 @@ GO_NET
         case 8:
         {
             //开始更新范围
+            locationViewController *location = [[locationViewController alloc]init];
+            [self.navigationController pushViewController:location animated:NO];
             
         }
             break;
@@ -805,39 +786,6 @@ GO_NET
     
 }
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    CLLocation *location=[locations lastObject];
-    
-    CLLocation *thelocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude + 0.1
-        longitude:location.coordinate.longitude + 0.1];    //位置反编码
-    CLGeocoder *geocoder=[[CLGeocoder alloc]init];
-    
-    [geocoder reverseGeocodeLocation:thelocation completionHandler:^(NSArray *placemarks, NSError *error)
-     {
-         for (CLPlacemark *placemake in placemarks)
-         {
-             UILabel *label = (UILabel *)[self.view viewWithTag:100];
-             label.frame = CGRectMake(35, 0, 260, 40);
-             label.font = [UIFont systemFontOfSize:15.5];
-             label.text = placemake.name;
-             if (placemake.name.length > 16)
-             {
-                 label.frame = CGRectMake(35, 0, 200, 40);
-                 label.font = [UIFont systemFontOfSize:13];
-                 label.text = placemake.name;
-             }
-             if (placemake.name.length >= 30)
-             {
-                 label.frame = CGRectMake(35, 0, 250, 40);
-                 label.font = [UIFont systemFontOfSize:13];
-                 label.text = placemake.name;
-             }
-             label.numberOfLines = 0;
-         }
-     }];
-    [locationManager stopUpdatingLocation];
-}
 
 
 -(void)regist:(UIButton*)sender

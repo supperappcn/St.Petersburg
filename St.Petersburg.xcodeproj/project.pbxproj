@@ -37,6 +37,7 @@
 		18650E9919E6655900209EB6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9119E6652900209EB6 /* libWeChatSDK.a */; };
 		18650E9A19E6655900209EB6 /* libYixinSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9219E6652900209EB6 /* libYixinSDK.a */; };
 		188CD28C1A1AE0A400D2F1CA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CD28B1A1AE0A400D2F1CA /* MapKit.framework */; };
+		188CD2D01A1B378900D2F1CA /* locationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CD2CF1A1B378900D2F1CA /* locationViewController.m */; };
 		C400546418EA6B0000E130B6 /* day1.png in Resources */ = {isa = PBXBuildFile; fileRef = C400545C18EA6B0000E130B6 /* day1.png */; };
 		C400546518EA6B0000E130B6 /* day2.png in Resources */ = {isa = PBXBuildFile; fileRef = C400545D18EA6B0000E130B6 /* day2.png */; };
 		C400546618EA6B0000E130B6 /* day3.png in Resources */ = {isa = PBXBuildFile; fileRef = C400545E18EA6B0000E130B6 /* day3.png */; };
@@ -858,6 +859,8 @@
 		18650E9119E6652900209EB6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		18650E9219E6652900209EB6 /* libYixinSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYixinSDK.a; sourceTree = "<group>"; };
 		188CD28B1A1AE0A400D2F1CA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		188CD2CE1A1B378900D2F1CA /* locationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = locationViewController.h; path = getlocation/locationViewController.h; sourceTree = "<group>"; };
+		188CD2CF1A1B378900D2F1CA /* locationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = locationViewController.m; path = getlocation/locationViewController.m; sourceTree = "<group>"; };
 		C400545C18EA6B0000E130B6 /* day1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day1.png; sourceTree = "<group>"; };
 		C400545D18EA6B0000E130B6 /* day2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day2.png; sourceTree = "<group>"; };
 		C400545E18EA6B0000E130B6 /* day3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day3.png; sourceTree = "<group>"; };
@@ -2016,6 +2019,15 @@
 			path = "点a文件";
 			sourceTree = "<group>";
 		};
+		188CD2CD1A1B374B00D2F1CA /* getlocation */ = {
+			isa = PBXGroup;
+			children = (
+				188CD2CE1A1B378900D2F1CA /* locationViewController.h */,
+				188CD2CF1A1B378900D2F1CA /* locationViewController.m */,
+			);
+			name = getlocation;
+			sourceTree = "<group>";
+		};
 		C40245F318F7D7E40016B360 /* SeceneryImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2887,6 +2899,7 @@
 				C4121F83192377F10047DEFA /* NewsViewController.m */,
 				C4121F84192377F10047DEFA /* SetViewController.h */,
 				C4121F85192377F10047DEFA /* SetViewController.m */,
+				188CD2CD1A1B374B00D2F1CA /* getlocation */,
 				C4121F8F192378080047DEFA /* 我的游记 */,
 				C4121F8E192377F90047DEFA /* 我的收藏 */,
 				C4FE85B718ADB5E700A579AE /* Location */,
@@ -4532,6 +4545,7 @@
 				C4121F961923781B0047DEFA /* MyCollectDetailViewController.m in Sources */,
 				0A06D2901A09CD5100F3256F /* MyEntainOrderDetailTableViewController.m in Sources */,
 				C44282691977612A00AA1F2A /* SubwayNewViewController.m in Sources */,
+				188CD2D01A1B378900D2F1CA /* locationViewController.m in Sources */,
 				C4E84FBA18DC1D7B00B118DB /* entainmentCustomCell.m in Sources */,
 				C49D17B318A5DCD70001E371 /* MainTabarController.m in Sources */,
 				0A041E8D19F64B7900320F8E /* AlixPayResult.m in Sources */,
