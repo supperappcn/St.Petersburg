@@ -708,8 +708,7 @@ backButton
         [bv addSubview:name];
         
     }
-    
-#warning Changed...     注释下面两行，并把选择支付方式挪到下个页面
+#pragma mark  Changed...     注释下面两行，并把选择支付方式挪到下个页面
 //    [footerView addSubview:payView];
 //    footerViewHeight = footerViewHeight+10+count*43;
     footerView.frame = CGRectMake(0, headerViewHeight+viewHeight, 320, footerViewHeight);
@@ -852,7 +851,6 @@ postRequestAgency(datas)
         ovc.orderNumber = result;
         ovc.RMB=[NSString stringWithFormat:@"%d", _RMB.intValue*_dayCount.intValue*(zhong.text.intValue+zhong2.text.intValue)];
         ovc.dollar=[NSString stringWithFormat:@"%d", _dollar.intValue*_dayCount.intValue*(zhong.text.intValue+zhong2.text.intValue)];
-        NSLog(@"ovc.rmb:%@,dollar:%@",ovc.RMB,ovc.dollar);
         ovc.selectPayWay=paytype;
         ovc.productDescription=_lineTypeStr;
         ovc.productName=_russianStr;

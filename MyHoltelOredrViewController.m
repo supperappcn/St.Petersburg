@@ -83,12 +83,10 @@ static NSString *identifier = @"Cell";
     refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     [_myTableview addSubview:refreshControl];
-    
-    [self loadNewData:0];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [_myTableview reloadData];
+    [self loadNewData:0];
 }
 
 - (void)refreshData{

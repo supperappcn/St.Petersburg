@@ -634,8 +634,8 @@ backButton
     }else {
         self.days = 1;
     }
-    int d = [_RMB intValue]*[zhong.text intValue]*self.days;
-    int r = [_dollar intValue]*[zhong.text intValue]*self.days;
+    int d = [_RMB intValue]*self.days;//*[zhong.text intValue]
+    int r = [_dollar intValue]*self.days;//*[zhong.text intValue]
     // price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>",d,r];
 //  导游/租车预订：参数（prodid：导游/租车产品ID，prodtype：1是导游订单2是租车订单，classid：预订代理商的产品类别，userid：预订人的用户ID,username：预订人的用户名,sdate：所选日期,pcount：游客数量，gcount：所需导游数/车辆数,cmoney：人民币,umoney：美元,uname：姓名,phone：电话,email：邮箱,qq：qq,weixin：微信,paytype：1微信支付，2支付宝客户端支付，3支付宝网页支付，4手机银联支付，5信用卡支付，6当面支付）
     int typeCount;
@@ -679,7 +679,6 @@ postRequestAgency(datas)
         ovc.orderNumber = result;
         ovc.RMB= [NSString stringWithFormat:@"%d", _RMB.intValue*self.days];
         ovc.dollar= [NSString stringWithFormat:@"%d", _dollar.intValue*self.days];
-        NSLog(@"ovc.rmb:%@,dollar:%@",ovc.RMB, ovc.dollar);
         ovc.selectPayWay=paytype;
         [self.navigationController pushViewController:ovc animated:NO];
     }else if (result.intValue==0){

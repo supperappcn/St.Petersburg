@@ -254,7 +254,7 @@
             lable3.font=[UIFont systemFontOfSize:15];
             [urlButton addSubview:lable3];
             [urlButton addSubview:image];
-            UILabel*lable2=[[UILabel alloc]initWithFrame:CGRectMake(50, 32+95, 200, 32)];
+            UILabel*lable2=[[UILabel alloc]initWithFrame:CGRectMake(50, 32+93, 200, 32)];
             lable2.text=@"020-38056258";
             lable2.backgroundColor=[UIColor clearColor];
             lable2.font=[UIFont systemFontOfSize:13];

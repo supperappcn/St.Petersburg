@@ -15,6 +15,7 @@
 #import "MyCollectViewController.h"
 #import "MyHoltelOredrViewController.h"
 #import "calendarViewController.h"
+#import "MyOrderListViewController.h"
 
 #define SEVERICE_IMAGE @"serviceHeardImage"
 
@@ -703,7 +704,7 @@ GO_NET
         case 7:
         {
             MineDetailViewController*detail=[MineDetailViewController new];
-            [self.navigationController pushViewController:detail animated:NO];
+            [self.navigationController pushViewController:detail animated:YES];
             detail.severiceImage=name_image.image;
             detail.pageTitle=@"我的账号";
         }
@@ -718,16 +719,15 @@ GO_NET
         {
             //设置客服务日期
             calendarViewController *calender = [[calendarViewController alloc]init];
-            [self.navigationController pushViewController:calender animated:NO];
+            [self.navigationController pushViewController:calender animated:YES];
         }
             break;
         case 10:
         {
             //我的订单
-//            MineDetailViewController*detail=[MineDetailViewController new];
-//            [self.navigationController pushViewController:detail animated:NO];
-//            detail.severiceImage=name_image.image;
-//            detail.pageTitle=@"我的账号";
+            MyOrderListViewController* molVC = [MyOrderListViewController new];
+            molVC.title = @"我的订单";
+            [self.navigationController pushViewController:molVC animated:YES];
         }
             break;
         case 11:
@@ -793,7 +793,7 @@ GO_NET
         {
             //设置
             SetViewController*set=[SetViewController new];
-            [self.navigationController pushViewController:set animated:NO];
+            [self.navigationController pushViewController:set animated:YES];
         }
             break;
    

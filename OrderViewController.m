@@ -388,9 +388,19 @@ static OrderViewController* orderViewController = nil;
     order.tradeNO = _orderNumber;
     order.productName = _productName;
     order.productDescription = _productDescription;
-    order.amount = self.RMB;
+    order.amount = @"0.01";// self.RMB;
     NSLog(@"self.RMB:%@,_orderNumber:%@, _productName:%@, _productDescription:%@", self.RMB,_orderNumber, _productName, _productDescription);
-    order.notifyURL = @"http://t.russia-online.cn/notify_url.aspx";
+    if (self.prodClass == 1) {
+        order.notifyURL = @"http://t.russia-online.cn/linenotify_url.aspx";
+    }else if (self.prodClass == 2) {
+        order.notifyURL = @"http://t.russia-online.cn/viewnotify_url.aspx";
+    }else if (self.prodClass == 3) {
+        order.notifyURL = @"http://t.russia-online.cn/notify_url.aspx";
+    }else if (self.prodClass == 4) {
+        order.notifyURL = @"http://t.russia-online.cn/ticketnotify_url.aspx";
+    }else if (self.prodClass == 5 || self.prodClass == 6) {
+        order.notifyURL = @"http://t.russia-online.cn/guidenotify_url.aspx";
+    }
     return [order description];
 }
 
@@ -499,10 +509,11 @@ static OrderViewController* orderViewController = nil;
 -(BOOL)checkOutPayResult {
     NSMutableString* urlStr = RussiaUrl4;
     [urlStr appendString:@"GetHotelorderPayinfo"];
-    NSString* argumentStr = _orderNumber;
+    NSLog(@"_orderNumber...:%@", _orderNumber);
+    NSString* argumentStr = [NSString stringWithFormat:@"prodclassid=%d&ordernumber=%@",self.prodClass,_orderNumber];
     postRequestTongBu(argumentStr, urlStr, received);
     dicResultTongbuNoDic(received, result);
-    NSLog(@"checkOutPayResult:%@",result);
+    NSLog(@"orderNumber:%@,checkOutPayResult:%@",_orderNumber,result);
     
     if (result.intValue == 2) {
         NSLog(@"服务器显示支付完成");
