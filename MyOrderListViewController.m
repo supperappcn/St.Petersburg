@@ -12,8 +12,8 @@
 #import "GDataXMLNode.h"
 #import "JSON.h"
 
-static const int pageSize = 10;
-int pageindex = 1;
+static const int pageSize2 = 10;
+int pageindex2 = 1;
 @interface MyOrderListViewController ()
 @property (assign, nonatomic) int typeId;
 @property (assign, nonatomic) int pageIndexOne;
@@ -29,7 +29,7 @@ int pageindex = 1;
 @implementation MyOrderListViewController
 
 backButton
-static NSString* identifier = @"Cell";
+static NSString* identifier = @"cell";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,7 +43,7 @@ static NSString* identifier = @"Cell";
 {
     [super viewDidLoad];
     hideTabbar
-    self.view.backgroundColor = [UIColor colorWithRed:0.847 green:0.847 blue:0.847 alpha:1];
+    self.view.backgroundColor = [UIColor colorWithRed:0.973 green:0.973 blue:0.973 alpha:1];
     self.tableArr = [NSMutableArray array];
     [self.myTableView registerClass:[MyOrderListTableViewCell class] forCellReuseIdentifier:identifier];
     self.pageIndexOne = 1;
@@ -53,7 +53,7 @@ static NSString* identifier = @"Cell";
     self.aicv.frame = CGRectMake(65+(8-self.title.length)*10, (44- self.aicv.frame.size.height)/2, self.aicv.frame.size.width,  self.aicv.frame.size.height);
     [self.navigationController.navigationBar addSubview: self.aicv];
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-    footerView.backgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1];
+    footerView.backgroundColor = [UIColor colorWithRed:0.973 green:0.973 blue:0.973 alpha:1];
     self.aicv2 = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.aicv2.frame = CGRectMake(145, 0, 40,  40);
     [footerView addSubview: self.aicv2];
@@ -62,6 +62,11 @@ static NSString* identifier = @"Cell";
     [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     [self.myTableView addSubview:self.refreshControl];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadNewData:0];
 }
 
 -(void)refreshData {
@@ -73,7 +78,7 @@ static NSString* identifier = @"Cell";
     [self.aicv startAnimating];
     NSMutableString *urlStr =RussiaUrl4;
     [urlStr appendString:@"GuidemyOrderList"];
-    NSString *argumentStr = [NSMutableString stringWithFormat:@"cityid=2&userid=%@&typeid=%d&pagesize=%d&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),self.typeId,pageSize,index ];
+    NSString *argumentStr = [NSMutableString stringWithFormat:@"cityid=2&userid=%@&typeid=%d&pagesize=%d&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),self.typeId,pageSize2,index ];
     postRequestYiBu(argumentStr, urlStr);
 }
 
@@ -88,7 +93,6 @@ postRequestAgency(self.datas)
             self.tableArr=self.tableArrBtnTwo = [dic valueForKey:@"ds"];
             self.pageIndexTwo=1;
         }
-        //tableArr = [dic valueForKey:@"ds"];
     }else self.tableArr=nil;
     [self.aicv stopAnimating];
     [self.refreshControl endRefreshing];

@@ -66,8 +66,8 @@
     orderTimeTitle.font = font;
     [self addSubview:orderTimeTitle];
     [self.cellSubviews addObject:orderTimeTitle];
-    RTLabel* orderTimeLab = [[RTLabel alloc]initWithFrame:CGRectMake(80, 48, DeviceWidth - 17 - 80, 21)];
-    orderTimeLab.text = dic[@""];
+    RTLabel* orderTimeLab = [[RTLabel alloc]initWithFrame:CGRectMake(80, 52, DeviceWidth - 17 - 80, 21)];
+    orderTimeLab.text = dic[@"Startdate"];
     self.orderTimeLabHeight = orderTimeLab.optimumSize.height;
     self.orderTimeLabHeight = self.orderTimeLabHeight>21?self.orderTimeLabHeight:21;
     orderTimeLab.frame = CGRectMake(orderTimeLab.frame.origin.x, orderTimeLab.frame.origin.y, orderTimeLab.frame.size.width, orderTimeLab.frame.size.height + self.orderTimeLabHeight - 21);
@@ -75,7 +75,7 @@
     [self addSubview:orderTimeLab];
     [self.cellSubviews addObject:orderTimeLab];
     UILabel* infoLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 70 + self.orderTimeLabHeight - 21, DeviceWidth, 21)];
-    infoLab.text = [NSString stringWithFormat:@"%@", dic[@""]];
+    infoLab.text = [NSString stringWithFormat:@"%@  %@位游客", dic[@"Uname"], dic[@"PCount"]];
     infoLab.font = font;
     [self addSubview:infoLab];
     [self.cellSubviews addObject:infoLab];
