@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyHoltelOredrViewController.h"
 
 @interface MyEntainOrderDetailTableViewController : UITableViewController
 
@@ -22,5 +23,5 @@
 @property (strong, nonatomic)UILabel* orderPriceLab;//用来显示订单的金额
 @property (copy, nonatomic)NSString* payStr;//支付方式
 @property (strong, nonatomic)UIImage* headImage;
-
+@property (strong, nonatomic)MyHoltelOredrViewController* mhoVC;
 @end

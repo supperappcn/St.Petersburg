@@ -197,10 +197,13 @@ static NSString* cellIdentifier = @"Cell";
     self.orderStatusLab.textColor = [UIColor colorWithRed:0.192 green:0.482 blue:0.76 alpha:1];
     self.orderStatusLab.font = font;
     [self.topView addSubview:self.orderStatusLab];
-    if ([self.orderStatusLab.text isEqualToString:@"去支付"]) {
-        self.statusBtn = [[UIButton alloc]initWithFrame:CGRectMake(210, 106, 70, 21)];
-        [self.topView addSubview:self.statusBtn];
+    if ([self.orderStatusLab.text isEqualToString:@"待支付"]) {
+        self.statusBtn = [[UIButton alloc]initWithFrame:CGRectMake(240, 106, 70, 21)];
+        [self.statusBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+        [self.statusBtn setTitleColor:[UIColor colorWithRed:0.192 green:0.482 blue:0.76 alpha:1] forState:UIControlStateNormal];
+        self.statusBtn.titleLabel.font = font;
         [self.statusBtn addTarget:self action:@selector(clickGoSecondButton:) forControlEvents:UIControlEventTouchUpInside];
+        [self.topView addSubview:self.statusBtn];
     }
     
 }
@@ -809,8 +812,6 @@ static NSString* cellIdentifier = @"Cell";
     [self.goSecondBtn addTarget:self action:@selector(clickGoSecondButton:) forControlEvents:UIControlEventTouchUpInside];
     if ([self.orderStatusLab.text isEqualToString:@"待支付"]) {
         self.orderStatusLab.textColor = [UIColor redColor];
-        self.statusBtn.hidden = NO;
-        [self.statusBtn setTitle:@"取消订单" forState:UIControlStateNormal];
         self.goSecondBtn.hidden = NO;
         [self.goSecondBtn setTitle:@"去支付" forState:UIControlStateNormal];
         self.footerViewHeight = 10 + 246 + 10 + 45;
@@ -1025,8 +1026,9 @@ static NSString* cellIdentifier = @"Cell";
                 if (result.length>0) {
                     self.orderStatusLab.text = @"已取消";
                     self.orderStatusLab.textColor = [UIColor grayColor];
-                    self.statusBtn.hidden=YES;
+                    [self.statusBtn removeFromSuperview];
                     [self.goSecondBtn setTitle:@"重新预订" forState:UIControlStateNormal];
+                    
                 }else{
                     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"取消失败。" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles: @"确定",nil];
                     [av show];

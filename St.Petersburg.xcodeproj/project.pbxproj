@@ -19,6 +19,10 @@
 		0A0682781A0CC03F0047B87F /* hotelCarenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0682771A0CC03F0047B87F /* hotelCarenderViewController.m */; };
 		0A06827C1A0CC1210047B87F /* GCCalenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06827B1A0CC1210047B87F /* GCCalenderViewController.m */; };
 		0A06D2901A09CD5100F3256F /* MyEntainOrderDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06D28F1A09CD5100F3256F /* MyEntainOrderDetailTableViewController.m */; };
+		0A071DF81A1B1FF500803E7B /* MyOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A071DF61A1B1FF500803E7B /* MyOrderListViewController.m */; };
+		0A071DF91A1B1FF500803E7B /* MyOrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A071DF71A1B1FF500803E7B /* MyOrderListViewController.xib */; };
+		0A071DFC1A1B323600803E7B /* MyOrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A071DFB1A1B323600803E7B /* MyOrderListTableViewCell.m */; };
+		0A071DFF1A1B48A000803E7B /* MyOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A071DFE1A1B48A000803E7B /* MyOrderDetailViewController.m */; };
 		0A0CB78919F4EED60013D763 /* libQYHMethod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CB78819F4EED60013D763 /* libQYHMethod.a */; };
 		0A0CB78B19F4EEE90013D763 /* libSinaWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CB78A19F4EEE90013D763 /* libSinaWeiboSDK.a */; };
 		0A0CB78F19F4EF020013D763 /* libTCWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CB78E19F4EF020013D763 /* libTCWeiboSDK.a */; };
@@ -833,6 +837,13 @@
 		0A06827B1A0CC1210047B87F /* GCCalenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCCalenderViewController.m; sourceTree = "<group>"; };
 		0A06D28E1A09CD5100F3256F /* MyEntainOrderDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEntainOrderDetailTableViewController.h; sourceTree = "<group>"; };
 		0A06D28F1A09CD5100F3256F /* MyEntainOrderDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEntainOrderDetailTableViewController.m; sourceTree = "<group>"; };
+		0A071DF51A1B1FF500803E7B /* MyOrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderListViewController.h; sourceTree = "<group>"; };
+		0A071DF61A1B1FF500803E7B /* MyOrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderListViewController.m; sourceTree = "<group>"; };
+		0A071DF71A1B1FF500803E7B /* MyOrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyOrderListViewController.xib; sourceTree = "<group>"; };
+		0A071DFA1A1B323600803E7B /* MyOrderListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderListTableViewCell.h; sourceTree = "<group>"; };
+		0A071DFB1A1B323600803E7B /* MyOrderListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderListTableViewCell.m; sourceTree = "<group>"; };
+		0A071DFD1A1B48A000803E7B /* MyOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderDetailViewController.h; sourceTree = "<group>"; };
+		0A071DFE1A1B48A000803E7B /* MyOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderDetailViewController.m; sourceTree = "<group>"; };
 		0A0CB78819F4EED60013D763 /* libQYHMethod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQYHMethod.a; path = "点a文件/libQYHMethod.a"; sourceTree = SOURCE_ROOT; };
 		0A0CB78A19F4EEE90013D763 /* libSinaWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSinaWeiboSDK.a; path = "点a文件/libSinaWeiboSDK.a"; sourceTree = SOURCE_ROOT; };
 		0A0CB78E19F4EF020013D763 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTCWeiboSDK.a; path = "点a文件/libTCWeiboSDK.a"; sourceTree = SOURCE_ROOT; };
@@ -854,7 +865,6 @@
 		18650E8C19E6652900209EB6 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		18650E8D19E6652900209EB6 /* libQYHMethod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libQYHMethod.a; sourceTree = "<group>"; };
 		18650E8E19E6652900209EB6 /* libSinaWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSinaWeiboSDK.a; sourceTree = "<group>"; };
-		18650E8F19E6652900209EB6 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		18650E9019E6652900209EB6 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCWeiboSDK.a; sourceTree = "<group>"; };
 		18650E9119E6652900209EB6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		18650E9219E6652900209EB6 /* libYixinSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYixinSDK.a; sourceTree = "<group>"; };
@@ -1180,7 +1190,6 @@
 		C45A7BE9193D64E0001D8A80 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		C45A7BEB193D64E0001D8A80 /* RennSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RennSDK.bundle; sourceTree = "<group>"; };
 		C45A7BEC193D64E0001D8A80 /* RennSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RennSDK.framework; sourceTree = "<group>"; };
-		C45A7BEE193D64E0001D8A80 /* libSinaWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSinaWeiboSDK.a; sourceTree = "<group>"; };
 		C45A7BEF193D64E0001D8A80 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		C45A7BF0193D64E0001D8A80 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
 		C45A7BF2193D64E0001D8A80 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCWeiboSDK.a; sourceTree = "<group>"; };
@@ -1969,6 +1978,20 @@
 			name = "订单详情";
 			sourceTree = "<group>";
 		};
+		0A071DEF1A1B1C2900803E7B /* 我的订单(导游) */ = {
+			isa = PBXGroup;
+			children = (
+				0A071DF51A1B1FF500803E7B /* MyOrderListViewController.h */,
+				0A071DF61A1B1FF500803E7B /* MyOrderListViewController.m */,
+				0A071DF71A1B1FF500803E7B /* MyOrderListViewController.xib */,
+				0A071DFA1A1B323600803E7B /* MyOrderListTableViewCell.h */,
+				0A071DFB1A1B323600803E7B /* MyOrderListTableViewCell.m */,
+				0A071DFD1A1B48A000803E7B /* MyOrderDetailViewController.h */,
+				0A071DFE1A1B48A000803E7B /* MyOrderDetailViewController.m */,
+			);
+			name = "我的订单(导游)";
+			sourceTree = "<group>";
+		};
 		0A0CB79B19F4F1A00013D763 /* 日历 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2011,7 +2034,6 @@
 				18650E8C19E6652900209EB6 /* libcrypto.a */,
 				18650E8D19E6652900209EB6 /* libQYHMethod.a */,
 				18650E8E19E6652900209EB6 /* libSinaWeiboSDK.a */,
-				18650E8F19E6652900209EB6 /* libssl.a */,
 				18650E9019E6652900209EB6 /* libTCWeiboSDK.a */,
 				18650E9119E6652900209EB6 /* libWeChatSDK.a */,
 				18650E9219E6652900209EB6 /* libYixinSDK.a */,
@@ -2556,7 +2578,6 @@
 		C45A7BED193D64E0001D8A80 /* SinaWeiboSDK */ = {
 			isa = PBXGroup;
 			children = (
-				C45A7BEE193D64E0001D8A80 /* libSinaWeiboSDK.a */,
 				C45A7BEF193D64E0001D8A80 /* WeiboSDK.bundle */,
 				C45A7BF0193D64E0001D8A80 /* WeiboSDK.h */,
 			);
@@ -2868,11 +2889,12 @@
 		C49D17A018A5DBD40001E371 /* MineView */ = {
 			isa = PBXGroup;
 			children = (
+				C4121F76192377F10047DEFA /* MineViewController.h */,
+				C4121F77192377F10047DEFA /* MineViewController.m */,
+				0A071DEF1A1B1C2900803E7B /* 我的订单(导游) */,
 				0A0632E71A14B003000890C5 /* 支付页面 */,
 				0A0524F01A15AABE00553786 /* 支付成功界面 */,
 				C42B64081919E4C1008C6F28 /* 登录 */,
-				C4121F76192377F10047DEFA /* MineViewController.h */,
-				C4121F77192377F10047DEFA /* MineViewController.m */,
 				C47F753A198656D300B358FE /* 订单列表 */,
 				0A0632E61A149DB5000890C5 /* 线路/景点/酒店/门票订单cell */,
 				0A0632E51A149BC6000890C5 /* 导游/租车订单cell */,
@@ -4177,6 +4199,7 @@
 				C4E4A50B18ACB51700AE9738 /* member_centerCenter_h.png in Resources */,
 				C4E19C611911A40700CE7B61 /* shouChang.png in Resources */,
 				C4C2463C19504B6900036616 /* zhong.png in Resources */,
+				0A071DF91A1B1FF500803E7B /* MyOrderListViewController.xib in Resources */,
 				C4AB4293190100A700D1E7B4 /* 4xing.png in Resources */,
 				C4F2A65F1934405300992B2E /* MyBG.png in Resources */,
 				C421A3971924A4F500F62D20 /* weather2_07.png in Resources */,
@@ -4426,6 +4449,7 @@
 				C4E19BC41911980200CE7B61 /* GeJuViewController.m in Sources */,
 				C47F753E198659D500B358FE /* MyHotelOrederListTableViewCell.m in Sources */,
 				C49D177A18A5DAB70001E371 /* AppDelegate.m in Sources */,
+				0A071DFC1A1B323600803E7B /* MyOrderListTableViewCell.m in Sources */,
 				C440860B19471052001E2A47 /* LookDetailViewController.m in Sources */,
 				C4DF76B918B8A39D002419C1 /* bqView.m in Sources */,
 				C4121F8A192377F10047DEFA /* MineMemberViewController.m in Sources */,
@@ -4539,8 +4563,10 @@
 				C417C84518B60726004F613B /* SceneryViewController.m in Sources */,
 				C4F127E418BAFF9D0041960B /* WeatherViewController.m in Sources */,
 				C4121F87192377F10047DEFA /* MineDetailViewController.m in Sources */,
+				0A071DF81A1B1FF500803E7B /* MyOrderListViewController.m in Sources */,
 				C4EAD87318B6EF0B00A2B8EB /* EmergencyViewController.m in Sources */,
 				C4264C2818A61FDE0098B6F8 /* GDataXMLNode.m in Sources */,
+				0A071DFF1A1B48A000803E7B /* MyOrderDetailViewController.m in Sources */,
 				0A0682781A0CC03F0047B87F /* hotelCarenderViewController.m in Sources */,
 				C4121F961923781B0047DEFA /* MyCollectDetailViewController.m in Sources */,
 				0A06D2901A09CD5100F3256F /* MyEntainOrderDetailTableViewController.m in Sources */,
