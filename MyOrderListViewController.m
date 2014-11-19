@@ -131,7 +131,7 @@ postRequestAgency(self.datas)
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MyOrderDetailViewController* modVC = [MyOrderDetailViewController new];
-//    modVC.currentDic = ;
+    modVC.currentDic = self.tableArr[indexPath.section];
     [self.navigationController pushViewController:modVC animated:YES];
 }
 

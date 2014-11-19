@@ -862,7 +862,6 @@
 		0A6414731A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLineOrderDetailTableViewCell.h; sourceTree = "<group>"; };
 		0A6414741A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLineOrderDetailTableViewCell.m; sourceTree = "<group>"; };
 		0A6414751A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyLineOrderDetailTableViewCell.xib; sourceTree = "<group>"; };
-		18650E8C19E6652900209EB6 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		18650E8D19E6652900209EB6 /* libQYHMethod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libQYHMethod.a; sourceTree = "<group>"; };
 		18650E8E19E6652900209EB6 /* libSinaWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSinaWeiboSDK.a; sourceTree = "<group>"; };
 		18650E9019E6652900209EB6 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCWeiboSDK.a; sourceTree = "<group>"; };
@@ -1192,12 +1191,9 @@
 		C45A7BEC193D64E0001D8A80 /* RennSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RennSDK.framework; sourceTree = "<group>"; };
 		C45A7BEF193D64E0001D8A80 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		C45A7BF0193D64E0001D8A80 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
-		C45A7BF2193D64E0001D8A80 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCWeiboSDK.a; sourceTree = "<group>"; };
 		C45A7BF3193D64E0001D8A80 /* WeiboApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboApi.h; sourceTree = "<group>"; };
-		C45A7BF5193D64E0001D8A80 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		C45A7BF6193D64E0001D8A80 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		C45A7BF7193D64E0001D8A80 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		C45A7BF9193D64E0001D8A80 /* libYixinSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYixinSDK.a; sourceTree = "<group>"; };
 		C45A7BFA193D64E0001D8A80 /* YXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXApi.h; sourceTree = "<group>"; };
 		C45A7BFB193D64E0001D8A80 /* YXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXApiObject.h; sourceTree = "<group>"; };
 		C45A7BFC193D64E0001D8A80 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
@@ -2031,7 +2027,6 @@
 		18650E8A19E6652900209EB6 /* 点a文件 */ = {
 			isa = PBXGroup;
 			children = (
-				18650E8C19E6652900209EB6 /* libcrypto.a */,
 				18650E8D19E6652900209EB6 /* libQYHMethod.a */,
 				18650E8E19E6652900209EB6 /* libSinaWeiboSDK.a */,
 				18650E9019E6652900209EB6 /* libTCWeiboSDK.a */,
@@ -2587,7 +2582,6 @@
 		C45A7BF1193D64E0001D8A80 /* TencentWeiboSDK */ = {
 			isa = PBXGroup;
 			children = (
-				C45A7BF2193D64E0001D8A80 /* libTCWeiboSDK.a */,
 				C45A7BF3193D64E0001D8A80 /* WeiboApi.h */,
 			);
 			path = TencentWeiboSDK;
@@ -2596,7 +2590,6 @@
 		C45A7BF4193D64E0001D8A80 /* WeChatSDK */ = {
 			isa = PBXGroup;
 			children = (
-				C45A7BF5193D64E0001D8A80 /* libWeChatSDK.a */,
 				C45A7BF6193D64E0001D8A80 /* WXApi.h */,
 				C45A7BF7193D64E0001D8A80 /* WXApiObject.h */,
 			);
@@ -2606,7 +2599,6 @@
 		C45A7BF8193D64E0001D8A80 /* YiXinSDK */ = {
 			isa = PBXGroup;
 			children = (
-				C45A7BF9193D64E0001D8A80 /* libYixinSDK.a */,
 				C45A7BFA193D64E0001D8A80 /* YXApi.h */,
 				C45A7BFB193D64E0001D8A80 /* YXApiObject.h */,
 			);
