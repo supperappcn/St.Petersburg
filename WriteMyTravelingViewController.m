@@ -47,11 +47,9 @@ backButton
     [backbutton.layer setCornerRadius:4];
     [backbutton setBackgroundColor:[UIColor colorWithRed:0.37 green:0.69 blue:0.95 alpha:1]];
     [backbutton addTarget:self action:@selector(saveTraveling) forControlEvents:UIControlEventTouchUpInside];
-    UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(8, -5, 40, 35)];
-    lable.font=[UIFont systemFontOfSize:15];
-    lable.textColor=[UIColor whiteColor];
-    lable.text=@"保存";
-    [backbutton addSubview:lable];
+    [backbutton setTitle:@"保存" forState:UIControlStateNormal];
+    [backbutton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    backbutton.titleLabel.font = [UIFont systemFontOfSize:15];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];
     self.navigationItem.rightBarButtonItem =backItem;
     
