@@ -21,6 +21,8 @@
     UISearchBar *searchCity;
     UIActivityIndicatorView *locActivity;
     UILabel *locationL;
+    NSMutableArray *reloadCA;
+    NSMutableArray *reloadRA;
 }
 
 @end
@@ -87,6 +89,8 @@ backButton
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     cityArr = [[NSMutableArray alloc]init];
     raingeArr = [[NSMutableArray alloc]init];
+    reloadCA = [[NSMutableArray alloc]init];
+    reloadRA = [[NSMutableArray alloc]init];
 
     locationTV = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 64 - 44) style:UITableViewStyleGrouped];
     locationTV.dataSource = self;
@@ -135,6 +139,30 @@ backButton
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 0.1;
+}
+
+#pragma -mark 降下键盘
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [searchCity resignFirstResponder];
+}
+
+#pragma -mark 搜索框的文字发生改变的时候
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    NSString *result = [NSString stringWithFormat:@"self like[c]'*%@*'",searchText];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:result];
+    
+    //city
+    NSMutableArray *searchCA = (NSMutableArray *)[cityArr filteredArrayUsingPredicate:predicate];
+    [reloadRA removeAllObjects];
+    for (NSInteger i = 0; i <searchCA.count; i ++)
+    {
+        NSString *string = [raingeArr objectAtIndex:[cityArr indexOfObject:searchCA[i]]];
+        [reloadRA addObject:string];
+    }
+    NSLog(@"searchCA = %@",searchCA);
+    NSLog(@"reloadRA = %@",reloadRA);
 }
 
 #pragma -mark 调整活动指示器的高度
