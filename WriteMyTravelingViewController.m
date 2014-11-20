@@ -30,7 +30,7 @@
     return self;
 }
 
-backButton  //自定义返回按钮
+backButton
 
 - (void)viewDidLoad
 {
@@ -119,7 +119,7 @@ backButton  //自定义返回按钮
     
 }
 
-#pragma saveTraveling
+#pragma -mark- saveTraveling
 -(void)saveTraveling
 {
 
@@ -146,7 +146,7 @@ backButton  //自定义返回按钮
     [self presentViewController:ipc animated:YES completion:nil];
     
 }
-#pragma pickPicture
+#pragma -mark- pickPicture
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];

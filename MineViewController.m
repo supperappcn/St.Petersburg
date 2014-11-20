@@ -103,7 +103,7 @@
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 NSMutableString *UrlStr = RussiaUrl4;
                 [UrlStr appendString:@"GetMyorderCount"];
-                NSString *argumentStr = [NSString stringWithFormat:@"userid=%@",GET_USER_DEFAUT(QUSE_ID)];
+                NSString *argumentStr = [NSString stringWithFormat:@"cityid=%d&userid=%@",2,GET_USER_DEFAUT(QUSE_ID)];
                 postRequestTongBu(argumentStr, UrlStr, received)
                 dicResultTongbuNoDic(received, result)
                 dispatch_async(dispatch_get_main_queue(), ^{

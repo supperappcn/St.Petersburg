@@ -12,8 +12,6 @@
 #import "GDataXMLNode.h"
 #import "JSON.h"
 
-static const int pageSize2 = 10;
-int pageindex2 = 1;
 @interface MyOrderListViewController ()
 @property (assign, nonatomic) int typeId;
 @property (assign, nonatomic) int pageIndexOne;
@@ -30,6 +28,9 @@ int pageindex2 = 1;
 
 backButton
 static NSString* identifier = @"cell";
+static const int pageSize2 = 10;
+int pageindex2 = 1;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -61,7 +62,6 @@ static NSString* identifier = @"cell";
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     [self.myTableView addSubview:self.refreshControl];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -133,6 +133,35 @@ postRequestAgency(self.datas)
     MyOrderDetailViewController* modVC = [MyOrderDetailViewController new];
     modVC.currentDic = self.tableArr[indexPath.section];
     [self.navigationController pushViewController:modVC animated:YES];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if(!self.aicv2.isAnimating && (scrollView.contentOffset.y > ((scrollView.contentSize.height - scrollView.frame.size.height+10)))) {
+        [self.aicv2 startAnimating];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSMutableString *urlStr =RussiaUrl4;
+            [urlStr appendString:@"GuidemyOrderList"];
+            NSString *argumentStr = [NSMutableString stringWithFormat:@"cityid=2&userid=%@&typeid=%d&pagesize=%d&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),self.typeId,pageSize2,pageindex2 ];
+            postRequestTongBu(argumentStr, urlStr, received)
+            dicResultTongbu(received, result, dic)
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [NSThread sleepForTimeInterval:.3];
+                if (result.length>11) {
+                    if (self.typeId==1) {
+                        pageindex2=++self.pageIndexOne;
+                        [self.tableArrBtnOne addObjectsFromArray:[dic objectForKey:@"ds"]];
+                        self.tableArr = self.tableArrBtnOne;
+                    }else{
+                        pageindex2=++self.pageIndexTwo;
+                        [self.tableArrBtnTwo addObjectsFromArray:[dic objectForKey:@"ds"]];
+                        self.tableArr = self.tableArrBtnTwo;
+                    }
+                    [self.myTableView reloadData];
+                }
+                [self.aicv2 stopAnimating];
+            });
+        });
+    }
 }
 
 - (IBAction)selectBtn:(UIButton *)sender {

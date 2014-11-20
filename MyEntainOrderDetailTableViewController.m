@@ -14,6 +14,7 @@
 #import "RTLabel.h"
 #import "MyHotelOredeDetailCell.h"
 #import "GuideDetailViewController.h"
+#import "ComentViewController.h"
 
 @interface MyEntainOrderDetailTableViewController ()
 @property (strong, nonatomic)UIView* topView;//“订单号”->“订单状态”这一部分视图   高度固定为127
@@ -1119,8 +1120,41 @@ static NSString* cellIdentifier = @"Cell";
             [self.navigationController pushViewController:guideDetailVC animated:YES];
         }
     }else if ([sender.currentTitle isEqualToString:@"去点评"]) {
-        NSLog(@"去点评，跳转到点评界面");
-        
+        ComentViewController* text = [ComentViewController new];
+        if (self.prodClass.intValue == 1) {
+            text.pageName = @"线路评论";
+            text.head = self.currentDic[@"Title"];
+            text.ID = self.hotelID;
+            text.type = 1;
+        }else if (self.prodClass.intValue == 2) {
+            text.pageName = @"景点评论";
+            text.head = self.currentDic[@"ViewCNName"];
+            text.eTittle = self.currentDic[@"ViewRUName"];
+            text.ID = self.hotelID;
+            text.type = 8;
+        }else if (self.prodClass.intValue == 3) {
+            text.pageName = @"酒店评论";
+            text.head = self.currentDic[@"HotelCNName"];
+            text.eTittle = self.currentDic[@"HotelRUName"];
+            text.ID = self.hotelID;
+            text.type = 2;
+        }else if (self.prodClass.intValue == 4) {
+            text.pageName = @"娱乐评论";
+            text.head = self.currentDic[@"TicketRName"];
+            text.ID = self.hotelID;
+            text.type = 3;
+        }else if (self.prodClass.intValue == 5) {
+            text.pageName = @"导游评论";
+            text.head = self.currentDic[@"GuideName"];
+            text.ID = self.hotelID;
+            text.type = 6;
+        }else if (self.prodClass.intValue == 6) {
+            text.pageName = @"租车评论";
+            text.head = self.currentDic[@"GuideName"];
+            text.ID = self.hotelID;
+            text.type = 7;
+        }
+        [self.navigationController pushViewController:text animated:YES];
     }
 }
 

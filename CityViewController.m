@@ -38,7 +38,7 @@ backButton
     NSArray*file = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city.plist" ofType:nil]];
     
     
-    self.view.backgroundColor=[UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor=[UIColor colorWithRed:235.0/255 green:235.0/255 blue:241.0/255 alpha:1];
     tabView.showsVerticalScrollIndicator=NO;
     
     //    country=[NSArray arrayWithObjects:@"中国",@"俄罗斯", nil];

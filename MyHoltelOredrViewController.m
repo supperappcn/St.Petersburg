@@ -16,9 +16,8 @@
 #import "EntainReseverClass.h"
 #import "EntainDetailViewController.h"//酒店预订  线路预订  景点预订  娱乐门票预订
 #import "GuideDetailViewController.h"//导游预订  租车预订
+#import "ComentViewController.h"
 
-static const int pageSize = 10;
-int pageindex = 1;
 @interface MyHoltelOredrViewController ()
 @property (nonatomic, retain)NSMutableArray* hotelIDs;//LineID、ViewID、HotelID、TicketID、GuideID
 @end
@@ -27,6 +26,8 @@ int pageindex = 1;
 
 backButton
 static NSString *identifier = @"Cell";
+static const int pageSize = 10;
+int pageindex = 1;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -237,6 +238,7 @@ postRequestAgency(datas)
             //        1待支付, 2待处理, 3预订成功等待出游, 4已失效,
             //        5已完成, 6已取消, 7出游中,         8已点评;
             cell.statusLab.text = [currentDic valueForKey:@"Status"];
+            cell.statusLab.textColor = [UIColor colorWithRed:0 green:0.58 blue:0.98 alpha:1];
             if ([cell.statusLab.text isEqualToString:@"待支付"]) {
                 cell.statusLab.textColor = [UIColor redColor];
                 [cell.goBtn setTitle:@"去支付" forState:UIControlStateNormal];
@@ -306,6 +308,7 @@ postRequestAgency(datas)
                 //        1待支付, 2待处理, 3预订成功等待出游, 4已失效,
                 //        5已完成, 6已取消, 7出游中,         8已点评;
                 cell.statusLab.text = [currentDic valueForKey:@"Status"];
+                cell.statusLab.textColor = [UIColor colorWithRed:0 green:0.58 blue:0.98 alpha:1];
                 if ([cell.statusLab.text isEqualToString:@"待支付"]) {
                     cell.statusLab.textColor = [UIColor redColor];
                     [cell.goBtn setTitle:@"去支付" forState:UIControlStateNormal];
@@ -335,6 +338,7 @@ postRequestAgency(datas)
                 //        1待支付, 2待处理, 3预订成功等待使用, 4已失效,
                 //        5已完成, 6已取消, 7使用中,         8已点评;
                 cell.statusLab.text = [currentDic valueForKey:@"Status"];
+                cell.statusLab.textColor = [UIColor colorWithRed:0 green:0.58 blue:0.98 alpha:1];
                 if ([cell.statusLab.text isEqualToString:@"待支付"]) {
                     cell.statusLab.textColor = [UIColor redColor];
                     [cell.goBtn setTitle:@"去支付" forState:UIControlStateNormal];
@@ -368,6 +372,7 @@ postRequestAgency(datas)
                 //        1待支付, 2待处理, 3预订成功, 4已失效,
                 //        5已完成, 6已取消, 7待入住,   8入住中,  9已点评;
                 cell.statusLab.text = [currentDic valueForKey:@"Status"];
+                cell.statusLab.textColor = [UIColor colorWithRed:0 green:0.58 blue:0.98 alpha:1];
                 if ([cell.statusLab.text isEqualToString:@"待支付"]) {
                     cell.statusLab.textColor = [UIColor redColor];
                     [cell.goBtn setTitle:@"去支付" forState:UIControlStateNormal];
@@ -397,6 +402,7 @@ postRequestAgency(datas)
                 //        1待支付, 2待处理, 3预订成功等待使用, 4已失效,
                 //        5已完成, 6已取消, 7使用中,         8已点评;
                 cell.statusLab.text = [currentDic valueForKey:@"Status"];
+                cell.statusLab.textColor = [UIColor colorWithRed:0 green:0.58 blue:0.98 alpha:1];
                 if ([cell.statusLab.text isEqualToString:@"待支付"]) {
                     cell.statusLab.textColor = [UIColor redColor];
                     [cell.goBtn setTitle:@"去支付" forState:UIControlStateNormal];
@@ -451,14 +457,10 @@ postRequestAgency(datas)
 {
 
     //NSLog(@"height:%f contentYoffset:%f frame.y:%f",height,contentYoffset,scrollView.frame.origin.y);
-    if(!aicv2.isAnimating && (scrollView.contentOffset.y > ((scrollView.contentSize.height - scrollView.frame.size.height+10))))
-        
-        
-    {
+    if(!aicv2.isAnimating && (scrollView.contentOffset.y > ((scrollView.contentSize.height - scrollView.frame.size.height+10)))) {
         [aicv2 startAnimating];
         NSLog(@"end of table");
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-           
             NSMutableString *urlStr =RussiaUrl4;
             if ([self.title isEqualToString:@"线路订单"]) {
                 [urlStr appendString:@"LineOrderList"];
@@ -509,8 +511,7 @@ postRequestAgency(datas)
                 }
                 [aicv2 stopAnimating];
             });
-            
-        });        
+        });
     }
 }
 
@@ -599,22 +600,48 @@ postRequestAgency(datas)
             [self.navigationController pushViewController:guideDetailVC animated:YES];
         }
     }else if ([[sender titleForState:UIControlStateNormal]isEqualToString:@"去点评"]) {
+        ComentViewController* text = [ComentViewController new];
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
+        NSDictionary* dict = tableArr[indexPath.section];
         if ([self.title isEqualToString:@"线路订单"]) {
-            
+            text.pageName = @"线路评论";
+            text.head = dict[@"Title"];
+            text.ID = [self.hotelIDs[sender.tag]intValue];
+            text.type = 1;
             
         }else if ([self.title isEqualToString:@"景点订单"]) {
-            
+            text.pageName = @"景点评论";
+            text.head = dict[@"ViewCNName"];
+            text.eTittle = dict[@"ViewRUName"];
+            text.ID = [self.hotelIDs[sender.tag]intValue];
+            text.type = 8;
             
         }else if ([self.title isEqualToString:@"酒店订单"]) {
-            
+            text.pageName = @"酒店评论";
+            text.head = dict[@"HotelCNName"];
+            text.eTittle = dict[@"HotelRUName"];
+            text.ID = [self.hotelIDs[sender.tag]intValue];
+            text.type = 2;
             
         }else if ([self.title isEqualToString:@"娱乐订单"]) {
-            
+            text.pageName = @"娱乐评论";
+            text.head = dict[@"TicketRName"];
+            text.ID = [self.hotelIDs[sender.tag]intValue];
+            text.type = 3;
             
         }else if ([self.title isEqualToString:@"导游/租车订单"]) {
-            
-            
+            text.ID = [self.hotelIDs[sender.tag]intValue];
+            text.head = dict[@"GuideName"];
+            MyGuideAndCarOrderDetailTableViewCell* cell = (MyGuideAndCarOrderDetailTableViewCell*)[_myTableview cellForRowAtIndexPath:indexPath];
+            if (cell.headIV.frame.size.height == 90) {
+                text.pageName = @"导游评论";
+                text.type = 6;
+            }else if (cell.headIV.frame.size.height == 45) {
+                text.pageName = @"租车评论";
+                text.type = 7;
+            }
         }
+        [self.navigationController pushViewController:text animated:YES];
     }
 }
 

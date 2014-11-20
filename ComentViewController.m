@@ -64,7 +64,7 @@ backButton
     //下bar
     if (GET_USER_DEFAUT(USER_NAME)) {
         tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(-.5, DeviceHeight-113.5, 321, 50)];
-        tableFooterView.backgroundColor=[UIColor groupTableViewBackgroundColor];
+        tableFooterView.backgroundColor=[UIColor colorWithRed:235.0/255 green:235.0/255 blue:241.0/255 alpha:1];
         tableFooterView.layer.borderWidth = .5;
         tableFooterView.layer.borderColor = [UIColor grayColor].CGColor;
         [self.view addSubview:tableFooterView];

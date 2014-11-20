@@ -4775,7 +4775,7 @@
 					"\"$(SRCROOT)\"/Utilities",
 				);
 				INFOPLIST_FILE = "St.Petersburg/St.Petersburg-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4827,7 +4827,7 @@
 					"\"$(SRCROOT)\"/Utilities",
 				);
 				INFOPLIST_FILE = "St.Petersburg/St.Petersburg-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

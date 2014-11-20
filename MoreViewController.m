@@ -105,7 +105,7 @@
     
 
      self.navigationController.navigationBar.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"top.png"]];
-    self.view.backgroundColor=[UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor=[UIColor colorWithRed:235.0/255 green:235.0/255 blue:241.0/255 alpha:1];
     
     scroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight-20-44)];
     scroll.contentSize=CGSizeMake(DeviceWidth, 600);
@@ -130,12 +130,13 @@
     UILabel*tittle=[[UILabel alloc]initWithFrame:CGRectMake(84, 11, 171, 39)];
     tittle.font=[UIFont systemFontOfSize:16];
     tittle.text=@"圣彼得堡旅游指南V1.0";
+    tittle.backgroundColor = [UIColor clearColor];
     [view addSubview:tittle];
     UILabel*descrip=[[UILabel alloc]initWithFrame:CGRectMake(84, 40,206, 20)];
     descrip.numberOfLines=2;
     descrip.font=[UIFont systemFontOfSize:13];
     descrip.text=@"最贴近你的俄罗斯旅游中文资讯网";
-    
+    descrip.backgroundColor = [UIColor clearColor];
     
     //    ©2013俄旅网
     [view addSubview:descrip];
@@ -144,7 +145,7 @@
     descrip2.numberOfLines=2;
     descrip2.font=[UIFont systemFontOfSize:13];
     descrip2.text=@"©2014俄旅网";
-    
+    descrip2.backgroundColor = [UIColor clearColor];
      float bold=100;
       float size=15;
     //    ©2013俄旅网
@@ -152,6 +153,7 @@
     
     UILabel*about=[[UILabel alloc]initWithFrame:CGRectMake(10,95,49, 30)];
     about.text=@"关于";
+    about.backgroundColor = [UIColor clearColor];
     about.font=[UIFont boldSystemFontOfSize:size];
     [view addSubview:about];
 
