@@ -68,7 +68,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
 {
     
     [navActivity stopAnimating];
-    [remindAlert dismissWithClickedButtonIndex:0 animated:YES];//取消
+    [remindAlert dismissWithClickedButtonIndex:0 animated:NO];//取消
     dicResultYiBu(datas, result, dic)
     
     [[LineViewController new]endRefresh:refresh];
@@ -107,7 +107,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
             
             _tableView.tableHeaderView=[self creatHeadView];
             [_tableView reloadData];
-            [remindAlert dismissWithClickedButtonIndex:0 animated:YES];//取消
+            [remindAlert dismissWithClickedButtonIndex:0 animated:NO];//取消
             
             [self getDetailList:arrayMethod];
             
@@ -1652,7 +1652,7 @@ GO_NET
             
             text.ID=self.hotelID;
             NSLog(@"text.ID:%d",text.ID);
-            [self.navigationController pushViewController:text animated:YES];
+            [self.navigationController pushViewController:text animated:NO];
             
         }
             break;
@@ -1818,7 +1818,7 @@ GO_NET
             MineViewController *mvc = [MineViewController new];
             mvc.tabBarController.tabBar.hidden=YES;
             mvc.tag=1;
-            [self.navigationController pushViewController:mvc animated:YES];
+            [self.navigationController pushViewController:mvc animated:NO];
         }
     }else{
         int _f=[DEFAUT integerForKey:@"QuseID"];

@@ -10,7 +10,4 @@
 
 @interface WriteMyTravelingViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
-@property (nonatomic, copy)NSString *titleTF;
-@property (nonatomic, copy)NSString *placeholder;
-
 @end
