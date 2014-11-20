@@ -515,7 +515,6 @@ postRequestAgency(datas)
         ovc.orderNumber = result;
         ovc.RMB=[NSString stringWithFormat:@"%d", _RMB.intValue*zhong.text.intValue];
         ovc.dollar=[NSString stringWithFormat:@"%d", _dollar.intValue*zhong.text.intValue];
-        NSLog(@"ovc.rmb:%@,dollar:%@",ovc.RMB,ovc.dollar);
         ovc.selectPayWay=paytype;
         ovc.productDescription=_roomTypeStr;
         ovc.productName=_chineseStr;

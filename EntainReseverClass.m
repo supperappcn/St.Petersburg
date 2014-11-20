@@ -527,7 +527,6 @@ postRequestAgency(datas)
         ovc.orderNumber = result;
         ovc.RMB=[NSString stringWithFormat:@"%d",_RMB.intValue*zhong.text.intValue];
         ovc.dollar=[NSString stringWithFormat:@"%d",_dollar.intValue*zhong.text.intValue];
-        NSLog(@"ovc.rmb:%@,dollar:%@",_RMB,_dollar);
         ovc.selectPayWay=paytype;
         ovc.productDescription=[NSString stringWithFormat:@"%@张",zhong.text];
         ovc.productName=_russianStr;
