@@ -42,6 +42,7 @@
 		18650E9A19E6655900209EB6 /* libYixinSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9219E6652900209EB6 /* libYixinSDK.a */; };
 		188CD28C1A1AE0A400D2F1CA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CD28B1A1AE0A400D2F1CA /* MapKit.framework */; };
 		188CD2D01A1B378900D2F1CA /* locationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CD2CF1A1B378900D2F1CA /* locationViewController.m */; };
+		188CD2D91A1DE5B100D2F1CA /* locationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CD2D81A1DE5B100D2F1CA /* locationCell.m */; };
 		C400546418EA6B0000E130B6 /* day1.png in Resources */ = {isa = PBXBuildFile; fileRef = C400545C18EA6B0000E130B6 /* day1.png */; };
 		C400546518EA6B0000E130B6 /* day2.png in Resources */ = {isa = PBXBuildFile; fileRef = C400545D18EA6B0000E130B6 /* day2.png */; };
 		C400546618EA6B0000E130B6 /* day3.png in Resources */ = {isa = PBXBuildFile; fileRef = C400545E18EA6B0000E130B6 /* day3.png */; };
@@ -870,6 +871,8 @@
 		188CD28B1A1AE0A400D2F1CA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		188CD2CE1A1B378900D2F1CA /* locationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = locationViewController.h; path = getlocation/locationViewController.h; sourceTree = "<group>"; };
 		188CD2CF1A1B378900D2F1CA /* locationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = locationViewController.m; path = getlocation/locationViewController.m; sourceTree = "<group>"; };
+		188CD2D71A1DE5B100D2F1CA /* locationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = locationCell.h; path = getlocation/locationCell.h; sourceTree = "<group>"; };
+		188CD2D81A1DE5B100D2F1CA /* locationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = locationCell.m; path = getlocation/locationCell.m; sourceTree = "<group>"; };
 		C400545C18EA6B0000E130B6 /* day1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day1.png; sourceTree = "<group>"; };
 		C400545D18EA6B0000E130B6 /* day2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day2.png; sourceTree = "<group>"; };
 		C400545E18EA6B0000E130B6 /* day3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day3.png; sourceTree = "<group>"; };
@@ -2041,6 +2044,8 @@
 			children = (
 				188CD2CE1A1B378900D2F1CA /* locationViewController.h */,
 				188CD2CF1A1B378900D2F1CA /* locationViewController.m */,
+				188CD2D71A1DE5B100D2F1CA /* locationCell.h */,
+				188CD2D81A1DE5B100D2F1CA /* locationCell.m */,
 			);
 			name = getlocation;
 			sourceTree = "<group>";
@@ -4474,6 +4479,7 @@
 				C4E907F119495A2000BDECEE /* ClauseDetailView.m in Sources */,
 				C4DEABE818E1332A000607C1 /* EntainDetailViewController.m in Sources */,
 				0A0CB7A019F4F1A00013D763 /* calendarViewController.m in Sources */,
+				188CD2D91A1DE5B100D2F1CA /* locationCell.m in Sources */,
 				C4E19BE31911982F00CE7B61 /* jianZhuViewController.m in Sources */,
 				C4E84FA818DBF91B00B118DB /* ImageScrollView.m in Sources */,
 				C4236EA318FD3714008F0EC9 /* SeceneryCommentView.m in Sources */,

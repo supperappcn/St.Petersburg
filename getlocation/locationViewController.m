@@ -7,6 +7,8 @@
 //
 
 #import "locationViewController.h"
+#import "locationCell.h"
+
 #define minUnit 0.0002
 
 @interface locationViewController ()
@@ -16,7 +18,9 @@
     UITableView *locationTV;
     NSMutableArray *cityArr;
     NSMutableArray *raingeArr;
-    CLGeocoder *locGeocoder;
+    UISearchBar *searchCity;
+    UIActivityIndicatorView *locActivity;
+    UILabel *locationL;
 }
 
 @end
@@ -32,6 +36,25 @@
     return self;
 }
 
+//             UILabel *label = (UILabel *)[self.view viewWithTag:100];
+//             label.frame = CGRectMake(35, 0, 260, 40);
+//             label.font = [UIFont systemFontOfSize:15.5];
+//             label.text = placemake.name;
+//             if (placemake.name.length > 16)
+//             {
+//                 label.frame = CGRectMake(35, 0, 200, 40);
+//                 label.font = [UIFont systemFontOfSize:13];
+//                 label.text = placemake.name;
+//             }
+//             if (placemake.name.length >= 30)
+//             {
+//                 label.frame = CGRectMake(35, 0, 250, 40);
+//                 label.font = [UIFont systemFontOfSize:13];
+//                 label.text = placemake.name;
+//             }
+//             label.numberOfLines = 0;
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.navigationItem setNewTitle:@"所在位置"];
@@ -46,31 +69,94 @@ backButton
     [super viewDidLoad];
     [self connNet];
     [self addtableView];
+    [self addSearchBar];
 }
 
+#pragma -mark 添加搜索框
+- (void)addSearchBar
+{
+    searchCity = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    searchCity.placeholder = @"搜索附近位置";
+    searchCity.delegate = self;
+    [self.view addSubview:searchCity];
+}
+
+#pragma -mark 添加tableView
 - (void)addtableView
 {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     cityArr = [[NSMutableArray alloc]init];
     raingeArr = [[NSMutableArray alloc]init];
-    locGeocoder = [[CLGeocoder alloc]init];
 
-    locationTV = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64) style:UITableViewStylePlain];
-//    locationTV.dataSource = self;
-//    locationTV.delegate = self;
+    locationTV = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 64 - 44) style:UITableViewStyleGrouped];
+    locationTV.dataSource = self;
+    locationTV.delegate = self;
     [self.view addSubview:locationTV];
+    
+    locActivity = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(70, 60, 40, 40)];
+    locActivity.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [locationTV addSubview:locActivity];
+//    [locActivity startAnimating];
+    
+    locationL = [[UILabel alloc]initWithFrame:CGRectMake(110, 60, 160, 40)];
+    locationL.font = [UIFont systemFontOfSize:14.5];
+    locationL.text = @"正在搜索附近位置";
+    locationL.hidden = YES;
+    [locationTV addSubview:locationL];
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    static NSString *index = @"locCell";
+    locationCell *cell = [tableView dequeueReusableCellWithIdentifier:index];
+    if (cell == nil)
+    {
+        cell = [[locationCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:index];
+    }
+    if (indexPath.row == 0)
+    {
+        cell.textLabel.text = @" 不显示位置";
+        cell.textLabel.textColor = [UIColor colorWithRed:44.0/255 green:110.0/255 blue:181.0/255 alpha:1];
+    }
+    else
+    {
+        cell.cityL.text = cityArr[indexPath.row - 1];
+        cell.raingeL.text = raingeArr[indexPath.row - 1];
+    }
+    return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 47;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.1;
+}
+
+#pragma -mark 调整活动指示器的高度
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;    
+    locActivity.frame = CGRectMake(70, 60 + 47 * cityArr.count, 40, 40);
+    locationL.frame = CGRectMake(110, 60 + 47 *cityArr.count, 160, 40);
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(hidden) userInfo:nil repeats:NO];
+    [timer userInfo];
+    
+    return [cityArr count] + 1;
 }
 
+#pragma -mark 隐藏活动指示器
+- (void)hidden
+{
+    locationL.hidden = YES;
+    [locActivity stopAnimating];
+}
+
+#pragma -mark 开始获取我的位置
 NetChange(noNetButton)
 GO_NET
 - (void)connNet
@@ -108,40 +194,16 @@ GO_NET
     [locationManager startUpdatingLocation];
 }
 
+#pragma -mark 利用经纬度获取我的位置
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location=[locations lastObject];
     
     CLLocation *thelocation = [[CLLocation alloc]initWithLatitude:location.coordinate.latitude - 0.0030 longitude:location.coordinate.longitude + 0.0051]; //位置反编码
+    [self Getlocation:thelocation];
+    locationL.hidden = NO;
+    [locActivity startAnimating];
     
-    
-    
-    [locGeocoder reverseGeocodeLocation:thelocation completionHandler:^(NSArray *placemarks, NSError *error)
-     {
-         for (CLPlacemark *placemake in placemarks)
-         {
-//             NSLog(@"placemake.name = %@",placemake.name);
-             [raingeArr addObject:placemake.name];
-             [cityArr addObject:placemake.locality];
-//             UILabel *label = (UILabel *)[self.view viewWithTag:100];
-//             label.frame = CGRectMake(35, 0, 260, 40);
-//             label.font = [UIFont systemFontOfSize:15.5];
-//             label.text = placemake.name;
-//             if (placemake.name.length > 16)
-//             {
-//                 label.frame = CGRectMake(35, 0, 200, 40);
-//                 label.font = [UIFont systemFontOfSize:13];
-//                 label.text = placemake.name;
-//             }
-//             if (placemake.name.length >= 30)
-//             {
-//                 label.frame = CGRectMake(35, 0, 250, 40);
-//                 label.font = [UIFont systemFontOfSize:13];
-//                 label.text = placemake.name;
-//             }
-//             label.numberOfLines = 0;
-         }
-     }];
     
     for (NSInteger i = 1; i <= 10; i ++)
     {
@@ -165,40 +227,50 @@ GO_NET
         loc = [[CLLocation alloc]initWithLatitude:thelocation.coordinate.latitude - i * minUnit  longitude:thelocation.coordinate.longitude - i * minUnit];
         [self Getlocation:loc];
     }
-    NSLog(@"cityArr = %@",cityArr);
-    NSLog(@"raingeArr = %@",raingeArr);
     
     [locationManager stopUpdatingLocation];
 }
 
 
+#pragma -mark 成功获取我的位置
 - (void)Getlocation:(CLLocation *)location
 {
+    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
 
-    //位置反编码    
-    [locGeocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
+    //位置反编码
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
      {
-//         NSLog(@"%@",placemarks);
          for (CLPlacemark *placemake in placemarks)
          {
-//             NSLog(@"a==%@",placemake.name);
-             [raingeArr addObject:placemake.name];
-//             NSLog(@"b==%@",placemake.thoroughfare);
-//             NSLog(@"c==%@",placemake.subThoroughfare);
+             NSArray *arr = [placemake.name componentsSeparatedByString:placemake.subLocality];
+             if (arr.count == 1)
+             {
+//                 NSLog(@"a==%@",arr[0]);
+                 if ([cityArr containsObject:arr[0]] == NO)
+                 {
+                     [cityArr addObject:arr[0]];
+                     [raingeArr addObject:placemake.subLocality];
+                     [locationTV reloadData];
+                     locationL.hidden = NO;
+                     [locActivity startAnimating];
+                 }
+             }
+             else if(arr.count == 2)
+             {
+//                 NSLog(@"a==%@",arr[1]);
+                 if ([cityArr containsObject:arr[1]] == NO)
+                 {
+                     [cityArr addObject:arr[1]];
+                     [raingeArr addObject:placemake.subLocality];
+                     [locationTV reloadData];
+                     locationL.hidden = NO;
+                     [locActivity startAnimating];
+                 }
+             }
 //             NSLog(@"d==%@",placemake.locality);
-             [cityArr addObject:placemake.locality];
 //             NSLog(@"e==%@",placemake.subLocality);
-//             NSLog(@"f==%@",placemake.administrativeArea);
-//             NSLog(@"g==%@",placemake.subAdministrativeArea);
-//             NSLog(@"h==%@",placemake.postalCode);
-//             NSLog(@"i==%@",placemake.ISOcountryCode);
-//             NSLog(@"j==%@",placemake.country);
-//             NSLog(@"k==%@",placemake.inlandWater);
-//             NSLog(@"l==%@",placemake.ocean);
-//             NSLog(@"m==%@",placemake.areasOfInterest);
          }
      }];
-
 }
 
 - (void)didReceiveMemoryWarning

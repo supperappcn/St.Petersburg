@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface locationViewController : UIViewController<CLLocationManagerDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface locationViewController : UIViewController<CLLocationManagerDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 
 @end
