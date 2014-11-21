@@ -23,6 +23,7 @@
     UILabel *locationL;
     NSMutableArray *reloadCA;
     NSMutableArray *reloadRA;
+    BOOL locFlag;
 }
 
 @end
@@ -86,6 +87,7 @@ backButton
 #pragma -mark 添加tableView
 - (void)addtableView
 {
+    locFlag = YES;
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     cityArr = [[NSMutableArray alloc]init];
     raingeArr = [[NSMutableArray alloc]init];
@@ -120,13 +122,32 @@ backButton
     }
     if (indexPath.row == 0)
     {
-        cell.textLabel.text = @" 不显示位置";
-        cell.textLabel.textColor = [UIColor colorWithRed:44.0/255 green:110.0/255 blue:181.0/255 alpha:1];
+        if (locFlag == YES)
+        {
+            cell.textLabel.text = @" 不显示位置";
+            cell.textLabel.textColor = [UIColor colorWithRed:44.0/255 green:110.0/255 blue:181.0/255 alpha:1];
+        }
+        else
+        {
+            cell.textLabel.text = @" 显示位置";
+            cell.textLabel.textColor = [UIColor colorWithRed:44.0/255 green:110.0/255 blue:181.0/255 alpha:1];
+        }
     }
     else
     {
-        cell.cityL.text = cityArr[indexPath.row - 1];
-        cell.raingeL.text = raingeArr[indexPath.row - 1];
+        if (searchCity.text.length < 1)
+        {
+            cell.cityL.text = cityArr[indexPath.row - 1];
+            cell.raingeL.text = raingeArr[indexPath.row - 1];
+        }
+        else
+        {
+            if (reloadRA.count > 0)
+            {
+                cell.cityL.text = reloadCA[indexPath.row - 1];
+                cell.raingeL.text = reloadRA[indexPath.row - 1];
+            }
+        }
     }
     return cell;
 }
@@ -142,6 +163,10 @@ backButton
 }
 
 #pragma -mark 降下键盘
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchCity resignFirstResponder];
+}
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [searchCity resignFirstResponder];
@@ -158,11 +183,57 @@ backButton
     [reloadRA removeAllObjects];
     for (NSInteger i = 0; i <searchCA.count; i ++)
     {
-        NSString *string = [raingeArr objectAtIndex:[cityArr indexOfObject:searchCA[i]]];
+        NSInteger integ = [cityArr indexOfObject:searchCA[i]];
+        NSString *string = raingeArr[integ];
         [reloadRA addObject:string];
     }
-    NSLog(@"searchCA = %@",searchCA);
-    NSLog(@"reloadRA = %@",reloadRA);
+    
+    //rainge
+    NSMutableArray *searchRA = [[NSMutableArray alloc]init];
+    [reloadCA removeAllObjects];
+    for (NSInteger i = 0; i < raingeArr.count; i ++)
+    {
+        NSArray *arr = [raingeArr[i] componentsSeparatedByString:searchText];
+//        NSLog(@"arr = %@",arr);
+        if (arr.count == 1)
+        {
+            
+        }
+        else
+        {
+            [searchRA addObject:raingeArr[i]];
+            [reloadCA addObject:cityArr[i]];
+        }
+    }
+    
+//    NSLog(@"searchRA = %@",searchRA);
+//    NSLog(@"reloadCA = %@",reloadCA);
+//    NSLog(@"searchCA = %@",searchCA);
+//    NSLog(@"reloadRA = %@",reloadRA);
+    
+    for (NSInteger i = 0; i <searchCA.count; i ++)
+    {
+        if ([reloadCA containsObject:searchCA[i]] == NO)
+        {
+            if (searchRA.count == 0)
+            {
+               [reloadCA addObjectsFromArray:searchCA];
+            }
+            else
+            {
+                [reloadCA addObject:searchCA[i]];
+                [searchRA addObject:reloadRA[i]];
+            }
+        }
+    }
+    if (searchRA.count != 0)
+    {
+        [reloadRA addObjectsFromArray:searchRA];
+    }
+
+//    NSLog(@"reloadRA = %@",reloadRA);
+//    NSLog(@"reloadCA = %@",reloadCA);
+    [locationTV reloadData];
 }
 
 #pragma -mark 调整活动指示器的高度
@@ -173,8 +244,18 @@ backButton
     
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(hidden) userInfo:nil repeats:NO];
     [timer userInfo];
-    
-    return [cityArr count] + 1;
+    if (locFlag == NO)
+    {
+        return 1;
+    }
+    else if (searchCity.text.length < 1)
+    {
+        return [cityArr count] + 1;
+    }
+    else
+    {
+        return [reloadCA count] + 1;
+    }
 }
 
 #pragma -mark 隐藏活动指示器
@@ -299,6 +380,25 @@ GO_NET
 //             NSLog(@"e==%@",placemake.subLocality);
          }
      }];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0)
+    {
+        if (locFlag == YES)
+        {
+            locFlag = NO;
+            [cityArr removeAllObjects];
+            [raingeArr removeAllObjects];
+        }
+        else
+        {
+            locFlag = YES;
+            [self connNet];
+        }
+        [locationTV reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning
