@@ -45,5 +45,7 @@
 }
 @property(nonatomic,assign)int tag;
 @property (nonatomic , retain)UIButton*memberCenter_name;
+@property (nonatomic , retain) NSString *locText;
 - (void)loadPic_tableViewIndexPath:(NSIndexPath*)indexPath headLabName:(NSString*)name headView:(UIImageView *)headView;
+
 @end

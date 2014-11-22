@@ -23,6 +23,7 @@
 @interface MineViewController ()
 {
     CLLocationManager *locationManager;
+    NSURLConnection *mineConn;
 }
 
 @end
@@ -39,6 +40,27 @@
     else
     {
         appearTabbar
+    }
+    
+    if (self.locText)
+    {
+        UILabel *label = (UILabel *)[self.view viewWithTag:100];
+        label.frame = CGRectMake(35, 0, 260, 40);
+        label.font = [UIFont systemFontOfSize:15.5];
+        label.text = self.locText;
+        if (self.locText.length > 16)
+        {
+            label.frame = CGRectMake(35, 0, 200, 40);
+            label.font = [UIFont systemFontOfSize:13];
+            label.text = self.locText;
+        }
+        if (self.locText.length >= 30)
+        {
+            label.frame = CGRectMake(35, 0, 250, 40);
+            label.font = [UIFont systemFontOfSize:13];
+            label.text = self.locText;
+        }
+        label.numberOfLines = 0;
     }
     
     [self.navigationItem setNewTitle:@"我的"];
@@ -179,6 +201,16 @@
         postRequestYiBu(canshu2, urlDomain)
         sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     
+    NSURL *url1 = [[NSURL alloc]initWithString:@"http://t.russia-online.cn/ListServiceg.asmx/AddLocation"];
+    NSMutableURLRequest *request1 = [[NSMutableURLRequest alloc]initWithURL:url1 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [request1 setHTTPMethod:@"POST"];
+    NSString *str = [NSString stringWithFormat:@"guideid=%d&location=&typeid=0",[[[NSUserDefaults standardUserDefaults] valueForKey:GUIDE_ID]intValue]];
+    NSData *data1 = [str dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"str = %@",str);
+    [request1 setHTTPBody:data1];
+    mineConn = [[NSURLConnection alloc]initWithRequest:request1 delegate:self];
+
+
 
     sv.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:sv];
@@ -692,6 +724,7 @@ GO_NET
         {
             //开始更新范围
             locationViewController *location = [[locationViewController alloc]init];
+            location.mine = self;
             [self.navigationController pushViewController:location animated:NO];
             
         }
@@ -850,7 +883,6 @@ GO_NET
     
     
 }
-postRequestAgency(datas)
 - (void)loadPic_tableViewIndexPath:(NSIndexPath*)indexPath headLabName:(NSString*)name headView:(UIImageView *)headView{
     //NSLog(@"picid %@",picID);
     if (name.length>4) {
@@ -885,8 +917,42 @@ postRequestAgency(datas)
         
     }//else  return [UIImage imageNamed:@"lack.jpg"];
 }
+
+postRequestAgency(datas)
+
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    if (connection == mineConn)
+    {
+        dicResultYiBu(datas, result, dic)
+        NSLog(@"result=%@",result);
+        dataArray=[dic valueForKey:@"ds"];
+        if ([result isEqualToString:@""])
+        {
+            result = @"获取我的位置";
+        }
+        
+        UILabel *label = (UILabel *)[self.view viewWithTag:100];
+        label.frame = CGRectMake(35, 0, 260, 40);
+        label.font = [UIFont systemFontOfSize:15.5];
+        label.text = result;
+        if (result.length > 16)
+        {
+            label.frame = CGRectMake(35, 0, 200, 40);
+            label.font = [UIFont systemFontOfSize:13];
+            label.text = result;
+        }
+        if (result.length >= 30)
+        {
+            label.frame = CGRectMake(35, 0, 250, 40);
+            label.font = [UIFont systemFontOfSize:13];
+            label.text = result;
+        }
+        label.numberOfLines = 0;
+    }
+    else
+    {
+        
     
     dicResultYiBu(datas, result, dic)
     NSLog(@"result=%@",result);
@@ -1175,6 +1241,7 @@ postRequestAgency(datas)
        
         
 
+    }
     }
 }
 -(void)viewDidAppear:(BOOL)animated

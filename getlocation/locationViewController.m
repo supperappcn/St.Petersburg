@@ -8,6 +8,9 @@
 
 #import "locationViewController.h"
 #import "locationCell.h"
+#import "GDataXMLNode.h"
+#import "JSON.h"
+
 
 #define minUnit 0.0002
 
@@ -23,6 +26,8 @@
     UILabel *locationL;
     NSMutableArray *reloadCA;
     NSMutableArray *reloadRA;
+    NSURLConnection *locConn;
+    NSMutableData *datas;
     BOOL locFlag;
 }
 
@@ -38,24 +43,6 @@
     }
     return self;
 }
-
-//             UILabel *label = (UILabel *)[self.view viewWithTag:100];
-//             label.frame = CGRectMake(35, 0, 260, 40);
-//             label.font = [UIFont systemFontOfSize:15.5];
-//             label.text = placemake.name;
-//             if (placemake.name.length > 16)
-//             {
-//                 label.frame = CGRectMake(35, 0, 200, 40);
-//                 label.font = [UIFont systemFontOfSize:13];
-//                 label.text = placemake.name;
-//             }
-//             if (placemake.name.length >= 30)
-//             {
-//                 label.frame = CGRectMake(35, 0, 250, 40);
-//                 label.font = [UIFont systemFontOfSize:13];
-//                 label.text = placemake.name;
-//             }
-//             label.numberOfLines = 0;
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -382,8 +369,40 @@ GO_NET
      }];
 }
 
+postRequestAgency(datas)
+
+static NSInteger alertFlag = 0;
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    if (connection == locConn)
+    {
+        dicResultYiBu(datas, result, dic)
+        NSLog(@"result=%@",result);
+        if (result.integerValue == 1)
+        {
+            alertFlag = 0;
+            [self.navigationController popToRootViewControllerAnimated:NO];
+        }
+        else if (result.integerValue == 0)
+        {
+            if (alertFlag < 2)
+            {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"抱歉，您获取的当前位置失败" delegate:self cancelButtonTitle:@"好的，谢谢" otherButtonTitles:nil, nil];
+                [alert show];
+                alertFlag ++;
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"出现莫名错误，要不..待会儿再试！！" delegate:self cancelButtonTitle:@"好的，谢谢" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+       }
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.row == 0)
     {
         if (locFlag == YES)
@@ -398,6 +417,19 @@ GO_NET
             [self connNet];
         }
         [locationTV reloadData];
+    }
+    else
+    {
+        self.mine.locText = cityArr[indexPath.row - 1];
+        
+        NSURL *url1 = [[NSURL alloc]initWithString:@"http://t.russia-online.cn/ListServiceg.asmx/AddLocation"];
+        NSMutableURLRequest *request1 = [[NSMutableURLRequest alloc]initWithURL:url1 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+        [request1 setHTTPMethod:@"POST"];
+        NSString *str = [NSString stringWithFormat:@"guideid=%d&location=%@&typeid=1",[[[NSUserDefaults standardUserDefaults] valueForKey:GUIDE_ID]intValue],self.mine.locText];
+        NSData *data1 = [str dataUsingEncoding:NSUTF8StringEncoding];
+        NSLog(@"str = %@",str);
+        [request1 setHTTPBody:data1];
+        locConn = [[NSURLConnection alloc]initWithRequest:request1 delegate:self];
     }
 }
 

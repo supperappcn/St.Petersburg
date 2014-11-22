@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MineViewController.h"
+@class MineViewController;
 
 @interface locationViewController : UIViewController<CLLocationManagerDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 
+@property (nonatomic ,weak)MineViewController *mine;
 @end

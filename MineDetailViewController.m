@@ -225,19 +225,23 @@ backButton
 {
 //    name_image.image=[UIImage imageNamed:@"defaultSmall.gif"];
 
-    NSURL *url = [[NSURL alloc]initWithString:@"http://t.russia-online.cn/ListServicet.asmx/FileUploadImage"];
+    NSURL *url = [[NSURL alloc]initWithString:@"http://192.168.0.156:805/ListServicet.asmx/FileUploadImage"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"POST"];
     name_image.image = [UIImage imageNamed:@"酒店订单_01.png"];
     NSData *imageData = UIImagePNGRepresentation(name_image.image);
+    
+    UIImage *originImage = [UIImage imageNamed:@"defaultHead.jpg"];
+    NSData *data1 = UIImageJPEGRepresentation(originImage, 1.0f);
+    NSString *encodedImageStr = [data1 base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 
-    NSLog(@"%@",imageData);
+    NSLog(@"encodedImageStr = %@",encodedImageStr);
 
 //    Byte *imgByte = (Byte *)[imageData bytes];
 //    NSLog(@"%s" , imgByte);
 
 
-    NSString *str = [NSString stringWithFormat:@"ImagefileName=twoLongLine.png&FileStream=%@",imageData];
+    NSString *str = [NSString stringWithFormat:@"userid=%d&bytestr=%@",3,encodedImageStr];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPBody:data];
     conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
