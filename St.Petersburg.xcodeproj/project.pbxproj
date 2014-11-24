@@ -882,6 +882,7 @@
 		188CD2CF1A1B378900D2F1CA /* locationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = locationViewController.m; path = getlocation/locationViewController.m; sourceTree = "<group>"; };
 		188CD2D71A1DE5B100D2F1CA /* locationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = locationCell.h; path = getlocation/locationCell.h; sourceTree = "<group>"; };
 		188CD2D81A1DE5B100D2F1CA /* locationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = locationCell.m; path = getlocation/locationCell.m; sourceTree = "<group>"; };
+		188CD5E51A230A6C00D2F1CA /* St.Petersburg-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "St.Petersburg-Prefix.pch"; sourceTree = "<group>"; };
 		C400545C18EA6B0000E130B6 /* day1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day1.png; sourceTree = "<group>"; };
 		C400545D18EA6B0000E130B6 /* day2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day2.png; sourceTree = "<group>"; };
 		C400545E18EA6B0000E130B6 /* day3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day3.png; sourceTree = "<group>"; };
@@ -1334,7 +1335,6 @@
 		C49D177118A5DAB70001E371 /* St.Petersburg-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "St.Petersburg-Info.plist"; sourceTree = "<group>"; };
 		C49D177318A5DAB70001E371 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C49D177518A5DAB70001E371 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C49D177718A5DAB70001E371 /* St.Petersburg-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "St.Petersburg-Prefix.pch"; sourceTree = "<group>"; };
 		C49D177818A5DAB70001E371 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C49D177918A5DAB70001E371 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C49D177B18A5DAB70001E371 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -2833,7 +2833,7 @@
 				C49D177118A5DAB70001E371 /* St.Petersburg-Info.plist */,
 				C49D177218A5DAB70001E371 /* InfoPlist.strings */,
 				C49D177518A5DAB70001E371 /* main.m */,
-				C49D177718A5DAB70001E371 /* St.Petersburg-Prefix.pch */,
+				188CD5E51A230A6C00D2F1CA /* St.Petersburg-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -3841,6 +3841,14 @@
 				TargetAttributes = {
 					C49D176518A5DAB70001E371 = {
 						DevelopmentTeam = 98B8Y26L7F;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					C49D178018A5DAB70001E371 = {
 						TestTargetID = C49D176518A5DAB70001E371;
@@ -4807,7 +4815,7 @@
 					"\"$(SRCROOT)\"/Utilities",
 				);
 				INFOPLIST_FILE = "St.Petersburg/St.Petersburg-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4859,7 +4867,7 @@
 					"\"$(SRCROOT)\"/Utilities",
 				);
 				INFOPLIST_FILE = "St.Petersburg/St.Petersburg-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
