@@ -425,7 +425,7 @@ static NSInteger alertFlag = 0;
         NSURL *url1 = [[NSURL alloc]initWithString:@"http://t.russia-online.cn/ListServiceg.asmx/AddLocation"];
         NSMutableURLRequest *request1 = [[NSMutableURLRequest alloc]initWithURL:url1 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
         [request1 setHTTPMethod:@"POST"];
-        NSString *str = [NSString stringWithFormat:@"guideid=%d&location=%@&typeid=1",[[[NSUserDefaults standardUserDefaults] valueForKey:GUIDE_ID]intValue],self.mine.locText];
+        NSString *str = [NSString stringWithFormat:@"guideid=%d&location=%@&typeid=1",[[[NSUserDefaults standardUserDefaults] valueForKey:QUSE_ID]intValue],self.mine.locText];
         NSData *data1 = [str dataUsingEncoding:NSUTF8StringEncoding];
         NSLog(@"str = %@",str);
         [request1 setHTTPBody:data1];

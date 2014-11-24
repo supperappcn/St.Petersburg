@@ -67,7 +67,7 @@ backButton
     scrollView.backgroundColor=[UIColor groupTableViewBackgroundColor];
 
     UIButton*memberCenter_name=[UIButton buttonWithType:UIButtonTypeCustom];
-    memberCenter_name.userInteractionEnabled=NO;
+//    memberCenter_name.userInteractionEnabled=NO;
     memberCenter_name.tag=1000;
     memberCenter_name.frame=CGRectMake(0, 10, 320, 70);
     memberCenter.backgroundColor=[UIColor groupTableViewBackgroundColor];
@@ -76,11 +76,14 @@ backButton
     [scrollView addSubview:memberCenter_name
      ];
     
-    name_image=[[UIImageView alloc]initWithFrame:CGRectMake(10, 15, 40, 40)];
+    name_image=[[UIButton alloc]initWithFrame:CGRectMake(10, 15, 40, 40)];
 //    name_image.backgroundColor=[UIColor blueColor];
-    name_image.image=_severiceImage;
-#pragma - mark 上传图片
-    [self connectionURL];
+//    name_image.image=_severiceImage;
+    [name_image setImage:_severiceImage forState:UIControlStateNormal];
+    
+    [name_image addTarget:self action:@selector(changeHeadImg) forControlEvents:UIControlEventTouchUpInside];
+//#pragma - mark 上传图片
+//    [self connectionURL];
 
 
     
@@ -221,25 +224,23 @@ backButton
     }
 }
 
+- (void)changeHeadImg
+{
+    NSLog(@"changeHeadImg");
+}
+
 - (void)connectionURL
 {
-//    name_image.image=[UIImage imageNamed:@"defaultSmall.gif"];
 
-    NSURL *url = [[NSURL alloc]initWithString:@"http://192.168.0.156:805/ListServicet.asmx/FileUploadImage"];
+    NSURL *url = [[NSURL alloc]initWithString:@"http://www.russia-online.cn/api/WebService.asmx/FileUploadImage"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"POST"];
-    name_image.image = [UIImage imageNamed:@"酒店订单_01.png"];
-    NSData *imageData = UIImagePNGRepresentation(name_image.image);
-    
+        
     UIImage *originImage = [UIImage imageNamed:@"defaultHead.jpg"];
     NSData *data1 = UIImageJPEGRepresentation(originImage, 1.0f);
     NSString *encodedImageStr = [data1 base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 
     NSLog(@"encodedImageStr = %@",encodedImageStr);
-
-//    Byte *imgByte = (Byte *)[imageData bytes];
-//    NSLog(@"%s" , imgByte);
-
 
     NSString *str = [NSString stringWithFormat:@"userid=%d&bytestr=%@",3,encodedImageStr];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
@@ -275,6 +276,7 @@ backButton
     UIView*view=touch.view;
     //判断单击事件，touch时间和touch的区域
   
+    NSLog(@"%hhd",[view isMemberOfClass:[UIImageView class]]);
     if (tapCount == 1 && self.touchTimer <=0.2 &&[view isMemberOfClass:[UIImageView class]])
     {
         UIImageView*iamge=(UIImageView*)[self.view viewWithTag:view.tag];
@@ -634,6 +636,24 @@ backButton
         [(AppDelegate*)[[UIApplication sharedApplication] delegate] numberGo];
         [self.navigationController popToRootViewControllerAnimated:NO];
 
+            
+            
+        }
+            break;
+            
+        case 1000:
+        {
+            
+            NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
+            [defaults removeObjectForKey:QUSE_ID];
+            [defaults removeObjectForKey:USER_NAME];
+            [defaults removeObjectForKey:GUIDE_ID];
+            [defaults removeObjectForKey:TYPE_ID];
+            [defaults removeObjectForKey:name_string.text];
+            [defaults synchronize];
+            [(AppDelegate*)[[UIApplication sharedApplication] delegate] numberGo];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            
             
             
         }

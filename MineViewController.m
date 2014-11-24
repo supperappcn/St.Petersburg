@@ -19,11 +19,14 @@
 #import "MyOrderListViewController.h"
 
 #define SEVERICE_IMAGE @"serviceHeardImage"
+#define IMG_KEY [NSString stringWithFormat:@"%@",GET_USER_DEFAUT(QUSE_ID)]
+
 
 @interface MineViewController ()
 {
     CLLocationManager *locationManager;
     NSURLConnection *mineConn;
+    NSString *imgFilePath;
 }
 
 @end
@@ -136,10 +139,11 @@
             });
         }
         NSLog(@"USER_NAME %@",name_string.text);
-        NSLog(@"[GET_USER_DEFAUT(name_string.text) length]  %@",GET_USER_DEFAUT(name_string.text) );
-        if ([GET_USER_DEFAUT(name_string.text) length]>4) {
-           [self loadPic_tableViewIndexPath:nil headLabName:GET_USER_DEFAUT(name_string.text) headView:name_image];
-        }else name_image.image= [UIImage imageNamed:@"defaultSmall.gif"];
+        NSLog(@"[GET_USER_DEFAUT(name_string.text) length]  %lu",(unsigned long)[GET_USER_DEFAUT(IMG_KEY) length] );
+        if ([GET_USER_DEFAUT(IMG_KEY) length]>4) {
+           [self loadPic_tableViewIndexPath:nil headLabName:GET_USER_DEFAUT(IMG_KEY) headView:name_image];
+        }
+        else name_image.image= [UIImage imageNamed:@"defaultSmall.gif"];
         
     
     }
@@ -204,7 +208,7 @@
     NSURL *url1 = [[NSURL alloc]initWithString:@"http://t.russia-online.cn/ListServiceg.asmx/AddLocation"];
     NSMutableURLRequest *request1 = [[NSMutableURLRequest alloc]initWithURL:url1 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request1 setHTTPMethod:@"POST"];
-    NSString *str = [NSString stringWithFormat:@"guideid=%d&location=&typeid=0",[[[NSUserDefaults standardUserDefaults] valueForKey:GUIDE_ID]intValue]];
+    NSString *str = [NSString stringWithFormat:@"guideid=%d&location=&typeid=0",[[[NSUserDefaults standardUserDefaults] valueForKey:QUSE_ID]intValue]];
     NSData *data1 = [str dataUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"str = %@",str);
     [request1 setHTTPBody:data1];
@@ -883,37 +887,58 @@ GO_NET
     
     
 }
+
+#pragma -mark 创建文件
+- (void)storageAddName:(NSString *)fileName
+{
+    NSString *docPath=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
+    imgFilePath=[docPath stringByAppendingPathComponent:fileName];
+    NSLog(@"imgFilePath = %@",imgFilePath);
+}
+
+
 - (void)loadPic_tableViewIndexPath:(NSIndexPath*)indexPath headLabName:(NSString*)name headView:(UIImageView *)headView{
     //NSLog(@"picid %@",picID);
     if (name.length>4) {
        // NSLog(@"[[_dataArr objectAtIndex:indexPath.row] objectForKey:Pic]   %@",[[dataArr objectAtIndex:indexPath.row] objectForKey:picID]);
-        NSData *pathData = [NSData dataWithContentsOfFile:PathOfFile(name)];
         
+        NSArray*paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSString*documentsDirectory =[paths objectAtIndex:0];
+        
+        
+        NSString*plistPath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",GET_USER_DEFAUT(IMG_KEY)]];
+        NSData *pathData = [NSData dataWithContentsOfFile:plistPath];
+
         if (pathData.length==0) {
             //[headAiv  startAnimating];
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                picPath = [GET_USER_DEFAUT(TYPE_ID) intValue]==2?@"service":@"Personal";
                 NSString *picUrl=[GET_USER_DEFAUT(TYPE_ID) intValue]==2?PicUrl:PicUrlWWW;
                 NSString *urlStr = [NSString stringWithFormat:@"%@%@/%@",picUrl,picPath,name];
-                NSLog(@"picurl %@",urlStr);
-                NSURL *url = [NSURL URLWithString:urlStr];
-                NSLog(@"url %@",url);
-                NSData *data = [NSData dataWithContentsOfURL:url];
-               // NSLog(@"data  %@",data);
+                
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
+//                NSString *imgName = [NSString stringWithFormat:@"img_%@.jpg",GET_USER_DEFAUT(QUSE_ID)];
+                [self storageAddName:GET_USER_DEFAUT(IMG_KEY)];
+//                SET_USER_DEFAUT(imgName,IMG_KEY);
+                NSLog(@"img_name == %@",GET_USER_DEFAUT(IMG_KEY));
+
+                [data writeToFile:imgFilePath atomically:YES];
+
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (data) {
                         
-                        [data writeToFile:PathOfFile(name) atomically:YES];
-                        
                         headView.image = [UIImage imageWithData:data];
+                        
                         [NSThread sleepForTimeInterval:1];
                         NSLog(@"data is yes");
-                        
+                        NSLog(@"QUSE_ID------------%@",(GET_USER_DEFAUT(QUSE_ID)));
+
                     }
                     
                 });
             });
-        }else headView.image = [UIImage imageWithData:pathData];
+        }
+        else headView.image = [UIImage imageWithData:pathData];
         
     }//else  return [UIImage imageNamed:@"lack.jpg"];
 }
@@ -926,8 +951,7 @@ postRequestAgency(datas)
     {
         dicResultYiBu(datas, result, dic)
         NSLog(@"result=%@",result);
-        dataArray=[dic valueForKey:@"ds"];
-        if ([result isEqualToString:@""])
+        if ([result isEqualToString:@""] | [result isEqualToString:@"0"])
         {
             result = @"获取我的位置";
         }
@@ -953,86 +977,86 @@ postRequestAgency(datas)
     else
     {
         
-    
-    dicResultYiBu(datas, result, dic)
-    NSLog(@"result=%@",result);
+        
+        dicResultYiBu(datas, result, dic)
+        NSLog(@"result=%@",result);
         dataArray=[dic valueForKey:@"ds"];
-    //    NSLog(@"dataArray=%@",dataArray);
+        //    NSLog(@"dataArray=%@",dataArray);
         if(isLogin==NO)
-    {
-         if ([[[dataArray lastObject]valueForKey:@"Summary"]length]>0)
-         {
-         NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
-         
-         NSMutableArray*weidu=[defaults valueForKey:@"dataArray"];
-         NSMutableArray*current=[defaults valueForKey:@"currentArray"];
-         
-         int a=weidu.count;
-         NSLog(@"a=%d",a);
-         int b=0;
-         
-         if (weidu==nil||current==nil)
-         {
-         
-         
-         [defaults setObject:dataArray forKey:@"dataArray"];
-
-         [defaults setObject:dataArray forKey:@"currentArray"];
-         [defaults synchronize];
-         
-         
-         }
-         
-         
-         else
-         {
-         
-         
-         for (int i = 0; i<[dataArray count]; i++)
-         {
-         NSString*ii=[[[dataArray objectAtIndex:i]valueForKey:@"ID"]stringValue];
-         int k=0;
-         for (int m=0;m<weidu.count; m++)
-         {
-         
-         NSString*mm=[[[weidu objectAtIndex:m]valueForKey:@"ID"]stringValue];
-         if ([mm isEqualToString:ii])
-         {
-         
-         
-         k++;
-
-         }
-
-         }
-         
-         if (k==0)
-         {
-         [weidu insertObject:[dataArray objectAtIndex:i] atIndex:0];
-         [current insertObject:[dataArray objectAtIndex:i] atIndex:0];
-         b++;
-         }
-         k=0;
-         }
-         
-         NSLog(@"b=%d",b);
-         if (b)
-         {
-         
-         
-         [defaults removeObjectForKey:@"dataArray"];
-         [defaults setObject:weidu forKey:@"dataArray"];
-         
-         [defaults removeObjectForKey:@"currentArray"];
-         [defaults setObject:current forKey:@"currentArray"];
-         [defaults synchronize];
-         
-         }
-         
-         
-         }
-         
-         }
+        {
+            if ([[[dataArray lastObject]valueForKey:@"Summary"]length]>0)
+            {
+                NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
+                
+                NSMutableArray*weidu=[defaults valueForKey:@"dataArray"];
+                NSMutableArray*current=[defaults valueForKey:@"currentArray"];
+                
+                int a=weidu.count;
+                NSLog(@"a=%d",a);
+                int b=0;
+                
+                if (weidu==nil||current==nil)
+                {
+                    
+                    
+                    [defaults setObject:dataArray forKey:@"dataArray"];
+                    
+                    [defaults setObject:dataArray forKey:@"currentArray"];
+                    [defaults synchronize];
+                    
+                    
+                }
+                
+                
+                else
+                {
+                    
+                    
+                    for (int i = 0; i<[dataArray count]; i++)
+                    {
+                        NSString*ii=[[[dataArray objectAtIndex:i]valueForKey:@"ID"]stringValue];
+                        int k=0;
+                        for (int m=0;m<weidu.count; m++)
+                        {
+                            
+                            NSString*mm=[[[weidu objectAtIndex:m]valueForKey:@"ID"]stringValue];
+                            if ([mm isEqualToString:ii])
+                            {
+                                
+                                
+                                k++;
+                                
+                            }
+                            
+                        }
+                        
+                        if (k==0)
+                        {
+                            [weidu insertObject:[dataArray objectAtIndex:i] atIndex:0];
+                            [current insertObject:[dataArray objectAtIndex:i] atIndex:0];
+                            b++;
+                        }
+                        k=0;
+                    }
+                    
+                    NSLog(@"b=%d",b);
+                    if (b)
+                    {
+                        
+                        
+                        [defaults removeObjectForKey:@"dataArray"];
+                        [defaults setObject:weidu forKey:@"dataArray"];
+                        
+                        [defaults removeObjectForKey:@"currentArray"];
+                        [defaults setObject:current forKey:@"currentArray"];
+                        [defaults synchronize];
+                        
+                    }
+                    
+                    
+                }
+                
+            }
          
        /*  else
          {
@@ -1177,11 +1201,14 @@ postRequestAgency(datas)
         [(AppDelegate*)[[UIApplication sharedApplication] delegate] numberGo];
         NSLog(@"useArr.count %d",useArr.count);
         NSLog(@"%@",name_string.text);
-        if ([[useArr lastObject] length]>4) {
-            SET_USER_DEFAUT([useArr lastObject],name_string.text);
-            NSLog(@"%@ %@",name_string.text,GET_USER_DEFAUT(name_string.text));
-        [defaults synchronize];
+        if ([[useArr lastObject] length]>4)
+        {
+            SET_USER_DEFAUT([useArr lastObject],IMG_KEY);
+            NSLog(@"img_name--%@",[defaults objectForKey:IMG_KEY]);
+            [defaults synchronize];
             [self loadPic_tableViewIndexPath:nil headLabName:[useArr lastObject] headView:name_image];
+            NSLog(@"QUSE_ID------------%@",[defaults objectForKey:QUSE_ID]);
+
         }
         if ([[defaults objectForKey:TYPE_ID] intValue]==2) {
             _memberCenter_name.hidden=NO;

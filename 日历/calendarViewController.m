@@ -80,7 +80,7 @@ backButton
     NSURL *url = [[NSURL alloc]initWithString:@"http://t.russia-online.cn/ListServiceg.asmx/AddOrderdate"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"POST"];
-    NSString *str = [NSString stringWithFormat:@"guideid=%d&datelist=&typeid=0",[[[NSUserDefaults standardUserDefaults] objectForKey:GUIDE_ID] integerValue]];
+    NSString *str = [NSString stringWithFormat:@"guideid=%d&datelist=&typeid=0",[[[NSUserDefaults standardUserDefaults] objectForKey:QUSE_ID] integerValue]];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPBody:data];
     [NSURLConnection connectionWithRequest:request delegate:self];
@@ -104,7 +104,7 @@ backButton
     GDataXMLDocument *document = [[GDataXMLDocument alloc]initWithData:datas options:0 error:&error];
     GDataXMLElement *element = [document rootElement];
     NSString *resule = [element stringValue];
-//    NSLog(@"%@",resule);
+    NSLog(@"resule = %@",resule);
     if ([resule integerValue] == 1)
     {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"恭喜，您已经设置的成功！！" delegate:self cancelButtonTitle:@"好的，谢谢" otherButtonTitles:nil, nil];
@@ -112,7 +112,7 @@ backButton
         resule = [NSString stringWithFormat:@"%@|",setStr];
         [self GetData];
     }
-    if ([resule integerValue] == 0)
+    else if ([resule isEqualToString:@"0"])
     {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"抱歉，您未曾设置日期，您再想想看好吗？？" delegate:self cancelButtonTitle:@"好的，谢谢" otherButtonTitles:nil, nil];
         [alert show];
@@ -254,7 +254,7 @@ backButton
         NSURL *url = [[NSURL alloc]initWithString:@"http://t.russia-online.cn/ListServiceg.asmx/AddOrderdate"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
         [request setHTTPMethod:@"POST"];
-        NSString *str = [NSString stringWithFormat:@"guideid=%d&datelist=%@&typeid=1",[[[NSUserDefaults standardUserDefaults] objectForKey:GUIDE_ID] integerValue],setStr];
+        NSString *str = [NSString stringWithFormat:@"guideid=%d&datelist=%@&typeid=1",[[[NSUserDefaults standardUserDefaults] objectForKey:QUSE_ID] integerValue],setStr];
         NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
         [request setHTTPBody:data];
         [NSURLConnection connectionWithRequest:request delegate:self];
