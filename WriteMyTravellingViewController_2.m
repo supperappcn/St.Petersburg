@@ -218,7 +218,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(80*self.imagesArr.count, 0, 65, 65)];
+    UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(65*self.imagesArr.count, 0, 65, 65)];
     imageView.image = image;
     imageView.userInteractionEnabled = YES;
     [self.imagesArr addObject:image];
@@ -228,7 +228,7 @@
     [deleteBtn addTarget:self action:@selector(deleteImageFromShowPicView:) forControlEvents:UIControlEventTouchUpInside];
     [imageView addSubview:deleteBtn];
     [self.showPicView addSubview:imageView];
-    self.showPicView.contentSize = CGSizeMake(80*self.imagesArr.count, 65);
+    self.showPicView.contentSize = CGSizeMake(65*self.imagesArr.count, 65);
 //    [self addPictures];
 }
 
@@ -298,7 +298,6 @@
 {
     UIImagePickerController* ipc = [[UIImagePickerController alloc]init];
     ipc.delegate = self;
-    ipc.allowsEditing = YES;
     [ipc setSourceType:UIImagePickerControllerSourceTypeCamera];
     [self presentViewController:ipc animated:YES completion:nil];
 }
@@ -307,7 +306,6 @@
 {
     UIImagePickerController* ipc = [[UIImagePickerController alloc]init];
     ipc.delegate = self;
-//    ipc.allowsEditing = YES;
     [ipc setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [self presentViewController:ipc animated:YES completion:nil];
 }
