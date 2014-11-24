@@ -2059,6 +2059,13 @@
 			name = getlocation;
 			sourceTree = "<group>";
 		};
+		188CD5E41A2306D300D2F1CA /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		C40245F318F7D7E40016B360 /* SeceneryImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2932,6 +2939,7 @@
 				C4121F83192377F10047DEFA /* NewsViewController.m */,
 				C4121F84192377F10047DEFA /* SetViewController.h */,
 				C4121F85192377F10047DEFA /* SetViewController.m */,
+				188CD5E41A2306D300D2F1CA /* New Group */,
 				188CD2CD1A1B374B00D2F1CA /* getlocation */,
 				C4121F8F192378080047DEFA /* 我的游记 */,
 				C4121F8E192377F90047DEFA /* 我的收藏 */,
