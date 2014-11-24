@@ -8,15 +8,17 @@
 
 #import "WriteMyTravelingViewController.h"
 #import "GCPlaceholderTextView.h"
+#import "GDataXMLNode.h"
+#import "JSON.h"
 
 @interface WriteMyTravelingViewController ()
 @property (nonatomic, strong)UITextField *titleTF;
-@property (nonatomic, retain)GCPlaceholderTextView* textView;
-@property (nonatomic, retain)UIView* addPictureView;
-@property (nonatomic, retain)UIImageView* imageView;
-@property (nonatomic, assign)float statusHeight;
-@property (nonatomic, assign)float navigationBarHeight;
-
+@property (nonatomic, strong)GCPlaceholderTextView* textView;
+@property (nonatomic, strong)UIView* addPictureView;
+@property (nonatomic, strong)UIImageView* imageView;
+@property (nonatomic, strong)NSMutableArray* imagesArr;//存放图片
+@property (nonatomic, strong)NSMutableArray* imagesStrArr;//存放图片经过base64编码后的字符串
+@property (nonatomic, strong)NSMutableData* datas;//服务器返回的上传结果
 @end
 
 @implementation WriteMyTravelingViewController
@@ -30,17 +32,18 @@
     return self;
 }
 
-backButton
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.title = @"发布游记";
     self.view.backgroundColor = [UIColor colorWithRed:248.0/255 green:248.0/255 blue:248.0/255 alpha:1];
+    self.imagesArr = [NSMutableArray array];
+    self.imagesStrArr = [NSMutableArray array];
+    self.datas = [NSMutableData data];
     
     //添加监听键盘弹起和隐藏
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardWillHideNotification object:nil];
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lostFirstResponder)];
     [self.view addGestureRecognizer:tap];
@@ -49,6 +52,40 @@ backButton
     [self addTitleTextField];
     [self addContentTextView];
     [self addPhotoView];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    float height=35;
+    UIButton *backbutton = [[UIButton alloc]init];
+    backbutton.frame=CGRectMake(0, (44-height)/2, 55, height);
+    [backbutton addTarget:self action:@selector(remindSave) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 15, 15)];
+    imageView.image=[UIImage imageNamed:@"_back.png"];
+    [backbutton addSubview:imageView];
+    UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 40, 35)];
+    lable.backgroundColor=[UIColor clearColor];
+    lable.font=[UIFont systemFontOfSize:15];
+    lable.textColor=[UIColor whiteColor];
+    lable.text=@"返回";[backbutton addSubview:lable];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];
+    self.navigationItem.leftBarButtonItem =backItem;
+}
+
+//点“返回”按钮时提示是否保存
+-(void)remindSave {
+    if (self.titleTF.text || self.textView.text) {
+        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您的游记尚未保存，确定离开此页面" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"离开", nil];
+        alertView.tag = 0;
+        [alertView show];
+    }else {
+        [self backToLastVC];
+    }
+}
+
+-(void)backToLastVC{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)lostFirstResponder {
@@ -67,7 +104,20 @@ backButton
     [backbutton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     backbutton.titleLabel.font = [UIFont systemFontOfSize:15];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];
-    self.navigationItem.rightBarButtonItem =backItem;
+//    self.navigationItem.rightBarButtonItem =backItem;
+    
+    
+    UIButton* testBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 5, 46, 26)];
+    [testBtn setTitle:@"测试" forState:UIControlStateNormal];
+    [testBtn addTarget:self action:@selector(clickTestBtn) forControlEvents:UIControlEventTouchUpInside];
+    testBtn.backgroundColor = [UIColor redColor];
+    UIBarButtonItem* testItem = [[UIBarButtonItem alloc]initWithCustomView:testBtn];
+    self.navigationItem.rightBarButtonItems = @[backItem,testItem];
+}
+
+-(void)clickTestBtn {
+    NSLog(@"range:%@",NSStringFromRange(self.textView.selectedRange));
+    
 }
 
 -(void)addTitleTextField {//“填写标题”视图
@@ -82,8 +132,6 @@ backButton
 }
 
 -(void)addContentTextView {//“游记内容”视图
-//    self.statusHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-//    self.navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
     float contentViewHeight = self.view.frame.size.height - 10 - 40 - 10 - 40;
     UIView* contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 10+40+10, self.view.bounds.size.width, contentViewHeight)];
     contentView.backgroundColor = [UIColor whiteColor];
@@ -96,46 +144,94 @@ backButton
 
 -(void)addPhotoView {//“添加照片”视图
     self.addPictureView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 40 - 64, self.view.frame.size.width, 40)];//64为状态栏和navigationbar的高度
-    
-    self.addPictureView.backgroundColor = [UIColor redColor];
-    
+    self.addPictureView.backgroundColor = [UIColor colorWithRed:248.0/255 green:248.0/255 blue:248.0/255 alpha:1];
     [self.view addSubview:self.addPictureView];
     //拍照按钮
-    UIButton* shootPictureBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.addPictureView.frame.size.width - 25 - 41 - 25 - 41, 3, 41, 34)];
+    UIButton* shootPictureBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 25 - 41 - 25 - 41, 3, 41, 34)];
     [shootPictureBtn setImage:[UIImage imageNamed:@"take_photos.png"] forState:UIControlStateNormal];
     [shootPictureBtn addTarget:self action:@selector(shootPicture) forControlEvents:UIControlEventTouchUpInside];
     [self.addPictureView addSubview:shootPictureBtn];
     //选择相册按钮
-    UIButton* pickPictureBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.addPictureView.frame.size.width - 25 - 41, 3, 41, 34)];
+    UIButton* pickPictureBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 25 - 41, 3, 41, 34)];
     [pickPictureBtn setImage:[UIImage imageNamed:@"picture.png"] forState:UIControlStateNormal];
     [pickPictureBtn addTarget:self action:@selector(pickPicture) forControlEvents:UIControlEventTouchUpInside];
     [self.addPictureView addSubview:pickPictureBtn];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
 }
 
 //根据键盘改变addPictureView的高度
 -(void)changeAddPictureViewHeight:(float)keyboardHeight
 {
     if (keyboardHeight) {
-        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-            self.addPictureView.frame = CGRectMake(0, self.view.bounds.size.height - 40 - keyboardHeight, self.view.bounds.size.width, 40);
-        } completion:nil];
-        
+        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+        [UIView setAnimationDuration:0.23];
+        self.addPictureView.frame = CGRectMake(0, self.view.bounds.size.height - 40 - keyboardHeight, self.view.bounds.size.width, 40);
+        [UIView commitAnimations];
     }else {
+        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+        [UIView setAnimationDuration:0.23];
         self.addPictureView.frame = CGRectMake(0, self.view.bounds.size.height - 40, self.view.bounds.size.width, 40);
-//         - self.statusHeight - self.navigationBarHeight
+        [UIView commitAnimations];
     }
-    
 }
 
 -(void)saveTraveling
 {
-    NSLog(@"保存");
+    if (!self.titleTF.text && self.textView.text) {
+        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请撰写游记标题" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        alertView.tag = 2;
+        [alertView show];
+    }else if (self.titleTF.text && !self.textView.text) {
+        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请撰写游记内容" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        alertView.tag = 3;
+        [alertView show];
+    }else if (!self.titleTF.text && !self.textView.text) {
+        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"游记不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        alertView.tag = 2;
+        [alertView show];
+    }//else {
+        
+        
+        NSMutableString* urlStr = [NSMutableString stringWithString: @"http://192.168.0.156:807/api/WebService.asmx/"];
+        [urlStr appendString: @"getAddTravelInfo"];
     
+        NSString* imagesString = [self.imagesStrArr componentsJoinedByString:@","];
+        NSString* argumentStr = [NSString stringWithFormat:@"userid=%@&username=%@&title=%@&piclist=%@&content=%@&cityid=%d&typeid=%d",GET_USER_DEFAUT(QUSE_ID),GET_USER_DEFAUT(USER_NAME),self.titleTF.text,imagesString,self.textView.text,2,1];
+    
+        NSLog(@"argumentStr:%@",argumentStr);
+        NSURL*url=[[NSURL alloc]initWithString:urlStr];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+        [request setHTTPMethod:@"POST"];
+        NSData *data = [argumentStr dataUsingEncoding:NSUTF8StringEncoding];
+        [request setHTTPBody:data];
+        [NSURLConnection connectionWithRequest:request delegate:self];
+    //}
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    self.datas = [NSMutableData dataWithData:data];
+}
+
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    dicResultYiBu(self.datas, result, dic)
+    NSLog(@"rijiResult:%@",result);
+    if (result.intValue == 1) {
+        NSLog(@"发布日记成功");
+        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"日记发布成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        alertView.tag = 1;
+        [alertView show];
+    }else if (result.intValue == 0) {
+        NSLog(@"发布日记失败");
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ((alertView.tag==0 && buttonIndex==1) || alertView.tag==1) {
+        [self backToLastVC];//离开此页面
+    }else if (alertView.tag == 2) {
+        [self.titleTF becomeFirstResponder];//标题或者标题和内容均为空，撰写标题
+    }else if (alertView.tag == 3) {
+        [self.textView becomeFirstResponder];//内容为空，撰写内容
+    }
 }
 
 -(void)shootPicture//拍照
@@ -145,7 +241,6 @@ backButton
     ipc.allowsEditing = YES;
     [ipc setSourceType:UIImagePickerControllerSourceTypeCamera];
     [self presentViewController:ipc animated:YES completion:nil];
-    
 }
 
 -(void)pickPicture//从相册获取图片
@@ -155,13 +250,24 @@ backButton
     ipc.allowsEditing = YES;
     [ipc setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [self presentViewController:ipc animated:YES completion:nil];
-    
 }
+
 #pragma -mark- pickPicture
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    self.imageView.image = image;
+    NSURL* imageURL = [info objectForKey:UIImagePickerControllerMediaURL];
+    [self.imagesArr addObject:image];
+    NSLog(@"imageURL:%@",imageURL);
+    NSData* imageData = nil;
+    if ([[imageURL absoluteString] hasSuffix:@"PNG"]) {
+        imageData = UIImagePNGRepresentation(image);
+    }else {
+        imageData = UIImageJPEGRepresentation(image, 1.0);
+    }
+    NSString* imageStr = [imageData base64EncodedStringWithOptions:0];
+    [self.imagesStrArr addObject:imageStr];
+    NSLog(@"self.imagesArr:%@\n,self.imagesStrArr:%@",self.imagesArr,self.imagesStrArr);
     [self dismissViewControllerAnimated:YES completion:nil];
     [self addPictures];
     [self.textView becomeFirstResponder];
@@ -169,7 +275,10 @@ backButton
 
 //选择完照片后添加到textView中
 -(void)addPictures {
-    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 100, 100)];
+//    int len = self.textView.selectedRange.location;
+    NSLog(@"range:%@",NSStringFromRange(self.textView.selectedRange));
+    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 50, 300, 300)];
+    self.imageView.image = self.imagesArr[0];
     UIBezierPath* path = [UIBezierPath bezierPathWithRect:self.imageView.frame];
     self.textView.textContainer.exclusionPaths = @[path];
     [self.textView addSubview:self.imageView];

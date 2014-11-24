@@ -12,6 +12,7 @@
 #import "JSON.h"
 #import "MyTravelingDetailViewController.h"
 #import "WriteMyTravelingViewController.h"
+#import "WriteMyTravellingViewController_2.h"
 
 @interface MyTravelingViewController ()
 
@@ -112,7 +113,8 @@ NetChange(noNetButton)
 GO_NET
 //static int a = 0 ;
 - (void)send{
-    [self.navigationController pushViewController:[WriteMyTravelingViewController new] animated:YES];
+//    [self.navigationController pushViewController:[WriteMyTravelingViewController new] animated:YES];
+    [self.navigationController pushViewController:[WriteMyTravellingViewController_2 new] animated:YES];
     
     
     

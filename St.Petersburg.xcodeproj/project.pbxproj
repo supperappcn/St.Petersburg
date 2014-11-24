@@ -16,6 +16,8 @@
 		0A041E9419F64B7900320F8E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A041E8319F64B7900320F8E /* libcrypto.a */; };
 		0A041E9519F64B7900320F8E /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A041E8419F64B7900320F8E /* libssl.a */; };
 		0A0524F61A15ABC500553786 /* PaySuccessfullyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0524F51A15ABC500553786 /* PaySuccessfullyViewController.m */; };
+		0A05FB481A1EDD2700FDD9EC /* take_photos.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A05FB471A1EDD2700FDD9EC /* take_photos.png */; };
+		0A05FB4A1A1EDD3700FDD9EC /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A05FB491A1EDD3700FDD9EC /* picture.png */; };
 		0A0682781A0CC03F0047B87F /* hotelCarenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0682771A0CC03F0047B87F /* hotelCarenderViewController.m */; };
 		0A06827C1A0CC1210047B87F /* GCCalenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06827B1A0CC1210047B87F /* GCCalenderViewController.m */; };
 		0A06D2901A09CD5100F3256F /* MyEntainOrderDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06D28F1A09CD5100F3256F /* MyEntainOrderDetailTableViewController.m */; };
@@ -33,6 +35,8 @@
 		0A0CB7A419F4F3490013D763 /* WriteMyTravelingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB7A319F4F3490013D763 /* WriteMyTravelingViewController.m */; };
 		0A0CB7A719F4F37A0013D763 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB7A619F4F37A0013D763 /* GCPlaceholderTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0A0EBE671A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EBE661A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m */; };
+		0A0EF4751A2063180011FFAC /* WriteMyTravellingViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EF4741A2063180011FFAC /* WriteMyTravellingViewController_2.m */; };
+		0A0EF4771A20683F0011FFAC /* 游记_发布2_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0EF4761A20683F0011FFAC /* 游记_发布2_03.png */; };
 		0A6414761A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6414741A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m */; };
 		0A6414771A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A6414751A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib */; };
 		18650E9519E6655900209EB6 /* libQYHMethod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E8D19E6652900209EB6 /* libQYHMethod.a */; };
@@ -832,6 +836,8 @@
 		0A041E8719F64B7900320F8E /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
 		0A0524F41A15ABC500553786 /* PaySuccessfullyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaySuccessfullyViewController.h; sourceTree = "<group>"; };
 		0A0524F51A15ABC500553786 /* PaySuccessfullyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaySuccessfullyViewController.m; sourceTree = "<group>"; };
+		0A05FB471A1EDD2700FDD9EC /* take_photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = take_photos.png; sourceTree = "<group>"; };
+		0A05FB491A1EDD3700FDD9EC /* picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture.png; sourceTree = "<group>"; };
 		0A0682761A0CC03F0047B87F /* hotelCarenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotelCarenderViewController.h; sourceTree = SOURCE_ROOT; };
 		0A0682771A0CC03F0047B87F /* hotelCarenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotelCarenderViewController.m; sourceTree = SOURCE_ROOT; };
 		0A06827A1A0CC1210047B87F /* GCCalenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCCalenderViewController.h; sourceTree = "<group>"; };
@@ -860,6 +866,9 @@
 		0A0CB7A619F4F37A0013D763 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		0A0EBE651A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGuideAndCarOrderDetailTableViewCell.h; sourceTree = "<group>"; };
 		0A0EBE661A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGuideAndCarOrderDetailTableViewCell.m; sourceTree = "<group>"; };
+		0A0EF4731A2063180011FFAC /* WriteMyTravellingViewController_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteMyTravellingViewController_2.h; sourceTree = "<group>"; };
+		0A0EF4741A2063180011FFAC /* WriteMyTravellingViewController_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteMyTravellingViewController_2.m; sourceTree = "<group>"; };
+		0A0EF4761A20683F0011FFAC /* 游记_发布2_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "游记_发布2_03.png"; sourceTree = "<group>"; };
 		0A6414731A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLineOrderDetailTableViewCell.h; sourceTree = "<group>"; };
 		0A6414741A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLineOrderDetailTableViewCell.m; sourceTree = "<group>"; };
 		0A6414751A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyLineOrderDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -2113,6 +2122,9 @@
 		C4121F8F192378080047DEFA /* 我的游记 */ = {
 			isa = PBXGroup;
 			children = (
+				0A05FB491A1EDD3700FDD9EC /* picture.png */,
+				0A05FB471A1EDD2700FDD9EC /* take_photos.png */,
+				0A0EF4761A20683F0011FFAC /* 游记_发布2_03.png */,
 				C409FF7519358DD40015A0B5 /* sendtravel.png */,
 				C4121F981923782A0047DEFA /* lack.jpg */,
 				C4121F9A1923782A0047DEFA /* travel_say.png */,
@@ -2126,6 +2138,8 @@
 				C4121FA21923782A0047DEFA /* MyTravelingDetailViewController.m */,
 				0A0CB7A219F4F3490013D763 /* WriteMyTravelingViewController.h */,
 				0A0CB7A319F4F3490013D763 /* WriteMyTravelingViewController.m */,
+				0A0EF4731A2063180011FFAC /* WriteMyTravellingViewController_2.h */,
+				0A0EF4741A2063180011FFAC /* WriteMyTravellingViewController_2.m */,
 				0A0CB7A519F4F37A0013D763 /* GCPlaceholderTextView.h */,
 				0A0CB7A619F4F37A0013D763 /* GCPlaceholderTextView.m */,
 			);
@@ -3865,6 +3879,7 @@
 				C418F5F018AB87CC00021042 /* city.plist in Resources */,
 				C4264C1318A60BFF0098B6F8 /* mine_logUp.png in Resources */,
 				C440545118D2966000983D58 /* _back.png in Resources */,
+				0A05FB4A1A1EDD3700FDD9EC /* picture.png in Resources */,
 				C4E19B531911075500CE7B61 /* moneyCNY.png in Resources */,
 				C4E19B9C1911907300CE7B61 /* bus2.jpg in Resources */,
 				C440546B18D2A4F800983D58 /* hotel_03-03.png in Resources */,
@@ -4088,6 +4103,7 @@
 				C450EC3918F9333300B1CF67 /* groupColor.png in Resources */,
 				C4E90802194996C000BDECEE /* homePic_introduce.png in Resources */,
 				C481C27918C47BD2002C0CDA /* lineButton.png in Resources */,
+				0A0EF4771A20683F0011FFAC /* 游记_发布2_03.png in Resources */,
 				C4E19B5D19110B5600CE7B61 /* TimeLable.png in Resources */,
 				C42D045B18DD934B00F9B570 /* entainment3.jpg in Resources */,
 				C416196D18E3CDC70087DCE7 /* stateBarColor.png in Resources */,
@@ -4139,6 +4155,7 @@
 				C49D17C918A5E05D0001E371 /* neighbo.png in Resources */,
 				C4E19BE01911982F00CE7B61 /* jianzhu2.jpg in Resources */,
 				C4E9080D1949AAB400BDECEE /* tool_11.png in Resources */,
+				0A05FB481A1EDD2700FDD9EC /* take_photos.png in Resources */,
 				C49D17C818A5E05D0001E371 /* more_h.png in Resources */,
 				C481C26B18C4594A002C0CDA /* slider-metal-handle-highlighted@2x.png in Resources */,
 				C4E4A50618ACB51700AE9738 /* member_centerUp.png in Resources */,
@@ -4503,6 +4520,7 @@
 				C4E19C2B19119DA800CE7B61 /* SupplierTableViewController.m in Sources */,
 				C4FE85B618ADB5CD00A579AE /* CityViewController.m in Sources */,
 				C416BD96196BA28C00196C75 /* SceneryReceverClass.m in Sources */,
+				0A0EF4751A2063180011FFAC /* WriteMyTravellingViewController_2.m in Sources */,
 				C4DFD5B218B1AA71007CF882 /* CustomCell2.m in Sources */,
 				C42C5CA218B7584200C31C7C /* RegexKitLite.m in Sources */,
 				C4871F531901287500C99431 /* IntroduceViewController.m in Sources */,
@@ -4781,7 +4799,7 @@
 					"\"$(SRCROOT)\"/Utilities",
 				);
 				INFOPLIST_FILE = "St.Petersburg/St.Petersburg-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4833,7 +4851,7 @@
 					"\"$(SRCROOT)\"/Utilities",
 				);
 				INFOPLIST_FILE = "St.Petersburg/St.Petersburg-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

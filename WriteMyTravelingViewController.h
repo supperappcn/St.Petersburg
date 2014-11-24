@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WriteMyTravelingViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface WriteMyTravelingViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,NSURLConnectionDataDelegate,UIAlertViewDelegate>
 
 @end
