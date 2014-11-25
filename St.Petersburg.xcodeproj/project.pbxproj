@@ -32,11 +32,11 @@
 		0A0CB79319F4EF1B0013D763 /* libYixinSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CB79219F4EF1B0013D763 /* libYixinSDK.a */; };
 		0A0CB7A019F4F1A00013D763 /* calendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB79D19F4F1A00013D763 /* calendarViewController.m */; };
 		0A0CB7A119F4F1A00013D763 /* calenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB79F19F4F1A00013D763 /* calenderView.m */; };
-		0A0CB7A419F4F3490013D763 /* WriteMyTravelingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB7A319F4F3490013D763 /* WriteMyTravelingViewController.m */; };
 		0A0CB7A719F4F37A0013D763 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB7A619F4F37A0013D763 /* GCPlaceholderTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0A0EBE671A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EBE661A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m */; };
 		0A0EF4751A2063180011FFAC /* WriteMyTravellingViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EF4741A2063180011FFAC /* WriteMyTravellingViewController_2.m */; };
 		0A0EF4771A20683F0011FFAC /* 游记_发布2_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0EF4761A20683F0011FFAC /* 游记_发布2_03.png */; };
+		0A27D4EE1A246CE0006A79F7 /* MyTravellingDetailViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A27D4ED1A246CE0006A79F7 /* MyTravellingDetailViewController_2.m */; };
 		0A6414761A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6414741A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m */; };
 		0A6414771A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A6414751A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib */; };
 		18650E9519E6655900209EB6 /* libQYHMethod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E8D19E6652900209EB6 /* libQYHMethod.a */; };
@@ -860,8 +860,6 @@
 		0A0CB79D19F4F1A00013D763 /* calendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calendarViewController.m; sourceTree = "<group>"; };
 		0A0CB79E19F4F1A00013D763 /* calenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calenderView.h; sourceTree = "<group>"; };
 		0A0CB79F19F4F1A00013D763 /* calenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calenderView.m; sourceTree = "<group>"; };
-		0A0CB7A219F4F3490013D763 /* WriteMyTravelingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteMyTravelingViewController.h; sourceTree = "<group>"; };
-		0A0CB7A319F4F3490013D763 /* WriteMyTravelingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteMyTravelingViewController.m; sourceTree = "<group>"; };
 		0A0CB7A519F4F37A0013D763 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
 		0A0CB7A619F4F37A0013D763 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		0A0EBE651A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGuideAndCarOrderDetailTableViewCell.h; sourceTree = "<group>"; };
@@ -869,6 +867,8 @@
 		0A0EF4731A2063180011FFAC /* WriteMyTravellingViewController_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteMyTravellingViewController_2.h; sourceTree = "<group>"; };
 		0A0EF4741A2063180011FFAC /* WriteMyTravellingViewController_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteMyTravellingViewController_2.m; sourceTree = "<group>"; };
 		0A0EF4761A20683F0011FFAC /* 游记_发布2_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "游记_发布2_03.png"; sourceTree = "<group>"; };
+		0A27D4EC1A246CE0006A79F7 /* MyTravellingDetailViewController_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTravellingDetailViewController_2.h; sourceTree = "<group>"; };
+		0A27D4ED1A246CE0006A79F7 /* MyTravellingDetailViewController_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTravellingDetailViewController_2.m; sourceTree = "<group>"; };
 		0A6414731A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLineOrderDetailTableViewCell.h; sourceTree = "<group>"; };
 		0A6414741A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLineOrderDetailTableViewCell.m; sourceTree = "<group>"; };
 		0A6414751A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyLineOrderDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -2143,8 +2143,8 @@
 				C4121FA01923782A0047DEFA /* MyTravelingTableViewCell.m */,
 				C4121FA11923782A0047DEFA /* MyTravelingDetailViewController.h */,
 				C4121FA21923782A0047DEFA /* MyTravelingDetailViewController.m */,
-				0A0CB7A219F4F3490013D763 /* WriteMyTravelingViewController.h */,
-				0A0CB7A319F4F3490013D763 /* WriteMyTravelingViewController.m */,
+				0A27D4EC1A246CE0006A79F7 /* MyTravellingDetailViewController_2.h */,
+				0A27D4ED1A246CE0006A79F7 /* MyTravellingDetailViewController_2.m */,
 				0A0EF4731A2063180011FFAC /* WriteMyTravellingViewController_2.h */,
 				0A0EF4741A2063180011FFAC /* WriteMyTravellingViewController_2.m */,
 				0A0CB7A519F4F37A0013D763 /* GCPlaceholderTextView.h */,
@@ -4498,7 +4498,6 @@
 				C4EF9D1F196FD2D300CFF415 /* EntainReseverClass.m in Sources */,
 				C4E19B4B1910F07C00CE7B61 /* TaxiPersonageCell.m in Sources */,
 				C4264C2C18A61FDE0098B6F8 /* SBJsonBase.m in Sources */,
-				0A0CB7A419F4F3490013D763 /* WriteMyTravelingViewController.m in Sources */,
 				C4E19BCC1911981400CE7B61 /* BaLIViewController.m in Sources */,
 				C44086081946F130001E2A47 /* FeedBackViewController.m in Sources */,
 				C4F1280118BB268D0041960B /* NumberKeypadDecimalPoint.m in Sources */,
@@ -4598,6 +4597,7 @@
 				0A071DF81A1B1FF500803E7B /* MyOrderListViewController.m in Sources */,
 				C4EAD87318B6EF0B00A2B8EB /* EmergencyViewController.m in Sources */,
 				C4264C2818A61FDE0098B6F8 /* GDataXMLNode.m in Sources */,
+				0A27D4EE1A246CE0006A79F7 /* MyTravellingDetailViewController_2.m in Sources */,
 				0A071DFF1A1B48A000803E7B /* MyOrderDetailViewController.m in Sources */,
 				0A0682781A0CC03F0047B87F /* hotelCarenderViewController.m in Sources */,
 				C4121F961923781B0047DEFA /* MyCollectDetailViewController.m in Sources */,

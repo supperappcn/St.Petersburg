@@ -11,8 +11,9 @@
 #import "GDataXMLNode.h"
 #import "JSON.h"
 #import "MyTravelingDetailViewController.h"
-#import "WriteMyTravelingViewController.h"
+#import "MyTravellingDetailViewController_2.h"
 #import "WriteMyTravellingViewController_2.h"
+#import "ComentViewController.h"
 
 @interface MyTravelingViewController ()
 
@@ -83,9 +84,16 @@ backButton
         [aiv startAnimating];
         [self.navigationController.navigationBar addSubview:aiv];
 
-        NSMutableString *urlStr = RussiaUrl4;
+#pragma -mark- Changed...
+//        NSMutableString *urlStr = RussiaUrl4;
+        NSMutableString *urlStr =[NSMutableString stringWithFormat:@"%@",@"http://192.168.0.156:807/api/WebService.asmx/"];
+        
         [urlStr appendString:@"getTravelList"];
-        NSString *aruStr = [NSString stringWithFormat:@"cityid=2&userid=%@&pagesize=5&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),0];
+        
+#pragma -mark- Changed...
+        //NSString *aruStr = [NSString stringWithFormat:@"cityid=2&userid=%@&pagesize=5&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),0];
+        NSString *aruStr = [NSString stringWithFormat:@"title=&cityname=圣彼得堡&userid=%@&pagesize=5&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),0];
+        
         postRequestYiBu(aruStr, urlStr)
     }else {
         NSData *data=[NSData dataWithContentsOfFile:PathOfFile(@"MyTravelDatas") ];
@@ -207,9 +215,15 @@ postRequestAgency(datas)
     [NSThread sleepForTimeInterval:.5];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSLog(@"加载中");
-        NSMutableString *urlStr = RussiaUrl4;
+        
+#pragma -mark-  Changed...
+//        NSMutableString *urlStr = RussiaUrl4;
+//        [urlStr appendString:@"getTravelList"];
+//        NSString *aruStr = [NSString stringWithFormat:@"cityid=2&userid=%@&pagesize=5&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),0];
+        NSMutableString *urlStr =[NSMutableString stringWithFormat:@"%@",@"http://192.168.0.156:807/api/WebService.asmx/"];
         [urlStr appendString:@"getTravelList"];
-        NSString *aruStr = [NSString stringWithFormat:@"cityid=2&userid=%@&pagesize=5&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),0];
+        NSString *aruStr = [NSString stringWithFormat:@"title=&cityname=圣彼得堡&userid=%@&pagesize=5&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),0];
+        
         postRequestTongBu(aruStr, urlStr, received)
         dicResultTongbu(received, result, dic)
         if (result.length>11&&[dic objectForKey:@"ds"]) {
@@ -236,9 +250,15 @@ postRequestAgency(datas)
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             NSLog(@"加载中");
-            NSMutableString *urlStr = RussiaUrl4;
+            
+#pragma -mark-  Changed...
+//            NSMutableString *urlStr = RussiaUrl4;
+//            [urlStr appendString:@"getTravelList"];
+//            NSString *aruStr = [NSString stringWithFormat:@"cityid=2&userid=%@&pagesize=5&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),++footerTag];
+            NSMutableString *urlStr =[NSMutableString stringWithFormat:@"%@",@"http://192.168.0.156:807/api/WebService.asmx/"];
             [urlStr appendString:@"getTravelList"];
-            NSString *aruStr = [NSString stringWithFormat:@"cityid=2&userid=%@&pagesize=5&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),++footerTag];
+            NSString *aruStr = [NSString stringWithFormat:@"title=&cityname=圣彼得堡&userid=%@&pagesize=5&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),0];
+            
             postRequestTongBu(aruStr, urlStr, received)
             dicResultTongbu(received, result, dic)
             
@@ -301,13 +321,21 @@ postRequestAgency(datas)
         
         NSData *pathData = [NSData dataWithContentsOfFile:PathOfFile(headLab.text)];
         
-        
-        if ([[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Pic"] length]>4) {
-            NSLog(@"[[_dataArr objectAtIndex:indexPath.row] objectForKey:Pic]   %@",[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Pic"]);
+#pragma -mark- Changed...
+//        if ([[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Pic"] length]>4) {
+        if ([[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"PicUrl"] length]>4) {
+            
+            
             if (pathData.length==0) {
                 [headAiv  startAnimating];
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    NSString *urlStr = [NSString stringWithFormat:@"%@%@",PicUrlTravel,[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Pic"]];
+                    
+#pragma -mark- Changed...
+//                    NSString *urlStr = [NSString stringWithFormat:@"%@%@",PicUrlTravel,[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Pic"]];
+                    NSString* picURL = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"PicUrl"];
+                    NSString *urlStr = [NSString stringWithFormat:@"http://www.russia-online.cn/Upload/SelfManual/%@",picURL];
+                    
+                    
                     NSURL *url = [NSURL URLWithString:urlStr];
                     NSData *data = [NSData dataWithContentsOfURL:url];
                    // [NSThread sleepForTimeInterval:2];
@@ -326,9 +354,6 @@ postRequestAgency(datas)
             }else headIV.image = [UIImage imageWithData:pathData];
    
         }else  headIV.image = [UIImage imageNamed:@"lack.jpg"];
-      
-        
-        
         
         UILabel *dateLab = [[UILabel alloc]initWithFrame:CGRectMake(115, 42, 200, 25)];
         dateLab.font = [UIFont systemFontOfSize:13];
@@ -336,26 +361,22 @@ postRequestAgency(datas)
         dateLab.text =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"PTime"];
         [myCell.contentView addSubview:dateLab];
         
-
-        
-        
         NSString *title = [NSString stringWithFormat:@"评论(%@)",[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Msgcount"]];
         for (int i = 0; i < 3; i++) {
             UIButton *say = [UIButton buttonWithType:UIButtonTypeCustom];
             
             [say setTitle:i==0?title:[tittleArr objectAtIndex:i] forState:UIControlStateNormal];
-            say.tag = i;
+            say.tag = indexPath.row;
             [say addTarget:self action:@selector(btnTouch:) forControlEvents:UIControlEventTouchUpInside];
             say.titleLabel.font = [UIFont systemFontOfSize:13];
             [say setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
             say.showsTouchWhenHighlighted=YES;
             say.titleLabel.textAlignment = NSTextAlignmentLeft;
-            say.frame = i==0?CGRectMake(126, 65, 60, 25):CGRectMake(150+55*i, 65, 30, 25);
+            say.frame = i==0?CGRectMake(126, 65, 70, 25):CGRectMake(160+55*i, 65, 30, 25);
             [myCell.contentView addSubview:say];
             
-            
             UIImageView *tittleIV=[[UIImageView alloc]init];
-            tittleIV.frame =i==0?CGRectMake(115, 70, 15, 15):CGRectMake(135+55*i, 70, 15, 15);
+            tittleIV.frame =i==0?CGRectMake(115, 70, 15, 15):CGRectMake(145+55*i, 70, 15, 15);
             tittleIV.image = [UIImage imageNamed:[imageNameArr objectAtIndex:i]];
             tittleIV.backgroundColor = [UIColor blueColor];
             [myCell.contentView addSubview:tittleIV];
@@ -364,27 +385,37 @@ postRequestAgency(datas)
     return myCell;
 }
 - (void)btnTouch:(UIButton*)btn{
-    switch (btn.tag) {
-        case 0:
-            NSLog(@"sender 点评  %d",btn.tag);
-            break;
-        case 1:
-            NSLog(@"sender 编辑  %d",btn.tag);
-            break;
-        case 2:
-            NSLog(@"sender 删除  %d",btn.tag);
-            break;
-        default:
-            break;
+    if ([btn.currentTitle isEqualToString:@"编辑"]) {
+        NSLog(@"sender编辑");
+        WriteMyTravellingViewController_2* wmtVC = [WriteMyTravellingViewController_2 new];
+        
+        
+        [self.navigationController pushViewController:wmtVC animated:YES];
+    }else if ([btn.currentTitle isEqualToString:@"删除"]) {
+        NSLog(@"sender删除");
+        
+    }else {
+        NSLog(@"sender点评");
+        NSDictionary* dic1 = [_dataArr objectAtIndex:btn.tag];
+        ComentViewController* text = [ComentViewController new];
+        text.pageName = @"游记评论";
+        text.head = [dic1 valueForKey:@"Title"];
+//        text.eTittle = [dic1 valueForKey:@"Msgcount"];
+        text.type = 9;
+        text.ID = [[dic1 valueForKey:@"ID"]intValue];
+        [self.navigationController pushViewController:text animated:NO];
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%s",__func__);
-    MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
-    mtdv.htmlStr = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Content"];
-    mtdv.title =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Title"];
-    [self.navigationController pushViewController:mtdv animated:YES];
+//    MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
+//    mtdv.htmlStr = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Content"];
+//    mtdv.title =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Title"];
+//    [self.navigationController pushViewController:mtdv animated:YES];
     
+    
+    MyTravellingDetailViewController_2* mtdVC = [MyTravellingDetailViewController_2 new];
+    mtdVC.dic = [_dataArr objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:mtdVC animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 100;
