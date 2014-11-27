@@ -44,6 +44,7 @@
 		18650E9819E6655900209EB6 /* libTCWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9019E6652900209EB6 /* libTCWeiboSDK.a */; };
 		18650E9919E6655900209EB6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9119E6652900209EB6 /* libWeChatSDK.a */; };
 		18650E9A19E6655900209EB6 /* libYixinSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9219E6652900209EB6 /* libYixinSDK.a */; };
+		1878CB631A25723800891E0B /* DrowRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1878CB621A25723800891E0B /* DrowRect.m */; };
 		188CD28C1A1AE0A400D2F1CA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CD28B1A1AE0A400D2F1CA /* MapKit.framework */; };
 		188CD2D01A1B378900D2F1CA /* locationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CD2CF1A1B378900D2F1CA /* locationViewController.m */; };
 		188CD2D91A1DE5B100D2F1CA /* locationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CD2D81A1DE5B100D2F1CA /* locationCell.m */; };
@@ -877,6 +878,8 @@
 		18650E9019E6652900209EB6 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCWeiboSDK.a; sourceTree = "<group>"; };
 		18650E9119E6652900209EB6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		18650E9219E6652900209EB6 /* libYixinSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYixinSDK.a; sourceTree = "<group>"; };
+		1878CB611A25723800891E0B /* DrowRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrowRect.h; sourceTree = "<group>"; };
+		1878CB621A25723800891E0B /* DrowRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrowRect.m; sourceTree = "<group>"; };
 		188CD28B1A1AE0A400D2F1CA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		188CD2CE1A1B378900D2F1CA /* locationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = locationViewController.h; path = getlocation/locationViewController.h; sourceTree = "<group>"; };
 		188CD2CF1A1B378900D2F1CA /* locationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = locationViewController.m; path = getlocation/locationViewController.m; sourceTree = "<group>"; };
@@ -2048,6 +2051,15 @@
 			path = "点a文件";
 			sourceTree = "<group>";
 		};
+		1878CB601A25720600891E0B /* drowRect */ = {
+			isa = PBXGroup;
+			children = (
+				1878CB611A25723800891E0B /* DrowRect.h */,
+				1878CB621A25723800891E0B /* DrowRect.m */,
+			);
+			name = drowRect;
+			sourceTree = "<group>";
+		};
 		188CD2CD1A1B374B00D2F1CA /* getlocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -2057,13 +2069,6 @@
 				188CD2D81A1DE5B100D2F1CA /* locationCell.m */,
 			);
 			name = getlocation;
-			sourceTree = "<group>";
-		};
-		188CD5E41A2306D300D2F1CA /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 		C40245F318F7D7E40016B360 /* SeceneryImage */ = {
@@ -2939,7 +2944,7 @@
 				C4121F83192377F10047DEFA /* NewsViewController.m */,
 				C4121F84192377F10047DEFA /* SetViewController.h */,
 				C4121F85192377F10047DEFA /* SetViewController.m */,
-				188CD5E41A2306D300D2F1CA /* New Group */,
+				1878CB601A25720600891E0B /* drowRect */,
 				188CD2CD1A1B374B00D2F1CA /* getlocation */,
 				C4121F8F192378080047DEFA /* 我的游记 */,
 				C4121F8E192377F90047DEFA /* 我的收藏 */,
@@ -4618,6 +4623,7 @@
 				C4E19C1519119BE400CE7B61 /* ManageTableViewCell.m in Sources */,
 				C4E19C1319119BE400CE7B61 /* NumberLabel.m in Sources */,
 				0A06827C1A0CC1210047B87F /* GCCalenderViewController.m in Sources */,
+				1878CB631A25723800891E0B /* DrowRect.m in Sources */,
 				C47F75331986419F00B358FE /* GetMyLocationViewController.m in Sources */,
 				C4E19BB81911978600CE7B61 /* ShipViewController.m in Sources */,
 				C4F127F018BB16650041960B /* TimeAndMoneyViewController.m in Sources */,

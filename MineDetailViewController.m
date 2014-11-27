@@ -9,10 +9,23 @@
 #import "MineDetailViewController.h"
 #import "JSON.h"
 #import "GDataXMLNode.h"
+
+#define ColorB [UIColor colorWithRed:34.0/255 green:117.0/255 blue:249.0/255 alpha:1]
+#define BlueCo [UIColor colorWithRed:29.0/255 green:92.0/255 blue:166.0/255 alpha:1]
+#define CaryCo [UIColor colorWithRed:230.0/255 green:230.0/255 blue:230.0/255 alpha:1]
+#define IMG_KEY [NSString stringWithFormat:@"%@",GET_USER_DEFAUT(QUSE_ID)]
+
+
 @interface MineDetailViewController ()
 {
     NSURLConnection *conn;
     NSMutableData *mdata;
+    UIActionSheet *myActionSheet;
+    UIButton *BGButton;
+    UIImage *selectImg;
+    UIImageView *selectIV;
+    CGPoint startPoint;
+    BOOL takePhotoFlag;
 }
 @end
 
@@ -66,29 +79,18 @@ backButton
     scrollView.showsVerticalScrollIndicator=NO;
     scrollView.backgroundColor=[UIColor groupTableViewBackgroundColor];
 
-    UIButton*memberCenter_name=[UIButton buttonWithType:UIButtonTypeCustom];
-//    memberCenter_name.userInteractionEnabled=NO;
+    UIImageView *memberCenter_name=[[UIImageView alloc]init];
+    memberCenter_name.userInteractionEnabled=YES;
     memberCenter_name.tag=1000;
     memberCenter_name.frame=CGRectMake(0, 10, 320, 70);
     memberCenter.backgroundColor=[UIColor groupTableViewBackgroundColor];
-    [memberCenter_name setImage:[UIImage imageNamed:@"memeber_headBack.png"] forState:UIControlStateNormal];
-    
-    [scrollView addSubview:memberCenter_name
-     ];
+    memberCenter_name.image = [UIImage imageNamed:@"memeber_headBack.png"];
+    [scrollView addSubview:memberCenter_name];
     
     name_image=[[UIButton alloc]initWithFrame:CGRectMake(10, 15, 40, 40)];
-//    name_image.backgroundColor=[UIColor blueColor];
-//    name_image.image=_severiceImage;
     [name_image setImage:_severiceImage forState:UIControlStateNormal];
-    
-    [name_image addTarget:self action:@selector(changeHeadImg) forControlEvents:UIControlEventTouchUpInside];
-//#pragma - mark 上传图片
-//    [self connectionURL];
-
-
-    
     [memberCenter_name addSubview:name_image];
-    
+
     name_string=[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 250, 16)];
     //name_string.backgroundColor = [UIColor redColor];
     name_string.textColor = [UIColor colorWithRed:30.0/255 green:98.0/255 blue:167.0/255 alpha:1];
@@ -224,30 +226,6 @@ backButton
     }
 }
 
-- (void)changeHeadImg
-{
-    NSLog(@"changeHeadImg");
-}
-
-- (void)connectionURL
-{
-
-    NSURL *url = [[NSURL alloc]initWithString:@"http://www.russia-online.cn/api/WebService.asmx/FileUploadImage"];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-    [request setHTTPMethod:@"POST"];
-        
-    UIImage *originImage = [UIImage imageNamed:@"defaultHead.jpg"];
-    NSData *data1 = UIImageJPEGRepresentation(originImage, 1.0f);
-    NSString *encodedImageStr = [data1 base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-
-    NSLog(@"encodedImageStr = %@",encodedImageStr);
-
-    NSString *str = [NSString stringWithFormat:@"userid=%d&bytestr=%@",3,encodedImageStr];
-    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-    [request setHTTPBody:data];
-    conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
-}
-
 
 //thouchesBegan 获取到touch的时间点
 - (void)touchesBegan:(NSSet *)touches
@@ -281,19 +259,18 @@ backButton
     {
         UIImageView*iamge=(UIImageView*)[self.view viewWithTag:view.tag];
         if (iamge.tag==200&&[[[NSUserDefaults standardUserDefaults] objectForKey:TYPE_ID] intValue]==2) {
-            iamge.image=[UIImage imageNamed:@"member_centerCenter_h"];
+            iamge.image=[UIImage imageNamed:@"member_centerCenter_h.png"];
         }
         
-        if (iamge.tag!=200)
+        if (iamge.tag!=200  && iamge.tag != 1000)
         {
             if (iamge.tag==207)
             {
-                 iamge.image=[UIImage imageNamed:@"member_centerDown_h.png"];
+                iamge.image=[UIImage imageNamed:@"member_centerDown_h.png"];
             }
             else
             {
-             iamge.image=[UIImage imageNamed:@"member_centerCenter_h"];
-            
+                iamge.image=[UIImage imageNamed:@"member_centerCenter_h.png"];
             }
            
         }
@@ -317,7 +294,7 @@ backButton
     {
         [datas appendData:data];
     }
-    if (connection == conn)
+    else if (connection == conn)
     {
         [mdata appendData:data];
         NSLog(@"sssss%@",mdata);
@@ -328,97 +305,110 @@ backButton
     NSLog(@"000000000");
 }
 
+#pragma mark 头像成功上传之后，删除原来的头像
+- (void)deleteOldHeadImg
+{
+    NSFileManager*fileManager =[NSFileManager defaultManager];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *plistPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",GET_USER_DEFAUT(IMG_KEY)]];
+        
+    if([fileManager fileExistsAtPath:plistPath])
+    {
+        [fileManager removeItemAtPath:plistPath error:nil];
+        NSLog(@"删除成功");
+    }
+}
+
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSString *image = [[NSString alloc]initWithData:mdata encoding:NSUTF8StringEncoding];
-    NSLog(@"image = %@",image);
-    
-    dicResultYiBu(datas, result, dic)
-    NSLog(@"%@",dic);
-    if (result.length>11)
+    if (connection == conn)
     {
-         dic3=[[dic valueForKey:@"ds"]lastObject];
-        NSLog(@"%@",dic3);
+        UIImage *image = [[UIImage alloc]initWithData:mdata];
+        dicResultYiBu(mdata, result, dic)
+        [self deleteOldHeadImg];
+        
+        NSLog(@"resule = %@",result);
     }
     else
     {
-        
-        dic3=nil;
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:TYPE_ID] intValue]==2)
+        dicResultYiBu(datas, result, dic)
+        NSLog(@"%@",dic);
+        if (result.length>11)
         {
-            name_style.text=@"客服";
+            dic3=[[dic valueForKey:@"ds"]lastObject];
+            NSLog(@"%@",dic3);
         }
+        else
+        {
+            
+            dic3=nil;
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:TYPE_ID] intValue]==2)
+            {
+                name_style.text=@"客服";
+            }
+        }
+        if (dic3)
+        {
+            
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:TYPE_ID] intValue]==2) {
+                name_style.text=@"客服";
+                dataArray = [NSMutableArray arrayWithObjects:[dic3 valueForKey:@"Email"],[dic3 valueForKey:@"Mobile"], nil];
+                NSLog(@"%@",dataArray);
+                for (int i=1; i<3; i++)
+                {
+                    UILabel*lable=(UILabel*)[self.view viewWithTag:300+i-1];
+                    lable.text=[dataArray objectAtIndex:i-1];
+                }
+            }else{
+                dataArray=[NSMutableArray arrayWithObjects:
+                           [dic3 valueForKey:@"ImgTouX"],
+                           [dic3 valueForKey:@"Email"],
+                           [dic3 valueForKey:@"Mobile"],
+                           [dic3 valueForKey:@"Gender"],
+                           [dic3 valueForKey:@"Birthday"],
+                           [dic3 valueForKey:@"Location"],
+                           [dic3 valueForKey:@"Address"],
+                           [dic3 valueForKey:@"Zip"],
+                           [dic3 valueForKey:@"Introduce"], nil];
+                //            NSLog(@"%@",dataArray);
+                for (int i=0; i<8; i++)
+                {
+                    UILabel*lable=(UILabel*)[self.view viewWithTag:300+i];
+                    lable.text=[dataArray objectAtIndex:i+1];
+                    
+                }
+                switch ([[dic3 valueForKey:GUIDE_ID]intValue])
+                {
+                    case 0:
+                        name_style.text=@"普通会员";
+                        break;
+                    case 1:
+                        name_style.text=@"导游会员";
+                        break;
+                    case 2:
+                        name_style.text=@"司兼导(租车)会员";
+                        break;
+                    case 3:
+                        name_style.text=@"导游兼翻译会员";
+                        break;
+                    case 4:
+                        name_style.text=@"导游兼翻译(带车)会员";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }else dataArray=nil;
     }
-   
-    
-
-
-    if (dic3)
-    {
-        
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:TYPE_ID] intValue]==2) {
-            name_style.text=@"客服";
-            dataArray = [NSMutableArray arrayWithObjects:[dic3 valueForKey:@"Email"],[dic3 valueForKey:@"Mobile"], nil];
-            NSLog(@"%@",dataArray);
-            for (int i=1; i<3; i++)
-            {
-                UILabel*lable=(UILabel*)[self.view viewWithTag:300+i-1];
-                lable.text=[dataArray objectAtIndex:i-1];
-            }
-        }else{
-            dataArray=[NSMutableArray arrayWithObjects:
-                       [dic3 valueForKey:@"ImgTouX"],
-                       [dic3 valueForKey:@"Email"],
-                       [dic3 valueForKey:@"Mobile"],
-                       [dic3 valueForKey:@"Gender"],
-                       [dic3 valueForKey:@"Birthday"],
-                       [dic3 valueForKey:@"Location"],
-                       [dic3 valueForKey:@"Address"],
-                       [dic3 valueForKey:@"Zip"],
-                       [dic3 valueForKey:@"Introduce"], nil];
-//            NSLog(@"%@",dataArray);
-            for (int i=0; i<8; i++)
-            {
-                UILabel*lable=(UILabel*)[self.view viewWithTag:300+i];
-                lable.text=[dataArray objectAtIndex:i+1];
-                
-            }
-            switch ([[dic3 valueForKey:GUIDE_ID]intValue])
-            {
-                case 0:
-                    name_style.text=@"普通会员";
-                    break;
-                case 1:
-                    name_style.text=@"导游会员";
-                    break;
-                case 2:
-                    name_style.text=@"司兼导(租车)会员";
-                    break;
-                case 3:
-                    name_style.text=@"导游兼翻译会员";
-                    break;
-                case 4:
-                    name_style.text=@"导游兼翻译(带车)会员";
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-        
-
-    }else dataArray=nil;
-    
-   
-
-
 }
 -(void)touch:(id)sender
 {
       UIImageView*iamgeView=(UIImageView*)sender;
     
-    if (iamgeView.tag!=200)
+    if (iamgeView.tag!=200 && iamgeView.tag != 1000)
     {
         if (iamgeView.tag==207)
         {
@@ -643,19 +633,14 @@ backButton
             
         case 1000:
         {
-            
-            NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
-            [defaults removeObjectForKey:QUSE_ID];
-            [defaults removeObjectForKey:USER_NAME];
-            [defaults removeObjectForKey:GUIDE_ID];
-            [defaults removeObjectForKey:TYPE_ID];
-            [defaults removeObjectForKey:name_string.text];
-            [defaults synchronize];
-            [(AppDelegate*)[[UIApplication sharedApplication] delegate] numberGo];
-            [self.navigationController popToRootViewControllerAnimated:NO];
-            
-            
-            
+            //在这里呼出下方菜单按钮项
+            myActionSheet = [[UIActionSheet alloc]
+                             initWithTitle:nil
+                             delegate:self
+                             cancelButtonTitle:@"取消"
+                             destructiveButtonTitle:nil
+                             otherButtonTitles: @"打开照相机", @"从手机相册获取",nil];
+            [myActionSheet showInView:self.view];
         }
             break;
 
@@ -664,6 +649,22 @@ backButton
     }
 
 }
+
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet
+{
+    for (UIView *subViwe in actionSheet.subviews)
+    {
+        if ([subViwe isKindOfClass:[UIButton class]])
+        {
+            UIButton *button = (UIButton*)subViwe;
+            [button setTitleColor:ColorB forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:18];
+        }
+    }
+}
+
+
+
 //返回显示的列数
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -784,9 +785,7 @@ backButton
             NSString*urlMethod=@"ModifyUserInfo";
             [urlDomain appendString:urlMethod];
             //postRequestTongBu(canshu, urlDomain, received)
-          
             postRequestYiBu(canshu, urlDomain);
-        
         }
             break;
         case 300:
@@ -796,7 +795,6 @@ backButton
             {
                 [provinces addObject:[[[allArray objectAtIndex:0] objectAtIndex:i] objectForKey:@"state"]];
             }
-
 //            UIPickerView*picker=(UIPickerView*)[self.view viewWithTag:101];
 //            [picker removeFromSuperview];
             UILabel*lable=(UILabel*)[self.view viewWithTag:304];
@@ -822,76 +820,377 @@ backButton
             [urlDomain appendString:urlMethod];
            // postRequestTongBu(canshu, urlDomain, received)
           postRequestYiBu(canshu, urlDomain);
-            
-            
         }
             break;
    
         default:
             break;
     }
-  
-
 }
+
+#pragma -mark 拍照
+- (void)takePhoto
+{
+    UIImagePickerControllerSourceType sourceType= UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])//判断是否可以拍照
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        picker.delegate = self;
+        picker.sourceType = sourceType;
+//        picker.allowsEditing = YES;
+        takePhotoFlag = YES;
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+    else
+    {
+        NSLog(@"模拟器无法打开照相机,请使用真机测试");
+    }
+}
+
+#pragma -mark 改变图片的大小（捏合）
+- (void)changeImgSize:(UIPinchGestureRecognizer *)pinchGesture
+{
+    if (pinchGesture == self.pinchGesture)
+    {
+        if (pinchGesture.scale < 1)
+        {
+            pinchGesture.scale = 0.97;
+        }
+        if (pinchGesture.scale >= 1)
+        {
+            pinchGesture.scale = 1.03;
+        }
+        
+        if (pinchGesture.state == UIGestureRecognizerStateBegan || pinchGesture.state == UIGestureRecognizerStateChanged)
+        {
+            
+            CGAffineTransform transForm = CGAffineTransformScale(selectIV.transform,pinchGesture.scale, pinchGesture.scale);
+            selectIV.transform = transForm;
+        }
+        if(pinchGesture.state == UIGestureRecognizerStateEnded)
+        {
+            NSLog(@"pinch ended");
+        }
+    }
+    [selectIV removeGestureRecognizer:self.pinchGesture];
+    [selectIV addGestureRecognizer:self.pinchGesture];
+    
+}
+
+
+#pragma -mark 改变图片的位置（拖拽）
+- (void)changeImgLocation:(UIPanGestureRecognizer *)panGesture
+{
+    if ([panGesture isKindOfClass:[UIPanGestureRecognizer class]])
+    {
+        if (panGesture.state == UIGestureRecognizerStateBegan)
+        {
+            startPoint = [panGesture translationInView:selectIV];
+        }
+        else if(panGesture.state == UIGestureRecognizerStateChanged)
+        {
+            CGPoint currentPoint=[panGesture translationInView:selectIV];
+            //delatx,delaty是我们获得偏移量
+            float delatx=currentPoint.x-startPoint.x;
+            float delaty=currentPoint.y-startPoint.y;
+            startPoint=currentPoint;
+            
+            CGAffineTransform transform=CGAffineTransformTranslate(selectIV.transform, delatx, delaty);
+            selectIV.transform=transform;
+            //                NSLog(@"selectIV.frame = %@",NSStringFromCGRect(selectIV.frame));
+            //                NSLog(@"selectIV.center = %@",NSStringFromCGPoint(selectIV.center));
+        }
+        if(panGesture.state == UIGestureRecognizerStateEnded)
+        {
+            NSLog(@"pan ended");
+        }
+        [selectIV removeGestureRecognizer:self.panGesture];
+        [selectIV addGestureRecognizer:self.panGesture];
+    }
+    
+}
+
+
+#pragma -mark 模拟编辑图片
+- (void)addBGButtonView
+{
+    BGButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    BGButton.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:BGButton];
+
+    selectIV = [[UIImageView alloc]init];
+    selectIV.userInteractionEnabled = YES;
+    selectIV.image = selectImg;
+    selectIV.frame = CGRectMake(0, 0, selectImg.size.width, selectImg.size.height);
+    if (takePhotoFlag == YES)
+    {
+        CGFloat X = [[UIScreen mainScreen] bounds].size.width;
+        CGFloat imgX = selectImg.size.width;
+        CGFloat imgY = selectImg.size.height;
+        selectIV.frame = CGRectMake(0, 0, X, imgY * (320.0/imgX));
+    }
+    selectIV.center = CGPointMake(BGButton.center.x, BGButton.center.y - 25);
+    [BGButton addSubview:selectIV];
+    
+    UILabel *selectL = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 256, 256)];
+    selectL.center = CGPointMake(BGButton.center.x, BGButton.center.y - 25);
+    selectL.layer.borderWidth = 1.0;
+    selectL.layer.borderColor = [UIColor whiteColor].CGColor;
+    [BGButton addSubview:selectL];
+
+    
+    self.pinchGesture = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(changeImgSize:)];
+    self.pinchGesture.delegate = self;
+    [selectIV addGestureRecognizer:self.pinchGesture];
+    
+    self.panGesture=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(changeImgLocation:)];
+    self.panGesture.delegate = self;
+    [selectIV addGestureRecognizer:self.panGesture];
+
+    
+    UIView *view= [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 49, self.view.frame.size.width, 49)];
+    if (takePhotoFlag == YES)
+    {
+        view.frame = CGRectMake(0, self.view.frame.size.height - 49 - 20, self.view.frame.size.width, 49);
+    }
+    view.backgroundColor = BlueCo;
+    [BGButton addSubview:view];
+    
+    UIButton *selectB = [[UIButton alloc]initWithFrame:CGRectMake(view.frame.size.width - 70, 9.5, 60, 30)];
+    selectB.backgroundColor = CaryCo;
+    selectB.layer.cornerRadius = 3.5;
+    selectB.titleLabel.font = [UIFont systemFontOfSize:15.5];
+    [selectB setTitle:@"确认" forState:UIControlStateNormal];
+    [selectB setTitleColor:ColorB forState:UIControlStateNormal];
+    [selectB addTarget:self action:@selector(selectB) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:selectB];
+    
+    UIButton *cancelB = [[UIButton alloc]initWithFrame:CGRectMake(10, 9.5, 60, 30)];
+    cancelB.backgroundColor = CaryCo;
+    cancelB.layer.cornerRadius = 3.5;
+    cancelB.titleLabel.font = [UIFont systemFontOfSize:15.5];
+    [cancelB setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelB setTitleColor:ColorB forState:UIControlStateNormal];
+    [cancelB addTarget:self action:@selector(cancelB) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:cancelB];
+}
+
+#pragma -mark 改变图片的尺寸
+-(UIImage*)setBackImage:(UIImage *)image setImageSize:(CGSize)size andImgRect:(CGRect)rect
+{
+    UIGraphicsBeginImageContext(size);  //size 为CGSize类型，即你所需要的图片尺寸
+    [image drawInRect:rect];
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
+}//设置缩小图片
+
+#pragma -mark 确认上传图片
+- (void)selectB
+{
+    NSLog(@"确认");
+    //#pragma - mark 上传图片
+    NSURL *url = [[NSURL alloc]initWithString:@"http://192.168.0.156:807/api/WebService.asmx/FileUploadImage"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [request setHTTPMethod:@"POST"];
+    
+    selectImg = [self setBackImage:selectImg setImageSize:CGSizeMake(selectIV.frame.size.width, selectIV.frame.size.height) andImgRect:CGRectMake(0, 0, selectIV.frame.size.width, selectIV.frame.size.height)];
+    NSLog(@"selectIV.frame = %@",NSStringFromCGRect(selectIV.frame));
+    NSLog(@"selectIV.center = %@",NSStringFromCGPoint(selectIV.center));
+
+    
+    CGFloat X = selectIV.center.x - selectIV.frame.origin.x - selectImg.size.width/2;
+    CGFloat Y = selectIV.center.y - selectIV.frame.origin.y - selectImg.size.height/2;
+    
+    NSLog(@"rect = %@",NSStringFromCGRect(CGRectMake(128 - selectImg.size.width/2 - X, 128 - selectImg.size.height/2 - Y, selectImg.size.width, selectImg.size.height)));
+    
+    UIImage *image = [self setBackImage:selectImg
+                           setImageSize:CGSizeMake(256, 256)
+                           andImgRect:CGRectMake(128 - selectImg.size.width/2 - X, 128 - selectImg.size.height/2 - Y, selectImg.size.width, selectImg.size.height)];
+    UIImage *finalImage = [self setBackImage:image
+                                setImageSize:CGSizeMake(128, 128)
+                                andImgRect:CGRectMake(0, 0, 128, 128)];
+
+    
+    NSData *data1;
+    if (UIImagePNGRepresentation(finalImage) == nil)
+    {
+        data1 = UIImageJPEGRepresentation(finalImage, 1.0);
+    }
+    else
+    {
+        data1 = UIImagePNGRepresentation(finalImage);
+    }
+    NSString *encodedImageStr = [data1 base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    NSLog(@"encodedImageStr = %@",encodedImageStr);
+    
+    NSString *str = [NSString stringWithFormat:@"userid=%d&bytestr=%@",3,encodedImageStr];
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:data];
+    conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+    [BGButton removeFromSuperview];
+}
+
+
+#pragma -mark 真正切图的地方
+//- (UIImage *)imageFromImage:(UIImage *)image inRect:(CGRect)rect
+//{
+//    CGImageRef sourceImageRef = [image CGImage];
+//    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, rect);
+//    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+//    return newImage;
+//}
+
+#pragma -mark 取消上传图片
+- (void)cancelB
+{
+    NSLog(@"取消");
+    selectImg = nil;
+    [BGButton removeFromSuperview];
+}
+
+#pragma -mark 在相册中选择一张图片后进入这里
+-(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+
+{
+    
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    selectImg = [[UIImage alloc]init];
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //先把图片转成NSData
+        selectImg = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        [self addBGButtonView];
+    }
+    
+    //关闭相册界面
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+
+#pragma - mark 本地相册
+- (void)localphoto
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    picker.delegate = self;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    picker.allowsEditing = YES;
+    takePhotoFlag = NO;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSString*str=[NSString stringWithFormat:@"%d",self.useID];
-     UILabel*lable=(UILabel*)[self.view viewWithTag:302];
-  
-    NSString* canshu;
-     NSString*urlMethod=@"ModifyUserInfo";
-    NSMutableString*urlDomain=RussiaUrl
-  
-    [urlDomain appendString:urlMethod];
-
-
-    switch (buttonIndex)
+    
+    if (actionSheet == myActionSheet)
     {
-       
-        case 0:
+        if (buttonIndex == myActionSheet.cancelButtonIndex)
         {
-            NSLog(@"---------");
-            
-
-            lable.text=@"男士";
-           
-             canshu=[NSString stringWithFormat:@"uid=%@&mobile=%@&sex=%@&birthday=%@&location=%@&address=%@&zip=%@&persondes=%@",str,@"",@"男士",@"",@"",@"",@"",@""];
-          //  postRequestTongBu(canshu, urlDomain, received)
-            postRequestYiBu(canshu, urlDomain);
-            
+            NSLog(@"取消");
         }
-            break;
-        case 1:
+        else if (buttonIndex == 0)
         {
-//              NSLog(@"!!!!!!!!");
-             lable.text=@"女士";
-          
-                canshu=[NSString stringWithFormat:@"uid=%@&mobile=%@&sex=%@&birthday=%@&location=%@&address=%@&zip=%@&persondes=%@",str,@"",@"女士",@"",@"",@"",@"",@""];
-          
-          //  postRequestTongBu(canshu, urlDomain, received)
-             postRequestYiBu(canshu, urlDomain);
+            NSLog(@"拍照");
+            [self takePhoto];
         }
-            break;
-        case 2:
+        else if (buttonIndex == 1)
         {
-            lable.text=@"保密";
-          
-              canshu=[NSString stringWithFormat:@"uid=%@&mobile=%@&sex=%@&birthday=%@&location=%@&address=%@&zip=%@&persondes=%@",str,@"",@"保密",@"",@"",@"",@"",@""];
-         
-           // postRequestTongBu(canshu, urlDomain, received)
-             postRequestYiBu(canshu, urlDomain);
+            NSLog(@"获取相册");
+            [self localphoto];
         }
-
-        
-            break;
-            
-        default:
-            break;
     }
+    else
+    {
+        NSString*str=[NSString stringWithFormat:@"%d",self.useID];
+        UILabel*lable=(UILabel*)[self.view viewWithTag:302];
+        
+        NSString* canshu;
+        NSString*urlMethod=@"ModifyUserInfo";
+        NSMutableString*urlDomain=RussiaUrl
+        
+        [urlDomain appendString:urlMethod];
+        
+        
+        switch (buttonIndex)
+        {
+                
+            case 0:
+            {
+                NSLog(@"---------");
+                
+                
+                lable.text=@"男士";
+                
+                canshu=[NSString stringWithFormat:@"uid=%@&mobile=%@&sex=%@&birthday=%@&location=%@&address=%@&zip=%@&persondes=%@",str,@"",@"男士",@"",@"",@"",@"",@""];
+                //  postRequestTongBu(canshu, urlDomain, received)
+                postRequestYiBu(canshu, urlDomain);
+                
+            }
+                break;
+            case 1:
+            {
+                //              NSLog(@"!!!!!!!!");
+                lable.text=@"女士";
+                
+                canshu=[NSString stringWithFormat:@"uid=%@&mobile=%@&sex=%@&birthday=%@&location=%@&address=%@&zip=%@&persondes=%@",str,@"",@"女士",@"",@"",@"",@"",@""];
+                
+                //  postRequestTongBu(canshu, urlDomain, received)
+                postRequestYiBu(canshu, urlDomain);
+            }
+                break;
+            case 2:
+            {
+                lable.text=@"保密";
+                
+                canshu=[NSString stringWithFormat:@"uid=%@&mobile=%@&sex=%@&birthday=%@&location=%@&address=%@&zip=%@&persondes=%@",str,@"",@"保密",@"",@"",@"",@"",@""];
+                
+                // postRequestTongBu(canshu, urlDomain, received)
+                postRequestYiBu(canshu, urlDomain);
+            }
+                
+                
+                break;
+                
+            default:
+                break;
+        }
 
-
-
+    }
 }
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    //    CGPoint currentPoint = [gestureRecognizer locationInView:self.view];
+    //    if (CGRectContainsPoint(CGRectMake(0, 0, 100, 100), currentPoint) ) {
+    //        return YES;
+    //    }
+    //
+    //    return NO;
+//    NSLog(@"2  =  %@",gestureRecognizer);
+
+    return YES;
+}
+
+// 询问delegate，两个手势是否同时接收消息，返回YES同事接收。返回NO，不同是接收（如果另外一个手势返回YES，则并不能保证不同时接收消息）the default implementation returns NO。
+// 这个函数一般在一个手势接收者要阻止另外一个手势接收自己的消息的时候调用
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+//    NSLog(@"3  =  %@",gestureRecognizer);
+
+    return NO;
+}
+
+// 询问delegate是否允许手势接收者接收一个touch对象
+// 返回YES，则允许对这个touch对象审核，NO，则不允许。
+// 这个方法在touchesBegan:withEvent:之前调用，为一个新的touch对象进行调用
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+//    NSLog(@"1  =  %@",gestureRecognizer);
+    return YES;
+}  
+
 - (BOOL)touchesShouldCancelInContentView:(UIView *)view
 {
     return NO;

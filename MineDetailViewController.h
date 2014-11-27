@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #define SEVERICE_IMAGE @"serviceHeardImage"
-@interface MineDetailViewController : UIViewController<UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate,NSURLConnectionDataDelegate>
+@interface MineDetailViewController : UIViewController<UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,NSURLConnectionDataDelegate,UIGestureRecognizerDelegate>
 {
 //   UIView*memberCenter;
     UIButton *name_image;
@@ -38,5 +38,6 @@
 @property(nonatomic, assign) NSTimeInterval touchTimer;
 @property(nonatomic,strong)NSString*name_style2;
 
-
+@property(retain , nonatomic)UIPinchGestureRecognizer *pinchGesture;
+@property(retain , nonatomic)UIPanGestureRecognizer *panGesture;
 @end

@@ -10,29 +10,29 @@
 	<string>St.Petersburg</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D7C68D71-8361-47C4-B152-3DC58F8E5365</key>
+		<key>595555FFE96A6775F228AF7E8B4EC833D54CE343</key>
 		<string>https://github.com/quBB/St.Petersburg.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>St.Petersburg.xcodeproj/project.xcworkspace</string>
+	<string>St.Petersburg.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D7C68D71-8361-47C4-B152-3DC58F8E5365</key>
+		<key>595555FFE96A6775F228AF7E8B4EC833D54CE343</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/quBB/St.Petersburg.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D7C68D71-8361-47C4-B152-3DC58F8E5365</string>
+	<string>595555FFE96A6775F228AF7E8B4EC833D54CE343</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D7C68D71-8361-47C4-B152-3DC58F8E5365</string>
+			<string>595555FFE96A6775F228AF7E8B4EC833D54CE343</string>
 			<key>IDESourceControlWCCName</key>
 			<string>St.Petersburg</string>
 		</dict>
