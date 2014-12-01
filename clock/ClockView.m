@@ -125,7 +125,7 @@ float Degrees2Radians(float degrees) { return degrees * M_PI / 180; }
 	NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:(NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:[NSDate date]];
 	NSInteger seconds = [dateComponents second];
 	NSInteger minutes = [dateComponents minute];
-	NSInteger hours =-4+[dateComponents hour];
+	NSInteger hours =- 5 +[dateComponents hour];
 	//NSLog(@"raw: hours:%d min:%d secs:%d", hours, minutes, seconds);
 	if (hours > 12) hours -=12; //PM
     

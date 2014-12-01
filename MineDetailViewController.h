@@ -11,7 +11,7 @@
 @interface MineDetailViewController : UIViewController<UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,NSURLConnectionDataDelegate,UIGestureRecognizerDelegate>
 {
 //   UIView*memberCenter;
-    UIButton *name_image;
+    UIImageView *name_image;
     NSArray*array;
     UIScrollView*scrollView;
     NSArray* file;

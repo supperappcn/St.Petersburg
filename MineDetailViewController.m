@@ -68,9 +68,11 @@ backButton
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self adagter];
     array=[NSArray arrayWithObjects:@"邮箱",@"手机号",@"性别", @"出生日期",@"所在地",@"详细地址",@"邮政编码",@"个人介绍",nil];
 
     scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:scrollView];
     [self.view addSubview:scrollView];
     scrollView.contentSize=CGSizeMake(320, 540);
     UIView*memberCenter=[[UIView alloc]init];
@@ -87,19 +89,20 @@ backButton
     memberCenter_name.image = [UIImage imageNamed:@"memeber_headBack.png"];
     [scrollView addSubview:memberCenter_name];
     
-    name_image=[[UIButton alloc]initWithFrame:CGRectMake(10, 15, 40, 40)];
-    [name_image setImage:_severiceImage forState:UIControlStateNormal];
+    name_image=[[UIImageView alloc]initWithFrame:CGRectMake(10, 15, 40, 40)];
+    name_image.image = _severiceImage;
     [memberCenter_name addSubview:name_image];
 
     name_string=[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 250, 16)];
     //name_string.backgroundColor = [UIColor redColor];
     name_string.textColor = [UIColor colorWithRed:30.0/255 green:98.0/255 blue:167.0/255 alpha:1];
+    name_string.backgroundColor = [UIColor clearColor];
     name_string.font = [UIFont systemFontOfSize:15.5];
     name_string.text=[[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
     [memberCenter_name addSubview: name_string];
     
     name_style=[[UILabel alloc]initWithFrame:CGRectMake(55, 35, 100, 15)];
-    
+    name_style.backgroundColor = [UIColor clearColor];
     name_style.text=self.name_style2;
     name_style.textColor = [UIColor grayColor];
     name_style.userInteractionEnabled=NO;
@@ -117,9 +120,10 @@ backButton
     
     UILabel*lable1=[[UILabel alloc]initWithFrame:CGRectMake(35, 0, 100, 40)];
     lable1.text=@"修改密码";
+    lable1.backgroundColor = [UIColor clearColor];
     [button1 addSubview:lable1];
     UIImageView *password = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 21, 21)];
-    password.image = [UIImage imageNamed:@"password"];
+    password.image = [UIImage imageNamed:@"password.png"];
     [button1 addSubview:password];
     
     UIImageView*button2=[UIImageView new];
@@ -134,6 +138,7 @@ backButton
     UILabel*lable2=[[UILabel alloc]initWithFrame:CGRectMake(130, 0, 70, 40)];
     //lable2.textColor=[UIColor whiteColor];
     lable2.text=@"退出登录";
+    lable2.backgroundColor = [UIColor clearColor];
     [button2 addSubview:lable2];
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:TYPE_ID] intValue]==2) {
 //        NSLog(@"客服页面");
@@ -141,7 +146,7 @@ backButton
             UIImageView*button=[UIImageView new];
    
             
-            button.image=[UIImage imageNamed:@"member_centerCenter"];
+            button.image=[UIImage imageNamed:@"member_centerCenter.png"];
 //            else button.image=[UIImage imageNamed:@"member_centerUpNo.png"];
             button.userInteractionEnabled = YES;
             
@@ -153,6 +158,7 @@ backButton
             
             UILabel*lable1=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 100, 40)];
             lable1.textColor=[UIColor grayColor];
+            lable1.backgroundColor = [UIColor clearColor];
             lable1.text=[array objectAtIndex:i];
             [button addSubview:lable1];
             
@@ -243,18 +249,14 @@ backButton
 - (void)touchesEnded:(NSSet *)touches
            withEvent:(UIEvent *)event
 {
-    NSLog(@"%s",__func__);
-    NSLog(@"sssssss%f",self.touchTimer);
     UITouch *touch = [touches anyObject];
     self.touchTimer = [touch timestamp]-self.touchTimer;
-    NSLog(@"----%f",self.touchTimer);
     
     NSUInteger tapCount = [touch tapCount];
 //    CGPoint touchPoint = [touch locationInView:scrollView];
     UIView*view=touch.view;
     //判断单击事件，touch时间和touch的区域
   
-    NSLog(@"%hhd",[view isMemberOfClass:[UIImageView class]]);
     if (tapCount == 1 && self.touchTimer <=0.2 &&[view isMemberOfClass:[UIImageView class]])
     {
         UIImageView*iamge=(UIImageView*)[self.view viewWithTag:view.tag];
@@ -297,12 +299,7 @@ backButton
     else if (connection == conn)
     {
         [mdata appendData:data];
-        NSLog(@"sssss%@",mdata);
     }
-}
--(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    NSLog(@"000000000");
 }
 
 #pragma mark 头像成功上传之后，删除原来的头像
@@ -317,7 +314,7 @@ backButton
     if([fileManager fileExistsAtPath:plistPath])
     {
         [fileManager removeItemAtPath:plistPath error:nil];
-        NSLog(@"删除成功");
+//        NSLog(@"删除成功");
     }
 }
 
@@ -326,11 +323,16 @@ backButton
 {
     if (connection == conn)
     {
-        UIImage *image = [[UIImage alloc]initWithData:mdata];
         dicResultYiBu(mdata, result, dic)
         [self deleteOldHeadImg];
-        
         NSLog(@"resule = %@",result);
+        if (result.length > 4)
+        {
+            MineViewController *mine = [[MineViewController alloc]init];
+            SET_USER_DEFAUT(result,IMG_KEY);
+//            NSLog(@"img_name == %@",GET_USER_DEFAUT(IMG_KEY));
+            [mine loadPic_tableViewIndexPath:nil headLabName:result headView:name_image];
+        }
     }
     else
     {
@@ -416,7 +418,7 @@ backButton
         }
         else
         {
-            iamgeView.image=[UIImage imageNamed:@"member_centerCenter"];
+            iamgeView.image=[UIImage imageNamed:@"member_centerCenter.png"];
             
         }
         
@@ -458,7 +460,7 @@ backButton
                if ([[[NSUserDefaults standardUserDefaults] objectForKey:TYPE_ID] intValue]==2)
                {
                    second.phoneNum=[(UILabel*)[self.view viewWithTag:301] text];
-                   NSLog(@"[(UILabel*)[self.view viewWithTag:301] text]  %@",[(UILabel*)[self.view viewWithTag:301] text]);
+//                   NSLog(@"[(UILabel*)[self.view viewWithTag:301] text]  %@",[(UILabel*)[self.view viewWithTag:301] text]);
                }
                 second.useID=self.useID;
                 [second setBlock:^(NSString *text)
@@ -534,7 +536,7 @@ backButton
             
             [view addSubview:dataPicker];
             
-            NSLog(@"%@",dataPicker.date);
+//            NSLog(@"%@",dataPicker.date);
             
         }
             break;
@@ -843,7 +845,7 @@ backButton
     }
     else
     {
-        NSLog(@"模拟器无法打开照相机,请使用真机测试");
+//        NSLog(@"模拟器无法打开照相机,请使用真机测试");
     }
 }
 
@@ -869,7 +871,7 @@ backButton
         }
         if(pinchGesture.state == UIGestureRecognizerStateEnded)
         {
-            NSLog(@"pinch ended");
+//            NSLog(@"pinch ended");
         }
     }
     [selectIV removeGestureRecognizer:self.pinchGesture];
@@ -902,7 +904,7 @@ backButton
         }
         if(panGesture.state == UIGestureRecognizerStateEnded)
         {
-            NSLog(@"pan ended");
+//            NSLog(@"pan ended");
         }
         [selectIV removeGestureRecognizer:self.panGesture];
         [selectIV addGestureRecognizer:self.panGesture];
@@ -988,21 +990,21 @@ backButton
 #pragma -mark 确认上传图片
 - (void)selectB
 {
-    NSLog(@"确认");
+//    NSLog(@"确认");
     //#pragma - mark 上传图片
     NSURL *url = [[NSURL alloc]initWithString:@"http://192.168.0.156:807/api/WebService.asmx/FileUploadImage"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"POST"];
     
     selectImg = [self setBackImage:selectImg setImageSize:CGSizeMake(selectIV.frame.size.width, selectIV.frame.size.height) andImgRect:CGRectMake(0, 0, selectIV.frame.size.width, selectIV.frame.size.height)];
-    NSLog(@"selectIV.frame = %@",NSStringFromCGRect(selectIV.frame));
-    NSLog(@"selectIV.center = %@",NSStringFromCGPoint(selectIV.center));
+//    NSLog(@"selectIV.frame = %@",NSStringFromCGRect(selectIV.frame));
+//    NSLog(@"selectIV.center = %@",NSStringFromCGPoint(selectIV.center));
 
     
     CGFloat X = selectIV.center.x - selectIV.frame.origin.x - selectImg.size.width/2;
     CGFloat Y = selectIV.center.y - selectIV.frame.origin.y - selectImg.size.height/2;
     
-    NSLog(@"rect = %@",NSStringFromCGRect(CGRectMake(128 - selectImg.size.width/2 - X, 128 - selectImg.size.height/2 - Y, selectImg.size.width, selectImg.size.height)));
+//    NSLog(@"rect = %@",NSStringFromCGRect(CGRectMake(128 - selectImg.size.width/2 - X, 128 - selectImg.size.height/2 - Y, selectImg.size.width, selectImg.size.height)));
     
     UIImage *image = [self setBackImage:selectImg
                            setImageSize:CGSizeMake(256, 256)
@@ -1023,7 +1025,7 @@ backButton
     }
     NSString *encodedImageStr = [data1 base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
-    NSLog(@"encodedImageStr = %@",encodedImageStr);
+//    NSLog(@"encodedImageStr = %@",encodedImageStr);
     
     NSString *str = [NSString stringWithFormat:@"userid=%d&bytestr=%@",3,encodedImageStr];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
@@ -1045,7 +1047,7 @@ backButton
 #pragma -mark 取消上传图片
 - (void)cancelB
 {
-    NSLog(@"取消");
+//    NSLog(@"取消");
     selectImg = nil;
     [BGButton removeFromSuperview];
 }
@@ -1091,16 +1093,16 @@ backButton
     {
         if (buttonIndex == myActionSheet.cancelButtonIndex)
         {
-            NSLog(@"取消");
+//            NSLog(@"取消");
         }
         else if (buttonIndex == 0)
         {
-            NSLog(@"拍照");
+//            NSLog(@"拍照");
             [self takePhoto];
         }
         else if (buttonIndex == 1)
         {
-            NSLog(@"获取相册");
+//            NSLog(@"获取相册");
             [self localphoto];
         }
     }

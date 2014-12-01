@@ -211,13 +211,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
         NSString*canshu2=[NSString stringWithFormat:@"cityid=%d",2];
         NSMutableString*urlDomain=RussiaUrl2
         NSString *urlMethod=@"getNoticeList";
         [urlDomain appendString:urlMethod];
         postRequestYiBu(canshu2, urlDomain)
         sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 49)withView:sv];
     
     [self addConn];
 
@@ -902,9 +902,11 @@ GO_NET
 }
 
 
-- (void)loadPic_tableViewIndexPath:(NSIndexPath*)indexPath headLabName:(NSString*)name headView:(UIImageView *)headView{
+- (void)loadPic_tableViewIndexPath:(NSIndexPath*)indexPath headLabName:(NSString*)name headView:(UIImageView *)headView
+{
     //NSLog(@"picid %@",picID);
-    if (name.length>4) {
+    if (name.length>4)
+    {
        // NSLog(@"[[_dataArr objectAtIndex:indexPath.row] objectForKey:Pic]   %@",[[dataArr objectAtIndex:indexPath.row] objectForKey:picID]);
         
         NSArray*paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
@@ -914,7 +916,8 @@ GO_NET
         NSString*plistPath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",GET_USER_DEFAUT(IMG_KEY)]];
         NSData *pathData = [NSData dataWithContentsOfFile:plistPath];
 
-        if (pathData.length==0) {
+        if (pathData.length==0)
+        {
             //[headAiv  startAnimating];
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                picPath = [GET_USER_DEFAUT(TYPE_ID) intValue]==2?@"service":@"Personal";
@@ -937,9 +940,7 @@ GO_NET
                         [NSThread sleepForTimeInterval:1];
                         NSLog(@"data is yes");
                         NSLog(@"QUSE_ID------------%@",(GET_USER_DEFAUT(QUSE_ID)));
-
                     }
-                    
                 });
             });
         }

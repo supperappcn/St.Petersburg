@@ -265,7 +265,7 @@ postRequestAgency(datas)
     NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:(NSYearCalendarUnit| NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit |NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:[NSDate date]];
     
     
-    NSDateComponents *dateComponents2 = [[NSCalendar currentCalendar] components:(NSYearCalendarUnit| NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit |NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:[NSDate dateWithTimeIntervalSinceNow:-4*60*60]];
+    NSDateComponents *dateComponents2 = [[NSCalendar currentCalendar] components:(NSYearCalendarUnit| NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit |NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:[NSDate dateWithTimeIntervalSinceNow:-5*60*60]];
     
     
     NSInteger year=[dateComponents year];

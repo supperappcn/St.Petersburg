@@ -40,7 +40,7 @@
     if (result.length>11) {
         _dataArr = [dic objectForKey:@"ds"];
         NSLog(@"dataArr  %@",_dataArr);
-        UIView*viewPush=[[UIView alloc]initWithFrame:CGRectMake(0, 220, 300, 130)];
+        UIView*viewPush=[[UIView alloc]initWithFrame:CGRectMake(0, 220 + 30, 320, 130)];
         [scroll addSubview:viewPush];
         UILabel*introLable=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 300, 30)];
         introLable.backgroundColor=[UIColor clearColor];
@@ -87,10 +87,9 @@
             
             [imageview2 addSubview:button];
         }
-        viewPush.frame = CGRectMake(0, 220, 300, 50+115*row);
+        viewPush.frame = CGRectMake(0, 220 + 30, 320, 50+115*row);
         view2.frame = CGRectMake(0, viewPush.frame.origin.y+viewPush.frame.size.height, 320, 350);
-        scroll.contentSize = CGSizeMake(320, 650+115*row);
-    
+        scroll.contentSize = CGSizeMake(DeviceWidth, 650+115*row);
     }
 }
 - (void)goStore:(UIButton*)btn{
@@ -108,6 +107,10 @@
     self.view.backgroundColor=[UIColor colorWithRed:235.0/255 green:235.0/255 blue:241.0/255 alpha:1];
     
     scroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight-20-44)];
+    if ([UIDevice currentDevice].systemVersion.floatValue < 7.0)
+    {
+        scroll.frame =CGRectMake(0, 0, DeviceWidth, DeviceHeight- 49 - 64);
+    }
     scroll.contentSize=CGSizeMake(DeviceWidth, 600);
      if ([[[UIDevice currentDevice] systemVersion] floatValue]<7.0)
      {
@@ -121,7 +124,7 @@
     scroll.delaysContentTouches=NO;
     //    [scroll delaysContentTouches:NO];
     [self.view addSubview:scroll];
-    UIView*view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 200)];
+    UIView*view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
     [self.view addSubview:view];
     [scroll addSubview:view];
     UIImageView*log=[[UIImageView alloc]initWithFrame:CGRectMake(10, 21, 60, 60)];
@@ -146,7 +149,6 @@
     descrip2.font=[UIFont systemFontOfSize:13];
     descrip2.text=@"©2014俄旅网";
     descrip2.backgroundColor = [UIColor clearColor];
-     float bold=100;
       float size=15;
     //    ©2013俄旅网
     [view addSubview:descrip2];
@@ -154,15 +156,16 @@
     UILabel*about=[[UILabel alloc]initWithFrame:CGRectMake(10,95,49, 30)];
     about.text=@"关于";
     about.backgroundColor = [UIColor clearColor];
+
     about.font=[UIFont boldSystemFontOfSize:size];
     [view addSubview:about];
 
     //    UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(10, 120, 300, 80)];
     //    imageView.userInteractionEnabled=YES;
     //    imageView.image=[UIImage imageNamed:@"更多01_03.png"];
-    NSArray*lableArray=[NSArray arrayWithObjects:@"版权信息",@"服务条例", nil];
+    NSArray*lableArray=[NSArray arrayWithObjects:@"给应用评分 鼓励一下吧",@"版权信息",@"服务条例", nil];
     //    [self.view addSubview:imageView];
-    for (int i=0; i<2; i++)
+    for (int i=0; i<lableArray.count; i++)
     {
         UIButton*button=[UIButton buttonWithType:UIButtonTypeCustom];
         //    [button setImage:[UIImage imageNamed:@"空白.png"] forState:UIControlStateNormal];
@@ -200,7 +203,7 @@
     
     
     
-    view2=[[UIView alloc]initWithFrame:CGRectMake(0, 220, DeviceWidth, 350)];
+    view2=[[UIView alloc]initWithFrame:CGRectMake(0, 220 + 40, DeviceWidth, 350)];
     [scroll addSubview:view2];
     UILabel*contactLable=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, DeviceWidth, 30)];
     contactLable.text=@"联系我们";
@@ -301,11 +304,16 @@
         {
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/cn/app/e-luo-si-lu-you-zhong-wen-wang/id795666578?mt=8"]];
+        }
+            break;
+        case 110:
+        {
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/cn/app/wan-zhuan-sheng-bi-de-bao/id871832934?mt=8"]];
             
         }
             break;
-            
-        case 110:
+        case 111:
         {
             
             [self performSelector:@selector(push:) withObject:sender afterDelay:0.1];
@@ -313,7 +321,7 @@
             
         }
             break;
-        case 111:
+        case 112:
         {
             [self performSelector:@selector(push:) withObject:sender afterDelay:0.1];
             [sender setImage:[UIImage imageNamed:@"下b.png"] forState:UIControlStateNormal];
@@ -336,7 +344,7 @@
 -(void)push:(UIButton*)sender
 {
     
-    if (sender.tag==111)
+    if (sender.tag==112)
     {
         //[sender setImage:[UIImage imageNamed:@"下.png"] forState:UIControlStateNormal];
         fwView*zs=[fwView new];
