@@ -11,7 +11,7 @@
 @interface MyTravellingDetailViewController_2 ()
 @property (nonatomic, strong)NSArray* imageNames;
 @property (nonatomic, strong)UIScrollView* scrollView;
-@property (nonatomic, strong)RTLabel* textLab;
+@property (nonatomic, strong)UITextView* textView;
 @end
 
 @implementation MyTravellingDetailViewController_2
@@ -36,17 +36,33 @@ backButton
     [self.view addSubview:self.scrollView];
     NSString* imageStr = self.dic[@"Piclist"];
     self.imageNames = [imageStr componentsSeparatedByString:@","];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        for (int i = 0; i < self.imageNames.count; i++) {
-            [self addImageView:i];
-        }
-        
-    });
-    
-    [self addTextLab];
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.textLab.frame.size.height + self.textLab.frame.origin.y+20);
+    for (int i = 0; i < self.imageNames.count; i++) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10 + 250*i, self.view.frame.size.width - 10 - 10, 240)];
+            [self.scrollView addSubview:imageView];
+            UIActivityIndicatorView* aiv = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            aiv.frame = CGRectMake((imageView.frame.size.width - 20)/2, 110 + 10 + 250*i, 20, 20);
+            [imageView addSubview:aiv];
+            [aiv startAnimating];
+            NSString* picURL = self.imageNames[i];
+            NSString *urlStr = [NSString stringWithFormat:@"http://192.168.0.156:807/Upload/SelfManual/travel/%@",picURL];
+            NSURL *url = [NSURL URLWithString:urlStr];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (data) {
+                    NSLog(@"dataFinish");
+                    imageView.image = [UIImage imageWithData:data];
+                    [aiv stopAnimating];
+                    [aiv removeFromSuperview];
+                }
+            });
+        });
 }
-
+    [self addTextLab];
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.textView.frame.size.height + self.textView.frame.origin.y+20);
+}
+/*
 -(void)addImageView:(int)number {
     UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10 + 250*number, self.view.frame.size.width - 10 - 10, 240)];
     [self.scrollView addSubview:imageView];
@@ -65,14 +81,16 @@ backButton
         [aiv removeFromSuperview];
     }
 }
-
+*/
 -(void)addTextLab {
-    self.textLab = [[RTLabel alloc]initWithFrame:CGRectMake(10, 10 + 250*self.imageNames.count, self.view.frame.size.width - 10 - 10, 100)];
-    self.textLab.text = self.dic[@"Content"];
-    self.textLab.font = [UIFont systemFontOfSize:17];
-    float height = self.textLab.optimumSize.height;
-    self.textLab.frame = CGRectMake(self.textLab.frame.origin.x, self.textLab.frame.origin.y, self.textLab.frame.size.width, height);
-    [self.scrollView addSubview:self.textLab];
+    self.textView = [[UITextView alloc]initWithFrame:CGRectMake(10, 10 + 250*self.imageNames.count, self.view.frame.size.width - 10 - 10, 100)];
+    self.textView.text = self.dic[@"Content"];
+    self.textView.allowsEditingTextAttributes = NO;
+    self.textView.editable = NO;
+    CGSize size = [self.textView.text sizeWithFont:[UIFont systemFontOfSize:17]];
+    float height = size.height;
+    self.textView.frame = CGRectMake(self.textView.frame.origin.x, self.textView.frame.origin.y, self.textView.frame.size.width, height);
+    [self.scrollView addSubview:self.textView];
 }
 
 - (void)didReceiveMemoryWarning

@@ -12,7 +12,7 @@
 #import "JSON.h"
 #import "MyTravelingDetailViewController.h"
 #import "MyTravellingDetailViewController_2.h"
-#import "WriteMyTravellingViewController_2.h"
+#import "WriteMyTravellingViewController_3.h"
 #import "ComentViewController.h"
 
 @interface MyTravelingViewController ()
@@ -121,8 +121,9 @@ NetChange(noNetButton)
 GO_NET
 //static int a = 0 ;
 - (void)send{
-//    [self.navigationController pushViewController:[WriteMyTravelingViewController new] animated:YES];
-    [self.navigationController pushViewController:[WriteMyTravellingViewController_2 new] animated:YES];
+    WriteMyTravellingViewController_3* wmtVC = [WriteMyTravellingViewController_3 new];
+    wmtVC.type = 0;
+    [self.navigationController pushViewController:wmtVC animated:YES];
     
     
     
@@ -361,7 +362,7 @@ postRequestAgency(datas)
         dateLab.text =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"PTime"];
         [myCell.contentView addSubview:dateLab];
         
-        NSString *title = [NSString stringWithFormat:@"评论(%@)",[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Msgcount"]];
+        NSString *title = [NSString stringWithFormat:@"评论(%@)",[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"ReyCount"]];//Msgcount
         for (int i = 0; i < 3; i++) {
             UIButton *say = [UIButton buttonWithType:UIButtonTypeCustom];
             
@@ -385,18 +386,40 @@ postRequestAgency(datas)
     return myCell;
 }
 - (void)btnTouch:(UIButton*)btn{
+    NSDictionary* dic1 = [_dataArr objectAtIndex:btn.tag];
     if ([btn.currentTitle isEqualToString:@"编辑"]) {
-        NSLog(@"sender编辑");
-        WriteMyTravellingViewController_2* wmtVC = [WriteMyTravellingViewController_2 new];
-        
-        
+        WriteMyTravellingViewController_3* wmtVC = [WriteMyTravellingViewController_3 new];
+        wmtVC.type = 1;
+        wmtVC.ID = [[dic1 valueForKey:@"ID"]intValue];
+        wmtVC.titleTFText = dic1[@"Title"];
+        wmtVC.textViewText = dic1[@"Content"];
+        NSString* imageNames = dic1[@"Piclist"];
+        if (imageNames.length > 4) {
+            if ([imageNames rangeOfString:@","].location != NSNotFound) {
+                wmtVC.imageNamesArr = [NSMutableArray arrayWithArray:[imageNames componentsSeparatedByString:@","]];
+            }else {
+                [wmtVC.imageNamesArr addObject:dic1[@"Piclist"]];
+            }
+        }else {
+            wmtVC.imageNamesArr = nil;
+        }
+        NSLog(@"imageNames.length:%d,imageNames:%@,imageNamesArr.count:%d,imageNamesArr:%@",imageNames.length,imageNames,wmtVC.imageNamesArr.count, wmtVC.imageNamesArr);
         [self.navigationController pushViewController:wmtVC animated:YES];
     }else if ([btn.currentTitle isEqualToString:@"删除"]) {
-        NSLog(@"sender删除");
-        
+        NSMutableString *urlStr =[NSMutableString stringWithFormat:@"%@",@"http://192.168.0.156:807/api/WebService.asmx/"];
+        [urlStr appendString:@"DeleteTravelInfo"];
+        NSString *aruStr = [NSString stringWithFormat:@"userid=%@&id=%@",GET_USER_DEFAUT(QUSE_ID),dic1[@"ID"]];
+        postRequestTongBu(aruStr, urlStr, received)
+        dicResultTongbuNoDic(received,result)
+        if (result.intValue == 1) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"删除游记成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            alertView.tag = 1;
+            [alertView show];
+        }else if (result.intValue == 0) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"删除游记失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
     }else {
-        NSLog(@"sender点评");
-        NSDictionary* dic1 = [_dataArr objectAtIndex:btn.tag];
         ComentViewController* text = [ComentViewController new];
         text.pageName = @"游记评论";
         text.head = [dic1 valueForKey:@"Title"];
@@ -407,18 +430,24 @@ postRequestAgency(datas)
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
-//    mtdv.htmlStr = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Content"];
-//    mtdv.title =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Title"];
-//    [self.navigationController pushViewController:mtdv animated:YES];
+    MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
+    mtdv.htmlStr = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Content"];
+    mtdv.title =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Title"];
+    [self.navigationController pushViewController:mtdv animated:YES];
     
     
-    MyTravellingDetailViewController_2* mtdVC = [MyTravellingDetailViewController_2 new];
-    mtdVC.dic = [_dataArr objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:mtdVC animated:YES];
+//    MyTravellingDetailViewController_2* mtdVC = [MyTravellingDetailViewController_2 new];
+//    mtdVC.dic = [_dataArr objectAtIndex:indexPath.row];
+//    [self.navigationController pushViewController:mtdVC animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 100;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1 && buttonIndex == 0) {
+        [_myTableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning

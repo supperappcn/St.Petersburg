@@ -15,7 +15,13 @@
 		0A041E8D19F64B7900320F8E /* AlixPayResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A041E7419F64B7900320F8E /* AlixPayResult.m */; };
 		0A041E9419F64B7900320F8E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A041E8319F64B7900320F8E /* libcrypto.a */; };
 		0A041E9519F64B7900320F8E /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A041E8419F64B7900320F8E /* libssl.a */; };
+		0A04EAD21A26BF5300F96DBC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A04EAD11A26BF5300F96DBC /* AssetsLibrary.framework */; };
+		0A04EAD51A26C00700F96DBC /* WriteMyTravellingViewController_3.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A04EAD41A26C00700F96DBC /* WriteMyTravellingViewController_3.m */; };
+		0A04EAD91A26F77100F96DBC /* ZYQAssetPicker.Bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A04EAD61A26F77100F96DBC /* ZYQAssetPicker.Bundle */; };
+		0A04EADA1A26F77100F96DBC /* ZYQAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A04EAD81A26F77100F96DBC /* ZYQAssetPickerController.m */; };
 		0A0524F61A15ABC500553786 /* PaySuccessfullyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0524F51A15ABC500553786 /* PaySuccessfullyViewController.m */; };
+		0A05544E1A281E280091760A /* CheckSelectedIVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05544D1A281E280091760A /* CheckSelectedIVViewController.m */; };
+		0A0554501A2824F90091760A /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A05544F1A2824F90091760A /* delete.png */; };
 		0A05FB481A1EDD2700FDD9EC /* take_photos.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A05FB471A1EDD2700FDD9EC /* take_photos.png */; };
 		0A05FB4A1A1EDD3700FDD9EC /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A05FB491A1EDD3700FDD9EC /* picture.png */; };
 		0A0682781A0CC03F0047B87F /* hotelCarenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0682771A0CC03F0047B87F /* hotelCarenderViewController.m */; };
@@ -835,8 +841,17 @@
 		0A041E8419F64B7900320F8E /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		0A041E8619F64B7900320F8E /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
 		0A041E8719F64B7900320F8E /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
+		0A04EAD11A26BF5300F96DBC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		0A04EAD31A26C00700F96DBC /* WriteMyTravellingViewController_3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteMyTravellingViewController_3.h; sourceTree = "<group>"; };
+		0A04EAD41A26C00700F96DBC /* WriteMyTravellingViewController_3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteMyTravellingViewController_3.m; sourceTree = "<group>"; };
+		0A04EAD61A26F77100F96DBC /* ZYQAssetPicker.Bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZYQAssetPicker.Bundle; sourceTree = "<group>"; };
+		0A04EAD71A26F77100F96DBC /* ZYQAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYQAssetPickerController.h; sourceTree = "<group>"; };
+		0A04EAD81A26F77100F96DBC /* ZYQAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQAssetPickerController.m; sourceTree = "<group>"; };
 		0A0524F41A15ABC500553786 /* PaySuccessfullyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaySuccessfullyViewController.h; sourceTree = "<group>"; };
 		0A0524F51A15ABC500553786 /* PaySuccessfullyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaySuccessfullyViewController.m; sourceTree = "<group>"; };
+		0A05544C1A281E280091760A /* CheckSelectedIVViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckSelectedIVViewController.h; sourceTree = "<group>"; };
+		0A05544D1A281E280091760A /* CheckSelectedIVViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckSelectedIVViewController.m; sourceTree = "<group>"; };
+		0A05544F1A2824F90091760A /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		0A05FB471A1EDD2700FDD9EC /* take_photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = take_photos.png; sourceTree = "<group>"; };
 		0A05FB491A1EDD3700FDD9EC /* picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture.png; sourceTree = "<group>"; };
 		0A0682761A0CC03F0047B87F /* hotelCarenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotelCarenderViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1785,6 +1800,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A04EAD21A26BF5300F96DBC /* AssetsLibrary.framework in Frameworks */,
 				188CD28C1A1AE0A400D2F1CA /* MapKit.framework in Frameworks */,
 				0A041E8B19F64B7900320F8E /* AlixPaylib_arc.a in Frameworks */,
 				0A041E9519F64B7900320F8E /* libssl.a in Frameworks */,
@@ -2136,6 +2152,7 @@
 			children = (
 				0A05FB491A1EDD3700FDD9EC /* picture.png */,
 				0A05FB471A1EDD2700FDD9EC /* take_photos.png */,
+				0A05544F1A2824F90091760A /* delete.png */,
 				0A0EF4761A20683F0011FFAC /* 游记_发布2_03.png */,
 				C409FF7519358DD40015A0B5 /* sendtravel.png */,
 				C4121F981923782A0047DEFA /* lack.jpg */,
@@ -2152,8 +2169,15 @@
 				0A27D4ED1A246CE0006A79F7 /* MyTravellingDetailViewController_2.m */,
 				0A0EF4731A2063180011FFAC /* WriteMyTravellingViewController_2.h */,
 				0A0EF4741A2063180011FFAC /* WriteMyTravellingViewController_2.m */,
+				0A04EAD31A26C00700F96DBC /* WriteMyTravellingViewController_3.h */,
+				0A04EAD41A26C00700F96DBC /* WriteMyTravellingViewController_3.m */,
+				0A05544C1A281E280091760A /* CheckSelectedIVViewController.h */,
+				0A05544D1A281E280091760A /* CheckSelectedIVViewController.m */,
 				0A0CB7A519F4F37A0013D763 /* GCPlaceholderTextView.h */,
 				0A0CB7A619F4F37A0013D763 /* GCPlaceholderTextView.m */,
+				0A04EAD61A26F77100F96DBC /* ZYQAssetPicker.Bundle */,
+				0A04EAD71A26F77100F96DBC /* ZYQAssetPickerController.h */,
+				0A04EAD81A26F77100F96DBC /* ZYQAssetPickerController.m */,
 			);
 			name = "我的游记";
 			sourceTree = "<group>";
@@ -2801,6 +2825,7 @@
 		C49D176818A5DAB70001E371 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A04EAD11A26BF5300F96DBC /* AssetsLibrary.framework */,
 				188CD28B1A1AE0A400D2F1CA /* MapKit.framework */,
 				18650E8A19E6652900209EB6 /* 点a文件 */,
 				C4E558E018D6909D00C0DB51 /* MessageUI.framework */,
@@ -2913,6 +2938,7 @@
 		C49D17A018A5DBD40001E371 /* MineView */ = {
 			isa = PBXGroup;
 			children = (
+				C4121F8F192378080047DEFA /* 我的游记 */,
 				C4121F76192377F10047DEFA /* MineViewController.h */,
 				C4121F77192377F10047DEFA /* MineViewController.m */,
 				0A071DEF1A1B1C2900803E7B /* 我的订单(导游) */,
@@ -2946,7 +2972,6 @@
 				C4121F84192377F10047DEFA /* SetViewController.h */,
 				C4121F85192377F10047DEFA /* SetViewController.m */,
 				188CD2CD1A1B374B00D2F1CA /* getlocation */,
-				C4121F8F192378080047DEFA /* 我的游记 */,
 				C4121F8E192377F90047DEFA /* 我的收藏 */,
 				C4FE85B718ADB5E700A579AE /* Location */,
 				C4476E8C18A8AAED00ED82DE /* memeberImage */,
@@ -3986,6 +4011,7 @@
 				C4871F6319012A0F00C99431 /* introduce_05.png in Resources */,
 				C421A39E1924B16A00F62D20 /* _order.png in Resources */,
 				C4AB4294190100A700D1E7B4 /* 5xing.png in Resources */,
+				0A04EAD91A26F77100F96DBC /* ZYQAssetPicker.Bundle in Resources */,
 				C4DA3C8518EC22EB00D3A7DA /* 向下.png in Resources */,
 				C4DEAC1518E13B12000607C1 /* price_02.png in Resources */,
 				C481C26A18C4594A002C0CDA /* slider-metal-handle-highlighted.png in Resources */,
@@ -4260,6 +4286,7 @@
 				C4D8F58118FFA33500704FBA /* detailIntroduce.png in Resources */,
 				C45ECD0918BDD3C4002BF7FF /* more_1.png in Resources */,
 				C440544318D2966000983D58 /* hotel_search.png in Resources */,
+				0A0554501A2824F90091760A /* delete.png in Resources */,
 				C42D045D18DD934B00F9B570 /* entainmentMore.png in Resources */,
 				C440544118D2966000983D58 /* hotel_area3.png in Resources */,
 				C440544218D2966000983D58 /* hotel_area4.png in Resources */,
@@ -4503,6 +4530,7 @@
 				C4EF9D1F196FD2D300CFF415 /* EntainReseverClass.m in Sources */,
 				C4E19B4B1910F07C00CE7B61 /* TaxiPersonageCell.m in Sources */,
 				C4264C2C18A61FDE0098B6F8 /* SBJsonBase.m in Sources */,
+				0A04EADA1A26F77100F96DBC /* ZYQAssetPickerController.m in Sources */,
 				C4E19BCC1911981400CE7B61 /* BaLIViewController.m in Sources */,
 				C44086081946F130001E2A47 /* FeedBackViewController.m in Sources */,
 				C4F1280118BB268D0041960B /* NumberKeypadDecimalPoint.m in Sources */,
@@ -4574,9 +4602,11 @@
 				C4BF07EB19610C3C004E1A27 /* OrderViewController.m in Sources */,
 				C4DF78FF18E559D4009D2A71 /* LineDetailCell.m in Sources */,
 				C48C8F971959189700326979 /* DateButton.m in Sources */,
+				0A05544E1A281E280091760A /* CheckSelectedIVViewController.m in Sources */,
 				C42DA8191920716D00641A4A /* Reachability.m in Sources */,
 				C4EC1C5C194AAC1700831059 /* MoreViewController.m in Sources */,
 				C41F332218D1468E0044DF11 /* RTLabel.m in Sources */,
+				0A04EAD51A26C00700F96DBC /* WriteMyTravellingViewController_3.m in Sources */,
 				C4E19C2819119DA800CE7B61 /* GuideTableViewCell.m in Sources */,
 				C4DF790A18E57BCA009D2A71 /* EveryDayViewController.m in Sources */,
 				C4DE2D9D18FBD55F0011BCEE /* surnameCustomCell.m in Sources */,

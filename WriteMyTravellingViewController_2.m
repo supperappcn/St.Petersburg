@@ -7,7 +7,6 @@
 //
 
 #import "WriteMyTravellingViewController_2.h"
-#import "GCPlaceholderTextView.h"
 #import "JSON.h"
 #import "GDataXMLNode.h"
 
@@ -18,19 +17,24 @@
 @property (nonatomic, strong)UIScrollView* showPicView;//选择图片页面预览视图
 @property (nonatomic, strong)NSMutableArray* imagesArr;//存放图片
 @property (nonatomic, strong)NSMutableArray* imagesStrArr;//存放图片经过base64编码后的字符串
+@property (nonatomic, strong)NSMutableArray* imagesArrNew;//更新游记时新添加的图片
 @property (nonatomic, strong)NSMutableData* datas;//服务器返回的上传结果
 @property (nonatomic, strong)UIButton* pictureBtn;
 @property (nonatomic, strong)UIButton* pickPictureBtn;//添加图片"+"按钮
 @property (nonatomic, strong)NSMutableArray* tempImagesArr;//临时存放选择照片页面中所选的照片
+@property (nonatomic, copy)NSString* deleteImageName;
+@property (nonatomic, copy)NSString* result;
 @end
 
 @implementation WriteMyTravellingViewController_2
+
+#define urlStr [NSMutableString stringWithString: @"http://192.168.0.156:807/"];
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.imageNamesArr = [NSMutableArray array];
     }
     return self;
 }
@@ -38,16 +42,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [super viewDidLoad];
-    self.title = @"发布游记";
-    self.view.backgroundColor = [UIColor colorWithRed:248.0/255 green:248.0/255 blue:248.0/255 alpha:1];
     self.imagesArr = [NSMutableArray array];
     self.imagesStrArr = [NSMutableArray array];
     self.tempImagesArr = [NSMutableArray array];
     self.datas = [NSMutableData data];
+    self.imagesArrNew = [NSMutableArray array];
+    if (self.type == 0) {
+        self.title = @"发布游记";
+    }else {
+        self.title = @"编辑游记";
+        
+    }
+    self.view.backgroundColor = [UIColor colorWithRed:248.0/255 green:248.0/255 blue:248.0/255 alpha:1];
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lostFirstResponder)];
     [self.view addGestureRecognizer:tap];
-    
     [self addSaveBtn];
     [self addTitleTextField];
     [self addContentTextView];
@@ -89,12 +97,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-}
-
 -(void)lostFirstResponder {
     [self.titleTF resignFirstResponder];
     [self.textView resignFirstResponder];
@@ -121,6 +123,9 @@
     [self.view addSubview:titleView];
     self.titleTF = [[UITextField alloc]initWithFrame:CGRectMake(10, 0, self.view.bounds.size.width - 20, 40)];
     self.titleTF.placeholder = @"填写标题";
+    if (self.titleText.length) {
+        self.titleTF.text = self.titleText;
+    }
     self.titleTF.font = [UIFont systemFontOfSize:17];
     [titleView addSubview:self.titleTF];
 }
@@ -132,6 +137,9 @@
     [self.view addSubview:contentView];
     self.textView = [[GCPlaceholderTextView alloc]initWithFrame:CGRectMake(5, 0, self.view.bounds.size.width - 10, contentViewHeight)];
     self.textView.placeholder = @"游记内容";
+    if (self.textViewText.length) {
+        self.textView.text = self.textViewText;
+    }
     self.textView.font = [UIFont systemFontOfSize:17];
     [contentView addSubview:self.textView];
 }
@@ -147,37 +155,149 @@
     [self.pickPictureBtn setImage:[UIImage imageNamed:@"游记_发布2_03.png"] forState:UIControlStateNormal];
     [self.pickPictureBtn addTarget:self action:@selector(showSheetView) forControlEvents:UIControlEventTouchUpInside];
     [self.addPictureView addSubview:self.pickPictureBtn];
-    if (self.imagesArr.count == 0) {
-        self.pickPictureBtn.frame = CGRectMake(85, 10, 65, 65);
-        self.pictureBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 65, 65)];
-        self.pictureBtn.backgroundColor = [UIColor colorWithRed:0 green:111.0/255 blue:178.0/255 alpha:1];
-        [self.addPictureView addSubview:self.pictureBtn];
-    }else {
-        if (self.pictureBtn) {
-            [self.pictureBtn removeFromSuperview];
+    if (self.type == 0) {//发布游记
+        if (self.imagesArr.count == 0) {
+            self.pickPictureBtn.frame = CGRectMake(85, 10, 65, 65);
+            self.pictureBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 65, 65)];
+            self.pictureBtn.backgroundColor = [UIColor colorWithRed:0 green:111.0/255 blue:178.0/255 alpha:1];
+            [self.addPictureView addSubview:self.pictureBtn];
+        }else {
+            if (self.pictureBtn) {
+                [self.pictureBtn removeFromSuperview];
+            }
+            self.pickPictureBtn.frame = CGRectMake(75*self.imagesArr.count + 10, 10, 65, 65);
+            for (int i = 0; i < self.imagesArr.count; i++) {
+                UIImage* image = self.imagesArr[i];
+                UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10 + 75*i, 10, 65, 65)];
+                imageView.image = image;
+                imageView.userInteractionEnabled = YES;
+                UIButton* deleteBtn = [[UIButton alloc]initWithFrame:CGRectMake(50, 0, 15, 15)];
+                deleteBtn.backgroundColor = [UIColor redColor];
+                [deleteBtn setTitle:@"X" forState:UIControlStateNormal];
+                [deleteBtn addTarget:self action:@selector(deleteImageFromAddPictureView:) forControlEvents:UIControlEventTouchUpInside];
+                [imageView addSubview:deleteBtn];
+                [self.addPictureView addSubview:imageView];
+            }
+            self.addPictureView.contentSize = CGSizeMake(10 + 75*(self.imagesArr.count+1), 65);
         }
-        self.pickPictureBtn.frame = CGRectMake(75*self.imagesArr.count + 10, 10, 65, 65);
-        for (int i = 0; i < self.imagesArr.count; i++) {
-            UIImage* image = self.imagesArr[i];
-            UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10 + 75*i, 10, 65, 65)];
-            imageView.image = image;
-            imageView.userInteractionEnabled = YES;
-            UIButton* deleteBtn = [[UIButton alloc]initWithFrame:CGRectMake(50, 0, 15, 15)];
-            deleteBtn.backgroundColor = [UIColor redColor];
-            [deleteBtn setTitle:@"X" forState:UIControlStateNormal];
-            [deleteBtn addTarget:self action:@selector(deleteImageFromAddPictureView:) forControlEvents:UIControlEventTouchUpInside];
-            [imageView addSubview:deleteBtn];
-            [self.addPictureView addSubview:imageView];
+    }else if (self.type == 1) {//更新游记
+        if (self.imageNamesArr.count == 0 && self.imagesArr.count == 0) {
+            self.pickPictureBtn.frame = CGRectMake(85, 10, 65, 65);
+            self.pictureBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 65, 65)];
+            self.pictureBtn.backgroundColor = [UIColor colorWithRed:0 green:111.0/255 blue:178.0/255 alpha:1];
+            [self.addPictureView addSubview:self.pictureBtn];
+        }else if (self.imageNamesArr.count != 0 && self.imagesArr.count == 0) {
+            if (self.pictureBtn) {
+                [self.pictureBtn removeFromSuperview];
+            }
+            self.pickPictureBtn.frame = CGRectMake(75*self.imageNamesArr.count + 10, 10, 65, 65);
+            for (int i = 0; i < self.imageNamesArr.count; i++) {
+                UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10 + 75*i, 10, 65, 65)];
+                imageView.userInteractionEnabled = YES;
+                imageView.tag = i;
+                UIButton* deleteBtn = [[UIButton alloc]initWithFrame:CGRectMake(50, 0, 15, 15)];
+                deleteBtn.backgroundColor = [UIColor redColor];
+                [deleteBtn setTitle:@"X" forState:UIControlStateNormal];
+                deleteBtn.tag = i;
+                [deleteBtn addTarget:self action:@selector(deleteImageFromAddPictureView:) forControlEvents:UIControlEventTouchUpInside];
+                [imageView addSubview:deleteBtn];
+                [self.addPictureView addSubview:imageView];
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    NSString* picURL = self.imageNamesArr[i];
+                    NSMutableString * mutableStr = urlStr;
+                    [mutableStr appendFormat:@"Upload/SelfManual/travel/%@",picURL];
+                    NSURL *url = [NSURL URLWithString:mutableStr];
+                    NSData *data = [NSData dataWithContentsOfURL:url];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (data) {
+                            imageView.image = [UIImage imageWithData:data];
+                            [self.imagesArr addObject:imageView.image];
+                        }
+                    });
+                });
+            }
+            self.addPictureView.contentSize = CGSizeMake(10 + 75*(self.imageNamesArr.count+1), 65);
+        }else {
+            if (self.pictureBtn) {
+                [self.pictureBtn removeFromSuperview];
+            }
+            self.pickPictureBtn.frame = CGRectMake(75*self.imagesArr.count + 10, 10, 65, 65);
+            for (int i = 0; i < self.imagesArr.count; i++) {
+                UIImage* image = self.imagesArr[i];
+                UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10 + 75*i, 10, 65, 65)];
+                imageView.tag = i;
+                imageView.image = image;
+                imageView.userInteractionEnabled = YES;
+                UIButton* deleteBtn = [[UIButton alloc]initWithFrame:CGRectMake(50, 0, 15, 15)];
+                deleteBtn.backgroundColor = [UIColor redColor];
+                [deleteBtn setTitle:@"X" forState:UIControlStateNormal];
+                deleteBtn.tag = i;
+                [deleteBtn addTarget:self action:@selector(deleteImageFromAddPictureView:) forControlEvents:UIControlEventTouchUpInside];
+                [imageView addSubview:deleteBtn];
+                [self.addPictureView addSubview:imageView];
+            }
+            self.addPictureView.contentSize = CGSizeMake(10 + 75*(self.imagesArr.count+1), 65);
         }
-        self.addPictureView.contentSize = CGSizeMake(10 + 75*(self.imagesArr.count+1), 65);
+        
+        /*else if (self.imageNamesArr.count == 0 && self.imagesArr.count != 0) {
+            if (self.pictureBtn) {
+                [self.pictureBtn removeFromSuperview];
+            }
+            self.pickPictureBtn.frame = CGRectMake(75*self.imagesArr.count + 10, 10, 65, 65);
+            for (int i = 0; i < self.imagesArr.count; i++) {
+                UIImage* image = self.imagesArr[i];
+                UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10 + 75*i, 10, 65, 65)];
+                imageView.image = image;
+                imageView.userInteractionEnabled = YES;
+                UIButton* deleteBtn = [[UIButton alloc]initWithFrame:CGRectMake(50, 0, 15, 15)];
+                deleteBtn.backgroundColor = [UIColor redColor];
+                [deleteBtn setTitle:@"X" forState:UIControlStateNormal];
+                [deleteBtn addTarget:self action:@selector(deleteImageFromAddPictureView:) forControlEvents:UIControlEventTouchUpInside];
+                [imageView addSubview:deleteBtn];
+                [self.addPictureView addSubview:imageView];
+            }
+            self.addPictureView.contentSize = CGSizeMake(10 + 75*(self.imagesArr.count+1), 65);
+        }else if (self.imageNamesArr.count != 0 && self.imagesArr.count != 0) {
+         
+        }*/
     }
+    
 }
 
 -(void)deleteImageFromAddPictureView:(UIButton* )sender {
-    UIImageView* iv = (UIImageView*)sender.superview;
-    [self.imagesArr removeObject:iv.image];
-    [iv removeFromSuperview];
-    [self updateImage2];
+    if (self.type == 0) {//发布游记
+        UIImageView* iv = (UIImageView*)sender.superview;
+        [self.imagesArr removeObject:iv.image];
+        [iv removeFromSuperview];
+        [self updateImage2];
+    }else if (self.type == 1){//更新游记
+        if (sender.tag < self.imageNamesArr.count) {//删除原游记中图片
+            self.deleteImageName = self.imageNamesArr[sender.tag];
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"此操作不可恢复，确定删除？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除", nil];
+            alertView.tag = 5;
+            [alertView show];
+            
+//            if ([self.result isEqualToString:@"yes"]) {
+//                UIImageView* iv = (UIImageView*)sender.superview;
+//                [self.imageNamesArr removeObjectAtIndex:sender.tag];
+//                [self.imagesArr removeObject:iv.image];
+//                [iv removeFromSuperview];
+//                [self updateImage2];
+//            }else if ([self.result isEqualToString:@"no"]) {
+//                UIAlertView* alertVi = [[UIAlertView alloc]initWithTitle:@"提示" message:@"删除照片失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+//                alertVi.tag = 6;
+//                [alertVi show];
+//            }
+        }else {//删除新添加的图片
+            UIImageView* iv = (UIImageView*)sender.superview;
+            [self.imagesArr removeObject:iv.image];
+            [self.imagesArrNew removeObject:iv.image];
+            [iv removeFromSuperview];
+            [self updateImage2];
+        }
+    }
 }
 
 -(void)updateImage2 {
@@ -196,7 +316,6 @@
         [self.addPictureView addSubview:self.pictureBtn];
     }
     self.addPictureView.contentSize = CGSizeMake(10 + 75*(self.imagesArr.count+1), 65);
-    NSLog(@"self.imagesArr:%@",self.imagesArr);
 }
 
 -(void)showSheetView {
@@ -217,22 +336,6 @@
     }
 }
 
-//根据键盘改变addPictureView的高度
-//-(void)changeAddPictureViewHeight:(float)keyboardHeight
-//{
-//    if (keyboardHeight) {
-//        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-//        [UIView setAnimationDuration:0.23];
-//        self.addPictureView.frame = CGRectMake(0, self.view.bounds.size.height - 40 - keyboardHeight, self.view.bounds.size.width, 40);
-//        [UIView commitAnimations];
-//    }else {
-//        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-//        [UIView setAnimationDuration:0.23];
-//        self.addPictureView.frame = CGRectMake(0, self.view.bounds.size.height - 40, self.view.bounds.size.width, 40);
-//        [UIView commitAnimations];
-//    }
-//}
-
 -(void)saveTraveling
 {
     NSString* tempStr = self.textView.placeholder;
@@ -244,29 +347,36 @@
         UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请撰写游记内容" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         alertView.tag = 3;
         [alertView show];
-    }//else {
-    
-    
-    NSMutableString* urlStr = [NSMutableString stringWithString: @"http://192.168.0.156:807/api/WebService.asmx/"];
-    [urlStr appendString: @"getAddTravelInfo"];
-    
-    for (UIImage* image in self.imagesArr) {
-        NSData* imageData = UIImageJPEGRepresentation(image, 0.5);
-        NSString* imageStr = [imageData base64EncodedStringWithOptions:0];
-        [self.imagesStrArr addObject:imageStr];
+    }else {
+        NSMutableString* mutableStr = urlStr
+        NSString* argumentStr;
+        if (self.type == 0) {//发布游记
+            [mutableStr appendString:@"api/WebService.asmx/getAddTravelInfo"];
+            for (UIImage* image in self.imagesArr) {
+                NSData* imageData = UIImageJPEGRepresentation(image, 0.5);
+                NSString* imageStr = [imageData base64EncodedStringWithOptions:0];
+                [self.imagesStrArr addObject:imageStr];
+            }
+            NSString* imagesString = [self.imagesStrArr componentsJoinedByString:@","];
+            argumentStr = [NSString stringWithFormat:@"userid=%@&username=%@&title=%@&piclist=%@&content=%@&cityid=%d&typeid=%d",GET_USER_DEFAUT(QUSE_ID),GET_USER_DEFAUT(USER_NAME),self.titleTF.text,imagesString,self.textView.text,2,1];
+            
+        }else if (self.type == 1) {//更新游记
+            [mutableStr appendString:@"api/WebService.asmx/getEditTravelInfo"];
+            for (UIImage* image in self.imagesArrNew) {
+                NSData* imageData = UIImageJPEGRepresentation(image, 0.5);
+                NSString* imageStr = [imageData base64EncodedStringWithOptions:0];
+                [self.imagesStrArr addObject:imageStr];
+            }
+            NSString* imagesString = [self.imagesStrArr componentsJoinedByString:@","];
+            argumentStr = [NSString stringWithFormat:@"userid=%@&id=%d&title=%@&piclist=%@&content=%@&cityid=%d",GET_USER_DEFAUT(QUSE_ID),self.ID,self.titleText,imagesString,self.textView.text,2];
+        }
+        NSURL*url=[[NSURL alloc]initWithString:mutableStr];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+        [request setHTTPMethod:@"POST"];
+        NSData *data = [argumentStr dataUsingEncoding:NSUTF8StringEncoding];
+        [request setHTTPBody:data];
+        [NSURLConnection connectionWithRequest:request delegate:self];
     }
-    NSString* imagesString = [self.imagesStrArr componentsJoinedByString:@","];
-    
-    NSString* argumentStr = [NSString stringWithFormat:@"userid=%@&username=%@&title=%@&piclist=%@&content=%@&cityid=%d&typeid=%d",GET_USER_DEFAUT(QUSE_ID),GET_USER_DEFAUT(USER_NAME),self.titleTF.text,imagesString,self.textView.text,2,1];
-    
-    NSLog(@"argumentStr:%@",argumentStr);
-    NSURL*url=[[NSURL alloc]initWithString:urlStr];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-    [request setHTTPMethod:@"POST"];
-    NSData *data = [argumentStr dataUsingEncoding:NSUTF8StringEncoding];
-    [request setHTTPBody:data];
-    [NSURLConnection connectionWithRequest:request delegate:self];
-    //}
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -290,6 +400,9 @@
         imageView.userInteractionEnabled = YES;
         [self.tempImagesArr addObject:imageView.image];
         [self.imagesArr addObject:imageView.image];
+        if (self.type == 1) {
+            [self.imagesArrNew addObject:imageView.image];
+        }
         UIButton* deleteBtn = [[UIButton alloc]initWithFrame:CGRectMake(50, 0, 15, 15)];
         deleteBtn.backgroundColor = [UIColor redColor];
         [deleteBtn setTitle:@"X" forState:UIControlStateNormal];
@@ -307,6 +420,9 @@
     UIImageView* iv = (UIImageView*)sender.superview;
     [self.tempImagesArr removeObject:iv.image];
     [self.imagesArr removeObject:iv.image];
+    if (self.type == 1) {
+        [self.imagesArrNew removeObject:iv.image];
+    }
     [iv removeFromSuperview];
     [self updateImage];
 }
@@ -349,13 +465,43 @@
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    dicResultYiBu(self.datas, result, dic)
-    if (result.intValue == 1) {
-        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"发布成功，等待管理员审核中..." delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        alertView.tag = 1;
-        [alertView show];
-    }else if (result.intValue == 0) {
-        NSLog(@"发布日记失败");
+    dicResultYiBu(self.datas, resu, dic)
+    self.result = resu;
+    NSLog(@"self.result:%@",self.result);
+    if (self.result.intValue == 1) {
+        if (self.type == 0) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"发布成功，等待管理员审核中..." delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            alertView.tag = 1;
+            [alertView show];
+        }else if (self.type == 1) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"更新成功，等待管理员审核中..." delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            alertView.tag = 1;
+            [alertView show];
+        }
+    }else if ([self.result isEqualToString:@"yes"]) {
+        NSString* imageNam = self.deleteImageName;
+        for (int i = 0; i < self.imageNamesArr.count; i++) {
+            NSString* name = self.imageNamesArr[i];
+            if ([name isEqualToString:imageNam]) {
+                UIImageView* iv = (UIImageView*)[self.addPictureView viewWithTag:i];
+                [self.imageNamesArr removeObjectAtIndex:i];
+                [self.imagesArr removeObject:iv.image];
+                [iv removeFromSuperview];
+                [self updateImage2];
+            }
+        }
+    }else if ([self.result isEqualToString:@"no"]) {
+        UIAlertView* alertVi = [[UIAlertView alloc]initWithTitle:@"提示" message:@"删除照片失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        alertVi.tag = 6;
+        [alertVi show];
+    }else if (self.result.intValue == 0) {
+        if (self.type == 0) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"发布失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }else if (self.type == 1) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"更新失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
     }
 }
 
@@ -366,7 +512,22 @@
         [self.titleTF becomeFirstResponder];//标题或者标题和内容均为空，撰写标题
     }else if (alertView.tag == 3) {
         [self.textView becomeFirstResponder];//内容为空，撰写内容
+    }else if (alertView.tag == 5 && buttonIndex == 1) {//删除原游记中的照片
+        [self deleteImageFromOriginalTravelling];
     }
+}
+
+-(void)deleteImageFromOriginalTravelling {
+    NSMutableString* mutableStr = urlStr
+    [mutableStr appendString:@"api/WebService.asmx/getDeleteTravelPic"];
+    NSString* argumentStr = [NSString stringWithFormat:@"id=%d&userid=%@&picname=%@",self.ID,GET_USER_DEFAUT(QUSE_ID),self.deleteImageName];
+    NSLog(@"argumentStr:%@",argumentStr);
+    NSURL*url=[[NSURL alloc]initWithString:mutableStr];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [request setHTTPMethod:@"POST"];
+    NSData *data = [argumentStr dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:data];
+    [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
 -(void)shootPicture//拍照
@@ -389,24 +550,6 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
--(void)keyboardWillShow:(NSNotification*) notification
-{
-//    NSValue *keyboardObject = [[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
-//    CGRect keyboardRect;
-//    [keyboardObject getValue:&keyboardRect];
-//    NSLog(@"keyboardHeight:%f",keyboardRect.size.height);
-//    [self changeAddPictureViewHeight:keyboardRect.size.height];
-}
-
--(void)keyboardWillHidden:(NSNotification*) notification
-{
-//    NSValue *keyboardObject = [[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
-//    CGRect keyboardRect;
-//    [keyboardObject getValue:&keyboardRect];
-//    NSLog(@"keyboardHeight:%f",keyboardRect.size.height);
-//    [self changeAddPictureViewHeight:0];
 }
 
 - (void)didReceiveMemoryWarning

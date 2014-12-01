@@ -69,7 +69,7 @@
     }
     
     if ([text isEqualToString:self.placeholder]) {
-        self.textColor = [UIColor lightGrayColor];
+        self.textColor = [UIColor colorWithRed:209.0/255 green:209.0/255 blue:213.0/255 alpha:1];
     }
     else {
         self.textColor = self.realTextColor;
@@ -90,13 +90,13 @@
 - (void) endEditing:(NSNotification*) notification {
     if ([self.realText isEqualToString:@""] || self.realText == nil) {
         super.text = self.placeholder;
-        self.textColor = [UIColor lightGrayColor];
+        self.textColor = [UIColor colorWithRed:209.0/255 green:209.0/255 blue:213.0/255 alpha:1];
     }
 }
 
 - (void) setTextColor:(UIColor *)textColor {
     if ([self.realText isEqualToString:self.placeholder]) {
-        if ([textColor isEqual:[UIColor lightGrayColor]]) [super setTextColor:textColor];
+        if ([textColor isEqual:[UIColor colorWithRed:209.0/255 green:209.0/255 blue:213.0/255 alpha:1]]) [super setTextColor:textColor];
         else self.realTextColor = textColor;
     }
     else {

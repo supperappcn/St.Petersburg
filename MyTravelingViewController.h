@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyTravelingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDataDelegate>{
+@interface MyTravelingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDataDelegate,UIAlertViewDelegate>{
     UIView *bv;
     
     UIRefreshControl *refresh;
