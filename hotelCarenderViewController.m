@@ -274,6 +274,7 @@ backButton
     YDButton.clipsToBounds = YES;
     
     price=[[RTLabel alloc]initWithFrame:CGRectMake(10, 15, 150, 25)];
+    price.backgroundColor = [UIColor clearColor];
     price.font = [UIFont systemFontOfSize:13.5];
     [view addSubview:price];
 }

@@ -139,16 +139,19 @@ backButton
     
     
     RTLabel *lab = [[RTLabel alloc]initWithFrame:CGRectMake(10, 50, 300, 15)];
+    lab.backgroundColor = [UIColor clearColor];
     lab.text = [NSString stringWithFormat:@"%@",_roomTypeStr];
     lab.font = [UIFont systemFontOfSize:11];
     [sv addSubview:lab];
     
     RTLabel *lab2 = [[RTLabel alloc]initWithFrame:CGRectMake(10, 70, 300, 15)];
+    lab2.backgroundColor = [UIColor clearColor];
     lab2.text = [NSString stringWithFormat:@"<font size=11 color=gray>最多可入住 : </font>%@",_peopleMaxCountStr];
     lab2.font = [UIFont systemFontOfSize:11];
     [sv addSubview:lab2];
     
     RTLabel *lab3 = [[RTLabel alloc]initWithFrame:CGRectMake(10, 90, 300, 15)];
+    lab3.backgroundColor = [UIColor clearColor];
     lab3.text = [NSString stringWithFormat:@"<font size=11 color=gray>房间设施 : </font>%@",_roomFacilityStr];
     lab3.font = [UIFont systemFontOfSize:11];
     [sv addSubview:lab3];
@@ -249,6 +252,7 @@ backButton
     }
     
     RTLabel *lastLab = [[RTLabel alloc] initWithFrame:CGRectMake(10, 254, 300, 40)];
+    lastLab.backgroundColor = [UIColor clearColor];
     lastLab.font = [UIFont systemFontOfSize:10];
     lastLab.textColor = [UIColor grayColor];
     lastLab.text = @"• 请如实填写入住人的真实信息，信息需与护照信息一致。\n• 入住人信息一经提交后，不可更改。请慎重填写，以免影响入住。";
@@ -484,6 +488,7 @@ backButton
     
     if (_reseverKnowStr.length>0) {
         RTLabel *content = [[RTLabel alloc] initWithFrame:CGRectMake(10, 43+10, 300, 0)];
+        content.backgroundColor = [UIColor clearColor];
         content.text = _reseverKnowStr;
         content.font = [UIFont systemFontOfSize:11];
         content.frame = CGRectMake(10, 43+10, 300, content.optimumSize.height);
@@ -585,6 +590,7 @@ backButton
     //价格和预订
     
     price=[[RTLabel alloc]initWithFrame:CGRectMake(10, 10, 150, 25)];
+    price.backgroundColor = [UIColor clearColor];
     price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%@</font><font color=white>（$%@)</font>",_RMB,_dollar];
     price.font = [UIFont systemFontOfSize:13.5];
     [guding addSubview:price];

@@ -157,12 +157,14 @@ static OrderViewController* orderViewController = nil;
         
         if (i == 0) {
             RTLabel *name2= [[RTLabel alloc] initWithFrame:CGRectMake(100, 15, 200, 18)];
+            name2.backgroundColor = [UIColor clearColor];
             name2.font = [UIFont boldSystemFontOfSize:15];
             name2.text = _orderNumber;
             name2.textColor = [UIColor grayColor];
             [bv addSubview:name2];
         }else if (i == 1) {
             self.totalPrice = [[RTLabel alloc]initWithFrame:CGRectMake(100, 15, 200, 18)];
+            self.totalPrice.backgroundColor = [UIColor clearColor];
             self.totalPrice.font = [UIFont boldSystemFontOfSize:15];
             self.totalPrice.text = [NSString stringWithFormat:@"<font color=orange>￥%@</font><font size=12><font color=gray>($%@)</font>", self.RMB, self.dollar];
             [bv addSubview:self.totalPrice];

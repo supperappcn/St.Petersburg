@@ -98,6 +98,7 @@ backButton
     startdayTitle.font = font;
     [orderView addSubview:startdayTitle];
     RTLabel* startdayLab = [[RTLabel alloc]initWithFrame:CGRectMake(120, 12, self.view.frame.size.width - 120 - 10, 21)];
+    startdayLab.backgroundColor = [UIColor clearColor];
     startdayLab.text = self.currentDic[@"Startdate"];
     float height = startdayLab.optimumSize.height;
     height = height>21?height:21;

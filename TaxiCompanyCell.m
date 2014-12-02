@@ -22,6 +22,7 @@
         
         
         self.text=[[RTLabel alloc]initWithFrame:CGRectMake(113, 10, 200, 170)];
+        self.text.backgroundColor = [UIColor clearColor];
         //self.text.textColor = [UIColor colorWithRed:30.0/255 green:98.0/255 blue:167.0/255 alpha:1];
         [self addSubview:self.text];
         

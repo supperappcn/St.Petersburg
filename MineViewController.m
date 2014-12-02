@@ -741,9 +741,9 @@ GO_NET
         case 7:
         {
             MineDetailViewController*detail=[MineDetailViewController new];
-            [self.navigationController pushViewController:detail animated:YES];
             detail.severiceImage=name_image.image;
             detail.pageTitle=@"我的账号";
+            [self.navigationController pushViewController:detail animated:YES];
         }
             break;
         case 8:

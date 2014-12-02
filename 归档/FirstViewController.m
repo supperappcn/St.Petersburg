@@ -123,7 +123,7 @@ postRequestAgency(datas)
     self.view.frame = CGRectMake(0, mainScreenFrame.origin.y+44, 320, mainScreenFrame.size.height-44);
     hideTabbar
     _countCellHeight = [[RTLabel alloc]initWithFrame:CGRectMake(0, 0, 200, 0)];
-    // self.view.backgroundColor = [UIColor redColor];
+    _countCellHeight.backgroundColor = [UIColor clearColor];
     _viewHeight = self.view.frame.size.height;
     _viewOY = self.view.frame.origin.y;
     _sayCellHeights = [NSMutableArray array];
@@ -442,6 +442,7 @@ GO_NET
         //        [manageCell.contentView addSubview:manageCell.name];
         
         manageCell.sayLable = [[RTLabel alloc]initWithFrame:CGRectMake(10, 15, 200, 50)];
+        manageCell.sayLable.backgroundColor = [UIColor clearColor];
         manageCell.head.image = BACK_IMAGE;
         //[[MineViewController new]loadPic_tableViewIndexPath:indexPath headLabName:GET_USER_DEFAUT(USER_NAME) headView:manageCell.head];
         manageCell.sayLable.font = [UIFont systemFontOfSize:14];
@@ -476,6 +477,7 @@ GO_NET
     userCell.head.image = BACK_IMAGE;
     [[MineViewController new]loadPic_tableViewIndexPath:indexPath headLabName:GET_USER_DEFAUT(USER_NAME) headView:userCell.head];
     userCell.sayLable = [[RTLabel alloc]initWithFrame:CGRectMake(80-3, 15, 200, 50)];
+    userCell.sayLable.backgroundColor = [UIColor clearColor];
     userCell.sayLable.font = [UIFont systemFontOfSize:14];
     userCell.sayLable.text = [dic objectForKey:@"Message"];
     userCell.sayLable.frame = CGRectMake(80-3, 15, userCell.sayLable.optimumSize.width, userCell.sayLable.optimumSize.height);

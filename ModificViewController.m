@@ -100,6 +100,7 @@ hideTabbar
         }
         
         RTLabel *clauseLab= [[RTLabel alloc] initWithFrame:CGRectMake(50, 200, 250, 10)];
+        clauseLab.backgroundColor = [UIColor clearColor];
         clauseLab.font = [UIFont systemFontOfSize:10];
         clauseLab.text = @"我已阅读并同意<font color='#006db8'>《俄罗斯旅游中文网会员服务条款》</font>";
         UITapGestureRecognizer *lookClauseTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lookClause)];

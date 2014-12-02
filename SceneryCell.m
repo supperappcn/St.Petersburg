@@ -38,7 +38,7 @@
         [self addSubview:self._imageView];
         
         
-        self.title=[[RTLabel alloc]initWithFrame:CGRectMake(45, 250, 265, 0)];
+        self.title=[[RTLabel alloc]initWithFrame:CGRectMake(45, 250, 265, 0)];self.title.backgroundColor = [UIColor clearColor];
         self.title.textColor=[UIColor grayColor];
         
         self.title.font=[UIFont systemFontOfSize:14];

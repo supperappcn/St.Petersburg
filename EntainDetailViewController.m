@@ -1012,6 +1012,7 @@ GO_NET
     [orderButton setTitle:@"预订" forState:UIControlStateNormal];
     ////////////////////////////////////////////////
     validityLable2=[[RTLabel alloc]initWithFrame:CGRectMake(103, 10, 280-103-5, 13)];
+    validityLable2.backgroundColor = [UIColor clearColor];
     validityLable2.textColor=[UIColor grayColor];
     validityLable2.font=[UIFont systemFontOfSize:13];
     //validityLable2.backgroundColor = [UIColor redColor];
@@ -1090,6 +1091,7 @@ GO_NET
         [scrollView addSubview:iv];
         
         RTLabel*roomOrederLable2=[[RTLabel alloc]initWithFrame:CGRectMake(118.5, roomOrderImage.frame.origin.y+i*25+3, 60, 15)];
+        roomOrederLable2.backgroundColor = [UIColor clearColor];
         roomOrederLable2.text = orderNameArr[i];
         roomOrederLable2.font=[UIFont systemFontOfSize:13];
         roomOrederLable2.textColor=[UIColor grayColor];
@@ -1097,7 +1099,7 @@ GO_NET
         
         if (i==1) {
             RTLabel*roomOrederLable3=[[RTLabel alloc]initWithFrame:CGRectMake(108.5, roomOrderImage.frame.origin.y+i*25, 157, 15)];
-            
+            roomOrederLable3.backgroundColor = [UIColor clearColor];
             roomOrederLable3.text = [NSString stringWithFormat:@"               %@",[dataArray[index] objectForKey:@"OrderMark"]];
             roomOrederLable3.font=[UIFont systemFontOfSize:13];
             roomOrederLable3.textColor=[UIColor grayColor];
@@ -1149,6 +1151,7 @@ GO_NET
         
         
         RTLabel*remarkLable2=[[RTLabel alloc]initWithFrame:CGRectMake(33, remarkLable1.frame.origin.y+5, 280-33-20, 0)];
+        remarkLable2.backgroundColor = [UIColor clearColor];
         remarkLable2.text=remarkt;
         remarkLable2.font=[UIFont systemFontOfSize:13];
         remarkLable2.textColor=[UIColor grayColor];
@@ -1180,6 +1183,7 @@ GO_NET
         
         
         RTLabel*remarkLable2=[[RTLabel alloc]initWithFrame:CGRectMake(33, remarkLable1.frame.origin.y+5, 280-33-20, 0)];
+        remarkLable2.backgroundColor = [UIColor clearColor];
         remarkLable2.text=[dataArray[index] objectForKey:@"OrderNote"];
         remarkLable2.font=[UIFont systemFontOfSize:11];
         remarkLable2.textColor=[UIColor grayColor];
@@ -1196,6 +1200,7 @@ GO_NET
     
     //价格和预订
     RTLabel*price=[[RTLabel alloc]initWithFrame:CGRectMake(10, 0, 100, 0)];
+    price.backgroundColor = [UIColor clearColor];
     price.text=[NSString stringWithFormat: @"$<font size=20 color=orange >%@</font>起",_price];
     price.font = [UIFont systemFontOfSize:14];
     CGSize priceSize=[price optimumSize];
@@ -1292,6 +1297,7 @@ GO_NET
     [orderButton setTitle:@"预订" forState:UIControlStateNormal];
     ////////////////////////////////////////////////
     validityLable2=[[RTLabel alloc]initWithFrame:CGRectMake(103, validityLable1.frame.origin.y, 280-103-5, 13)];
+    validityLable2.backgroundColor = [UIColor clearColor];
     validityLable2.textColor=[UIColor grayColor];
     validityLable2.font=[UIFont systemFontOfSize:13];
     //validityLable2.backgroundColor = [UIColor redColor];
@@ -1394,6 +1400,7 @@ GO_NET
     
     
     RTLabel*roomApartmentLable2=[[RTLabel alloc]initWithFrame:CGRectMake(33, roomApartmentLable1.frame.origin.y+15, 280-33-20, 0)];
+    roomApartmentLable2.backgroundColor = [UIColor clearColor];
     roomApartmentLable2.text=Apartment;
     roomApartmentLable2.font=[UIFont systemFontOfSize:13];
     roomApartmentLable2.textColor=[UIColor grayColor];
@@ -1423,6 +1430,7 @@ GO_NET
         [scrollView addSubview:iv];
         
         RTLabel*roomOrederLable2=[[RTLabel alloc]initWithFrame:CGRectMake(118.5, roomOrderImage.frame.origin.y+i*25+3, 60, 15)];
+        roomOrederLable2.backgroundColor = [UIColor clearColor];
         roomOrederLable2.text = orderNameArr[i];
         roomOrederLable2.font=[UIFont systemFontOfSize:13];
         roomOrederLable2.textColor=[UIColor grayColor];
@@ -1430,7 +1438,8 @@ GO_NET
         
         if (i==1) {
             RTLabel*roomOrederLable3=[[RTLabel alloc]initWithFrame:CGRectMake(108.5, roomOrderImage.frame.origin.y+i*25, 157, 15)];
-            
+            roomOrederLable3.backgroundColor = [UIColor clearColor];
+            roomOrederLable3.backgroundColor = [UIColor clearColor];
             roomOrederLable3.text = [NSString stringWithFormat:@"               %@",[dataArray[index] objectForKey:@"OrderMark"]];
             roomOrederLable3.font=[UIFont systemFontOfSize:13];
             roomOrederLable3.textColor=[UIColor grayColor];
@@ -1482,6 +1491,7 @@ GO_NET
         
         
         RTLabel*remarkLable2=[[RTLabel alloc]initWithFrame:CGRectMake(33, remarkLable1.frame.origin.y+5, 280-33-20, 0)];
+        remarkLable2.backgroundColor = [UIColor clearColor];
         remarkLable2.text=remarkt;
         remarkLable2.font=[UIFont systemFontOfSize:13];
         remarkLable2.textColor=[UIColor grayColor];
@@ -1513,6 +1523,7 @@ GO_NET
         
         
         RTLabel*remarkLable2=[[RTLabel alloc]initWithFrame:CGRectMake(33, remarkLable1.frame.origin.y+5, 280-33-20, 0)];
+        remarkLable2.backgroundColor = [UIColor clearColor];
         remarkLable2.text=[dataArray[index] objectForKey:@"OrderNote"];
         remarkLable2.font=[UIFont systemFontOfSize:11];
         remarkLable2.textColor=[UIColor grayColor];
@@ -1529,6 +1540,7 @@ GO_NET
     
     //价格和预订
     RTLabel*price=[[RTLabel alloc]initWithFrame:CGRectMake(10, 0, 100, 0)];
+    price.backgroundColor = [UIColor clearColor];
     price.text=[NSString stringWithFormat: @"$<font size=20 color=orange >%@</font>起",_price];
     price.font = [UIFont systemFontOfSize:14];
     CGSize priceSize=[price optimumSize];
@@ -2090,6 +2102,7 @@ GO_NET
     //俄文
     RTLabel*russiaHead=[[RTLabel alloc]initWithFrame:CGRectMake(10, 20, 300, 0)];
     //中文
+    russiaHead.backgroundColor = [UIColor clearColor];
     russiaHead.text=[dataDic valueForKey:@"HotelRUName"];
     if (self.tag==1)
     {
@@ -2117,6 +2130,7 @@ GO_NET
     [tabHead addSubview:russiaHead];
     
     RTLabel*  chineseLable=[[RTLabel alloc]initWithFrame:CGRectMake(10,  russiaHead.frame.origin.y+ russiaHead.frame.size.height+5, 300, 0)];
+    chineseLable.backgroundColor = [UIColor clearColor];
     chineseLable.text=[dataDic valueForKey:@"HotelCNName"];
     if (self.tag==1)
     {
@@ -2165,6 +2179,7 @@ GO_NET
     
     introduceLable=[[RTLabel alloc]initWithFrame:CGRectMake(10, 0, 300, 0)];
     NSString*str=[dataDic valueForKey:@"Content"];
+    introduceLable.backgroundColor = [UIColor clearColor];
     introduceLable.font=[UIFont systemFontOfSize:15];
     introduceLable.text= [NSString stringWithFormat:@"%@",[dataDic valueForKey:@"Content"]];
     introduceLable.textColor=[UIColor grayColor];
@@ -2318,6 +2333,7 @@ GO_NET
     
     
     RTLabel*userInfo=[[RTLabel alloc]initWithFrame:CGRectMake(135, 10, 175, 70)];
+    userInfo.backgroundColor = [UIColor clearColor];
     userInfo.textColor=[UIColor colorWithRed:30.0/255 green:98.0/255 blue:167.0/255 alpha:1];
     userInfo.text=[NSString stringWithFormat:@"<font size=14 color=black>姓名</font> <font size=14 color=gray>%@（%@）</font><br><font size=14 color=black>国籍</font> <font size=14 color=gray>%@</font><br><font size=14 color=black>车况</font> %@人座 %@ %@",name,sex,country,seat,CarClass,jicheng];
     [intrdouce addSubview:userInfo];
@@ -2353,6 +2369,7 @@ GO_NET
     [order addSubview:link1];
     
     RTLabel*lable1=[[RTLabel alloc]initWithFrame:CGRectMake(10, 0, 80, 0)];
+    lable1.backgroundColor = [UIColor clearColor];
     lable1.text=[NSString stringWithFormat:@"$<font size=16  color=orange>%@</font>",[self.dataDic2 valueForKey:@"UPrice"]];
     CGSize size=[lable1 optimumSize];
     lable1.frame=CGRectMake(20, (order.frame.size.height-size.height)/2, 80, size.height);
@@ -2447,7 +2464,7 @@ GO_NET
     {
         UIView* order=[[UIView alloc]initWithFrame:CGRectMake(0, userImage.frame.origin.y+userImage.frame.size.height+10+50*i, 320, 50)];
         order.tag=61;
-        order.backgroundColor=[UIColor groupTableViewBackgroundColor];
+//        order.backgroundColor=[UIColor groupTableViewBackgroundColor];
         [tabHead addSubview:order];
         
         UIImageView*link1=[[UIImageView alloc]initWithFrame:CGRectMake(0, order.frame.size.height-2, 320, 2)];
@@ -2455,6 +2472,7 @@ GO_NET
         [order addSubview:link1];
         
         RTLabel*lable1=[[RTLabel alloc]initWithFrame:CGRectMake(10, 0,200, 0)];
+        lable1.backgroundColor = [UIColor clearColor];
         lable1.text=[titleArray objectAtIndex:i];
         CGSize size=[lable1 optimumSize];
         lable1.frame=CGRectMake(10, (order.frame.size.height-size.height)/2, 200, size.height);
@@ -2758,6 +2776,7 @@ GO_NET
         [view addSubview:lable];
         
         RTLabel*lable2=[[RTLabel alloc]initWithFrame:CGRectMake(115, 15, 195, 30)];
+        lable2.backgroundColor = [UIColor clearColor];
         lable2.lineSpacing=3;
         lable2.userInteractionEnabled=NO;
         
@@ -2836,6 +2855,7 @@ GO_NET
             [tabHead2 addSubview:iv];
             
             RTLabel*roomOrederLable2=[[RTLabel alloc]initWithFrame:CGRectMake(132, roomOrderImage.frame.origin.y+i*25+3, 60, 15)];
+            roomOrederLable2.backgroundColor = [UIColor clearColor];
             roomOrederLable2.text = orderNameArr[i];
             roomOrederLable2.font=[UIFont systemFontOfSize:13];
             roomOrederLable2.textColor=[UIColor grayColor];
@@ -2843,7 +2863,7 @@ GO_NET
             
             if (i==1) {
                 RTLabel*roomOrederLable3=[[RTLabel alloc]initWithFrame:CGRectMake(133.5, roomOrderImage.frame.origin.y+i*25+2, 157, 15)];
-                
+                roomOrederLable3.backgroundColor = [UIColor clearColor];
                 roomOrederLable3.text = [NSString stringWithFormat:@"               %@",[dataDic objectForKey:@"OrderMark"]];
                 roomOrederLable3.font=[UIFont systemFontOfSize:13];
                 roomOrederLable3.textColor=[UIColor grayColor];
@@ -2875,6 +2895,7 @@ GO_NET
             
             
             RTLabel*remarkLable2=[[RTLabel alloc]initWithFrame:CGRectMake(33, remarkLable1.frame.origin.y+5, 280-33-20, 0)];
+            remarkLable2.backgroundColor = [UIColor clearColor];
             remarkLable2.text=[dataDic objectForKey:@"Notice"];
             remarkLable2.font=[UIFont systemFontOfSize:13];
             remarkLable2.textColor=[UIColor grayColor];
@@ -2926,6 +2947,7 @@ GO_NET
             
             
             RTLabel*remarkLable2=[[RTLabel alloc]initWithFrame:CGRectMake(40, remarkLable1.frame.origin.y+5, 280-33-20, 0)];
+            remarkLable2.backgroundColor = [UIColor clearColor];
             remarkLable2.text=[dataDic objectForKey:@"OrderNote"];
             remarkLable2.font=[UIFont systemFontOfSize:13];
             remarkLable2.textColor=[UIColor grayColor];
@@ -2958,7 +2980,7 @@ GO_NET
         
         RTLabel*lable1=[[RTLabel alloc]initWithFrame:CGRectMake(10, 10, 80, 25)];
         //    lable1.font=[UIFont systemFontOfSize:18];
-        
+        lable1.backgroundColor = [UIColor clearColor];
         if (self.tag==1)
         {
             lable1.text=[NSString stringWithFormat:@"$<font size=16  color=orange>%@</font>起",[dataDic valueForKey:@"UDPrice"]];

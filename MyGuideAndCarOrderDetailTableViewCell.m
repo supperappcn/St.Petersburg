@@ -144,6 +144,7 @@
     [self addSubview:selectTimeTitle];
     [self.cellSubviews addObject:selectTimeTitle];
     self.selectTimeLab = [[RTLabel alloc]initWithFrame:CGRectMake(80, 175, DeviceWidth - 80 - 10, 21)];
+    self.selectTimeLab.backgroundColor = [UIColor clearColor];
     self.selectTimeLab.text = currentDic[@"Startdate"];
     float selectTimeHeight = self.selectTimeLab.optimumSize.height;
     selectTimeHeight = selectTimeHeight>21?selectTimeHeight:21;
@@ -195,6 +196,7 @@
         [self addSubview:shanChangTitle];
         [self.cellSubviews addObject:shanChangTitle];
         RTLabel* shanChangLab = [[RTLabel alloc]initWithFrame:CGRectMake(145, 152, DeviceWidth - 145 - 17, 20)];
+        shanChangLab.backgroundColor = [UIColor clearColor];
         shanChangLab.text = currentDic[@"JiangJie"];
         float shanChangHeight = shanChangLab.optimumSize.height;
         shanChangHeight = shanChangHeight>20?shanChangHeight:20;

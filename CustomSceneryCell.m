@@ -70,6 +70,7 @@
 
         
         self.price=[[RTLabel alloc]initWithFrame:CGRectMake(250, self.gradeImage.frame.origin.y-5, 60, 30)];
+        self.price.backgroundColor = [UIColor clearColor];
         self.price.textColor=[UIColor grayColor];
         //self.price.text=[NSString stringWithFormat:@"$<font size=21 color=orange>520</font>起"];
         self.price.textAlignment=RTTextAlignmentRight;

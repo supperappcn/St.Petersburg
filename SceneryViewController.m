@@ -74,6 +74,7 @@ hideTabbar
         
         
         RTLabel*lable=[[RTLabel alloc]initWithFrame:CGRectMake(35, 7, 265, height)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.userInteractionEnabled=NO;
 //      lable.font=[UIFont fontWithName:@"Microsoft YaHei" size:12];
         lable.backgroundColor=[UIColor clearColor];

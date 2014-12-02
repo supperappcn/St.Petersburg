@@ -77,7 +77,7 @@ backButton
     UIScrollView *sv = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     sv.backgroundColor = BLACK_VIEW_COLOR;
     RTLabel *lab = [[RTLabel alloc]initWithFrame:CGRectMake(10, -10, 300, 0)];
-    
+    lab.backgroundColor = [UIColor clearColor];
     lab.lineSpacing = 10;
     lab.font = [UIFont systemFontOfSize:13];
     lab.text = contentStr;

@@ -36,6 +36,7 @@
         
         
         self.titleLable=[[RTLabel alloc]initWithFrame:CGRectMake(10, 40, 300, 60)];
+        self.titleLable.backgroundColor = [UIColor clearColor];
         [self addSubview:self.titleLable];
         
         UIImageView*_imageView2=[[UIImageView alloc]initWithFrame:CGRectMake(260, 5, 50, 20)];

@@ -121,6 +121,7 @@ GO_NET
     _scrollView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight)];
 
     head=[[RTLabel alloc]initWithFrame:CGRectMake(5, 5, 310,0)];
+    head.backgroundColor = [UIColor clearColor];
     head.text=[dic1 valueForKey:@"Title"];
     
     NSLog(@"%@----",[dic1 valueForKey:@"Title"]);
@@ -154,7 +155,7 @@ GO_NET
     
     
     time=[[RTLabel alloc]initWithFrame:CGRectMake(10,imageView.frame.origin.y+imageView.frame.size.height+5, 310,20)];
-    
+    time.backgroundColor = [UIColor clearColor];
     NSMutableString*strtime=[dic1 valueForKey:@"PTime"];
     [strtime replaceOccurrencesOfString:@"/" withString:@"-" options:NSCaseInsensitiveSearch range:NSMakeRange(0, 10)];
     

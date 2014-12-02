@@ -73,6 +73,7 @@ backButton
     
     UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 0)];
     footLab = [[RTLabel alloc]initWithFrame:CGRectMake(10, 20, 300, 0)];
+    footLab.backgroundColor = [UIColor clearColor];
     if (_tag==2) {
         footLab.text = [NSString stringWithFormat:@"<font size=16 color=black><b>个人介绍\n</b></font><font size=16 color=gray>    %@</font>",[dic2 objectForKey:@"Note"]];
     }else footLab.text = [NSString stringWithFormat:@"<font size=16 color=black><b>导游/翻译团队介绍\n</b></font><font size=16 color=gray>    %@</font>",[dic2 objectForKey:@"Note"]];
@@ -718,6 +719,7 @@ postRequestAgency(_datas)
     [cell.contentView addSubview:_link];
     
     RTLabel *lab = [[RTLabel alloc]initWithFrame:CGRectMake(10, 12, 200, 30)];
+    lab.backgroundColor = [UIColor clearColor];
     lab.text = _tableArr[indexPath.row];
     lab.font = [UIFont systemFontOfSize:16];
     [cell.contentView addSubview:lab];

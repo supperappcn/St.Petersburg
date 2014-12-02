@@ -31,6 +31,7 @@ backButton
     [sv addSubview:iv1];
     
     RTLabel *lab2 = [[RTLabel alloc]initWithFrame:CGRectMake(10, iv1.frame.origin.y+iv1.frame.size.height+20, 300, 0)];
+    lab2.backgroundColor = [UIColor clearColor];
     lab2.text = @"       普希金话剧院（国立普希金模范话剧院）是圣彼得堡欣赏话剧的最佳场所，它于1832年建成。该话剧院的建筑极具特色：剧院有六根巨大的圆柱，正面两侧壁龛里有舞蹈女神缪斯忒尔普西科拉和悲剧女神缪斯墨尔波墨涅的塑像，楣额上是镶在楼冠里的竖琴，再上面是美神和艺术保护神阿波罗的飞辇，剧院墙壁的四周，装饰着用悲剧面具和花环组成的饰带，剧院广场上矗立着叶卡特琳娜二世的全身雕像。\n       此外，圣彼得堡的马林斯基剧院、圣彼得堡青年剧院等也是欣赏俄罗斯话剧的绝佳场所。\n       俄罗斯有名的话剧有：《三姐妹》、《轨道》、《五个黄昏》、《战争与和平》、奥斯特洛夫斯基的《智者千虑，必有一失》和《狼与羊》、高尔基的《小市民》、《狼与羊》等，都是认识和体验博大的俄罗斯文化的绝好作品。";
     lab2.frame = CGRectMake(10, iv1.frame.origin.y+iv1.frame.size.height+20, 300, lab2.optimumSize.height);
     [sv addSubview:lab2];

@@ -94,6 +94,7 @@ backButton
     UIView*headView=[[UIView alloc]init];
     //俄文
     RTLabel*head=[[RTLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 0)];
+    head.backgroundColor = [UIColor clearColor];
     head.font=[UIFont boldSystemFontOfSize:18];
     head.text=self.eTittle==nil?self.head:self.eTittle;
     
@@ -103,6 +104,7 @@ backButton
     [headView addSubview:head];
     //中文
     RTLabel*ehead=[[RTLabel alloc]initWithFrame:CGRectMake(10, 0, 300, 0)];
+    ehead.backgroundColor = [UIColor clearColor];
     ehead.font=[UIFont boldSystemFontOfSize:14];
     ehead.text=self.eTittle==nil?nil:self.head;
     CGSize size2=[ehead optimumSize];

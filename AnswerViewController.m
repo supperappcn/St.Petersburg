@@ -60,6 +60,7 @@
     [self.view addSubview:answer];
     
     RTLabel*lable2=[[RTLabel alloc]initWithFrame:CGRectMake(42, answer.frame.origin.y, 270, 0)];
+    lable2.backgroundColor = [UIColor clearColor];
     lable2.font=[UIFont systemFontOfSize:16];
     lable2.lineSpacing=8;
     lable2.text=self.text;

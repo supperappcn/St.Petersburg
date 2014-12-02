@@ -29,6 +29,7 @@ backButton
     UIColor* grayColor = [UIColor grayColor];
     UIFont* font_14 = [UIFont systemFontOfSize:14];
     RTLabel* messageLab = [[RTLabel alloc]initWithFrame:CGRectMake(10, 12, self.view.frame.size.width - 20, 20)];//使用RTLabel时存在2pixel的误差
+    messageLab.backgroundColor = [UIColor clearColor];
     if ([self.payWay isEqualToString:@"当面支付"]) {
         messageLab.text = @"您的订单已选择当面支付！将有相关客服人员与您联系。";
     }else {

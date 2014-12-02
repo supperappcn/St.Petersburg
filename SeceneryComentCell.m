@@ -43,7 +43,7 @@
         
         
         self.title=[[RTLabel alloc]initWithFrame:CGRectMake(50, self._imageView1.frame.origin.y+self._imageView1.frame.size.height+5, 260, 40)];
-        
+        self.title.backgroundColor = [UIColor clearColor];
         [self addSubview:self.title];
         
         

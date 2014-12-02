@@ -49,7 +49,7 @@
 
         
         self.title=[[RTLabel alloc]initWithFrame:CGRectMake(50,40, 240, 0)];
-        
+        self.title.backgroundColor = [UIColor clearColor];
        
         
         [self addSubview:self.title];

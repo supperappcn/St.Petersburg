@@ -74,6 +74,7 @@ backButton
     _link.frame = CGRectMake( 10, 0, 300, 2);
     [footView addSubview:_link];
     footLab = [[RTLabel alloc]initWithFrame:CGRectMake(10, 20, 300, 0)];
+    footLab.backgroundColor = [UIColor clearColor];
     footLab.text = [NSString stringWithFormat:@"<font size=15 color=black><b>个人介绍\n</b></font><font size=12 color=gray>    %@</font>",[dic2 objectForKey:@"Note"]];
     footLab.frame = CGRectMake(10, 20, 300, footLab.optimumSize.height);
     footView.frame = CGRectMake(0, 0, 320, footLab.frame.size.height+40);
@@ -94,6 +95,7 @@ backButton
     {
         RTLabel*lable;
         lable = [[RTLabel alloc]initWithFrame:CGRectMake(0, 0, 190, 0)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.text=textArr[indexPath.row];
         lable.font = [UIFont boldSystemFontOfSize:16];
        

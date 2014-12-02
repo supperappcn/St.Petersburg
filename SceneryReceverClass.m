@@ -128,11 +128,13 @@ backButton
     
     
     RTLabel *lab = [[RTLabel alloc]initWithFrame:CGRectMake(10, 50, 300, 15)];
+    lab.backgroundColor = [UIColor clearColor];
     lab.text = [NSString stringWithFormat:@"%@",_roomTypeStr];
     lab.font = [UIFont systemFontOfSize:11];
     [sv addSubview:lab];
     
     RTLabel *lab2 = [[RTLabel alloc]initWithFrame:CGRectMake(10, 70, 300, 15)];
+    lab2.backgroundColor = [UIColor clearColor];
     lab2.text = [NSString stringWithFormat:@"<font size=11 color=gray>开放时间 : </font>%@",_showTime];
     lab2.font = [UIFont systemFontOfSize:11];
     [sv addSubview:lab2];
@@ -353,6 +355,7 @@ backButton
     
     if (_reseverKnowStr.length>0) {
         RTLabel *content = [[RTLabel alloc] initWithFrame:CGRectMake(10, 43+10, 300, 0)];
+        content.backgroundColor = [UIColor clearColor];
         content.text = _reseverKnowStr;
         content.font = [UIFont systemFontOfSize:11];
         content.frame = CGRectMake(10, 43+10, 300, content.optimumSize.height);
@@ -453,6 +456,7 @@ backButton
     //价格和预订
     
     price=[[RTLabel alloc]initWithFrame:CGRectMake(10, 10, 150, 25)];
+    price.backgroundColor = [UIColor clearColor];
     price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%@</font><font color=white>（$%@)</font>",_RMB,_dollar];
     price.font = [UIFont systemFontOfSize:13.5];
     [guding addSubview:price];

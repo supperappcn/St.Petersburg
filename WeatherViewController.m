@@ -170,6 +170,7 @@ backButton
             [imageView addSubview:line];
             
             RTLabel*lable=[[RTLabel alloc]initWithFrame:CGRectMake(30, 35, 100, 60)];
+            lable.backgroundColor = [UIColor clearColor];
             [imageView addSubview:lable];
             NSDateFormatter *dayFormatter = [NSDateFormatter new];
             [dayFormatter setAMSymbol:@"AM"];
@@ -191,6 +192,7 @@ backButton
 
             
             RTLabel*weatherCondition2=[[RTLabel alloc]initWithFrame:CGRectMake(225, 0, 320, 0)];
+            weatherCondition2.backgroundColor = [UIColor clearColor];
             weatherCondition2.textColor=[UIColor redColor];
 
             NSString*wind;
@@ -261,6 +263,7 @@ backButton
             [imageView addSubview:line];
             
             RTLabel*lable=[[RTLabel alloc]init];
+            lable.backgroundColor = [UIColor clearColor];
             lable.frame=CGRectMake(30, (imageView.frame.size.height-50)/2, 100, 50);
             [imageView addSubview:lable];
             
@@ -273,6 +276,7 @@ backButton
 
         
             RTLabel*weatherCondition2=[[RTLabel alloc]init];
+            weatherCondition2.backgroundColor = [UIColor clearColor];
            // NSLog(@"%@",forecastArray);
             weatherCondition2.textAlignment=NSTextAlignmentCenter;
             weatherCondition2.frame=CGRectMake(200, (imageView.frame.size.height-30)/2, 100, 30);

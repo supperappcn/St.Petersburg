@@ -72,6 +72,7 @@ backButton
     //            116, 13.5, 150, 16
     //            296.5, 13.5, 16, 16
                 RTLabel *dateLabe = (RTLabel*)[self.view viewWithTag:11];
+                dateLabe.backgroundColor = [UIColor clearColor];
                 UIButton *dateBtn = (UIButton*)[self.view viewWithTag:100];
                 UIButton *orderCountBtn = (UIButton*)[self.view viewWithTag:101];
                 UIButton *travellerCountBtn;
@@ -176,6 +177,7 @@ backButton
         if (_ProdType.intValue==1) {
             
             headerLab = [[RTLabel alloc] initWithFrame:CGRectMake(10, 5, 300, 20)];
+            headerLab.backgroundColor = [UIColor clearColor];
             headerLab.text=[NSString stringWithFormat:@"<font  size=14 color=black><b>%@</b></font> <font  size=12 color=gray>%@ %@</font> <font size=12>%@</font>",_nameStr,_countryStr,_sexStr,_carAndGuideTypeStr];
             headerLab.textColor = [UIColor colorWithRed:30.0/255 green:98.0/255 blue:167.0/255 alpha:1];
             NSLog(@"%@",headerLab.text);
@@ -184,6 +186,7 @@ backButton
             
         }else if (_ProdType.intValue==2){
             headerLab = [[RTLabel alloc] initWithFrame:CGRectMake(10, 5, 300, 42)];
+            headerLab.backgroundColor = [UIColor clearColor];
             headerLab.text=[NSString stringWithFormat:@"<font  size=16 color=red><b>%@</b></font>\n<font  size=12 color=black>%@</font> ",_nameStr,_CNUStudentStr];
             //headerLab.textColor = [UIColor colorWithRed:30.0/255 green:98.0/255 blue:167.0/255 alpha:1];
             headerLab.lineSpacing=3;
@@ -231,6 +234,7 @@ backButton
                 [bv addTarget:self action:@selector(gotoChangeDate:) forControlEvents:UIControlEventTouchUpInside];
                 //前日期
                 RTLabel *date= [[RTLabel alloc] initWithFrame:CGRectMake(116, 13, 185, 16)];
+                date.backgroundColor = [UIColor clearColor];
                 date.font = [UIFont systemFontOfSize:16];
                 date.userInteractionEnabled = YES;
                 date.tag = 11;
@@ -491,6 +495,7 @@ backButton
     
     if (_reseverKnowStr.length>0) {
         RTLabel *content = [[RTLabel alloc] initWithFrame:CGRectMake(10, 43+10, 300, 0)];
+        content.backgroundColor = [UIColor clearColor];
         content.text = _reseverKnowStr;
         content.font = [UIFont systemFontOfSize:11];
         content.frame = CGRectMake(10, 43+10, 300, content.optimumSize.height);
@@ -594,6 +599,7 @@ backButton
     //价格和预订
     
     price=[[RTLabel alloc]initWithFrame:CGRectMake(10, 10, 150, 25)];
+    price.backgroundColor = [UIColor clearColor];
     price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%@</font><font color=white>（$%@)</font>",_RMB,_dollar];
     price.font = [UIFont systemFontOfSize:13.5];
     [guding addSubview:price];

@@ -24,6 +24,7 @@
         
         
         self.head=[[RTLabel alloc]initWithFrame:CGRectMake( self._imageView.frame.origin.x+self._imageView.frame.size.width+5, self.backGround.frame.origin.y+13,150 , 30)];
+        self.head.backgroundColor = [UIColor clearColor];
         self.head.font=[UIFont boldSystemFontOfSize:17];
         [  self.backGround addSubview:self.head];
         

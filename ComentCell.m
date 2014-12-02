@@ -21,16 +21,19 @@
         [self.contentView addSubview:self.headImage];
         
         self.name=[[RTLabel alloc]initWithFrame:CGRectMake(60, 8, 250, 20)];
+        self.name.backgroundColor = [UIColor clearColor];
        // self.name.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"skyBlue.png"]];
         self.name.font=[UIFont systemFontOfSize:12.5];
         [self.contentView addSubview:self.name];
         
         self.date=[[RTLabel alloc]initWithFrame:CGRectMake(145, 10, 155, 20)];
+        self.date.backgroundColor = [UIColor clearColor];
         self.date.textColor=[UIColor grayColor];
         self.date.font=[UIFont systemFontOfSize:10];
         [self.contentView addSubview:self.date];
         
         self.comment=[[RTLabel alloc]initWithFrame:CGRectMake(60, 30, 250, 0)];
+        self.comment.backgroundColor = [UIColor clearColor];
         self.comment.font=[UIFont systemFontOfSize:12.5];
         [self.contentView addSubview:self.comment];
         

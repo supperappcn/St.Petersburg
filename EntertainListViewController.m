@@ -473,6 +473,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         }
        
         RTLabel*lable=[[RTLabel alloc]initWithFrame:CGRectMake(5, 160, 200, 20)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.text=[[headerArray objectAtIndex:i] valueForKey:@"Title"];
         lable.font=[UIFont systemFontOfSize:15];
         lable.textColor=[UIColor whiteColor];
@@ -1053,6 +1054,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
                         
                         
                         RTLabel *priceLab = [[RTLabel alloc]initWithFrame:CGRectMake(90, 0, 60, 20)];
+                        priceLab.backgroundColor = [UIColor clearColor];
                         priceLab.textColor = [UIColor grayColor];
                         priceLab.font = [UIFont systemFontOfSize:12];
                         [mainLab addSubview:priceLab];
@@ -1561,6 +1563,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     
     
     RTLabel*russiaLable=[[RTLabel alloc]initWithFrame:CGRectMake(3, imageView.frame.origin.y+imageView.frame.size.height, 145, 0)];
+    russiaLable.backgroundColor = [UIColor clearColor];
     russiaLable.font=[UIFont systemFontOfSize:15];
     russiaLable.text=[[_dataArray objectAtIndex:indexPath]valueForKey:@"RestRName"];
     
@@ -1589,7 +1592,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     
     RTLabel*_price=[[RTLabel alloc]initWithFrame:CGRectMake(3,140, 142, 20)];
     _price.text=[NSString stringWithFormat:@"人均消费：$%@",[[_dataArray objectAtIndex:indexPath]valueForKey:@"Price"]];
-    
+    _price.backgroundColor = [UIColor clearColor];
     
     _price.font=[UIFont systemFontOfSize:12];
     _price.textColor=[UIColor grayColor];
@@ -1714,6 +1717,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
    
     
     RTLabel*_price=[[RTLabel alloc]initWithFrame:CGRectMake(145,typeLable.frame.origin.y+5, 0, 30)];
+    _price.backgroundColor = [UIColor clearColor];
     _price.text=[NSString stringWithFormat:@"<font size=15 color=orange>¥%d</font>起", [[[_dataArray objectAtIndex:indexPath]valueForKey:@"LPrice"]integerValue]] ;
     if (self.tag==1)
     {
@@ -2058,6 +2062,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         {
             
             RTLabel*lable=(RTLabel*)[self.view viewWithTag:63];
+            lable.backgroundColor = [UIColor clearColor];
             NSLog(@"length=====%d",lable.text.length);
             if (lable.text.length!=30)
             {
@@ -2116,6 +2121,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     NSString *title1 = [dayFormatter stringFromDate:_fromDate];
 //    [dayFormatter release];
     RTLabel*lable=(RTLabel*)[self.view viewWithTag:160];
+    lable.backgroundColor = [UIColor clearColor];
     lable.text=[NSString stringWithFormat:@"<font color=gray>从</font> %@",title1];
     
     
@@ -2133,6 +2139,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     if (title2 && title2.length > 0)
     {
         RTLabel*lable=(RTLabel*)[self.view viewWithTag:161];
+        lable.backgroundColor = [UIColor clearColor];
         lable.text=[NSString stringWithFormat:@"<font color=gray>到</font> %@",title2];
     }
 //       dayFormatter.dateFormat = @"yyyy-LL-d";
@@ -2403,7 +2410,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
                 self.FromDate=nil;
                 self.ToDate=nil;
                 RTLabel*lable=(RTLabel*)[self.view viewWithTag:160];
+                lable.backgroundColor = [UIColor clearColor];
                 RTLabel*lable11=(RTLabel*)[self.view viewWithTag:161];
+                lable11.backgroundColor = [UIColor clearColor];
                 lable.text=[NSString stringWithFormat:@"<font color=gray>从</font> %@",@"选择日期"];
                lable11.text=[NSString stringWithFormat:@"<font color=gray>从</font> %@",@"选择日期"];
                     
@@ -3483,6 +3492,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         [button addSubview:data];
         
         RTLabel*lable=[[RTLabel alloc]initWithFrame:CGRectMake(20, 0, 220, 0)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.tag=160+i;
         lable.userInteractionEnabled=NO;
         lable.text=[Array objectAtIndex:i];
@@ -4024,9 +4034,11 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     
     
     RTLabel*lable=(RTLabel*)[self.view viewWithTag:160];
+    lable.backgroundColor = [UIColor clearColor];
     lable.text=[NSString stringWithFormat:@"<font color=gray>从</font> %@",oldStartData];
     
     RTLabel*lable11=(RTLabel*)[self.view viewWithTag:161];
+    lable11.backgroundColor = [UIColor clearColor];
     lable11.text=[NSString stringWithFormat:@"<font color=gray>从</font> %@",oldEndData];
    
     if ([startData isEqualToString:@""]||[endData isEqualToString:@""])

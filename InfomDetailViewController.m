@@ -105,12 +105,14 @@ NetChange(noNetButton)
     [self.view addSubview:_scrollView];
     RTLabel*head=[[RTLabel alloc]initWithFrame:CGRectMake(10, 10, 300,40)];
     head.text=[dic1 valueForKey:@"Title"];
+    head.backgroundColor = [UIColor clearColor];
     head.font=[UIFont systemFontOfSize:18];
     head.font=[UIFont boldSystemFontOfSize:18];
     CGSize headSize=[head optimumSize];
      head.frame=CGRectMake(10, 10, 310,headSize.height );
     [_scrollView addSubview:head];
   time=[[RTLabel alloc]initWithFrame:CGRectMake(10,head.frame.origin.y+head.frame.size.height+5, 310,40)];
+    time.backgroundColor = [UIColor clearColor];
     NSString*strtime=[dic1 valueForKey:@"PTime"];
     
     

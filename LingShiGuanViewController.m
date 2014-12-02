@@ -24,6 +24,7 @@ backButton
     [self.view addSubview:sv];
     
     RTLabel *lab1 = [[RTLabel alloc]initWithFrame:CGRectMake(10, 20, 300, 0)];
+    lab1.backgroundColor = [UIColor clearColor];
     lab1.text = @"驻圣彼得堡总领事馆";
     lab1.font = [UIFont boldSystemFontOfSize:20];
     lab1.frame = CGRectMake(10, 20, 300, lab1.optimumSize.height);
@@ -44,6 +45,7 @@ backButton
     sv2.zoomScale=3;
     [sv2 setContentOffset:CGPointMake(0, 180)];
     RTLabel *lab2 = [[RTLabel alloc]initWithFrame:CGRectMake(10, sv2.frame.origin.y+sv2.frame.size.height+20, 300, 0)];
+    lab2.backgroundColor = [UIColor clearColor];
     lab2.text = @"       <b>办公时间</b>：9:00-12:00  15:00-18:00\n       <b>电话</b>：007-812-7137605\n       <b>传真</b>：007-812-7144958\n       <b>邮箱</b>：chinaconsul_sp_ru@mfa.gov.cn\n       <b>地址</b>：俄罗斯圣彼得堡市戈里鲍耶多夫沿河街134号\n       <b>签证办理时间</b>：周一至周五9:00-13:00、14:00-18:00\n       <b>领区</b>：圣彼得堡市、列宁格勒州、普斯科夫州、诺夫哥罗德州、摩尔曼斯克州、阿尔汉格尔斯克州、卡雷利阿共和国\n       <b>交通信息</b>：坐公交车在公园站(Садовая д.77)或者列拉马多夫斯基大街站Лермонтовский проспект д.10)下车";
     lab2.frame = CGRectMake(10, sv2.frame.origin.y+sv2.frame.size.height+20, 300, lab2.optimumSize.height);
     [sv addSubview:lab2];

@@ -25,10 +25,12 @@
         
         self.head=[[RTLabel alloc]initWithFrame:CGRectMake(115, 15, 140, 20)];
         //self.head.text=@"标准双床房";
+        self.head.backgroundColor = [UIColor clearColor];
         self.head.font=[UIFont boldSystemFontOfSize:18];
         [self.backGround addSubview:self.head];
         
         self.title=[[RTLabel alloc]initWithFrame:CGRectMake(115, 35, 140, 50)];
+        self.title.backgroundColor = [UIColor clearColor];
         self.title.textColor=[UIColor grayColor];
         //self.title.text=@"早晨 大床 wifi";
         self.title.font=[UIFont systemFontOfSize:13];
@@ -36,6 +38,7 @@
 
         
         self.price=[[RTLabel alloc]initWithFrame:CGRectMake(230, 10, 80, 30)];
+        self.price.backgroundColor = [UIColor clearColor];
         self.price.text=@"¥<font size=20 color=orange>520</font>";
         self.price.textAlignment=RTTextAlignmentRight;
         [self.backGround addSubview:self.price];

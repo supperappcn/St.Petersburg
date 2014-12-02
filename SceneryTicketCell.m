@@ -36,6 +36,7 @@
         
         
         self.price=[[RTLabel alloc]initWithFrame:CGRectMake(230, 10, 80, 30)];
+        self.price.backgroundColor = [UIColor clearColor];
         //self.price.text=@"¥<font size=20 color=orange>520</font>";
         self.price.textAlignment=RTTextAlignmentRight;
         [self.backGround addSubview:self.price];

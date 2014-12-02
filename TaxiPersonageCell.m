@@ -20,15 +20,19 @@
         self._imageView.image=BACK_IMAGE;
         [self addSubview:self._imageView];
         self.nameCountrySexSeatCountCarClassJicheng=[[RTLabel alloc]initWithFrame:CGRectMake(115, 10, 205, 20)];
+        self.nameCountrySexSeatCountCarClassJicheng.backgroundColor = [UIColor clearColor];
         self.nameCountrySexSeatCountCarClassJicheng.textColor = [UIColor colorWithRed:30.0/255 green:98.0/255 blue:167.0/255 alpha:1];
         [self addSubview:self.nameCountrySexSeatCountCarClassJicheng];
         self.carBrand=[[RTLabel alloc]initWithFrame:CGRectMake(115, 30, 200, 20)];
+        self.carBrand.backgroundColor = [UIColor clearColor];
         self.carBrand.backgroundColor=[UIColor clearColor];
         [self addSubview:self.carBrand];
         self.zongZhi=[[RTLabel alloc]initWithFrame:CGRectMake(115, 50, 198, 40)];
         [self addSubview:self.zongZhi];
+        self.zongZhi.backgroundColor = [UIColor clearColor];
         
         self.priceHour=[[RTLabel alloc]initWithFrame:CGRectMake(115, 85, 198, 20)];
+        self.priceHour.backgroundColor = [UIColor clearColor];
         [self addSubview:self.priceHour];
 
         UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(10, 113, 300, 2)];

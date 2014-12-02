@@ -581,6 +581,7 @@ postRequestAgency(datas)
                     
                     
                     RTLabel *priceLab = [[RTLabel alloc]initWithFrame:CGRectMake(90, 0, 60, 20)];
+                    priceLab.backgroundColor = [UIColor clearColor];
                     priceLab.textColor = [UIColor grayColor];
                     priceLab.font = [UIFont systemFontOfSize:12];
                     [mainLab addSubview:priceLab];

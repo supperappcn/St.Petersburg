@@ -72,6 +72,7 @@
     [self addSubview:orderTimeTitle];
     [self.cellSubviews addObject:orderTimeTitle];
     RTLabel* orderTimeLab = [[RTLabel alloc]initWithFrame:CGRectMake(80, 52, DeviceWidth - 17 - 80, 21)];
+    orderTimeLab.backgroundColor = [UIColor clearColor];
     orderTimeLab.text = dic[@"Startdate"];
     self.orderTimeLabHeight = orderTimeLab.optimumSize.height;
     self.orderTimeLabHeight = self.orderTimeLabHeight>21?self.orderTimeLabHeight:21;

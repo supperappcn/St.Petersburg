@@ -481,6 +481,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         {
             
             RTLabel*lable=(RTLabel*)[self.view viewWithTag:63];
+            lable.backgroundColor = [UIColor clearColor];
            // NSLog(@"length=====%d",lable.text.length);
             if (lable.text.length!=30)
             {
@@ -756,6 +757,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         [button addSubview:data];
         
         RTLabel*lable=[[RTLabel alloc]initWithFrame:CGRectMake(20, 0, 220, 0)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.tag=63+i;
         lable.userInteractionEnabled=NO;
         lable.text=[array4 objectAtIndex:i];

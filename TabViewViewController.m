@@ -610,6 +610,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert ,navActivity)
         [view setImage:[UIImage imageNamed:@"defaultBig.gif"] forState:UIControlStateNormal];
         view.tag=100+i;
         RTLabel*lable=[[RTLabel alloc]initWithFrame:CGRectMake(5, view.frame.size.height-20, 200, 20)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.text=[[topArray objectAtIndex:i]valueForKey:@"Title"];
         lable.font=[UIFont systemFontOfSize:15];
         lable.textColor=[UIColor whiteColor];
