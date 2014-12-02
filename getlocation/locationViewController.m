@@ -103,7 +103,7 @@ backButton
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *index = @"locCell";
+    NSString *index = [NSString stringWithFormat:@"Cell%d%d", [indexPath section], [indexPath row]];//以indexPath来唯一确定cell
     locationCell *cell = [tableView dequeueReusableCellWithIdentifier:index];
     if (cell == nil)
     {
