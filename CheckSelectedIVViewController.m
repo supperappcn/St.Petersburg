@@ -68,6 +68,7 @@ backButton
     self.pageControl.numberOfPages = self.imageViewsArr.count;
     self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
     self.pageControl.currentPageIndicatorTintColor = [UIColor grayColor];
+    self.pageControl.hidden = YES;
     [self.view addSubview:self.pageControl];
     for (int i = 0; i < self.imageViewsArr.count; i++) {
         UIImageView* imageView = self.imageViewsArr[i];
@@ -201,7 +202,7 @@ backButton
 }
 
 -(BOOL)prefersStatusBarHidden {
-    return self.isFullScreen; //返回NO表示要显示，返回YES将hiden
+    return self.isFullScreen; //返回YES表示全屏，返回NO表示非全屏
 }
 
 -(void)viewWillLayoutSubviews {
@@ -232,11 +233,6 @@ backButton
 //        }
 //    }
 //    NSLog(@"222self.view.frame:%@,self.view.bounds:%@,self.scrollView.frame:%@",NSStringFromCGRect(self.view.frame),NSStringFromCGRect(self.view.bounds),NSStringFromCGRect(self.scrollView.frame));
-//    CGRect viewBounds = self.view.bounds;
-//    CGFloat topBarOffset = 20.0;
-//    viewBounds.origin.y = -topBarOffset;
-//    self.view.bounds = viewBounds;
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];//for status bar style
 }
 
 - (void)didReceiveMemoryWarning

@@ -51,7 +51,6 @@ backButton
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (data) {
-                    NSLog(@"dataFinish");
                     imageView.image = [UIImage imageWithData:data];
                     [aiv stopAnimating];
                     [aiv removeFromSuperview];

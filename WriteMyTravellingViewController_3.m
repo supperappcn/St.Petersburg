@@ -202,8 +202,6 @@ backButton
 }
 
 -(void)tapImageView:(UIGestureRecognizer*)tap {
-    NSLog(@"imageView:%@",tap.view);
-    
     UIImageView* iv = (UIImageView*)tap.view;
     CheckSelectedIVViewController* cSIVVC = [CheckSelectedIVViewController new];
     cSIVVC.imageViewsArr = self.imageViewsArr;

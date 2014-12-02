@@ -20,7 +20,7 @@ backButton
     wv = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     wv.scalesPageToFit=YES;
 //    wv.userInteractionEnabled = YES;
-    NSString *HTMLData=[NSString stringWithFormat:@"<div id='foo' style='line-height:1.5'><font size=8 line-height=25>%@</font></div>",_htmlStr];
+    NSString *HTMLData=[NSString stringWithFormat:@"<div id='foo' style='line-height:1.5'><font size=14px; line-height=25>%@</font></div>",_htmlStr];
     [wv loadHTMLString:HTMLData baseURL:nil];
     [self.view addSubview:wv];
 

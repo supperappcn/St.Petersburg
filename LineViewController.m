@@ -865,7 +865,6 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     NSString *path = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"myData/%@",text]];
    // NSLog(@"filePath %@",path);
     
-    
     return path;
 }
 
