@@ -18,6 +18,7 @@
         self._imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
         [self addSubview:self._imageView];
         self.lable=[[UILabel alloc]initWithFrame:CGRectMake(5, 0, 100, 40)];
+        self.lable.backgroundColor = [UIColor clearColor];
         [self._imageView addSubview:self.lable];
         // Initialization code
     }

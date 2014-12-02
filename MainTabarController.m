@@ -27,19 +27,41 @@
 {
     [super viewDidLoad];
     [self initCustomTabBar];
-    
+    [self tabBarAdagter];
     
     
 }
+
+
+#pragma -mark TabBar适配
+- (void)tabBarAdagter
+{
+    CGRect tabBarFrame = self.tabBar.frame;
+    tabBarFrame.origin.y = DeviceHeight;//tabBar的位置
+    self.tabBar.frame = tabBarFrame;
+    
+    UIView *transSition = self.view.subviews[0];
+    NSLog(@"subviews = %@",self.view.subviews);
+    transSition.frame = CGRectMake(0, 0, DeviceWidth, DeviceHeight);//主屏的大小，位置，不包TabBar，包状态栏
+    
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+    {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.tabBar.translucent = YES;
+        
+        CGRect b = transSition.bounds;
+        b.origin.y = 0;
+        transSition.bounds = b;
+    }
+    
+}
+
+
 - (void)initCustomTabBar
 {
 
     [self.tabBar setHidden:YES];
     self.customizedBar = [[UIView alloc]initWithFrame:CGRectMake(0, DeviceHeight-49,DeviceWidth ,49)];
-    if ([[UIDevice currentDevice] systemVersion].floatValue <7)
-    {
-        self.customizedBar.frame = CGRectMake(0, 0, DeviceWidth, DeviceHeight);//主屏的大小，位置，不包TabBar，包状态栏
-    }
 //    highlightImageNames=[[NSArray alloc]initWithObjects:@"home_h.png",@"tool_h.png",@"neighbo_h.png",@"mine_h.png",@"more_h.png", nil];
 //     normalImageNames=[[NSArray alloc]initWithObjects:@"home.png",@"tool.png",@"neighbo.png",@"mine.png",@"more.png", nil];
     

@@ -64,6 +64,7 @@ hideTabbar
               UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 20+40*i, 320, 40)];
             imageView.userInteractionEnabled=YES;
             UILabel*l=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 80, 40)];
+            l.backgroundColor = [UIColor clearColor];
             l.userInteractionEnabled=YES;
 //            l.backgroundColor=[UIColor blueColor];
             l.text=[zhuce objectAtIndex:i];
@@ -163,6 +164,7 @@ hideTabbar
         logIn.userInteractionEnabled=YES;
         logIn.image=[UIImage imageNamed:@"memeber_headBack.png"];
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(5, 0, 90,50)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.text=@"详细地址";
         lable.textAlignment=NSTextAlignmentLeft;
 //        [logIn addSubview:lable];
@@ -219,7 +221,7 @@ hideTabbar
             
             UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(10, (50-20)/2, 90, 20)];
             lable.text=[mima objectAtIndex:i];
-            
+            lable.backgroundColor = [UIColor clearColor];
             lable.textAlignment=NSTextAlignmentLeft;
             [logIn addSubview:lable];
             
@@ -521,6 +523,7 @@ hideTabbar
         
         [backbutton addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
         UILabel*backbuttonlable=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, backbutton.frame.size.width, backbutton.frame.size.height)] ;
+        backbuttonlable.backgroundColor = [UIColor clearColor];
         backbuttonlable.text=@"完成";
         backbuttonlable.textAlignment=NSTextAlignmentCenter;
         backbuttonlable.textColor=[UIColor whiteColor];
@@ -548,6 +551,7 @@ hideTabbar
         [backbutton addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
         UILabel*backbuttonlable=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, backbutton.frame.size.width, backbutton.frame.size.height)] ;
         backbuttonlable.text=@"完成";
+        backbuttonlable.backgroundColor = [UIColor clearColor];
         backbuttonlable.textAlignment=NSTextAlignmentCenter;
         backbuttonlable.textColor=[UIColor whiteColor];
         [backbutton addSubview:backbuttonlable];

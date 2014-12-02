@@ -39,6 +39,7 @@
     UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(42, 10, 270, 30)];
     lable.font=[UIFont systemFontOfSize:17];
     lable.text=self.head;
+    lable.backgroundColor = [UIColor clearColor];
     lable.numberOfLines=0;
     CGSize size=[lable sizeThatFits:CGSizeMake(270, 0)];
     if (size.height>30)

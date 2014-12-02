@@ -27,6 +27,7 @@
         self._imageView.image=BACK_IMAGE;
         [self addSubview:self._imageView];
         self.lableHead=[[UILabel alloc]initWithFrame:CGRectMake(115, Y+3, 195, 40)];
+        self.lableHead.backgroundColor = [UIColor clearColor];
         self.lableHead.numberOfLines=2;
          self.lableHead.font=[UIFont boldSystemFontOfSize:14];
         [self addSubview:self.lableHead];
@@ -38,12 +39,14 @@
         
         self.useName=[[UILabel alloc]initWithFrame:CGRectMake(self.headImage.frame.origin.x+27, self.headImage.frame.origin.y, 100, 20)];
         self.useName.font=[UIFont systemFontOfSize:14];
+        self.useName.backgroundColor = [UIColor clearColor];
         self.useName.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         self.useName.textAlignment=NSTextAlignmentLeft;
         [self addSubview:self.useName];
         
         
         self.data=[[UILabel alloc]initWithFrame:CGRectMake( self.headImage.frame.origin.x, self.useName.frame.origin.y+ self.useName.frame.size.height+3, 200, 20)];
+        self.data.backgroundColor = [UIColor clearColor];
         self.data.font=[UIFont systemFontOfSize:13];
         self.data.textColor=[UIColor grayColor];
         [self addSubview:self.data];

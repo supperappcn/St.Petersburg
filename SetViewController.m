@@ -53,6 +53,7 @@ backButton
     
     UILabel*lable1=[[UILabel alloc]initWithFrame:CGRectMake(5, 0, 150, 40)];
     lable1.text=@"图片显示智能切换";
+    lable1.backgroundColor = [UIColor clearColor];
     
     [imageView1 addSubview:lable1];
     
@@ -61,6 +62,7 @@ backButton
     [self.view addSubview:imageView1];
   
     UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(15, imageView1.frame.origin.y+imageView1.frame.size.height, 250, 20)];
+    lable.backgroundColor = [UIColor clearColor];
     lable.text=@"非wifi模式下将自动切换到不显示图片模式";
     lable.textColor=[UIColor grayColor];
     lable.font=[UIFont systemFontOfSize:12];
@@ -73,6 +75,7 @@ backButton
     
     [imageView2 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
     UILabel*lable2=[[UILabel alloc]initWithFrame:CGRectMake(5, 0, 100, 40)];
+    lable2.backgroundColor = [UIColor clearColor];
     lable2.text=@"清除缓存";
     
     [imageView2 addSubview:lable2];

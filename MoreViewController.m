@@ -237,6 +237,7 @@
             
             [urlButton addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
             UILabel*lable2=[[UILabel alloc]initWithFrame:CGRectMake(0, 2, 200, 32)];
+            lable2.backgroundColor = [UIColor clearColor];
             lable2.text=@"www.Rusia-Online.cn";
             lable2.font=[UIFont systemFontOfSize:13];
             lable2.textColor=[UIColor blueColor];

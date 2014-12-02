@@ -56,6 +56,7 @@ backButton
         button.tag=10+i;
         [self.view addSubview:button];
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(5, 0, 80, height)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.text=[Country objectAtIndex:i];
         [button addSubview:lable];
     }

@@ -973,6 +973,7 @@ GO_NET
     NSString *head = [NSString stringWithFormat:@"%@%@",_name,Ftitle];
     UILabel*name=[[UILabel alloc]initWithFrame:CGRectMake(5, 0, 230, 30)];
     name.text=[NSString stringWithFormat:@"%@",head];
+    name.backgroundColor = [UIColor clearColor];
     name.font=[UIFont boldSystemFontOfSize:17];
     [view1 addSubview:name];
     //关闭按钮
@@ -996,6 +997,7 @@ GO_NET
     
     UILabel*validityLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, 10, 70, 13)];
     validityLable1.text=@"有效期";
+    validityLable1.backgroundColor = [UIColor clearColor];
     validityLable1.font=[UIFont boldSystemFontOfSize:13];
     [scrollView addSubview:validityLable1];
     
@@ -1074,6 +1076,7 @@ GO_NET
     
     UILabel*roomOrederLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, roomOrderImage.frame.origin.y, 60, 15)];
     roomOrederLable1.text=@"支付方式";
+    roomOrederLable1.backgroundColor = [UIColor clearColor];
     roomOrederLable1.font=[UIFont boldSystemFontOfSize:13];
     [scrollView addSubview:roomOrederLable1];
     
@@ -1118,6 +1121,7 @@ GO_NET
         validityImage2.image=[UIImage imageNamed:@"room_orderday.png"];
         [scrollView addSubview:validityImage2];
         UILabel*validityLable3=[[UILabel alloc]initWithFrame:CGRectMake(33, validityImage2.frame.origin.y, 280-33, 15)];
+        validityLable3.backgroundColor = [UIColor clearColor];
         validityLable3.textColor=[UIColor redColor];
         validityLable3.text=[NSString stringWithFormat:@"游玩当日%@前预订有效",Valid];
         
@@ -1138,6 +1142,7 @@ GO_NET
         remarkImage.image=[UIImage imageNamed:@"room_remarks.png"];
         [scrollView addSubview:remarkImage];
         UILabel*remarkLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, remarkImage.frame.origin.y, 60, 15)];
+        remarkLable1.backgroundColor = [UIColor clearColor];
         remarkLable1.text=@"备注";
         remarkLable1.font=[UIFont boldSystemFontOfSize:13];
         [scrollView addSubview:remarkLable1];
@@ -1168,6 +1173,7 @@ GO_NET
         remarkImage.image=[UIImage imageNamed:@"预订须知"];
         [scrollView addSubview:remarkImage];
         UILabel*remarkLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, remarkImage.frame.origin.y, 60, 15)];
+        remarkLable1.backgroundColor = [UIColor clearColor];
         remarkLable1.text=@"预订须知";
         remarkLable1.font=[UIFont boldSystemFontOfSize:13];
         [scrollView addSubview:remarkLable1];
@@ -1238,6 +1244,7 @@ GO_NET
     
     NSString *head = [NSString stringWithFormat:@"%@%@",_name,Ftitle];
     UILabel*name=[[UILabel alloc]initWithFrame:CGRectMake(5, 0, 230, 30)];
+    name.backgroundColor = [UIColor clearColor];
     name.text=[NSString stringWithFormat:@"%@",head];
     name.font=[UIFont boldSystemFontOfSize:17];
     [view1 addSubview:name];
@@ -1269,6 +1276,7 @@ GO_NET
     [scrollView addSubview:validityImage];
     
     UILabel*validityLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, _imageView.frame.origin.y+_imageView.frame.size.height+13, 70, 13)];
+    validityLable1.backgroundColor = [UIColor clearColor];
     validityLable1.text=@"可入住日期";
     validityLable1.font=[UIFont boldSystemFontOfSize:13];
     [scrollView addSubview:validityLable1];
@@ -1355,12 +1363,14 @@ GO_NET
     peopleImage.image = [UIImage imageNamed:@"住宿预订第1步_03-09"];
     [scrollView addSubview:peopleImage];
     UILabel*peopleName=[[UILabel alloc]initWithFrame:CGRectMake(33, peopleImage.frame.origin.y, 70, 15)];
+    peopleName.backgroundColor = [UIColor clearColor];
     peopleName.text=@"最多可入住";
     peopleName.font=[UIFont boldSystemFontOfSize:13];
     [scrollView addSubview:peopleName];
     
     UILabel*peopleCount=[[UILabel alloc]initWithFrame:CGRectMake(103, peopleImage.frame.origin.y, 60, 15)];
     peopleCount.text=[NSString stringWithFormat:@"%@人",[dataArray[index]  objectForKey:@"MoneyType"]];
+    peopleCount.backgroundColor = [UIColor clearColor];
     peopleCount.textColor = [UIColor grayColor];
     peopleCount.font=[UIFont boldSystemFontOfSize:13];
     [scrollView addSubview:peopleCount];
@@ -1377,6 +1387,7 @@ GO_NET
     [scrollView addSubview:roomApartmentImage];
     
     UILabel*roomApartmentLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, roomApartmentImage.frame.origin.y, 60, 15)];
+    roomApartmentImage.backgroundColor = [UIColor clearColor];
     roomApartmentLable1.text=@"房间设施";
     roomApartmentLable1.font=[UIFont boldSystemFontOfSize:13];
     [scrollView addSubview:roomApartmentLable1];
@@ -1397,6 +1408,7 @@ GO_NET
     [scrollView addSubview:roomOrderImage];
     
     UILabel*roomOrederLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, roomOrderImage.frame.origin.y, 60, 15)];
+    roomOrderImage.backgroundColor = [UIColor clearColor];
     roomOrederLable1.text=@"支付方式";
     roomOrederLable1.font=[UIFont boldSystemFontOfSize:13];
     [scrollView addSubview:roomOrederLable1];
@@ -1443,6 +1455,7 @@ GO_NET
         [scrollView addSubview:validityImage2];
         UILabel*validityLable3=[[UILabel alloc]initWithFrame:CGRectMake(33, validityImage2.frame.origin.y, 280-33, 15)];
         validityLable3.textColor=[UIColor redColor];
+        validityLable3.backgroundColor = [UIColor clearColor];
         validityLable3.text=[NSString stringWithFormat:@"入住当日%@前预订有效",Valid];
 
         validityLable3.font=[UIFont systemFontOfSize:13];
@@ -1463,6 +1476,7 @@ GO_NET
         [scrollView addSubview:remarkImage];
         UILabel*remarkLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, remarkImage.frame.origin.y, 60, 15)];
         remarkLable1.text=@"备注";
+        remarkLable1.backgroundColor = [UIColor clearColor];
         remarkLable1.font=[UIFont boldSystemFontOfSize:13];
         [scrollView addSubview:remarkLable1];
         
@@ -1493,6 +1507,7 @@ GO_NET
         [scrollView addSubview:remarkImage];
         UILabel*remarkLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, remarkImage.frame.origin.y, 60, 15)];
         remarkLable1.text=@"预订须知";
+        remarkLable1.backgroundColor = [UIColor clearColor];
         remarkLable1.font=[UIFont boldSystemFontOfSize:13];
         [scrollView addSubview:remarkLable1];
         
@@ -1898,6 +1913,7 @@ GO_NET
     
     UILabel*head=[[UILabel alloc]initWithFrame:CGRectMake(23, 5, 80, 30)];
     head.textColor=[UIColor whiteColor];
+    head.backgroundColor = [UIColor clearColor];
     head.font=[UIFont boldSystemFontOfSize:18];
     head.text=[NSString stringWithFormat:@"第%@天",[[_dataArray objectAtIndex:indexPath]valueForKey:@"LineDay"]];
     [button addSubview:head];
@@ -1905,6 +1921,7 @@ GO_NET
     UILabel*title=[[UILabel alloc]initWithFrame:CGRectMake(23, 30, 115, 40)];
     title.numberOfLines=2;
     title.font=[UIFont systemFontOfSize:15];
+    title.backgroundColor = [UIColor clearColor];
     title.textColor=[UIColor whiteColor];
     title.text=[[_dataArray objectAtIndex:indexPath]valueForKey:@"Title"];
     CGSize size=[title sizeThatFits:CGSizeMake(115, 0)];
@@ -2316,6 +2333,7 @@ GO_NET
     
     [address addSubview:location];
     UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(23, 0, 150, 20)];
+    lable.backgroundColor = [UIColor clearColor];
     lable.text=[self.dataDic2 valueForKey:@"Location"];
     [address addSubview:lable];
     
@@ -2402,6 +2420,7 @@ GO_NET
     
     [address addSubview:location];
     UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(23, 0, 150, 20)];
+    lable.backgroundColor = [UIColor clearColor];
     lable.text=[self.dataDic2 valueForKey:@"Location"];
     [address addSubview:lable];
     
@@ -2802,6 +2821,7 @@ GO_NET
         [tabHead2 addSubview:roomOrderImage];
         
         UILabel*roomOrederLable1=[[UILabel alloc]initWithFrame:CGRectMake(40, roomOrderImage.frame.origin.y+2, 80, 16)];
+        roomOrederLable1.backgroundColor = [UIColor clearColor];
         roomOrederLable1.text=@"支付方式";
         roomOrederLable1.font=[UIFont boldSystemFontOfSize:16];
         [tabHead2 addSubview:roomOrederLable1];
@@ -2848,6 +2868,7 @@ GO_NET
             remarkImage.image=[UIImage imageNamed:@"门票使用注意事项"];
             [tabHead2 addSubview:remarkImage];
             UILabel*remarkLable1=[[UILabel alloc]initWithFrame:CGRectMake(40, remarkImage.frame.origin.y+5, 150, 16)];
+            remarkLable1.backgroundColor = [UIColor clearColor];
             remarkLable1.text=@"门票使用注意事项";
             remarkLable1.font=[UIFont boldSystemFontOfSize:16];
             [tabHead2 addSubview:remarkLable1];
@@ -2875,6 +2896,7 @@ GO_NET
             validityImage2.image=[UIImage imageNamed:@"room_orderday.png"];
             [tabHead2 addSubview:validityImage2];
             UILabel*validityLable3=[[UILabel alloc]initWithFrame:CGRectMake(40, validityImage2.frame.origin.y, 280-33, 15)];
+            validityLable3.backgroundColor = [UIColor clearColor];
             validityLable3.textColor=[UIColor redColor];
             validityLable3.text=[NSString stringWithFormat:@"入住当日%@前预订有效",[dataDic valueForKey:@"MoneyType"]];
             
@@ -2898,6 +2920,7 @@ GO_NET
             [tabHead2 addSubview:remarkImage];
             UILabel*remarkLable1=[[UILabel alloc]initWithFrame:CGRectMake(40, remarkImage.frame.origin.y+2, 100, 15)];
             remarkLable1.text=@"预订须知";
+            remarkLable1.backgroundColor = [UIColor clearColor];
             remarkLable1.font=[UIFont boldSystemFontOfSize:16];
             [tabHead2 addSubview:remarkLable1];
             
@@ -2963,12 +2986,14 @@ GO_NET
     {
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(10, c+10, 100, 20)];
         lable.text=@"个人介绍";
+        lable.backgroundColor = [UIColor clearColor];
         lable.font=[UIFont boldSystemFontOfSize:16];
         [tabHead2 addSubview:lable];
         
         UILabel*introduce=[[UILabel alloc]initWithFrame:CGRectMake(10, c+40, 300, 0)];
         introduce.numberOfLines=0;
         introduce.textColor=[UIColor grayColor];
+        introduce.backgroundColor = [UIColor clearColor];
         introduce.font=[UIFont systemFontOfSize:16];
         introduce.text=[self.dataDic2 valueForKey:@"Note"];
         CGSize _size=[introduce sizeThatFits:CGSizeMake(300, 0)];

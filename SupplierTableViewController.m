@@ -401,6 +401,7 @@ postRequestAgency(_datas)
         imageView.tag=410+i;
         imageView.image=[UIImage imageNamed:[tabfootImage objectAtIndex:i]];
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(0, 30, 80, 20)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.textColor=[UIColor whiteColor];
         lable.font=[UIFont systemFontOfSize:10];
         lable.textAlignment=NSTextAlignmentCenter;

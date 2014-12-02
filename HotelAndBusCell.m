@@ -27,11 +27,13 @@
         
         self.head=[[UILabel alloc]initWithFrame:CGRectMake(45, 10, 265, 30)];
         self.head.font=[UIFont boldSystemFontOfSize:17];
+        self.head.backgroundColor = [UIColor clearColor];
         [self addSubview:self.head];
         
         
         self.title=[[RTLabel alloc]initWithFrame:CGRectMake(45, 50, 265, 0)];
         self.title.textColor=[UIColor grayColor];
+        self.title.backgroundColor = [UIColor clearColor];
         self.title.font=[UIFont systemFontOfSize:14];
         [self addSubview:self.title];
         

@@ -26,15 +26,18 @@
         self._imageView.image=BACK_IMAGE;
         [self addSubview:self._imageView];
         self.lableHead=[[UILabel alloc]initWithFrame:CGRectMake(X+Width+5, Y, 304-Width-15, 20)];
+        self.lableHead.backgroundColor = [UIColor clearColor];
         self.lableHead.numberOfLines=1;
         self.lableHead.font=[UIFont boldSystemFontOfSize:14];
          self.lableDetail=[[UILabel alloc]initWithFrame:CGRectMake(X+Width+5, Y+30, 310-Width-15, 0)];
+        self.lableDetail.backgroundColor = [UIColor clearColor];
         self.lableDetail.font=[UIFont systemFontOfSize:12];
         self.lableDetail.numberOfLines=2;
         [self addSubview:self.lableDetail];
         [self addSubview:self.lableHead];
         
         self.data=[[UILabel alloc]initWithFrame:CGRectMake(X+Width+5, 70,  310-Width-15, 20)];
+        self.data.backgroundColor = [UIColor clearColor];
         self.data.textColor=[UIColor grayColor];
         self.data.font=[UIFont systemFontOfSize:13];
         [self addSubview:self.data];

@@ -39,23 +39,27 @@
     UIFont* font = [UIFont systemFontOfSize:14];
     UIColor* grayColor = [UIColor grayColor];
     UILabel* orderNumTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 70, 21)];
+    orderNumTitle.backgroundColor = [UIColor clearColor];
     orderNumTitle.text = @"订单号：";
     orderNumTitle.textColor = grayColor;
     orderNumTitle.font = font;
     [self addSubview:orderNumTitle];
     [self.cellSubviews addObject:orderNumTitle];
     self.orderNumLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, 230, 21)];
+    self.orderNumLab.backgroundColor = [UIColor clearColor];
     self.orderNumLab.text = currentDic[@"OrderID"];
     self.orderNumLab.font = font;
     [self addSubview:self.orderNumLab];
     [self.cellSubviews addObject:self.orderNumLab];
     UILabel* orderPriceTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 70, 21)];
+    orderPriceTitle.backgroundColor = [UIColor clearColor];
     orderPriceTitle.text = @"订单金额：";
     orderPriceTitle.textColor = grayColor;
     orderPriceTitle.font = font;
     [self addSubview:orderPriceTitle];
     [self.cellSubviews addObject:orderPriceTitle];
     self.orderPriceLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 30, 230, 21)];
+    self.orderPriceLab.backgroundColor = [UIColor clearColor];
     NSString *rmb = [NSString stringWithFormat:@"￥%@",[currentDic valueForKey:@"Cmoney"]];//人民币
     NSString *dollor = [NSString stringWithFormat:@"($%@)",[currentDic valueForKey:@"Umoney"]];//美元
     NSString *allStr = [NSString stringWithFormat:@"%@%@",rmb,dollor];
@@ -67,23 +71,27 @@
     [self addSubview:self.orderPriceLab];
     [self.cellSubviews addObject:self.orderPriceLab];
     UILabel* orderTimeTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 50, 70, 21)];
+    orderTimeTitle.backgroundColor = [UIColor clearColor];
     orderTimeTitle.text = @"下单时间：";
     orderTimeTitle.textColor = grayColor;
     orderTimeTitle.font = font;
     [self addSubview:orderTimeTitle];
     [self.cellSubviews addObject:orderTimeTitle];
     self.orderTimeLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 50, 230, 21)];
+    self.orderTimeLab.backgroundColor = [UIColor clearColor];
     self.orderTimeLab.text = currentDic[@"PTime"];
     self.orderTimeLab.font = font;
     [self addSubview:self.orderTimeLab];
     [self.cellSubviews addObject:self.orderTimeLab];
     UILabel* payWayTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 70, 70, 21)];
+    payWayTitle.backgroundColor = [UIColor clearColor];
     payWayTitle.text = @"支付方式：";
     payWayTitle.textColor = grayColor;
     payWayTitle.font = font;
     [self addSubview:payWayTitle];
     [self.cellSubviews addObject:payWayTitle];
     self.payWayLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 70, 230, 21)];
+    self.payWayLab.backgroundColor = [UIColor clearColor];
     int wayCount = [[currentDic valueForKey:@"PayType"] intValue];//支付方式
     if (wayCount <= 6) {
         if (wayCount == 0) {
@@ -103,6 +111,7 @@
     [self addSubview:self.headIV];
     [self.cellSubviews addObject:self.headIV];
     self.titleLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 110, DeviceWidth - 80 - 17, 21)];
+    self.titleLab.backgroundColor = [UIColor clearColor];
     NSString* sex = @"";
     NSString* guideName = [currentDic valueForKey:@"GuideName"];
     NSString* guideClass = [currentDic valueForKey:@"GuideClass"];
@@ -128,6 +137,7 @@
     [self addSubview:line2];
     [self.cellSubviews addObject:line2];
     UILabel* selectTimeTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 175, 70, 21)];
+    selectTimeTitle.backgroundColor = [UIColor clearColor];
     selectTimeTitle.text = @"预订日期：";
     selectTimeTitle.textColor = grayColor;
     selectTimeTitle.font = font;
@@ -143,12 +153,14 @@
     [self addSubview:self.selectTimeLab];
     [self.cellSubviews addObject:self.selectTimeLab];
     UILabel* statusTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 195 + selectTimeHeight - 21, 70, 21)];
+    statusTitle.backgroundColor = [UIColor clearColor];
     statusTitle.text = @"订单状态：";
     statusTitle.textColor = grayColor;
     statusTitle.font = font;
     [self addSubview:statusTitle];
     [self.cellSubviews addObject:statusTitle];
     self.statusLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 195 + selectTimeHeight - 21, 160, 21)];
+    self.statusLab.backgroundColor = [UIColor clearColor];
     self.statusLab.font = font;
     [self addSubview:self.statusLab];
     [self.cellSubviews addObject:self.statusLab];
@@ -163,17 +175,20 @@
     if ([[currentDic valueForKey:@"ProdType"]intValue] == 1) { //导游
         self.headIV.frame = CGRectMake(10, 110, 60, 90);
         UILabel* languageTitle = [[UILabel alloc]initWithFrame:CGRectMake(80, 130, 40, 20)];
+        languageTitle.backgroundColor = [UIColor clearColor];
         languageTitle.text = @"语言：";
         languageTitle.textColor = grayColor;
         languageTitle.font = [UIFont systemFontOfSize:12];
         [self addSubview:languageTitle];
         [self.cellSubviews addObject:languageTitle];
         UILabel* languageLab = [[UILabel alloc]initWithFrame:CGRectMake(120, 130, DeviceWidth - 120 - 17, 20)];
+        languageLab.backgroundColor = [UIColor clearColor];
         languageLab.text = currentDic[@"Language"];
         languageLab.font = [UIFont systemFontOfSize:12];
         [self addSubview:languageLab];
         [self.cellSubviews addObject:languageLab];
         UILabel* shanChangTitle = [[UILabel alloc]initWithFrame:CGRectMake(80, 150, 65, 20)];
+        shanChangTitle.backgroundColor = [UIColor clearColor];
         shanChangTitle.text = @"擅长讲解：";
         shanChangTitle.textColor = grayColor;
         shanChangTitle.font = [UIFont systemFontOfSize:12];
@@ -198,6 +213,7 @@
         
     }else if ([[currentDic valueForKey:@"ProdType"]intValue] == 2) { //租车
         self.carInfoLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 130, DeviceWidth - 80 - 17, 20)];
+        self.carInfoLab.backgroundColor = [UIColor clearColor];
         self.carInfoLab.text = [NSString stringWithFormat:@"%@人座 %@ %@",currentDic[@"SeatCount"], currentDic[@"CarType"], currentDic[@"JiCheng"]];
         self.carInfoLab.textColor = [UIColor colorWithRed:0.047 green:0.345 blue:0.663 alpha:1];
         self.carInfoLab.font = [UIFont systemFontOfSize:12];

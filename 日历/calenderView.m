@@ -110,6 +110,7 @@
 #pragma -mark 年月
     UILabel *titleText = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 40)];
     titleText.textAlignment = NSTextAlignmentCenter;
+    titleText.backgroundColor = [UIColor clearColor];
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"y年M月"];
     NSString *dateString = [format stringFromDate:self.calendarDate];

@@ -135,6 +135,7 @@ backButton
         [bv addSubview:star];
         
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 90, 320, 20)];
+        lab.backgroundColor = [UIColor clearColor];
         lab.textAlignment = NSTextAlignmentCenter;
         lab.text =[NSString stringWithFormat:@"您还没有收藏过%@",self.title];
         lab.font = [UIFont boldSystemFontOfSize:18];
@@ -569,9 +570,10 @@ postRequestAgency(datas)
                 if ([[dic objectForKey:priceKey[i]] intValue]!=0) {
                     
                     UILabel *mainLab = [[UILabel alloc]initWithFrame:CGRectMake(115, 70+20*h++, 200, 20)];
-                    
+                    mainLab.backgroundColor = [UIColor clearColor];
                     
                     UILabel *tittlePriceLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 90, 20)];
+                    tittlePriceLab.backgroundColor = [UIColor clearColor];
                     tittlePriceLab.textColor = [UIColor grayColor];
                     tittlePriceLab.font = [UIFont systemFontOfSize:12];
                     tittlePriceLab.text = [NSString stringWithFormat:@"%@",tittles[i]];

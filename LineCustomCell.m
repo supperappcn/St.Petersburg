@@ -39,10 +39,12 @@
         
         self.head=[[UILabel alloc]initWithFrame:CGRectMake(10, 195, 265, 25)];
         self.head.text=@"线路标题线路标题线路标题线路标题";
+        self.head.backgroundColor = [UIColor clearColor];
         [self.backgroud addSubview:self.head];
         
         self.intrdouce=[[UILabel alloc]initWithFrame:CGRectMake(10, 220, 265, 20)];
         self.intrdouce.text=@"线路标题线路标题线路标题线路标题";
+        self.intrdouce.backgroundColor = [UIColor clearColor];
         self.intrdouce.font=[UIFont systemFontOfSize:13];
         self.intrdouce.textColor=[UIColor grayColor];
         

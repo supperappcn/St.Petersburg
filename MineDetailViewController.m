@@ -94,7 +94,6 @@ backButton
     [memberCenter_name addSubview:name_image];
 
     name_string=[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 250, 16)];
-    //name_string.backgroundColor = [UIColor redColor];
     name_string.textColor = [UIColor colorWithRed:30.0/255 green:98.0/255 blue:167.0/255 alpha:1];
     name_string.backgroundColor = [UIColor clearColor];
     name_string.font = [UIFont systemFontOfSize:15.5];
@@ -164,6 +163,7 @@ backButton
             
             
             UILabel*lable2=[[UILabel alloc]initWithFrame:CGRectMake(100, 0, 185, 40)];
+            lable2.backgroundColor = [UIColor clearColor];
             if ([[dataArray lastObject]length]>0)
             {
                 lable2.text=[dataArray objectAtIndex:i];
@@ -210,10 +210,11 @@ backButton
         UILabel*lable1=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 100, 40)];
         lable1.textColor=[UIColor grayColor];
         lable1.text=[array objectAtIndex:i];
-        
+        lable1.backgroundColor = [UIColor clearColor];
         [button addSubview:lable1];
         
         UILabel*lable2=[[UILabel alloc]initWithFrame:CGRectMake(100, 0, 185, 40)];
+        lable2.backgroundColor = [UIColor clearColor];
         if ([[dataArray lastObject]length]>0)
         {
             lable2.text=[dataArray objectAtIndex:i+1];
@@ -362,6 +363,7 @@ backButton
                 for (int i=1; i<3; i++)
                 {
                     UILabel*lable=(UILabel*)[self.view viewWithTag:300+i-1];
+                    lable.backgroundColor = [UIColor clearColor];
                     lable.text=[dataArray objectAtIndex:i-1];
                 }
             }else{
@@ -380,6 +382,7 @@ backButton
                 {
                     UILabel*lable=(UILabel*)[self.view viewWithTag:300+i];
                     lable.text=[dataArray objectAtIndex:i+1];
+                    lable.backgroundColor = [UIColor clearColor];
                     
                 }
                 switch ([[dic3 valueForKey:GUIDE_ID]intValue])
@@ -455,6 +458,7 @@ backButton
                 [self.navigationController pushViewController:second animated:NO];
                 
                 UILabel*lable=(UILabel*)[self.view viewWithTag:300];
+                lable.backgroundColor = [UIColor clearColor];
                 second.pageTitle=@"修改邮箱";
                 second.mailNum=lable.text;
                if ([[[NSUserDefaults standardUserDefaults] objectForKey:TYPE_ID] intValue]==2)
@@ -482,6 +486,7 @@ backButton
 
             UILabel*lable=(UILabel*)[self.view viewWithTag:301];
             second.pageTitle=@"修改手机号";
+            lable.backgroundColor = [UIColor clearColor];
             second.phoneNum=lable.text;
            if ([[[NSUserDefaults standardUserDefaults] objectForKey:TYPE_ID] intValue]==2)
                second.mailNum = [(UILabel*)[self.view viewWithTag:300] text];
@@ -559,6 +564,7 @@ backButton
             [self.navigationController pushViewController:second animated:NO];
             
             UILabel*lable=(UILabel*)[self.view viewWithTag:305];
+            lable.backgroundColor = [UIColor clearColor];
             second.pageTitle=@"修改详细地址";
             second.phoneNum=lable.text;
             second.useID=self.useID;
@@ -580,6 +586,7 @@ backButton
             [self.navigationController pushViewController:second animated:NO];
             
             UILabel*lable=(UILabel*)[self.view viewWithTag:306];
+            lable.backgroundColor = [UIColor clearColor];
             second.pageTitle=@"修改邮政编码";
             second.phoneNum=lable.text;
             second.useID=self.useID;
@@ -601,6 +608,7 @@ backButton
             [self.navigationController pushViewController:second animated:NO];
             
             UILabel*lable=(UILabel*)[self.view viewWithTag:307];
+            lable.backgroundColor = [UIColor clearColor];
             second.pageTitle=@"修改个人介绍";
             second.phoneNum=lable.text;
             second.useID=self.useID;
@@ -777,6 +785,7 @@ backButton
             NSString*str=[form stringFromDate:picker.date];
             
             UILabel*lable=(UILabel*)[self.view viewWithTag:303];
+            lable.backgroundColor = [UIColor clearColor];
             lable.text=str;
             UIView*view=[self.view viewWithTag:10000];
             [view removeFromSuperview];
@@ -800,6 +809,7 @@ backButton
 //            UIPickerView*picker=(UIPickerView*)[self.view viewWithTag:101];
 //            [picker removeFromSuperview];
             UILabel*lable=(UILabel*)[self.view viewWithTag:304];
+            lable.backgroundColor = [UIColor clearColor];
             NSString*local;
             if ([self.local1 isEqualToString:@"俄罗斯"]||[self.local3 isEqualToString:@"北京"]||[self.local3 isEqualToString:@"天津"]||[self.local3 isEqualToString:@"重庆"]||[self.local3 isEqualToString:@"上海"])
             {
@@ -935,6 +945,7 @@ backButton
     [BGButton addSubview:selectIV];
     
     UILabel *selectL = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 256, 256)];
+    selectL.backgroundColor = [UIColor clearColor];
     selectL.center = CGPointMake(BGButton.center.x, BGButton.center.y - 25);
     selectL.layer.borderWidth = 1.0;
     selectL.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -1110,7 +1121,7 @@ backButton
     {
         NSString*str=[NSString stringWithFormat:@"%d",self.useID];
         UILabel*lable=(UILabel*)[self.view viewWithTag:302];
-        
+        lable.backgroundColor = [UIColor clearColor];
         NSString* canshu;
         NSString*urlMethod=@"ModifyUserInfo";
         NSMutableString*urlDomain=RussiaUrl

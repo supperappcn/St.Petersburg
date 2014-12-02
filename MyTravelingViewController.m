@@ -41,7 +41,13 @@ backButton
     tittleArr = @[@"评论(99)",@"编辑",@"删除"];
     imageNameArr = @[@"travel_say.png",@"travel_pen.png",@"travel_trash.png"];
     
-    float height=35;UIButton *backbutton = [[UIButton alloc]init];backbutton.frame=CGRectMake(0, (44-height)/2, 40, height);[backbutton addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 16, 16)];imageView.image=[UIImage imageNamed:@"sendtravel"];[backbutton addSubview:imageView];UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(17, 0, 40, 35)]; lable.font=[UIFont systemFontOfSize:15];lable.textColor=[UIColor whiteColor];lable.text=@"发布";[backbutton addSubview:lable];UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];self.navigationItem.rightBarButtonItem =backItem;
+    float height=35;UIButton *backbutton = [[UIButton alloc]init];backbutton.frame=CGRectMake(0, (44-height)/2, 40, height);[backbutton addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 16, 16)];imageView.image=[UIImage imageNamed:@"sendtravel"];[backbutton addSubview:imageView];
+    UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(17, 0, 40, 35)]; lable.font=[UIFont systemFontOfSize:15];
+    lable.backgroundColor = [UIColor clearColor];
+    lable.textColor=[UIColor whiteColor];
+    lable.text=@"发布";[backbutton addSubview:lable];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];
+    self.navigationItem.rightBarButtonItem =backItem;
     
     _myTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _myTableView.dataSource = self;
@@ -58,6 +64,7 @@ backButton
     foolerView = [[UIView alloc]init];
     foolerView.frame = CGRectMake(0, 0, 320, 90);
     foolerLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 40, 320, 30)];
+    foolerLab.backgroundColor = [UIColor clearColor];
     foolerLab.textAlignment =NSTextAlignmentCenter;
     foolerLab.text = @"上拉刷新...";
     [foolerView addSubview:foolerLab];
@@ -135,6 +142,7 @@ postRequestAgency(datas)
         
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 90, 320, 20)];
         lab.textAlignment = NSTextAlignmentCenter;
+        lab.backgroundColor = [UIColor clearColor];
         lab.text =[NSString stringWithFormat:@"您还没有发布过游记"];
         lab.font = [UIFont boldSystemFontOfSize:16.5];
         lab.textColor = [UIColor lightGrayColor];
@@ -233,6 +241,7 @@ postRequestAgency(datas)
         headAiv.frame = CGRectMake(35, 25, 30, 30);
         [headIV addSubview:headAiv];
         UILabel *headLab = [[UILabel alloc]initWithFrame:CGRectMake(115, 0, 200, 50)];
+        headLab.backgroundColor = [UIColor clearColor];
         headLab.numberOfLines = 2;
         headLab.font = [UIFont boldSystemFontOfSize:14];
         headLab.text = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Title"];
@@ -271,6 +280,7 @@ postRequestAgency(datas)
             }else headIV.image = [UIImage imageWithData:pathData];
         }else  headIV.image = [UIImage imageNamed:@"lack.jpg"];
         UILabel *dateLab = [[UILabel alloc]initWithFrame:CGRectMake(115, 42, 200, 25)];
+        dateLab.backgroundColor = [UIColor clearColor];
         dateLab.font = [UIFont systemFontOfSize:13];
         dateLab.textColor = [UIColor grayColor];
         dateLab.text =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"PTime"];

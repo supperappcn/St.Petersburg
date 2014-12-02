@@ -21,6 +21,7 @@
         [self addSubview:self.userImage];
         
         self.userName=[[UILabel alloc]initWithFrame:CGRectMake( self.userImage.frame.origin.x+self.userImage.frame.size.width+5, 15, 80, 15)];
+        self.userName.backgroundColor = [UIColor clearColor];
         self.userName.font=[UIFont systemFontOfSize:12];
         self.userName.text=@"yonghuming";
         self.userName.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
@@ -29,6 +30,7 @@
         [self addSubview:self.userName];
         
         self.comentDate=[[UILabel alloc]initWithFrame:CGRectMake(self.userName.frame.origin.x+self.userName.frame.size.width+5, 15, 200, 15)];
+        self.comentDate.backgroundColor = [UIColor clearColor];
         self.comentDate.font=[UIFont systemFontOfSize:12];
         self.comentDate.textColor=[UIColor grayColor];
         self.comentDate.text=@"2014.3.21 4.4";
@@ -40,6 +42,7 @@
         
         
         self._imageViewTitle=[[UILabel alloc]initWithFrame:CGRectMake(self.userName.frame.origin.x, 35, 0, 10)];
+        self._imageViewTitle.backgroundColor = [UIColor clearColor];
         self._imageViewTitle.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"orange.png"]];
         self._imageViewTitle.font=[UIFont systemFontOfSize:12];
         [self addSubview:self._imageViewTitle];

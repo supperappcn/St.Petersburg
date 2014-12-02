@@ -221,6 +221,7 @@ backButton
         
         UILabel *name= [[UILabel alloc] initWithFrame:CGRectMake(36, 14, 70, 16)];
         name.font = [UIFont systemFontOfSize:16];
+        name.backgroundColor = [UIColor clearColor];
         name.text = names[i];
         name.textColor = [UIColor grayColor];
         [bv addSubview:name];
@@ -508,6 +509,7 @@ backButton
                 
                 UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(35.5, 0, 70, 43)];
                 name.font = [UIFont systemFontOfSize:12.5];
+                name.backgroundColor = [UIColor clearColor];
                 name.text = @"预订须知";
                 [bv addSubview:name];
             }
@@ -534,6 +536,7 @@ backButton
         [payView addSubview:bv];
         
         UILabel *name = [[UILabel alloc]init];
+        name.backgroundColor = [UIColor clearColor];
         name.text = names[i];
         if (i!=0) {
             name.frame = CGRectMake(64, 0, 140, 43);
@@ -610,7 +613,7 @@ backButton
 - (void)goUpOrder{
     
     UILabel *lab = (UILabel*)[sv viewWithTag:11];
-    
+    lab.backgroundColor = [UIColor clearColor];
 
     if (lab.text.length==0) {
         UIAlertView *av = [[UIAlertView alloc]initWithTitle:[NSString  stringWithFormat:@"日期不能为空"] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];

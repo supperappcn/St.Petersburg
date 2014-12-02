@@ -44,6 +44,7 @@
     UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 15, 15)];
     imageView.image=[UIImage imageNamed:@"_back.png"];[backbutton addSubview:imageView];
     UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 40, 35)];
+    lable.backgroundColor = [UIColor clearColor];
     lable.font=[UIFont systemFontOfSize:15];lable.textColor=[UIColor whiteColor];
     lable.text=@"返回";
     [backbutton addSubview:lable];
@@ -148,6 +149,7 @@
             [self.view addSubview:beijing];
             
             UILabel*date=[[UILabel alloc]initWithFrame:CGRectMake(150, 20, 140, 20)];
+            date.backgroundColor = [UIColor clearColor];
             date.textColor=[UIColor greenColor];
             date.textAlignment=NSTextAlignmentCenter;
 //            date.text=[s objectAtIndex:i];
@@ -163,6 +165,7 @@
             [beijing addSubview:Location];
             
             UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 140, 40)];
+            lable.backgroundColor = [UIColor clearColor];
             lable.text=[s objectAtIndex:i];
             lable.textColor=[UIColor whiteColor];
             lable.textAlignment=NSTextAlignmentCenter;
@@ -281,14 +284,18 @@ postRequestAgency(datas)
     NSInteger day2=[dateComponents2 day];
 
     UILabel*lable1=(UILabel*)[self.view viewWithTag:200];
+    lable1.backgroundColor = [UIColor clearColor];
     lable1.text=[NSString stringWithFormat:@"%02d:%02d:%02d",hours,minutes,seconds];
     UILabel*lable2=(UILabel*)[self.view viewWithTag:201];
+    lable2.backgroundColor = [UIColor clearColor];
     lable2.text=[NSString stringWithFormat:@"%02d:%02d:%02d",hours1,minutes,seconds];
     UILabel*lable3=(UILabel*)[self.view viewWithTag:300];
+    lable3.backgroundColor = [UIColor clearColor];
     lable3.text=[NSString stringWithFormat:@"%04d-%02d-%02d",year,month,day];
   
   
     UILabel*lable4=(UILabel*)[self.view viewWithTag:301];
+    lable4.backgroundColor = [UIColor clearColor];
     lable4.text=[NSString stringWithFormat:@"%04d-%02d-%02d",year2,month2,day2];
     
 

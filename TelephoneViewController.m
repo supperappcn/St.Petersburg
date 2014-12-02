@@ -45,7 +45,7 @@
         [button addSubview:link];
         
         UILabel*title=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 160, 50)];
-        
+        title.backgroundColor = [UIColor clearColor];
         
         if (i==4)
         {

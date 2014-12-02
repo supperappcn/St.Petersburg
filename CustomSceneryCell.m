@@ -31,6 +31,7 @@
         
         
         self.russiaHead=[[UILabel alloc]initWithFrame:CGRectMake( self._imageView.frame.origin.x+self._imageView.frame.size.width+5, self.backGround.frame.origin.y+10,200 , 20)];
+        self.russiaHead.backgroundColor = [UIColor clearColor];
         self.russiaHead.text=@"Центральный";
         self.russiaHead.font=[UIFont systemFontOfSize:16];
         [  self.backGround addSubview:self.russiaHead];

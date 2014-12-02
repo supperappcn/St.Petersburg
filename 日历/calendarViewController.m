@@ -63,7 +63,6 @@ backButton
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     setArr = [[NSMutableArray alloc]init];
     setStr = [[NSString alloc]init];
     
@@ -152,6 +151,7 @@ backButton
 - (void)addScrollView
 {
     self.ScrollV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height - 64)];
+    [self changeViewFrame:CGRectMake(0, 0, self.view.bounds.size.width, DeviceHeight - 49 - 64) withView:self.ScrollV];
     [self.view addSubview: self.ScrollV];
 }
 
@@ -173,6 +173,7 @@ backButton
     
     UILabel *BText = [[UILabel alloc]initWithFrame:CGRectMake(30, 10, 110, 15)];
     BText.text = @"已设置可服务日期";
+    BText.backgroundColor = [UIColor clearColor];
     BText.textColor = BColor;
     BText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.0f];
     [self.underView addSubview:BText];
@@ -185,6 +186,7 @@ backButton
     
     UILabel *OText = [[UILabel alloc]initWithFrame:CGRectMake(160, 10, 50, 15)];
     OText.text = @"已有订单";
+    OText.backgroundColor = [UIColor clearColor];
     OText.textColor = OColor;
     OText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.0f];
     [self.underView addSubview:OText];
@@ -198,6 +200,7 @@ backButton
     UILabel *RText = [[UILabel alloc]initWithFrame:CGRectMake(240, 10, 70, 15)];
     RText.text = @"选中日期";
     RText.textColor = RColor;
+    RText.backgroundColor = [UIColor clearColor];
     RText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.0f];
     [self.underView addSubview:RText];
     
@@ -210,6 +213,7 @@ backButton
     UILabel *OutT = [[UILabel alloc]initWithFrame:CGRectMake(160, 35, 100, 15)];
     OutT.text = @"不可设置的日期";
     OutT.textColor = BlackC;
+    OutT.backgroundColor = [UIColor clearColor];
     OutT.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.0f];
     [self.underView addSubview:OutT];
 
@@ -219,16 +223,18 @@ backButton
     
     UILabel *attentionText = [[UILabel alloc]initWithFrame:CGRectMake(35, 35, 40, 20)];
     attentionText.text = @"注意";
+    attentionText.backgroundColor = [UIColor clearColor];
     attentionText.textColor = [UIColor blackColor];
     attentionText.font = [UIFont fontWithName:@"Helvetica-Bold" size:15.0f];
     [self.underView addSubview:attentionText];
 
     RTLabel * SLabel =[[RTLabel alloc]initWithFrame:CGRectMake(10, 63, 300, 55)];
     SLabel.text=@"<b>请<font color=red>慎重设置</font>您可提供服务的日期，并根据自身日程表，及时确认更新可服务日期表！如设定为可服务日期，则<font color=red>无权更改或拒绝</font>客户或游客订单</b>";
+    SLabel.backgroundColor = [UIColor clearColor];
     SLabel.font = [UIFont systemFontOfSize:13];
     [self.underView addSubview:SLabel];
     
-    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 64 - 60, self.view.frame.size.width, 60)];
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, DeviceHeight - 64 - 60, self.view.frame.size.width, 60)];
     view.backgroundColor = BlackC;
     [self.view addSubview:view];
     

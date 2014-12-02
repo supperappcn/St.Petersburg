@@ -147,6 +147,7 @@ backButton
                 if ([indexarr[i][0] integerValue] == indexPath.row)
                 {
                     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(8, 5, 13, 13)];
+                    label.backgroundColor = [UIColor clearColor];
                     label.tag = indexPath.row + 1;
                     //            label.backgroundColor = [UIColor yellowColor];
                     label.text = [NSString stringWithFormat:@"%@",indexarr[i][1]];
@@ -234,6 +235,7 @@ backButton
                 if ([indexarr[i][0] integerValue] == indexPath.row)
                 {
                     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(8, 5, 13, 13)];
+                    label.backgroundColor = [UIColor clearColor];
                     label.tag = indexPath.row + 1;
                     //            label.backgroundColor = [UIColor yellowColor];
                     label.text = [NSString stringWithFormat:@"%@",indexarr[i][1]];

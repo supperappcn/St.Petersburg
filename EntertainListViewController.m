@@ -223,6 +223,7 @@ NetChange(noNetButton)
         
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 90, 320, 20)];
         lab.textAlignment = NSTextAlignmentCenter;
+        lab.backgroundColor = [UIColor clearColor];
         lab.text =[NSString stringWithFormat:@"您还没有收藏过%@",self.title];
         lab.font = [UIFont boldSystemFontOfSize:18];
         lab.textColor = [UIColor lightGrayColor];
@@ -1041,9 +1042,10 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
                     if ([[dic objectForKey:priceKey[i]] intValue]!=0) {
                         
                         UILabel *mainLab = [[UILabel alloc]initWithFrame:CGRectMake(115, 70+20*h++, 200, 20)];
-                        
+                        mainLab.backgroundColor = [UIColor clearColor];
                         
                         UILabel *tittlePriceLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 90, 20)];
+                        tittlePriceLab.backgroundColor = [UIColor clearColor];
                         tittlePriceLab.textColor = [UIColor grayColor];
                         tittlePriceLab.font = [UIFont systemFontOfSize:12];
                         tittlePriceLab.text = [NSString stringWithFormat:@"%@",tittles[i]];
@@ -1569,6 +1571,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     
     
     UILabel*chineseLable=[[UILabel alloc]initWithFrame:CGRectMake(3, russiaLable.frame.origin.y+russiaLable.frame.size.height, 145, 20)];
+    chineseLable.backgroundColor = [UIColor clearColor];
     chineseLable.text=[[_dataArray objectAtIndex:indexPath]valueForKey:@"RestCName"];
   
     
@@ -1578,6 +1581,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     
     UILabel*typeLable=[[UILabel alloc]initWithFrame:CGRectMake(3, 120, 145, 20)];
     typeLable.font=[UIFont systemFontOfSize:13];
+    typeLable.backgroundColor = [UIColor clearColor];
     typeLable.text=[[_dataArray objectAtIndex:indexPath]valueForKey:@"RestType"];
     typeLable.textColor=[UIColor grayColor];
     [button addSubview:typeLable];
@@ -1655,6 +1659,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     
     UILabel*russiaLable=[[UILabel alloc]initWithFrame:CGRectMake(3, imageView.frame.origin.y+imageView.frame.size.height, 145, 20)];
     russiaLable.font=[UIFont systemFontOfSize:15];
+    russiaLable.backgroundColor = [UIColor clearColor];
     russiaLable.text=[[_dataArray objectAtIndex:indexPath]valueForKey:@"HotelRUName"];
     if (self.tag==1)
     {
@@ -1672,6 +1677,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     
     
     UILabel*chineseLable=[[UILabel alloc]initWithFrame:CGRectMake(3, russiaLable.frame.origin.y+russiaLable.frame.size.height-3, 145, 30)];
+    chineseLable.backgroundColor = [UIColor clearColor];
     chineseLable.text=[[_dataArray objectAtIndex:indexPath]valueForKey:@"HotelCNName"];
     
     if (self.tag==1)
@@ -1688,6 +1694,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     [button addSubview:chineseLable];
     
     UILabel*typeLable=[[UILabel alloc]initWithFrame:CGRectMake(3, chineseLable.frame.origin.y+chineseLable.frame.size.height-5, 145, 30)];
+    typeLable.backgroundColor = [UIColor clearColor];
     typeLable.font=[UIFont systemFontOfSize:13];
     typeLable.text=str;
     
@@ -1744,13 +1751,14 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         sendTag=sender.tag;
          UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+30];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
-
+        lable.backgroundColor = [UIColor clearColor];
         
         for (int i=1; i<array.count; i++)
         {
             UIButton*button=(UIButton*)[self.view viewWithTag:(sender.tag-100+i)%array.count+100];
             [button setBackgroundImage:[UIImage imageNamed:@"leftSelect"] forState:UIControlStateNormal];
             UILabel*lable2=(UILabel*)[self.view viewWithTag:(sender.tag-100+i)%array.count+100+30];
+            lable2.backgroundColor = [UIColor clearColor];
             lable2.textColor=[UIColor blackColor];
             
             
@@ -2226,6 +2234,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 46)];
         lable.tag=130+i;
         lable.text=[array objectAtIndex:i];
+        lable.backgroundColor = [UIColor clearColor];
         lable.font=[UIFont boldSystemFontOfSize:17];
         lable.textAlignment=NSTextAlignmentCenter;
         [button addSubview:lable];
@@ -2437,7 +2446,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
             oldHigprice=0;
             
             UILabel*lable1=(UILabel*)[self.view viewWithTag:201];
+            lable1.backgroundColor = [UIColor clearColor];
             UILabel*lable2=(UILabel*)[self.view viewWithTag:202];
+            lable2.backgroundColor = [UIColor clearColor];
             lable1.text=[NSString stringWithFormat:@"¥0"];
             lable2.text=[NSString stringWithFormat:@"不限"];
             
@@ -2455,7 +2466,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
                 oldHigprice=0;
                 
                 UILabel*lable1=(UILabel*)[self.view viewWithTag:201];
+                lable1.backgroundColor = [UIColor clearColor];
                 UILabel*lable2=(UILabel*)[self.view viewWithTag:202];
+                lable2.backgroundColor = [UIColor clearColor];
                 lable1.text=[NSString stringWithFormat:@"¥0"];
                 lable2.text=[NSString stringWithFormat:@"不限"];
                 
@@ -2486,7 +2499,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
             oldHigprice=0;
             
             UILabel*lable1=(UILabel*)[self.view viewWithTag:201];
+                lable1.backgroundColor = [UIColor clearColor];
             UILabel*lable2=(UILabel*)[self.view viewWithTag:202];
+                lable2.backgroundColor = [UIColor clearColor];
             lable1.text=[NSString stringWithFormat:@"¥0"];
             lable2.text=[NSString stringWithFormat:@"不限"];
             
@@ -2520,8 +2535,10 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
                 UIImageView*imageView=(UIImageView*)[self.view viewWithTag:80];
                 imageView.image=[UIImage imageNamed:@"pitchUp.png"];
                 UILabel*lable=(UILabel*)[self.view viewWithTag:60];
+                lable.backgroundColor = [UIColor clearColor];
                  lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
                 UILabel*lablee=(UILabel*)[self.view viewWithTag:70];
+                lablee.backgroundColor = [UIColor clearColor];
                 lablee.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
                 
                 
@@ -2532,7 +2549,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
                     
                     UILabel*lable1=(UILabel*)[self.view viewWithTag:i%(arrayType.count)+60];
                     lable1.textColor=[UIColor blackColor];
+                    lable1.backgroundColor = [UIColor clearColor];
                     UILabel*lable11=(UILabel*)[self.view viewWithTag:i%(arrayType.count)+70];
+                    lable11.backgroundColor = [UIColor clearColor];
                     lable11.textColor=[UIColor blackColor];
                     
                 }
@@ -2560,6 +2579,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
 {
 
     UILabel*lable=(UILabel*)[self.view viewWithTag:tag];
+    lable.backgroundColor = [UIColor clearColor];
      lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
     UIImageView*imageView;
 //    =(UIImageView*)[self.view viewWithTag:tag+10];
@@ -2578,6 +2598,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     {
         UILabel*lable1=(UILabel*)[self.view viewWithTag:i+tag];
         lable1.textColor=[UIColor blackColor];
+        lable1.backgroundColor = [UIColor clearColor];
         
         UIImageView*imageView2;
     
@@ -2637,12 +2658,14 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     
     UILabel*lowPrice=[[UILabel alloc]initWithFrame:CGRectMake(10, 20, 100, 20) ];
     [SelectPrice addSubview:lowPrice];
+    lowPrice.backgroundColor = [UIColor clearColor];
     lowPrice.tag=201;
     lowPrice.text=@"¥0";
     lowPrice.textColor=[UIColor blueColor];
     lowPrice.font=[UIFont systemFontOfSize:15];
     
     UILabel*upperPrice=[[UILabel alloc]initWithFrame:CGRectMake(160, 20, 80, 20) ];
+    upperPrice.backgroundColor = [UIColor clearColor];
     [SelectPrice addSubview:upperPrice];
     upperPrice.text=@"不限";
     upperPrice.tag=202;
@@ -2652,7 +2675,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
 -(void)progress:(NMRangeSlider*)sender
 {
     UILabel*lable1=(UILabel*)[self.view viewWithTag:201];
+    lable1.backgroundColor = [UIColor clearColor];
     UILabel*lable2=(UILabel*)[self.view viewWithTag:202];
+    lable2.backgroundColor = [UIColor clearColor];
     lable1.text=[NSString stringWithFormat:@"¥%d",(int)sender.lowerValue];
     lable2.text=[NSString stringWithFormat:@"¥%d",(int)sender.upperValue];
     
@@ -2682,6 +2707,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         [button addTarget:self action:@selector(chooseCountry:) forControlEvents:UIControlEventTouchUpInside];
         button.frame=CGRectMake(0, 0+46*i, 220, 46);
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, 200, 46)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.tag=3360+i;
         if (i==0)
         {
@@ -2723,6 +2749,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     
     oldCountry=sender.tag-3350;
     UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+10];
+    lable.backgroundColor = [UIColor clearColor];
      lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
     UIImageView*imageView=(UIImageView*)[self.view viewWithTag:sender.tag+20];
     imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -2731,7 +2758,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     {
         UILabel*lable1=(UILabel*)[self.view viewWithTag:(sender.tag-3350+i)%6+3360];
         lable1.textColor=[UIColor blackColor];
-        
+        lable1.backgroundColor = [UIColor clearColor];
         UIImageView*imageView2=(UIImageView*)[self.view viewWithTag:(sender.tag-3350+i)%6+3370];
         imageView2.image=[UIImage imageNamed:@""];
         
@@ -2760,6 +2787,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         button.frame=CGRectMake(0, 0+46*i, 220, 46);
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, 200, 46)];
         lable.tag=2260+i;
+        lable.backgroundColor = [UIColor clearColor];
         if (i==0)
         {
             lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
@@ -2800,6 +2828,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     oldSex=sender.tag-2250;
     UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+10];
      lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
+    lable.backgroundColor = [UIColor clearColor];
     UIImageView*imageView=(UIImageView*)[self.view viewWithTag:sender.tag+20];
     imageView.image=[UIImage imageNamed:@"pitchUp.png"];
     
@@ -2807,7 +2836,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     {
         UILabel*lable1=(UILabel*)[self.view viewWithTag:(sender.tag-2250+i)%6+2260];
         lable1.textColor=[UIColor blackColor];
-        
+        lable1.backgroundColor = [UIColor clearColor];
         UIImageView*imageView2=(UIImageView*)[self.view viewWithTag:(sender.tag-2250+i)%6+2270];
         imageView2.image=[UIImage imageNamed:@""];
         
@@ -2873,6 +2902,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, 150, 46)];
         lable.tag=260+i;
         lable.text=[_arrayType objectAtIndex:i];
+        lable.backgroundColor = [UIColor clearColor];
         [button addSubview:lable];
         if (i==0)
         {
@@ -2914,6 +2944,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:270];
         imageView.image=[UIImage imageNamed:@"pitchUp.png"];
         UILabel*lable=(UILabel*)[self.view viewWithTag:260];
+        lable.backgroundColor = [UIColor clearColor];
        lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         
         
@@ -2924,7 +2955,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
             
             UILabel*lable1=(UILabel*)[self.view viewWithTag:(sender.tag-250+i)%6+260];
             lable1.textColor=[UIColor blackColor];
-            
+            lable1.backgroundColor = [UIColor clearColor];
         }
         
         star=[NSMutableString stringWithString:@""];
@@ -2937,13 +2968,13 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         
         UILabel*lable1=(UILabel*)[self.view viewWithTag:260];
         lable1.textColor=[UIColor blackColor];
-        
+        lable1.backgroundColor = [UIColor clearColor];
         
         
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:sender.tag+20];
         
         UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+10];
-        
+        lable.backgroundColor = [UIColor clearColor];
         
         
         if (  imageView.image==[UIImage imageNamed:@"pitchUp.png"])
@@ -3011,6 +3042,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, 150, 46)];
         lable.tag=1360+i;
+        lable.backgroundColor = [UIColor clearColor];
         lable.text=[_arrayType2 objectAtIndex:i];
         [button addSubview:lable];
         if (i==0)
@@ -3044,6 +3076,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:1370];
         imageView.image=[UIImage imageNamed:@"pitchUp.png"];
         UILabel*lable=(UILabel*)[self.view viewWithTag:1360];
+        lable.backgroundColor = [UIColor clearColor];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         
         
@@ -3053,6 +3086,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
             imageView1.image=[UIImage imageNamed:@""];
             
             UILabel*lable1=(UILabel*)[self.view viewWithTag:(sender.tag-1350+i)%6+1360];
+            lable1.backgroundColor = [UIColor clearColor];
             lable1.textColor=[UIColor blackColor];
             
         }
@@ -3067,13 +3101,13 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         
         UILabel*lable1=(UILabel*)[self.view viewWithTag:1360];
         lable1.textColor=[UIColor blackColor];
-        
+        lable1.backgroundColor = [UIColor clearColor];
         
         
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:sender.tag+20];
         
         UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+10];
-        
+        lable.backgroundColor = [UIColor clearColor];
         
         
         if (  imageView.image==[UIImage imageNamed:@"pitchUp.png"])
@@ -3128,6 +3162,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, 150, 46)];
         lable.tag=1460+i;
+        lable.backgroundColor = [UIColor clearColor];
         lable.text=[_arrayType3 objectAtIndex:i];
         [button addSubview:lable];
         UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 45.5, 220, .5)];
@@ -3158,6 +3193,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:1470];
         imageView.image=[UIImage imageNamed:@"pitchUp.png"];
         UILabel*lable=(UILabel*)[self.view viewWithTag:1460];
+        lable.backgroundColor = [UIColor clearColor];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         
         
@@ -3168,7 +3204,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
             
             UILabel*lable1=(UILabel*)[self.view viewWithTag:(sender.tag-1450+i)%8+1460];
             lable1.textColor=[UIColor blackColor];
-            
+            lable1.backgroundColor = [UIColor clearColor];
         }
         
         TranslateStr=[NSMutableString stringWithString:@""];
@@ -3181,13 +3217,13 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         
         UILabel*lable1=(UILabel*)[self.view viewWithTag:1460];
         lable1.textColor=[UIColor blackColor];
-        
+        lable1.backgroundColor = [UIColor clearColor];
         
         
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:sender.tag+20];
         
         UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+10];
-        
+        lable.backgroundColor = [UIColor clearColor];
         
         
         if (  imageView.image==[UIImage imageNamed:@"pitchUp.png"])
@@ -3257,11 +3293,13 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(20, 8, 200, 15)];
         lable.tag=60+i;
+        lable.backgroundColor = [UIColor clearColor];
         lable.font=[UIFont systemFontOfSize:17];
         lable.text=[arrayType objectAtIndex:i];
         [button addSubview:lable];
         UILabel*lable2=[[UILabel alloc]initWithFrame:CGRectMake(20, 23, 200, 15)];
         lable2.tag=70+i;
+        lable2.backgroundColor = [UIColor clearColor];
          lable2.font=[UIFont systemFontOfSize:16];
         lable2.text=[russiaArray objectAtIndex:i];
         [button addSubview:lable2];
@@ -3303,8 +3341,10 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:80];
         imageView.image=[UIImage imageNamed:@"pitchUp.png"];
         UILabel*lable=(UILabel*)[self.view viewWithTag:60];
+        lable.backgroundColor = [UIColor clearColor];
        lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         UILabel*lable2=(UILabel*)[self.view viewWithTag:70];
+        lable2.backgroundColor = [UIColor clearColor];
         lable2.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
 
         
@@ -3314,10 +3354,12 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
             imageView1.image=[UIImage imageNamed:@""];
             
             UILabel*lable3=(UILabel*)[self.view viewWithTag:(sender.tag-50+i)%(arrayType.count)+60];
+            lable3.backgroundColor = [UIColor clearColor];
             lable3.textColor=[UIColor blackColor];
             
             UILabel*lable4=(UILabel*)[self.view viewWithTag:(sender.tag-50+i)%(arrayType.count)+70];
             lable4.textColor=[UIColor blackColor];
+            lable4.backgroundColor = [UIColor clearColor];
             
         }
         
@@ -3361,8 +3403,10 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         
         UILabel*lable1=(UILabel*)[self.view viewWithTag:60];
         lable1.textColor=[UIColor blackColor];
+        lable1.backgroundColor = [UIColor clearColor];
         UILabel*lable11=(UILabel*)[self.view viewWithTag:70];
        lable11.textColor=[UIColor blackColor];
+        lable11.backgroundColor = [UIColor clearColor];
 
         
       
@@ -3370,9 +3414,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:sender.tag+30];
         
         UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+10];
-        
+        lable.backgroundColor = [UIColor clearColor];
         UILabel*lablee=(UILabel*)[self.view viewWithTag:sender.tag+20];
-        
+        lablee.backgroundColor = [UIColor clearColor];
         if (  imageView.image==[UIImage imageNamed:@"pitchUp.png"])
         {
             if (oldArearArray.count>1)
@@ -3494,7 +3538,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(27, 0, 30, 40)];
         lable.textColor=[UIColor grayColor];
-        
+        lable.backgroundColor = [UIColor clearColor];
          a=i;
         if ([self.navName isEqualToString:@"圣彼得堡购物"]&&i==3)
         {
@@ -3562,7 +3606,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
 {
     UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+10];
     lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
-    
+    lable.backgroundColor = [UIColor clearColor];
     
     [sender setImage:[UIImage imageNamed:@"sectionGray.png"] forState:UIControlStateNormal];
     
@@ -3579,6 +3623,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     {
         UILabel*lable1=(UILabel*)[self.view viewWithTag:(sender.tag-10+i)%5+20];
         lable1.textColor=[UIColor grayColor];
+        lable.backgroundColor = [UIColor clearColor];
     }
     
      UIImageView*imageView=(UIImageView*)[self.view viewWithTag:33];
@@ -3690,7 +3735,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     for (int i=0; i<arrayType.count; i++)
     {
         UILabel*lable=(UILabel*)[self.view viewWithTag:60+i];
+        lable.backgroundColor = [UIColor clearColor];
         UILabel*lable1=(UILabel*)[self.view viewWithTag:70+i];
+        lable1.backgroundColor = [UIColor clearColor];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:80+i];
         lable.textColor=[UIColor blackColor];
         lable1.textColor=[UIColor blackColor];
@@ -3701,7 +3748,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     if (oldArearArray.count==0)
     {
         UILabel*lable=(UILabel*)[self.view viewWithTag:60];
+        lable.backgroundColor = [UIColor clearColor];
         UILabel*lable1=(UILabel*)[self.view viewWithTag:70];
+        lable1.backgroundColor = [UIColor clearColor];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:80];
          lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
          lable1.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
@@ -3720,7 +3769,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         int a=[_array1 indexOfObject:[oldArearArray objectAtIndex:i]];
         NSLog(@"a======%d",a);
         UILabel*lable=(UILabel*)[self.view viewWithTag:61+a];
-         UILabel*lable2=(UILabel*)[self.view viewWithTag:71+a];
+        lable.backgroundColor = [UIColor clearColor];
+        UILabel*lable2=(UILabel*)[self.view viewWithTag:71+a];
+        lable2.backgroundColor = [UIColor clearColor];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:81+a];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         lable2.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
@@ -3736,6 +3787,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     oldSex=Sex;
     UILabel*lable=(UILabel*)[self.view viewWithTag:oldSex+2260];
     lable.textColor=[UIColor blueColor];
+        lable.backgroundColor = [UIColor clearColor];
     UIImageView*imageView=(UIImageView*)[self.view viewWithTag:oldSex+2270];
     imageView.image=[UIImage imageNamed:@"pitchUp.png"];
     
@@ -3743,7 +3795,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     {
         UILabel*lable1=(UILabel*)[self.view viewWithTag:(oldSex+i)%6+2260];
         lable1.textColor=[UIColor blackColor];
-        
+        lable1.backgroundColor = [UIColor clearColor];
         UIImageView*imageView2=(UIImageView*)[self.view viewWithTag:(oldSex+i)%6+2270];
         imageView2.image=[UIImage imageNamed:@""];
         
@@ -3758,6 +3810,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     
         oldCountry=Country;
         UILabel*lable=(UILabel*)[self.view viewWithTag:oldCountry+3360];
+        lable.backgroundColor = [UIColor clearColor];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
        
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:oldCountry+3370];
@@ -3766,6 +3819,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         for (int i=1; i<6; i++)
         {
             UILabel*lable1=(UILabel*)[self.view viewWithTag:(oldCountry+i)%6+3360];
+            lable1.backgroundColor = [UIColor clearColor];
             lable1.textColor=[UIColor blackColor];
             
             UIImageView*imageView2=(UIImageView*)[self.view viewWithTag:(oldCountry+i)%6+3370];
@@ -3782,7 +3836,9 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
 
     
     UILabel*lable1=(UILabel*)[self.view viewWithTag:201];
+    lable1.backgroundColor = [UIColor clearColor];
     UILabel*lable2=(UILabel*)[self.view viewWithTag:202];
+    lable2.backgroundColor = [UIColor clearColor];
     lable1.text=[NSString stringWithFormat:@"¥%d",oldLowprice];
     lable2.text=[NSString stringWithFormat:@"¥%d",oldHigprice];
     
@@ -3804,6 +3860,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     for (int i=0; i<6; i++)
     {
         UILabel*lable=(UILabel*)[self.view viewWithTag:260+i];
+        lable.backgroundColor = [UIColor clearColor];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:270+i];
         lable.textColor=[UIColor blackColor];
         imageView.image=[UIImage imageNamed:@""];
@@ -3813,6 +3870,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     if (oldStarArray.count==0)
     {
         UILabel*lable=(UILabel*)[self.view viewWithTag:260];
+        lable.backgroundColor = [UIColor clearColor];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:270];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -3842,6 +3900,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         int a=[_array indexOfObject:[oldStarArray objectAtIndex:i]];
         NSLog(@"a======%d",a);
         UILabel*lable=(UILabel*)[self.view viewWithTag:261+a];
+        lable.backgroundColor = [UIColor clearColor];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:271+a];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -3860,6 +3919,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         for (int i=0; i<6; i++)
         {
             UILabel*lable=(UILabel*)[self.view viewWithTag:1360+i];
+            lable.backgroundColor = [UIColor clearColor];
             UIImageView*imageView=(UIImageView*)[self.view viewWithTag:1370+i];
             lable.textColor=[UIColor blackColor];
             imageView.image=[UIImage imageNamed:@""];
@@ -3869,6 +3929,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         if (oldSkilledArray.count==0)
         {
             UILabel*lable=(UILabel*)[self.view viewWithTag:1360];
+            lable.backgroundColor = [UIColor clearColor];
             UIImageView*imageView=(UIImageView*)[self.view viewWithTag:1370];
             lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
             imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -3888,6 +3949,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
             int a=[_array indexOfObject:[oldSkilledArray objectAtIndex:i]];
             NSLog(@"a======%d",a);
             UILabel*lable=(UILabel*)[self.view viewWithTag:1361+a];
+            lable.backgroundColor = [UIColor clearColor];
             UIImageView*imageView=(UIImageView*)[self.view viewWithTag:1371+a];
             lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
             imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -3912,6 +3974,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         for (int i=0; i<8; i++)
         {
             UILabel*lable=(UILabel*)[self.view viewWithTag:1460+i];
+            lable.backgroundColor = [UIColor clearColor];
             UIImageView*imageView=(UIImageView*)[self.view viewWithTag:1470+i];
             lable.textColor=[UIColor blackColor];
             imageView.image=[UIImage imageNamed:@""];
@@ -3921,6 +3984,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         if (oldTranslateArray.count==0)
         {
             UILabel*lable=(UILabel*)[self.view viewWithTag:1460];
+            lable.backgroundColor = [UIColor clearColor];
             UIImageView*imageView=(UIImageView*)[self.view viewWithTag:1470];
             lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
             imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -3940,6 +4004,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
             int a=[_array indexOfObject:[oldTranslateArray objectAtIndex:i]];
             NSLog(@"a======%d",a);
             UILabel*lable=(UILabel*)[self.view viewWithTag:1461+a];
+            lable.backgroundColor = [UIColor clearColor];
             UIImageView*imageView=(UIImageView*)[self.view viewWithTag:1471+a];
             lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
             imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -3988,6 +4053,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     
     UILabel*head=[[UILabel alloc]initWithFrame:CGRectMake(5, 5, 310, 30)];
     head.text=self.navName;
+    head.backgroundColor = [UIColor clearColor];
     
     
     head.font=[UIFont boldSystemFontOfSize:18];
@@ -3995,6 +4061,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     
     UILabel*title=[[UILabel alloc]initWithFrame:CGRectMake(5, 25, 310, 60)];
     title.text=self.introduce;
+    title.backgroundColor = [UIColor clearColor];
     title.numberOfLines=0;
     title.font=[UIFont systemFontOfSize:15];
     title.textColor=[UIColor grayColor];
@@ -4087,6 +4154,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
         
         UILabel*lable=(UILabel*)[self.view viewWithTag:2];
         lable.text=@"";
+        lable.backgroundColor = [UIColor clearColor];
         UIActivityIndicatorView *tableFooterActivityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(150.0f, 10.0f, 20.0f, 20.0f)];
         
         [tableFooterActivityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
@@ -4144,6 +4212,7 @@ filterView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     
     UILabel *loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320, 40.0f)];
     loadMoreText.tag=2;
+    loadMoreText.backgroundColor = [UIColor clearColor];
     [loadMoreText setCenter:tableFooterView.center];
     
     [loadMoreText setFont:[UIFont fontWithName:@"Helvetica Neue" size:14]];

@@ -16,6 +16,7 @@ backButton
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
     UILabel *headLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 200, 30)];
+    headLab.backgroundColor = [UIColor clearColor];
     headLab.text = @"请选择投诉原因";
     headLab.textColor = [UIColor grayColor];
     headLab.font = [UIFont boldSystemFontOfSize:15.5];
@@ -66,6 +67,7 @@ backButton
     [backbutton addTarget:self action:@selector(sendFeedBack) forControlEvents:UIControlEventTouchUpInside];
    UILabel *backbuttonlable=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, backbutton.frame.size.width, backbutton.frame.size.height)] ;
     backbuttonlable.text=@"发送";
+    backbuttonlable.backgroundColor = [UIColor clearColor];
     backbutton.tag=50;
     backbuttonlable.textAlignment=NSTextAlignmentCenter;
     backbuttonlable.textColor=[UIColor whiteColor];

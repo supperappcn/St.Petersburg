@@ -38,6 +38,7 @@ backButton
     
     [backbutton addTarget:self action:@selector(setEditing:animated:) forControlEvents:UIControlEventTouchUpInside];
   backbuttonlable=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, backbutton.frame.size.width, backbutton.frame.size.height)] ;
+    backbuttonlable.backgroundColor = [UIColor clearColor];
     backbuttonlable.text=@"编辑";
     backbutton.tag=50;
     backbuttonlable.textAlignment=NSTextAlignmentCenter;

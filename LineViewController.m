@@ -243,6 +243,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 46)];
         lable.tag=130+i;
         lable.text=[array objectAtIndex:i];
+        lable.backgroundColor = [UIColor clearColor];
         lable.font=[UIFont boldSystemFontOfSize:17];
         lable.textAlignment=NSTextAlignmentCenter;
         [button addSubview:lable];
@@ -322,6 +323,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         {
             oldLineDays=0;
             UILabel*lable=(UILabel*)[self.view viewWithTag:160];
+            lable.backgroundColor = [UIColor clearColor];
             lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
             UIImageView*imageView=(UIImageView*)[self.view viewWithTag:170];
             imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -330,7 +332,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
             {
                 UILabel*lable1=(UILabel*)[self.view viewWithTag:i+160];
                 lable1.textColor=[UIColor blackColor];
-                
+                lable1.backgroundColor = [UIColor clearColor];
                 UIImageView*imageView2=(UIImageView*)[self.view viewWithTag:i+170];
                 imageView2.image=[UIImage imageNamed:@""];
                 
@@ -347,7 +349,9 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
             oldHigprice=0;
             
             UILabel*lable1=(UILabel*)[self.view viewWithTag:201];
+            lable1.backgroundColor = [UIColor clearColor];
             UILabel*lable2=(UILabel*)[self.view viewWithTag:202];
+            lable2.backgroundColor = [UIColor clearColor];
             lable1.text=[NSString stringWithFormat:@"¥0"];
             lable2.text=[NSString stringWithFormat:@"不限"];
             
@@ -362,6 +366,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
             UIImageView*imageView=(UIImageView*)[self.view viewWithTag:270];
             imageView.image=[UIImage imageNamed:@"pitchUp.png"];
             UILabel*lable=(UILabel*)[self.view viewWithTag:260];
+            lable.backgroundColor = [UIColor clearColor];
             lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
             
             
@@ -371,6 +376,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
                 imageView1.image=[UIImage imageNamed:@""];
                 
                 UILabel*lable1=(UILabel*)[self.view viewWithTag:i%(arrayType.count+1)+260];
+                lable1.backgroundColor = [UIColor clearColor];
                 lable1.textColor=[UIColor blackColor];
                 
             }
@@ -391,6 +397,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         sendTag=sender.tag;
         UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+30];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
+        lable.backgroundColor = [UIColor clearColor];
         
         for (int i=1; i<array.count; i++)
         {
@@ -398,6 +405,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
             
             [button setBackgroundImage:[UIImage imageNamed:@"leftSelect"] forState:UIControlStateNormal];
             UILabel*lable2=(UILabel*)[self.view viewWithTag:(sender.tag-100+i)%array.count+100+30];
+            lable2.backgroundColor = [UIColor clearColor];
             lable2.textColor=[UIColor blackColor];
         }
     }
@@ -508,6 +516,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
 
     UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+10];
     lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
+    lable.backgroundColor = [UIColor clearColor];
     
     
     
@@ -525,6 +534,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     {
         UILabel*lable1=(UILabel*)[self.view viewWithTag:(sender.tag-10+i)%5+20];
         lable1.textColor=[UIColor grayColor];
+        lable1.backgroundColor = [UIColor clearColor];
     }
     
     UIImageView*imageView=(UIImageView*)[self.view viewWithTag:33];
@@ -639,6 +649,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     
     UILabel*lable=(UILabel*)[self.view viewWithTag:oldLineDays+160];
     lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
+    lable.backgroundColor = [UIColor clearColor];
     UIImageView*imageView=(UIImageView*)[self.view viewWithTag:oldLineDays+170];
     imageView.image=[UIImage imageNamed:@"pitchUp.png"];
     
@@ -646,7 +657,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     {
         UILabel*lable1=(UILabel*)[self.view viewWithTag:(oldLineDays+i)%6+160];
         lable1.textColor=[UIColor blackColor];
-        
+        lable1.backgroundColor = [UIColor clearColor];
         UIImageView*imageView2=(UIImageView*)[self.view viewWithTag:(oldLineDays+i)%6+170];
         imageView2.image=[UIImage imageNamed:@""];
         
@@ -657,7 +668,9 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     oldHigprice=higprice;
     
     UILabel*lable1=(UILabel*)[self.view viewWithTag:201];
+    lable1.backgroundColor = [UIColor clearColor];
     UILabel*lable2=(UILabel*)[self.view viewWithTag:202];
+    lable2.backgroundColor = [UIColor clearColor];
     lable1.text=[NSString stringWithFormat:@"¥%d",oldLowprice];
     lable2.text=[NSString stringWithFormat:@"¥%d",oldHigprice];
     
@@ -675,6 +688,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     for (int i=0; i<arrayType.count+1; i++)
     {
         UILabel*lable=(UILabel*)[self.view viewWithTag:260+i];
+        lable.backgroundColor = [UIColor clearColor];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:270+i];
         lable.textColor=[UIColor blackColor];
         imageView.image=[UIImage imageNamed:@""];
@@ -684,6 +698,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     if (oldLinetypeArray.count==0)
     {
         UILabel*lable=(UILabel*)[self.view viewWithTag:260];
+        lable.backgroundColor = [UIColor clearColor];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:270];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -705,6 +720,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         int a=[_array indexOfObject:[oldLinetypeArray objectAtIndex:i]];
      //   NSLog(@"a======%d",a);
         UILabel*lable=(UILabel*)[self.view viewWithTag:261+a];
+        lable.backgroundColor = [UIColor clearColor];
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:271+a];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -778,6 +794,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         button.frame=CGRectMake(i* (DeviceWidth/_array.count), 0, DeviceWidth/_array.count, 40);
         
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(27, 0, 30, 40)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.textColor=[UIColor grayColor];
         button.tag=10+i;
         lable.font=[UIFont systemFontOfSize:13];
@@ -887,6 +904,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, 200, 46)];
         lable.tag=160+i;
+        lable.backgroundColor = [UIColor clearColor];
         lable.font = [UIFont systemFontOfSize:17];
         lable.text=[arrayday objectAtIndex:i];
         [button addSubview:lable];
@@ -925,6 +943,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     
     oldLineDays=sender.tag-150;
     UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+10];
+    lable.backgroundColor = [UIColor clearColor];
     lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
     UIImageView*imageView=(UIImageView*)[self.view viewWithTag:sender.tag+20];
     imageView.image=[UIImage imageNamed:@"pitchUp.png"];
@@ -932,6 +951,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     for (int i=1; i<6; i++)
     {
         UILabel*lable1=(UILabel*)[self.view viewWithTag:(sender.tag-150+i)%6+160];
+        lable1.backgroundColor = [UIColor clearColor];
         lable1.textColor=[UIColor blackColor];
         
         UIImageView*imageView2=(UIImageView*)[self.view viewWithTag:(sender.tag-150+i)%6+170];
@@ -958,6 +978,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         [button addTarget:self action:@selector(chooseType:) forControlEvents:UIControlEventTouchUpInside];
         
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, 150, 46)];
+        lable.backgroundColor = [UIColor clearColor];
         lable.tag=260+i;
         if (i==0)
         {
@@ -1005,6 +1026,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:270];
         imageView.image=[UIImage imageNamed:@"pitchUp.png"];
         UILabel*lable=(UILabel*)[self.view viewWithTag:260];
+        lable.backgroundColor = [UIColor clearColor];
         lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         
         
@@ -1014,6 +1036,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
             imageView1.image=[UIImage imageNamed:@""];
             
             UILabel*lable1=(UILabel*)[self.view viewWithTag:(sender.tag-250+i)%(arrayType.count+1)+260];
+            lable1.backgroundColor = [UIColor clearColor];
             lable1.textColor=[UIColor blackColor];
             
         }
@@ -1028,13 +1051,13 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         
         UILabel*lable1=(UILabel*)[self.view viewWithTag:260];
         lable1.textColor=[UIColor blackColor];
-        
+        lable1.backgroundColor = [UIColor clearColor];
         
         
         UIImageView*imageView=(UIImageView*)[self.view viewWithTag:sender.tag+20];
         
         UILabel*lable=(UILabel*)[self.view viewWithTag:sender.tag+10];
-        
+        lable.backgroundColor = [UIColor clearColor];
         
         
         if (  imageView.image==[UIImage imageNamed:@"pitchUp.png"])
@@ -1324,12 +1347,14 @@ GO_NET
     
     UILabel*lowPrice=[[UILabel alloc]initWithFrame:CGRectMake(10, 20, 100, 20) ];
     [SelectPrice addSubview:lowPrice];
+    lowPrice.backgroundColor = [UIColor clearColor];
     lowPrice.tag=201;
     lowPrice.text=@"¥0";
     lowPrice.textColor=[UIColor blueColor];
     lowPrice.font=[UIFont systemFontOfSize:15];
     
     UILabel*upperPrice=[[UILabel alloc]initWithFrame:CGRectMake(180, 20, 80, 20) ];
+    upperPrice.backgroundColor = [UIColor clearColor];
     [SelectPrice addSubview:upperPrice];
     upperPrice.text=@"不限";
     upperPrice.tag=202;
@@ -1377,7 +1402,9 @@ GO_NET
 -(void)progress:(NMRangeSlider*)sender
 {
     UILabel*lable1=(UILabel*)[self.view viewWithTag:201];
+    lable1.backgroundColor = [UIColor clearColor];
     UILabel*lable2=(UILabel*)[self.view viewWithTag:202];
+    lable2.backgroundColor = [UIColor clearColor];
     lable1.text=[NSString stringWithFormat:@"¥%d",(int)sender.lowerValue];
     lable2.text=[NSString stringWithFormat:@"¥%d",(int)sender.upperValue];
     
@@ -1514,6 +1541,7 @@ GO_NET
         _loadingMore = YES;
         
         UILabel*lable=(UILabel*)[self.view viewWithTag:2];
+        lable.backgroundColor = [UIColor clearColor];
         lable.text=@"";
         UIActivityIndicatorView *tableFooterActivityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(150.0f, 10.0f, 20.0f, 20.0f)];
         
@@ -1574,6 +1602,7 @@ GO_NET
 {
     UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, _tabView.bounds.size.width, 40.0f)];
     UILabel *loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320, 40.0f)];
+    loadMoreText.backgroundColor = [UIColor clearColor];
     loadMoreText.tag=2;
     [loadMoreText setCenter:tableFooterView.center];
     [loadMoreText setFont:[UIFont fontWithName:@"Helvetica Neue" size:14]];

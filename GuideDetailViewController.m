@@ -347,7 +347,7 @@ postRequestAgency(_datas)
     checkCollectNum=@"没有收藏";
     //NSLog(@"%@",_gudieID);
     tableArr = [NSMutableArray array];
-    myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-56) style:UITableViewStylePlain];
+    myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight-56) style:UITableViewStylePlain];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     myTableView.dataSource =self;
     myTableView.delegate = self;
@@ -491,6 +491,7 @@ postRequestAgency(_datas)
         imageView.highlightedImage = [UIImage imageNamed:[tabfootImagehight objectAtIndex:i]];
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(0, 30, 80, 20)];
         lable.textColor=[UIColor whiteColor];
+        lable.backgroundColor = [UIColor clearColor];
         lable.font=[UIFont systemFontOfSize:10];
         lable.textAlignment=NSTextAlignmentCenter;
         lable.text=[titleArray objectAtIndex:i];
@@ -797,7 +798,7 @@ postRequestAgency(_datas)
     [cell.contentView addSubview:iv];
     
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(40, 7, 75, 30)];
-    // title.backgroundColor = [UIColor redColor];
+    title.backgroundColor = [UIColor clearColor];
     title.font = [UIFont boldSystemFontOfSize:16];
     title.text = titleArr[indexPath.row];
     [cell.contentView addSubview:title];
@@ -807,6 +808,7 @@ postRequestAgency(_datas)
         text1.text = [NSString stringWithFormat:@"%@",textArr[indexPath.row]];
         text1.font = [UIFont systemFontOfSize:16];
         text1.textColor = [UIColor grayColor];
+        text1.backgroundColor = [UIColor clearColor];
         text1.lineSpacing= 3;
         size=[text1 optimumSize];
 

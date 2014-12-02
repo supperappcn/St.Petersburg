@@ -48,6 +48,7 @@
     if (self.locText)
     {
         UILabel *label = (UILabel *)[self.view viewWithTag:100];
+        label.backgroundColor = [UIColor clearColor];
         label.frame = CGRectMake(35, 0, 260, 40);
         label.font = [UIFont systemFontOfSize:15.5];
         label.text = self.locText;
@@ -291,6 +292,7 @@
         
         UIButton*Button1=[UIButton buttonWithType:UIButtonTypeCustom];
         UILabel*new=[[UILabel alloc]initWithFrame:CGRectMake(40, (height-20)/2, 51, 20)];
+        new.backgroundColor = [UIColor clearColor];
         new.text=@"消息";
         new.font = [UIFont systemFontOfSize:15.5];
         UIImageView *news = [[UIImageView alloc]initWithFrame:CGRectMake(10, (height-21)/2, 21, 21)];
@@ -319,6 +321,7 @@
         UIButton*Button2=[UIButton buttonWithType:UIButtonTypeCustom];
         Button2.frame=CGRectMake(0, 268, width, 40);
         UILabel*set=[[UILabel alloc]initWithFrame:CGRectMake(40, (height-20)/2, 51, 20)];
+        set.backgroundColor = [UIColor clearColor];
         Button2.tag=19;
         [Button2 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         set.text=@"设置";
@@ -372,12 +375,14 @@
     
     name_string=[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 250, 16)];
     name_string.text=textFieldName.text;
+    name_string.backgroundColor = [UIColor clearColor];
     name_string.font = [UIFont systemFontOfSize:15.5];
     name_string.textColor = [UIColor colorWithRed:30.0/255 green:98.0/255 blue:167.0/255 alpha:1];
     name_string.userInteractionEnabled=NO;
     [_memberCenter_name addSubview:name_string];
     
     name_style=[[UILabel alloc]initWithFrame:CGRectMake(55, 35, 200, 16)];
+    name_style.backgroundColor = [UIColor clearColor];
     name_style.textColor = [UIColor grayColor];
     name_style.userInteractionEnabled=NO;
     name_style.font = [UIFont systemFontOfSize:14];
@@ -392,6 +397,7 @@
             orderManagementBtn.tag=11+i;
             [orderManagementBtn addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
             UILabel*orderManagementLab=[[UILabel alloc]initWithFrame:CGRectMake(35, (height-20)/2, 100, 20)];
+            orderManagementLab.backgroundColor = [UIColor clearColor];
             orderManagementLab.text=titleArr[i];
             orderManagementLab.font = [UIFont systemFontOfSize:15.5];
             orderManagementLab.textAlignment=NSTextAlignmentLeft;
@@ -413,6 +419,7 @@
         memberCenter_nameButton3.tag=16;
         [memberCenter_nameButton3 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         UILabel*memberCenter_namenew3=[[UILabel alloc]initWithFrame:CGRectMake(35, (height-20)/2, 100, 20)];
+        memberCenter_namenew3.backgroundColor = [UIColor clearColor];
         memberCenter_namenew3.text=@"游记";
         memberCenter_namenew3.font = [UIFont systemFontOfSize:15.5];
         memberCenter_namenew3.textAlignment=NSTextAlignmentLeft;
@@ -432,6 +439,7 @@
         [memberCenter_nameButton4 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         memberCenter_nameButton4.frame=CGRectMake(0, 250, width, 40);
         UILabel*memberCenter_nameset4=[[UILabel alloc]initWithFrame:CGRectMake(35, (height-20)/2, 100, 20)];
+        memberCenter_nameset4.backgroundColor = [UIColor clearColor];
         memberCenter_nameset4.text=@"收藏";
         memberCenter_nameset4.font = [UIFont systemFontOfSize:15.5];
         memberCenter_nameset4.textAlignment=NSTextAlignmentLeft;
@@ -457,6 +465,7 @@
         memberCenter_nameButton5.frame=CGRectMake(0, 300, width, 40);
         
         UILabel*memberCenter_nameset3=[[UILabel alloc]initWithFrame:CGRectMake(35, (height-20)/2, 51, 20)];
+        memberCenter_nameset3.backgroundColor = [UIColor clearColor];
         memberCenter_nameButton5.tag=18;
         [memberCenter_nameButton5 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         memberCenter_nameset3.text=@"消息";
@@ -484,6 +493,7 @@
         memberCenter_nameButton7.tag=19;
         [memberCenter_nameButton7 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         UILabel*memberCenter_namenew4=[[UILabel alloc]initWithFrame:CGRectMake(35, (height-20)/2, 51, 20)];
+        memberCenter_namenew4.backgroundColor = [UIColor clearColor];
         memberCenter_namenew4.text=@"设置";
         memberCenter_namenew4.font = [UIFont systemFontOfSize:15.5];
         memberCenter_namenew4.textAlignment=NSTextAlignmentLeft;
@@ -514,6 +524,7 @@
             orderManagementBtn.tag=8+i;
             [orderManagementBtn addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
             UILabel*orderManagementLab=[[UILabel alloc]initWithFrame:CGRectMake(35, (height-20)/2, 130, 20)];
+            orderManagementLab.backgroundColor = [UIColor clearColor];
             orderManagementLab.text=titleArr[i];
             orderManagementLab.tag = 100 + i;
             orderManagementLab.font = [UIFont systemFontOfSize:15.5];
@@ -552,6 +563,7 @@
         memberCenter_nameButton3.tag=16;
         [memberCenter_nameButton3 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         UILabel*memberCenter_namenew3=[[UILabel alloc]initWithFrame:CGRectMake(35, (height-20)/2, 100, 20)];
+        memberCenter_namenew3.backgroundColor = [UIColor clearColor];
         memberCenter_namenew3.text=@"游记";
         memberCenter_namenew3.font = [UIFont systemFontOfSize:15.5];
         memberCenter_namenew3.textAlignment=NSTextAlignmentLeft;
@@ -571,6 +583,7 @@
         [memberCenter_nameButton4 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         memberCenter_nameButton4.frame=CGRectMake(0, 400, width, 40);
         UILabel*memberCenter_nameset4=[[UILabel alloc]initWithFrame:CGRectMake(35, (height-20)/2, 100, 20)];
+        memberCenter_nameset4.backgroundColor = [UIColor clearColor];
         memberCenter_nameset4.text=@"收藏";
         memberCenter_nameset4.font = [UIFont systemFontOfSize:15.5];
         memberCenter_nameset4.textAlignment=NSTextAlignmentLeft;
@@ -596,6 +609,7 @@
         memberCenter_nameButton5.frame=CGRectMake(0, 450, width, 40);
         
         UILabel*memberCenter_nameset3=[[UILabel alloc]initWithFrame:CGRectMake(35, (height-20)/2, 51, 20)];
+        memberCenter_nameset3.backgroundColor = [UIColor clearColor];
         memberCenter_nameButton5.tag=18;
         [memberCenter_nameButton5 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         memberCenter_nameset3.text=@"消息";
@@ -623,6 +637,7 @@
         memberCenter_nameButton8.tag=19;
         [memberCenter_nameButton8 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         UILabel*memberCenter_namenew4=[[UILabel alloc]initWithFrame:CGRectMake(35, (height-20)/2, 51, 20)];
+        memberCenter_namenew4.backgroundColor = [UIColor clearColor];
         memberCenter_namenew4.text=@"设置";
         memberCenter_namenew4.font = [UIFont systemFontOfSize:15.5];
         memberCenter_namenew4.textAlignment=NSTextAlignmentLeft;
@@ -652,6 +667,7 @@
         UIButton*memberCenter_nameButton3=[UIButton buttonWithType:UIButtonTypeCustom];
         memberCenter_nameButton3.frame=CGRectMake(0, 0, width, 40);
         UILabel*memberCenter_nameset3=[[UILabel alloc]initWithFrame:CGRectMake(40, (height-20)/2, 51, 20)];
+        memberCenter_nameset3.backgroundColor = [UIColor clearColor];
         memberCenter_nameButton3.tag=18;
         memberCenter_nameset3.font = [UIFont systemFontOfSize:15.5];
         [memberCenter_nameButton3 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
@@ -679,6 +695,7 @@
         memberCenter_nameButton4.tag=19;
         [memberCenter_nameButton4 addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         UILabel*memberCenter_namenew4=[[UILabel alloc]initWithFrame:CGRectMake(40, (height-20)/2, 51, 20)];
+        memberCenter_namenew4.backgroundColor = [UIColor clearColor];
         memberCenter_namenew4.text=@"设置";
         memberCenter_namenew4.textAlignment=NSTextAlignmentLeft;
         memberCenter_namenew4.font = [UIFont systemFontOfSize:15.5];
@@ -809,6 +826,7 @@ GO_NET
             [self.navigationController pushViewController:detail animated:YES];
             
             UILabel*lable=(UILabel*)[self.view viewWithTag:30];
+            lable.backgroundColor = [UIColor clearColor];
             lable.text=@"";
         }
             break;
@@ -963,6 +981,7 @@ postRequestAgency(datas)
         }
         
         UILabel *label = (UILabel *)[self.view viewWithTag:100];
+        label.backgroundColor = [UIColor clearColor];
         label.frame = CGRectMake(35, 0, 260, 40);
         label.font = [UIFont systemFontOfSize:15.5];
         label.text = result;

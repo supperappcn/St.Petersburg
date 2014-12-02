@@ -29,6 +29,7 @@
     self.view.backgroundColor=[UIColor whiteColor];
     
     UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(0, (DeviceHeight-64)/2, 320, 40)];
+    lable.backgroundColor = [UIColor clearColor];
     lable.text=@"系统完善中...";
     lable.textAlignment=NSTextAlignmentCenter;
     lable.font=[UIFont systemFontOfSize:25];

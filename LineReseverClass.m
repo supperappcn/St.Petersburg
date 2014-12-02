@@ -51,6 +51,7 @@ backButton
         
         UILabel *checkLab = (UILabel *)[sv viewWithTag:11];
         checkLab.text = _checkDate;
+        checkLab.backgroundColor = [UIColor clearColor];
         price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>",_RMB.intValue*zhong.text.intValue,_dollar.intValue*zhong.text.intValue];
     }
 //    if (_check_outDate) {
@@ -143,6 +144,7 @@ backButton
 - (void)addHeaderView{
     russianName = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 20)];
     russianName.text=_russianStr;
+    russianName.backgroundColor = [UIColor clearColor];
     russianName.font = [UIFont boldSystemFontOfSize:18];
     [sv addSubview:russianName];
     
@@ -174,6 +176,7 @@ backButton
             [bv addSubview:iv];
             
             UILabel *name= [[UILabel alloc] initWithFrame:CGRectMake(36, 13.5, 170, 16)];
+            name.backgroundColor = [UIColor clearColor];
 //            name.tag = 88 + i;
             name.font = [UIFont systemFontOfSize:16];
             name.text = names[i];
@@ -189,6 +192,7 @@ backButton
                 
                 //前日期
                 UILabel *date= [[UILabel alloc] initWithFrame:CGRectMake(116, 13.5, 200, 16)];
+                date.backgroundColor = [UIColor clearColor];
                 date.font = [UIFont systemFontOfSize:16];
                 //date.text = [_formatter stringFromDate:[NSDate date]];
                 date.tag = 11;
@@ -232,6 +236,7 @@ backButton
                 [bv addSubview:v];
                 
                 UILabel *peopleLab = [[UILabel alloc]initWithFrame:CGRectMake(230, 0, 50, 43)];
+                peopleLab.backgroundColor = [UIColor clearColor];
                 peopleLab.text=@"成人";
                 [bv addSubview:peopleLab];
                 
@@ -267,6 +272,7 @@ backButton
                 [bv addSubview:v];
                 UILabel *peopleLab = [[UILabel alloc]initWithFrame:CGRectMake(230, 0, 50, 43)];
                 peopleLab.text=@"儿童";
+                peopleLab.backgroundColor = [UIColor clearColor];
                 [bv addSubview:peopleLab];
             }
                 break;
@@ -471,6 +477,7 @@ backButton
             
             if (i==0) {
                 UILabel *fang = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 43)];
+                fang.backgroundColor = [UIColor clearColor];
                 fang.font = [UIFont systemFontOfSize:14];
                 fang.text = [NSString stringWithFormat:@"第%d位游客信息",k];
                 [bv addSubview:fang];
@@ -478,6 +485,7 @@ backButton
                 
                     UILabel *fang = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 80, 43)];
                     fang.font = [UIFont systemFontOfSize:16];
+                    fang.backgroundColor = [UIColor clearColor];
                     fang.text = tittle[i-1];
                     fang.textColor = [UIColor grayColor];
                     [bv addSubview:fang];
@@ -501,6 +509,7 @@ backButton
                         
                         UILabel *fang2 = [[UILabel alloc] initWithFrame:CGRectMake(170, 0, 80, 43)];
                         fang2.font = [UIFont systemFontOfSize:16];
+                        fang2.backgroundColor = [UIColor clearColor];
                         fang2.text = i==1?@"中文名":@"英文名";
                         fang2.textColor = [UIColor grayColor];
                         [bv addSubview:fang2];
@@ -613,6 +622,7 @@ backButton
         UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(10, 13.5, 140, 16)];
         name.font = [UIFont systemFontOfSize:i==0?12.5:16];
         name.text = linkmanNames[i];
+        name.backgroundColor = [UIColor clearColor];
         name.textColor =  i==0?[UIColor blackColor]:[UIColor grayColor];
         [bv addSubview:name];
         
@@ -657,6 +667,7 @@ backButton
                 
                 UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(35.5, 0, 70, 43)];
                 name.font = [UIFont systemFontOfSize:12.5];
+                name.backgroundColor = [UIColor clearColor];
                 name.text = @"预订须知";
                 [bv addSubview:name];
             }
@@ -683,6 +694,7 @@ backButton
         [payView addSubview:bv];
         
         UILabel *name = [[UILabel alloc]init];
+        name.backgroundColor = [UIColor clearColor];
         name.text = names[i];
         if (i!=0) {
             name.frame = CGRectMake(64, 0, 140, 43);
@@ -755,7 +767,7 @@ backButton
 - (void)goUpOrder{
     
     UILabel *lab = (UILabel*)[sv viewWithTag:11];
-    
+    lab.backgroundColor = [UIColor clearColor];
     //UILabel *lab2 = (UILabel*)[userDataView viewWithTag:12];
     if (lab.text.length==0) {
         UIAlertView *av = [[UIAlertView alloc]initWithTitle:[NSString  stringWithFormat:@"日期不能为空"] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];

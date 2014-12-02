@@ -27,6 +27,7 @@
         
         
         self.head=[[UILabel alloc]initWithFrame:CGRectMake(45, 10, 180, 30)];
+        self.head.backgroundColor = [UIColor clearColor];
         self.head.font=[UIFont boldSystemFontOfSize:17];
         [self addSubview:self.head];
         

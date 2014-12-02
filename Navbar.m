@@ -274,6 +274,7 @@
 {
       
     UILabel *label = [[UILabel alloc] init];
+    label.backgroundColor = [UIColor clearColor];
     label.frame = CGRectMake(0, 0, 180, 20);
     label.backgroundColor = [UIColor clearColor];
     label.tag = 99901;

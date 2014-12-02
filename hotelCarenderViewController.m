@@ -260,7 +260,7 @@ backButton
     [self.view addSubview: self.ScrollV];
     [self.ScrollV addSubview:self.calenderV];
     
-    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 64 - 50, self.view.frame.size.width, 50)];
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, DeviceHeight - 64 - 50, self.view.frame.size.width, 50)];
     view.backgroundColor = Gary40;
     [self.view addSubview:view];
     
@@ -714,11 +714,13 @@ backButton
                     
                     UILabel *dayL = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, button.frame.size.width, 20)];
                     dayL.text = dayArr[i];
+                    dayL.backgroundColor = [UIColor clearColor];
                     dayL.textAlignment = NSTextAlignmentCenter;
                     dayL.font = [UIFont systemFontOfSize:14];
                     [button addSubview:dayL];
                     
                     UILabel *moneyL = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, button.frame.size.width, 12)];
+                    moneyL.backgroundColor = [UIColor clearColor];
                     moneyL.textAlignment = NSTextAlignmentCenter;
                     moneyL.text = [NSString stringWithFormat:@"$%@",[DataArr[i] objectForKey:@"Price"]];
                     moneyL.textColor = [UIColor orangeColor];
@@ -726,6 +728,7 @@ backButton
                     [button addSubview:moneyL];
                     
                     UILabel *numL = [[UILabel alloc]initWithFrame:CGRectMake(0, 32, button.frame.size.width - 3, button.frame.size.height - 32)];
+                    numL.backgroundColor = [UIColor clearColor];
                     numL.textAlignment = NSTextAlignmentRight;
                     numL.text = [NSString stringWithFormat:@"剩%@",[DataArr[i] objectForKey:@"Number"]];
                     numL.textColor = [UIColor colorWithRed:0.26 green:0.57 blue:0.23 alpha:1];
@@ -1057,6 +1060,7 @@ backButton
 - (void)addDayLText:(NSString *)labelT withBtn:(UIButton *)button
 {
     UILabel *dayL = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, button.frame.size.width, 20)];
+    dayL.backgroundColor = [UIColor clearColor];
     dayL.text = labelT;
     dayL.textAlignment = NSTextAlignmentCenter;
     dayL.font = [UIFont systemFontOfSize:14];
@@ -1066,6 +1070,7 @@ backButton
 - (void)addMoneyLText:(NSString *)labelT withBtn:(UIButton *)button
 {
     UILabel *moneyL = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, button.frame.size.width, 12)];
+    moneyL.backgroundColor = [UIColor clearColor];
     moneyL.textAlignment = NSTextAlignmentCenter;
     moneyL.text = labelT;
     moneyL.textColor = [UIColor orangeColor];
@@ -1077,6 +1082,7 @@ backButton
 - (void)addNumLText:(NSString *)labelT withBtn:(UIButton *)button
 {
     UILabel *numL = [[UILabel alloc]initWithFrame:CGRectMake(0, 32, button.frame.size.width - 3, button.frame.size.height - 32)];
+    numL.backgroundColor = [UIColor clearColor];
     numL.textAlignment = NSTextAlignmentRight;
     numL.text = labelT;
     numL.textColor = [UIColor colorWithRed:0.26 green:0.57 blue:0.23 alpha:1];
@@ -1279,6 +1285,7 @@ backButton
             [self addMoneyLText:[NSString stringWithFormat:@"$%@",UPArr[WeekD - 1]] withBtn:button];
             
             UILabel *numL = [[UILabel alloc]initWithFrame:CGRectMake(0, 32, button.frame.size.width, button.frame.size.height - 32)];
+            numL.backgroundColor = [UIColor clearColor];
             numL.textAlignment = NSTextAlignmentCenter;
             if (i == 0)
             {
@@ -1435,6 +1442,7 @@ backButton
     [button setTitle:@"" forState:UIControlStateNormal];
     
     UILabel *dayL = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, button.frame.size.width, 20)];
+    dayL.backgroundColor = [UIColor clearColor];
     dayL.text = [NSString stringWithFormat:@"%d",DF];
     dayL.textAlignment = NSTextAlignmentCenter;
     dayL.font = [UIFont systemFontOfSize:14];
@@ -1442,6 +1450,7 @@ backButton
     [button addSubview:dayL];
     
     UILabel *moneyL = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, button.frame.size.width, 12)];
+    moneyL.backgroundColor = [UIColor clearColor];
     moneyL.textAlignment = NSTextAlignmentCenter;
     
     WeekD = [self GetWeekWithYear:self.calenderV.year andMonth:self.calenderV.month andDay:DF];
@@ -1455,6 +1464,7 @@ backButton
     
     UILabel *numL = [[UILabel alloc]initWithFrame:CGRectMake(0, 32, button.frame.size.width - 3, button.frame.size.height - 32)];
     numL.textAlignment = NSTextAlignmentRight;
+    numL.backgroundColor = [UIColor clearColor];
     numL.text = [NSString stringWithFormat:@"剩%@",PCArr[WeekD - 1]];
     numL.textColor = [UIColor colorWithRed:0.26 green:0.57 blue:0.23 alpha:1];
     roomNum = [PCArr[WeekD - 1] integerValue];

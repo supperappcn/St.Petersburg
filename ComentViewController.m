@@ -325,6 +325,7 @@ postRequestAgencyAndRefesh(datas, refresh)
         
         
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 90, 320, 20)];
+        lab.backgroundColor = [UIColor clearColor];
         lab.textAlignment = NSTextAlignmentCenter;
         lab.text =[NSString stringWithFormat:@"暂无点评，快来点评一下吧~"];
         lab.font = [UIFont boldSystemFontOfSize:17];

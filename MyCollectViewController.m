@@ -106,11 +106,12 @@ postRequestAgency(datas);
     UIImageView *iv = [[UIImageView alloc]initWithFrame:CGRectMake(10, 7, 25, 25)];
     [cell.contentView addSubview:iv];
     UILabel *tittle = [[UILabel alloc]initWithFrame:CGRectMake(40, 10, 50, 20)];
+    tittle.backgroundColor = [UIColor clearColor];
     tittle.font = [UIFont systemFontOfSize:15.5];
     [cell.contentView addSubview:tittle];
     
     UILabel *detailLab = [[UILabel alloc]initWithFrame:CGRectMake(270, 10, 15, 17)];
-
+    detailLab.backgroundColor = [UIColor clearColor];
     detailLab.text = [NSString stringWithFormat:@"(%@)",numberArr.count>1?[numberArr objectAtIndex:indexPath.row]:@"0"];
     
    

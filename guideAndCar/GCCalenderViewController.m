@@ -124,7 +124,7 @@ backButton
 #pragma - mark 添加日历
 - (void)addCalenderView
 {
-    self.calenderV= [[calenderView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height - 64)];
+    self.calenderV= [[calenderView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, DeviceHeight - 64)];
     //    NSLog(@"%@",NSStringFromCGRect(self.aaC.frame));
     [self.calenderV setBackgroundColor:[UIColor clearColor]];
     self.calenderV.calendarDate = [NSDate date];
@@ -135,7 +135,8 @@ backButton
 #pragma - mark 添加scroll
 - (void)addScrollView
 {
-    self.ScrollV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height - 64)];
+    self.ScrollV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, DeviceHeight - 64)];
+    [self changeViewFrame:CGRectMake(0, 0, self.view.bounds.size.width, DeviceHeight - 49 - 64) withView:self.ScrollV];
     [self.view addSubview: self.ScrollV];
 }
 
@@ -157,6 +158,7 @@ backButton
     
     UILabel *BText = [[UILabel alloc]initWithFrame:CGRectMake(30, 10, 110, 15)];
     BText.text = @"不可预订";
+    BText.backgroundColor = [UIColor clearColor];
     BText.textColor = BlackC;
     BText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.0f];
     [self.underView addSubview:BText];
@@ -170,6 +172,7 @@ backButton
     UILabel *OText = [[UILabel alloc]initWithFrame:CGRectMake(120, 10, 50, 15)];
     OText.text = @"可预订";
     OText.textColor = BColor;
+    OText.backgroundColor = [UIColor clearColor];
     OText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.0f];
     [self.underView addSubview:OText];
     
@@ -182,6 +185,7 @@ backButton
     UILabel *RText = [[UILabel alloc]initWithFrame:CGRectMake(200, 10, 70, 15)];
     RText.text = @"选中日期";
     RText.textColor = RColor;
+    RText.backgroundColor = [UIColor clearColor];
     RText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.0f];
     [self.underView addSubview:RText];
     
@@ -191,6 +195,7 @@ backButton
     
     UILabel *attentionText = [[UILabel alloc]initWithFrame:CGRectMake(35, 35, 40, 20)];
     attentionText.text = @"注意";
+    attentionText.backgroundColor = [UIColor clearColor];
     attentionText.textColor = [UIColor blackColor];
     attentionText.font = [UIFont fontWithName:@"Helvetica-Bold" size:15.0f];
     [self.underView addSubview:attentionText];
@@ -198,9 +203,10 @@ backButton
     RTLabel * SLabel =[[RTLabel alloc]initWithFrame:CGRectMake(10, 63, 300, 55)];
     SLabel.text=@"每个定最多可预订8天，如果预定不相连的多个日期，间隔不能超过3天";
     SLabel.font = [UIFont systemFontOfSize:12];
+    SLabel.backgroundColor = [UIColor clearColor];
     [self.underView addSubview:SLabel];
         
-    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 64 - 50, self.view.frame.size.width, 50)];
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, DeviceHeight - 64 - 50, self.view.frame.size.width, 50)];
     view.backgroundColor = Gary40;
     [self.view addSubview:view];
     

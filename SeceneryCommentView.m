@@ -64,6 +64,7 @@ backButton
     
     UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(17, 0, 180, 15)];
     lable.text=@"圣彼得堡5号大街";
+    lable.backgroundColor = [UIColor clearColor];
     lable.font=[UIFont systemFontOfSize:15];
     lable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
     [location addSubview:lable];

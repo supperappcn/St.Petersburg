@@ -21,6 +21,7 @@
         [self addSubview:self.userImage];
         
         self.userName=[[UILabel alloc]initWithFrame:CGRectMake(50, 15, 80, 15)];
+        self.userName.backgroundColor = [UIColor clearColor];
         self.userName.font=[UIFont systemFontOfSize:12];
         self.userName.text=@"yonghuming";
         self.userName.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
@@ -29,6 +30,7 @@
         [self addSubview:self.userName];
         
         self.comentDate=[[UILabel alloc]initWithFrame:CGRectMake(self.userName.frame.origin.x+self.userName.frame.size.width+5, 15, 200, 15)];
+        self.comentDate.backgroundColor = [UIColor clearColor];
         self.comentDate.font=[UIFont systemFontOfSize:12];
         self.comentDate.textColor=[UIColor grayColor];
         self.comentDate.text=@"2014.3.21 4.4";
@@ -53,6 +55,7 @@
         [self addSubview:self.addressImage];
         
         self.addressLable=[[UILabel alloc]initWithFrame:CGRectMake(22,self.addressImage.frame.origin.y, 100, 10)];
+        self.addressLable.backgroundColor = [UIColor clearColor];
         self.addressLable.font=[UIFont systemFontOfSize:12];
         self.addressLable.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         self.addressLable.text=@"圣彼得堡友谊大街5号";
@@ -61,6 +64,7 @@
       
         
         self.commentLable=[[UILabel alloc]initWithFrame:CGRectMake(270, 0, 40, 12)];
+        self.commentLable.backgroundColor = [UIColor clearColor];
         self.commentLable.text=@"评论1";
         self.commentLable.textColor=[UIColor grayColor];
         self.commentLable.font=[UIFont systemFontOfSize:12];
@@ -93,6 +97,7 @@
         
         
         self.gradeLable=[[UILabel alloc]initWithFrame:CGRectMake(270, 80, 40, 10)];
+        self.gradeLable.backgroundColor = [UIColor clearColor];
         self.gradeLable.text=@"总分20";
         self.gradeLable.textColor=[UIColor grayColor];
         self.gradeLable.font=[UIFont systemFontOfSize:12];
@@ -116,6 +121,7 @@
         
         
         self.praiseLable=[[UILabel alloc]initWithFrame:CGRectMake(270, 80, 40, 10)];
+        self.praiseLable.backgroundColor = [UIColor clearColor];
         self.praiseLable.text=@"赞3";
         self.praiseLable.textColor=[UIColor grayColor];
         self.praiseLable.font=[UIFont systemFontOfSize:12];

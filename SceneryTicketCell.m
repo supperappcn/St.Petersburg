@@ -23,10 +23,12 @@
         
         self.head=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 200, 20)];
         //self.head.text=@"成人票";
+        self.head.backgroundColor = [UIColor clearColor];
         self.head.font=[UIFont systemFontOfSize:16];
         [self.backGround addSubview:self.head];
         
         self.validData=[[UILabel alloc]initWithFrame:CGRectMake(10, 40, 240, 15)];
+        self.validData.backgroundColor = [UIColor clearColor];
         //self.validData.text=@"有效期:2014.03.21-2014.04.01";
         self.validData.font=[UIFont systemFontOfSize:14];
         self.validData.textColor=[UIColor grayColor];

@@ -45,6 +45,7 @@ backButton
     NSArray* orderName = @[@"订单号：",@"订单总额：",@"支付方式："];
     for (int i = 0; i < 3; i++) {
         UILabel* orderTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 10 + 41*i, 70, 21)];
+        orderTitle.backgroundColor = [UIColor clearColor];
         orderTitle.text = orderName[i];
         orderTitle.textColor = grayColor;
         orderTitle.font = font_14;
@@ -55,6 +56,7 @@ backButton
             [orderView addSubview:line];
         }
         UILabel* orderLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 10 + 41*i, self.view.frame.size.width - 10 - 80, 21)];
+        orderLab.backgroundColor = [UIColor clearColor];
         orderLab.font = font_14;
         [orderView addSubview:orderLab];
         if (i == 0) {

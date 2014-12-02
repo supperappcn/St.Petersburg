@@ -28,6 +28,7 @@
         
         UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(35, 0, 60, 34)];
         lable.text=@"第2天";
+        lable .backgroundColor = [UIColor clearColor];
         lable.textColor=[UIColor whiteColor];
         lable.font=[UIFont systemFontOfSize:15];
         [_imageView addSubview:lable];

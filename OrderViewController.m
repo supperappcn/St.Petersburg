@@ -100,6 +100,7 @@ static OrderViewController* orderViewController = nil;
     imageView.image=[UIImage imageNamed:@"_back.png"];
     [backbutton addSubview:imageView];
     UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 40, 35)];
+    lable.backgroundColor = [UIColor clearColor];
     lable.font=[UIFont systemFontOfSize:15];
     lable.textColor=[UIColor whiteColor];
     if (self.presentWay == 0) {
@@ -148,6 +149,7 @@ static OrderViewController* orderViewController = nil;
         [bv setImage:[UIImage imageNamed:i==0?@"MyDownCell":@"MyCenter"]];
         
         UILabel *name= [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 90, 43)];
+        name.backgroundColor = [UIColor clearColor];
         name.font = [UIFont boldSystemFontOfSize:15];
         name.text = names[i];
         name.textColor = [UIColor grayColor];
@@ -174,6 +176,7 @@ static OrderViewController* orderViewController = nil;
     imageView.image = [UIImage imageNamed:@"预订须知.png"];
     [self.scrollView addSubview:imageView];
     UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(30, self.topViewHeight + 10, self.scrollView.frame.size.width - 40, 48)];
+    label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:13];
     label.numberOfLines = 3;
     label.textAlignment = NSTextAlignmentLeft;
@@ -209,6 +212,7 @@ static OrderViewController* orderViewController = nil;
         [payWayView addSubview:bv];
         
         UILabel *name = [[UILabel alloc]init];
+        name.backgroundColor = [UIColor clearColor];
         name.text = self.names[i];
         if (i!=0) {
             name.frame = CGRectMake(64, 0, 140, 43);

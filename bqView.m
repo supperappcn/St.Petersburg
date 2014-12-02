@@ -83,7 +83,9 @@ backButton
     UILabel*newLable=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 300, 20)];
     newLable.text=@"    版权声明";
     newLable.font=[UIFont boldSystemFontOfSize:15];
-      
+    newLable.backgroundColor = [UIColor clearColor];
+
+    
     //        self.navigationItem.backBarButtonItem = backItem;
     
     //    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"custom" style:UIBarButtonItemStylePlain target:self action:nil];

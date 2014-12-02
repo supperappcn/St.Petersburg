@@ -946,6 +946,7 @@ postRequestAgency(datas)
         _loadingMore = YES;
         
         UILabel*lable=(UILabel*)[self.view viewWithTag:2];
+        lable.backgroundColor = [UIColor clearColor];
         lable.text=@"";
         UIActivityIndicatorView *tableFooterActivityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(150.0f, 10.0f, 20.0f, 20.0f)];
         

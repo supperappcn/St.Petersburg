@@ -57,6 +57,7 @@ backButton
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    self.view.frame = CGRectMake(0, 0, DeviceWidth, DeviceHeight);
     [self connNet];
     [self addtableView];
     [self addSearchBar];
@@ -81,7 +82,7 @@ backButton
     reloadCA = [[NSMutableArray alloc]init];
     reloadRA = [[NSMutableArray alloc]init];
 
-    locationTV = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 64 - 44) style:UITableViewStyleGrouped];
+    locationTV = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, DeviceHeight - 64 - 44) style:UITableViewStyleGrouped];
     locationTV.dataSource = self;
     locationTV.delegate = self;
     [self.view addSubview:locationTV];
@@ -94,6 +95,7 @@ backButton
     locationL = [[UILabel alloc]initWithFrame:CGRectMake(110, 60, 160, 40)];
     locationL.font = [UIFont systemFontOfSize:14.5];
     locationL.text = @"正在搜索附近位置";
+    locationL.backgroundColor = [UIColor clearColor];
     locationL.hidden = YES;
     [locationTV addSubview:locationL];
 

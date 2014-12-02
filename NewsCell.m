@@ -19,20 +19,24 @@
        self._imgeView.image=[UIImage imageNamed:@"mine_news.png"];
         [self addSubview:self._imgeView];
         self.title=[[UILabel alloc]initWithFrame:CGRectMake(5, 10, 280, 20)];
+        self.title.backgroundColor = [UIColor clearColor];
         self.title.font=[UIFont boldSystemFontOfSize:16];
         [self._imgeView addSubview:self.title];
         
         self.content=[[UILabel alloc]initWithFrame:CGRectMake(5, 35,280, 40)];
+        self.content.backgroundColor = [UIColor clearColor];
         self.content.font=[UIFont systemFontOfSize:14];
         self.content.numberOfLines=2;
         [self._imgeView addSubview:self.content];
 
         self.time=[[UILabel alloc]initWithFrame:CGRectMake(200, 10,115, 20)];
           [self addSubview:self.time];
+        self.time.backgroundColor = [UIColor clearColor];
         self.time.textColor=[UIColor grayColor];
         self.time.font=[UIFont systemFontOfSize:12];
         
         self.weidu=[[UILabel alloc]initWithFrame:CGRectMake(270, 35,40, 40)];
+        self.weidu.backgroundColor = [UIColor clearColor];
         self.weidu.font=[UIFont systemFontOfSize:13];
         self.weidu.backgroundColor=[UIColor clearColor];
         self.weidu.textColor=[UIColor redColor];

@@ -188,6 +188,7 @@ GO_NET
         [bv addSubview:star];
         
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 90, 320, 20)];
+        lab.backgroundColor = [UIColor clearColor];
         lab.textAlignment = NSTextAlignmentCenter;
         lab.text =[NSString stringWithFormat:@"您还没有收藏过%@",self.title];
         lab.font = [UIFont boldSystemFontOfSize:18];
@@ -857,6 +858,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert ,navActivity)
         _loadingMore = YES;
       
         UILabel*view=(UILabel*)[self.view viewWithTag:2];
+        view.backgroundColor = [UIColor clearColor];
         view.text=@"";
         UIActivityIndicatorView *tableFooterActivityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(150.0f, 10.0f, 20.0f, 20.0f)];
         
@@ -949,6 +951,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert ,navActivity)
     UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, _tabView.bounds.size.width, 40.0f)];
    
     UILabel *loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320, 40.0f)];
+    loadMoreText.backgroundColor = [UIColor clearColor];
      loadMoreText.tag=2;
     [loadMoreText setCenter:tableFooterView.center];
     
