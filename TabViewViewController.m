@@ -137,6 +137,8 @@ GO_NET
 
     
    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight-49-20) style:UITableViewStylePlain];
+//    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:_tabView];
+
     _tabView.delegate=self;
     _tabView.dataSource=self;
 //    _tabView.separatorStyle=UITableViewCellSeparatorStyleSingleLineEtched;
