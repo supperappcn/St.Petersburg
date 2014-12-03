@@ -201,15 +201,15 @@ static OrderViewController* orderViewController = nil;
 
 -(void)addPayWayView {
     self.pointIVArr = [NSMutableArray array];
-    int count = self.payWay.intValue==1?6:7;
+    int count = self.payWay.intValue==1?3:4;
     UIView *payWayView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topViewHeight + self.attentionViewHeight, 320, count*43)];
     [self.scrollView addSubview:payWayView];
     self.payWayViewHeight = payWayView.frame.size.height;
-    self.names = @[@"选择支付方式",@"微信支付",@"支付宝客户端支付",@"支付宝网页支付",@"手机银联支付",@"信用卡支付",@"当面支付"];
-    NSArray *imageNames = @[@"",@"weixin",@"zhi",@"zhifubao",@"yinlian",@"xinyongka",@"dangmian"];
+    self.names = @[@"选择支付方式",@"支付宝客户端支付",@"支付宝网页支付",@"当面支付"];
+    NSArray *imageNames = @[@"",@"zhi",@"zhifubao",@"dangmian"];
     for (int i=0; i<count; i++) {
         UIImageView *bv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 10+i*43, 320, 43)];
-        [bv setImage:[UIImage imageNamed:i==0?@"MyDownCell":i==6?@"MyUpCell":@"MyCenter"]];
+        [bv setImage:[UIImage imageNamed:i==0?@"MyDownCell":i==3?@"MyUpCell":@"MyCenter"]];
         bv.userInteractionEnabled = YES;
         [payWayView addSubview:bv];
         
@@ -223,7 +223,6 @@ static OrderViewController* orderViewController = nil;
             iv.image = [UIImage imageNamed:imageNames[i]];
             [bv addSubview:iv];
             
-            //点点
             UIImageView *point = [[UIImageView alloc] initWithFrame:CGRectMake(290, 12.5, 20, 20)];
             point.tag = i;
             point.image = [UIImage imageNamed:i==1?@"住宿预订第1步_19":@"住宿预订第1步_19-14"];
@@ -240,6 +239,47 @@ static OrderViewController* orderViewController = nil;
         [bv addSubview:name];
     }
     _selectPayWay = @"1";
+#pragma  mark-  Changed...
+    /*  将其它支付方式屏蔽
+     self.pointIVArr = [NSMutableArray array];
+     int count = self.payWay.intValue==1?6:7;
+     UIView *payWayView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topViewHeight + self.attentionViewHeight, 320, count*43)];
+     [self.scrollView addSubview:payWayView];
+     self.payWayViewHeight = payWayView.frame.size.height;
+     self.names = @[@"选择支付方式",@"微信支付",@"支付宝客户端支付",@"支付宝网页支付",@"手机银联支付",@"信用卡支付",@"当面支付"];
+     NSArray *imageNames = @[@"",@"weixin",@"zhi",@"zhifubao",@"yinlian",@"xinyongka",@"dangmian"];
+     for (int i=0; i<count; i++) {
+     UIImageView *bv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 10+i*43, 320, 43)];
+     [bv setImage:[UIImage imageNamed:i==0?@"MyDownCell":i==6?@"MyUpCell":@"MyCenter"]];
+     bv.userInteractionEnabled = YES;
+     [payWayView addSubview:bv];
+     
+     UILabel *name = [[UILabel alloc]init];
+     name.text = self.names[i];
+     if (i!=0) {
+     name.frame = CGRectMake(64, 0, 140, 43);
+     name.font = [UIFont systemFontOfSize:16];
+     UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 7, 44, 29)];
+     iv.image = [UIImage imageNamed:imageNames[i]];
+     [bv addSubview:iv];
+     
+     UIImageView *point = [[UIImageView alloc] initWithFrame:CGRectMake(290, 12.5, 20, 20)];
+     point.tag = i;
+     point.image = [UIImage imageNamed:i==1?@"住宿预订第1步_19":@"住宿预订第1步_19-14"];
+     point.userInteractionEnabled = YES;
+     [bv addSubview:point];
+     [self.pointIVArr addObject:point];
+     
+     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectPayWay:)];
+     [point addGestureRecognizer:tap];
+     }else{
+     name.frame = CGRectMake( 10, 0, 140, 43);
+     name.font = [UIFont systemFontOfSize:12.5];
+     }
+     [bv addSubview:name];
+     }
+     _selectPayWay = @"1";
+     */
 }
 
 - (void)selectPayWay:(UITapGestureRecognizer*)tap{
@@ -270,15 +310,6 @@ static OrderViewController* orderViewController = nil;
     [orderButton addTarget:self action:@selector(goToPay) forControlEvents:UIControlEventTouchUpInside];
     [orderButton setTitle:@"去支付" forState:UIControlStateNormal];
     [gudingView addSubview:orderButton];
-    
-    
-#warning mark   test...
-    UIButton* testBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 45)];
-    testBtn.backgroundColor = [UIColor redColor];
-    [testBtn setTitle:@"查看详情" forState:UIControlStateNormal];
-    testBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [testBtn addTarget:self action:@selector(goToPaySuccessfullyViewController) forControlEvents:UIControlEventTouchUpInside];
-    [gudingView addSubview:testBtn];
 }
 
 #pragma mark  goToPay
@@ -394,7 +425,7 @@ static OrderViewController* orderViewController = nil;
     order.tradeNO = _orderNumber;
     order.productName = _productName;
     order.productDescription = _productDescription;
-    order.amount = @"0.01";// self.RMB;
+    order.amount = self.RMB; //@"0.01";
     NSLog(@"self.RMB:%@,_orderNumber:%@, _productName:%@, _productDescription:%@", self.RMB,_orderNumber, _productName, _productDescription);
     if (self.prodClass == 1) {
         order.notifyURL = @"http://t.russia-online.cn/linenotify_url.aspx";

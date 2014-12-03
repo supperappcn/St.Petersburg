@@ -123,6 +123,7 @@ GO_NET
 postRequestAgency(datas)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     dicResultYiBu(datas, result, dic)
+    [aiv stopAnimating];
     if (result.length>11&&[dic objectForKey:@"ds"]) {
        _dataArr = [dic objectForKey:@"ds"];
 //        [aiv stopAnimating];
@@ -150,7 +151,6 @@ postRequestAgency(datas)
     }else {
         [bv removeFromSuperview];
     }
-    [aiv stopAnimating];
 }
 
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{

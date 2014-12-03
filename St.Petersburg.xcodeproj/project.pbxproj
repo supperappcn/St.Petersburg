@@ -31,6 +31,7 @@
 		0A071DF91A1B1FF500803E7B /* MyOrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A071DF71A1B1FF500803E7B /* MyOrderListViewController.xib */; };
 		0A071DFC1A1B323600803E7B /* MyOrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A071DFB1A1B323600803E7B /* MyOrderListTableViewCell.m */; };
 		0A071DFF1A1B48A000803E7B /* MyOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A071DFE1A1B48A000803E7B /* MyOrderDetailViewController.m */; };
+		0A09A3071A2EB9750054DA54 /* TabViewViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A09A3061A2EB9750054DA54 /* TabViewViewController_2.m */; };
 		0A0CB78919F4EED60013D763 /* libQYHMethod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CB78819F4EED60013D763 /* libQYHMethod.a */; };
 		0A0CB78B19F4EEE90013D763 /* libSinaWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CB78A19F4EEE90013D763 /* libSinaWeiboSDK.a */; };
 		0A0CB78F19F4EF020013D763 /* libTCWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CB78E19F4EF020013D763 /* libTCWeiboSDK.a */; };
@@ -867,6 +868,8 @@
 		0A071DFB1A1B323600803E7B /* MyOrderListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderListTableViewCell.m; sourceTree = "<group>"; };
 		0A071DFD1A1B48A000803E7B /* MyOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderDetailViewController.h; sourceTree = "<group>"; };
 		0A071DFE1A1B48A000803E7B /* MyOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderDetailViewController.m; sourceTree = "<group>"; };
+		0A09A3051A2EB9750054DA54 /* TabViewViewController_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabViewViewController_2.h; sourceTree = "<group>"; };
+		0A09A3061A2EB9750054DA54 /* TabViewViewController_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabViewViewController_2.m; sourceTree = "<group>"; };
 		0A0CB78819F4EED60013D763 /* libQYHMethod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQYHMethod.a; path = "点a文件/libQYHMethod.a"; sourceTree = SOURCE_ROOT; };
 		0A0CB78A19F4EEE90013D763 /* libSinaWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSinaWeiboSDK.a; path = "点a文件/libSinaWeiboSDK.a"; sourceTree = SOURCE_ROOT; };
 		0A0CB78E19F4EF020013D763 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTCWeiboSDK.a; path = "点a文件/libTCWeiboSDK.a"; sourceTree = SOURCE_ROOT; };
@@ -2910,6 +2913,8 @@
 				C4EF577318AE17B8009D0B52 /* TabViewViewController.m */,
 				C4E816DE18B322D9005C20D7 /* CustomCell3.h */,
 				C4E816DF18B322D9005C20D7 /* CustomCell3.m */,
+				0A09A3051A2EB9750054DA54 /* TabViewViewController_2.h */,
+				0A09A3061A2EB9750054DA54 /* TabViewViewController_2.m */,
 				C406D7AE18CDAD1B00BB3EED /* class */,
 				C4FAAB5819419B82006D65C1 /* 评论投诉 */,
 				C467DBA118C9AF6B00F6BFCC /* UITableView+table.h */,
@@ -4599,6 +4604,7 @@
 				C4FE85B018ADB58E00A579AE /* CountryViewController.m in Sources */,
 				C4EF9D22196FE65C00CFF415 /* LineReseverClass.m in Sources */,
 				C42C5CA118B7584200C31C7C /* OHAttributedLabel.m in Sources */,
+				0A09A3071A2EB9750054DA54 /* TabViewViewController_2.m in Sources */,
 				C4BF07EB19610C3C004E1A27 /* OrderViewController.m in Sources */,
 				C4DF78FF18E559D4009D2A71 /* LineDetailCell.m in Sources */,
 				C48C8F971959189700326979 /* DateButton.m in Sources */,

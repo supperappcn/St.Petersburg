@@ -270,7 +270,6 @@ GO_NET
 }
 -(void)seach
 {
-   
     searchDisplayC.searchResultsDataSource=self;
     searchDisplayC.searchResultsDelegate=self;
     self.navigationController.navigationBar.hidden=YES;

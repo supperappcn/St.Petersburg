@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "TabViewViewController_2.h"
 
 @interface HomeViewController ()
 
@@ -122,19 +123,29 @@ GO_NET
             break;
         case 1001:
         {
-            TabViewViewController*tab=[TabViewViewController new];
-            tab.tag=@"资讯";
-            tab.pageName=@"资讯列表";
-            [self.navigationController pushViewController:tab animated:NO];
+            TabViewViewController_2* tabViewVC = [TabViewViewController_2 new];
+            tabViewVC.title = @"咨询列表";
+            [self.navigationController pushViewController:tabViewVC animated:YES];
+            
+            
+//            TabViewViewController*tab=[TabViewViewController new];
+//            tab.tag=@"资讯";
+//            tab.pageName=@"资讯列表";
+//            [self.navigationController pushViewController:tab animated:NO];
         
         }
             break;
         case 1002:
         {
-            TabViewViewController*tab=[TabViewViewController new];
-            tab.tag=@"游记";
-             tab.pageName=@"游记列表";
-            [self.navigationController pushViewController:tab animated:NO];
+            TabViewViewController_2* tabViewVC = [TabViewViewController_2 new];
+            tabViewVC.title = @"游记列表";
+            [self.navigationController pushViewController:tabViewVC animated:YES];
+            
+            
+//            TabViewViewController*tab=[TabViewViewController new];
+//            tab.tag=@"游记";
+//             tab.pageName=@"游记列表";
+//            [self.navigationController pushViewController:tab animated:NO];
             
         }
             break;
