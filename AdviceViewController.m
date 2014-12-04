@@ -19,9 +19,10 @@
 {
     [super viewDidLoad];
     scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:scrollView];
     [self.view addSubview:scrollView];
     scrollView.backgroundColor=GroupColor;
-    scrollView.contentSize=CGSizeMake(320, DeviceHeight+50);
+    scrollView.contentSize=CGSizeMake(320, DeviceHeight - 64);
     UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 300, 30)];
     lable.backgroundColor = [UIColor clearColor];
     lable.text=@"欢迎你提出宝贵的意见和建议";

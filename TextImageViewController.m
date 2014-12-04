@@ -31,13 +31,14 @@
   
     NSLog(@"%@",self.titleArray);
     
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight)];
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight - 64 +49)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:_scrollView];
     _scrollView.backgroundColor=GroupColor;
     [self.view addSubview:_scrollView];
       a=0;
     
     a=[QYHMeThod creatTextImage:self.titleArray andImageArray:self.imageArray andSuperView:_scrollView andViewHeight:a];
-    _scrollView.contentSize=CGSizeMake(320, a+40);
+    _scrollView.contentSize=CGSizeMake(320, a + 10);
 	// Do any additional setup after loading the view.
 }
 backButton

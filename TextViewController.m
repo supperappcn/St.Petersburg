@@ -34,7 +34,8 @@ backButton
     - (void)viewDidLoad
     {
         [super viewDidLoad];
-        UIScrollView *sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+        UIScrollView *sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight )];
+        [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:sv];
         [self.view addSubview:sv];
         sv.backgroundColor=GroupColor;
         RTLabel *lab1 = [[RTLabel alloc]initWithFrame:CGRectMake(10, 20, 300, 0)];

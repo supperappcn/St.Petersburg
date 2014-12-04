@@ -200,15 +200,28 @@ GO_NET
 - (void)tap{
     [textFile resignFirstResponder];
     [UIView beginAnimations:nil context:nil];
-    
-    [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height)];
+    [self deleagerSixOrSeven];
     barView.frame =CGRectMake(0, _viewHeight-46, 320, 46);
     [UIView commitAnimations];
+}
+
+- (void)deleagerSixOrSeven
+{
+    if ([UIDevice currentDevice].systemVersion.floatValue < 7.0)
+    {
+        self.view.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+    }
+    else
+    {
+        [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height)];
+    }
+
 }
 - (void)send{
     //发送信息并且加到本地数组刷新
     
-    if (![textFile.text isEqualToString:@""]) {
+    NSLog(@"textFile.text = %@",textFile.text);
+    if (![textFile.text isEqualToString:@""]&&textFile.text != NULL) {
         NSMutableString *urlStr;
         NSString *argumentStr;
         if ([[defaults objectForKey:QUSE_ID] intValue]>0&&[[defaults objectForKey:TYPE_ID] intValue]==2&&[[_editDic objectForKey:@"IsService"] intValue]>0) {
@@ -300,11 +313,13 @@ GO_NET
             //英文转中文
             myTableView.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height-216-46);
             barView.frame =CGRectMake(0, self.view.frame.size.height-216-46, 320, 46);
-            [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height-216)];
+//            [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height-216)];
+            [self deleagerSixOrSeven];
             a++;
         }else{
             //降
-            [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height+252-216)];
+//            [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height+252-216)];
+            [self deleagerSixOrSeven];
             myTableView.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height-46);
             barView.frame =CGRectMake(0, self.view.frame.size.height-46, 320, 46);
         }
@@ -314,12 +329,14 @@ GO_NET
             //中文键盘1次
             myTableView.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height-252-46);
             barView.frame =CGRectMake(0, self.view.frame.size.height-252-46, 320, 46);
-            [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height-252)];
+//            [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height-252)];
+            [self deleagerSixOrSeven];
         }else{
             //中文键盘2次
             myTableView.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height-252+216-46);
             barView.frame =CGRectMake(0, self.view.frame.size.height-252+216-46, 320, 46);
-            [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height-252+216)];
+//            [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height-252+216)];
+            [self deleagerSixOrSeven];
         }
         
     }
@@ -357,7 +374,8 @@ GO_NET
         [textField resignFirstResponder];
         [UIView beginAnimations:nil context:nil];
         
-        [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height)];
+//        [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height)];
+       [self deleagerSixOrSeven];
         barView.frame =CGRectMake(0, _viewHeight-46, 320, 46);
         [UIView commitAnimations];
         return YES;
@@ -370,7 +388,8 @@ GO_NET
     [textFile resignFirstResponder];
     [UIView beginAnimations:nil context:nil];
     
-    [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height)];
+//    [self.view setFrame:CGRectMake(0, _viewOY, 320, self.view.bounds.size.height)];
+    [self deleagerSixOrSeven];
     barView.frame =CGRectMake(0, _viewHeight-46, 320, 46);
     [UIView commitAnimations];
     return YES;

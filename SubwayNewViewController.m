@@ -13,7 +13,9 @@ backButton
 - (void)viewDidLoad{
     hideTabbar
     [self.navigationItem setNewTitle:@"圣彼得堡地铁"];
-    UIScrollView *sv2 = [[UIScrollView alloc]initWithFrame:self.view.bounds];
+    UIScrollView *sv2 = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DeviceWidth, self.view.bounds.size.height - 64 + 49)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, self.view.bounds.size.height - 44) withView:sv2];
+    
     sv2.delegate = self;
     sv2.minimumZoomScale = 1;
     sv2.maximumZoomScale = 10;

@@ -26,7 +26,7 @@ backButton
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIScrollView *sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    UIScrollView *sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight)];
     [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:sv];
     sv.backgroundColor=GroupColor;
     [self.view addSubview:sv];

@@ -68,15 +68,12 @@ backButton
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self adagter];
     array=[NSArray arrayWithObjects:@"邮箱",@"手机号",@"性别", @"出生日期",@"所在地",@"详细地址",@"邮政编码",@"个人介绍",nil];
 
-    scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight)];
-    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:scrollView];
+    scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight - 64 )];
+//    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:scrollView];
     [self.view addSubview:scrollView];
-    scrollView.contentSize=CGSizeMake(320, 540);
-    UIView*memberCenter=[[UIView alloc]init];
-    memberCenter.frame=CGRectMake(0, 0, 320, 600);
+    scrollView.contentSize=CGSizeMake(320, 520);
     scrollView.userInteractionEnabled = YES;
     scrollView.showsVerticalScrollIndicator=NO;
     scrollView.backgroundColor=[UIColor groupTableViewBackgroundColor];
@@ -85,7 +82,6 @@ backButton
     memberCenter_name.userInteractionEnabled=YES;
     memberCenter_name.tag=1000;
     memberCenter_name.frame=CGRectMake(0, 10, 320, 70);
-    memberCenter.backgroundColor=[UIColor groupTableViewBackgroundColor];
     memberCenter_name.image = [UIImage imageNamed:@"memeber_headBack.png"];
     [scrollView addSubview:memberCenter_name];
     
@@ -504,7 +500,7 @@ backButton
         case 202:
         {
             
-            UIActionSheet*actionSheet=[[UIActionSheet alloc]initWithTitle:@"性别修改" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"男士" otherButtonTitles:@"女士",@"保密" ,nil];
+            UIActionSheet*actionSheet=[[UIActionSheet alloc]initWithTitle:@"性别修改" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男士",@"女士",@"保密" ,nil];
             [actionSheet showInView:self.view];
             
 
@@ -649,8 +645,9 @@ backButton
                              delegate:self
                              cancelButtonTitle:@"取消"
                              destructiveButtonTitle:nil
-                             otherButtonTitles: @"打开照相机", @"从手机相册获取",nil];
+                             otherButtonTitles:@"打开照相机",@"从手机相册获取",nil];
             [myActionSheet showInView:self.view];
+            
         }
             break;
 
@@ -662,6 +659,7 @@ backButton
 
 - (void)willPresentActionSheet:(UIActionSheet *)actionSheet
 {
+    NSLog(@"%@ = actionSheet.subviews",actionSheet.subviews);
     for (UIView *subViwe in actionSheet.subviews)
     {
         if ([subViwe isKindOfClass:[UIButton class]])
@@ -1099,12 +1097,13 @@ backButton
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    NSLog(@"tag = %d",buttonIndex);
     
     if (actionSheet == myActionSheet)
     {
         if (buttonIndex == myActionSheet.cancelButtonIndex)
         {
-//            NSLog(@"取消");
+            NSLog(@"取消");
         }
         else if (buttonIndex == 0)
         {

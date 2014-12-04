@@ -27,9 +27,10 @@
 {
     [super viewDidLoad];
    self.view.backgroundColor=GroupColor;
-    UIScrollView*scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight)];
+    UIScrollView*scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight - 64 + 49)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:scrollView];
     [self.view addSubview:scrollView];
-    scrollView.contentSize=CGSizeMake(320, 500);
+    scrollView.contentSize=CGSizeMake(320, 450);
     NSArray*titleArray=[NSArray arrayWithObjects:@"火警",@"救护车",@"报警",@"市内电话查询",@"中国驻圣彼得堡领事馆",@"圣彼得堡银行",@"圣彼得堡市中心医院",@"市医院No4o",@"圣彼得堡牙科诊所", nil];
     
     NSArray*numArray=[NSArray arrayWithObjects:@"01",@"03",@"02",@"09",@"7137605",@"3295050",@"3105838",@"4374075,4370970",@"1350766,1352396", nil];
