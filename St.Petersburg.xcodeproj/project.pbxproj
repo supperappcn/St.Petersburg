@@ -52,6 +52,7 @@
 		18650E9819E6655900209EB6 /* libTCWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9019E6652900209EB6 /* libTCWeiboSDK.a */; };
 		18650E9919E6655900209EB6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9119E6652900209EB6 /* libWeChatSDK.a */; };
 		18650E9A19E6655900209EB6 /* libYixinSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9219E6652900209EB6 /* libYixinSDK.a */; };
+		1866C7261A32A4E6002AF324 /* ZXCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1866C7251A32A4E6002AF324 /* ZXCell.m */; };
 		188CD28C1A1AE0A400D2F1CA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CD28B1A1AE0A400D2F1CA /* MapKit.framework */; };
 		188CD2D01A1B378900D2F1CA /* locationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CD2CF1A1B378900D2F1CA /* locationViewController.m */; };
 		188CD2D91A1DE5B100D2F1CA /* locationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CD2D81A1DE5B100D2F1CA /* locationCell.m */; };
@@ -898,6 +899,8 @@
 		18650E9019E6652900209EB6 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCWeiboSDK.a; sourceTree = "<group>"; };
 		18650E9119E6652900209EB6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		18650E9219E6652900209EB6 /* libYixinSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYixinSDK.a; sourceTree = "<group>"; };
+		1866C7241A32A4E6002AF324 /* ZXCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXCell.h; sourceTree = "<group>"; };
+		1866C7251A32A4E6002AF324 /* ZXCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXCell.m; sourceTree = "<group>"; };
 		188CD28B1A1AE0A400D2F1CA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		188CD2CE1A1B378900D2F1CA /* locationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = locationViewController.h; path = getlocation/locationViewController.h; sourceTree = "<group>"; };
 		188CD2CF1A1B378900D2F1CA /* locationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = locationViewController.m; path = getlocation/locationViewController.m; sourceTree = "<group>"; };
@@ -2079,6 +2082,15 @@
 			path = "点a文件";
 			sourceTree = "<group>";
 		};
+		1866C7231A32A497002AF324 /* ZXCell */ = {
+			isa = PBXGroup;
+			children = (
+				1866C7241A32A4E6002AF324 /* ZXCell.h */,
+				1866C7251A32A4E6002AF324 /* ZXCell.m */,
+			);
+			name = ZXCell;
+			sourceTree = "<group>";
+		};
 		188CD2CD1A1B374B00D2F1CA /* getlocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -3030,6 +3042,7 @@
 				C4E19BF719119B8500CE7B61 /* TextViewController.m */,
 				C4E9E7521919009C00DA8A76 /* AnswerViewController.h */,
 				C4E9E7531919009C00DA8A76 /* AnswerViewController.m */,
+				1866C7231A32A497002AF324 /* ZXCell */,
 				C4E19BA2191193FB00CE7B61 /* energy */,
 				C4E19BA0191192C900CE7B61 /* taxi.jpg */,
 				C4E19B951911907300CE7B61 /* Bus */,
@@ -4605,6 +4618,7 @@
 				C4EF9D22196FE65C00CFF415 /* LineReseverClass.m in Sources */,
 				C42C5CA118B7584200C31C7C /* OHAttributedLabel.m in Sources */,
 				0A09A3071A2EB9750054DA54 /* TabViewViewController_2.m in Sources */,
+				1866C7261A32A4E6002AF324 /* ZXCell.m in Sources */,
 				C4BF07EB19610C3C004E1A27 /* OrderViewController.m in Sources */,
 				C4DF78FF18E559D4009D2A71 /* LineDetailCell.m in Sources */,
 				C48C8F971959189700326979 /* DateButton.m in Sources */,

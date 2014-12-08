@@ -26,7 +26,8 @@
 @property (nonatomic,retain)NSTimer *timer;
 @property (nonatomic , retain)NSMutableArray *sayCellHeights;
 @property (nonatomic ,retain)RTLabel *countCellHeight;
-
+@property (nonatomic , retain)NSString *leftHeadImg;
+@property (nonatomic , retain)NSString *rightHeadImg;
 
 //cityid=%@&userid=%@&typeid=%@",@"2",QuseID,@"0"
 //@property (nonatomic ,copy)NSString *cityid;

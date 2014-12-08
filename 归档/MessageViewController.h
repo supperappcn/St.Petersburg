@@ -13,7 +13,7 @@
     UIButton *btn2;
     UITableView *_tableView;
     NSOperationQueue *queue;
-    NSArray *arr;
+    NSMutableArray *arr;
     NSTimer *timer;
     NSTimer *newsNumber;
     //NSTimer *numberTimer;
@@ -28,5 +28,8 @@
 @property (nonatomic ,retain)NSMutableArray *messages;
 @property (nonatomic ,retain)NSMutableArray *oldMessages;
 @property (nonatomic ,copy)NSString *userName;
+
+
+- (void)loadDataWithType_ID:(NSString *)type_ID andImgName:(NSString*)imgName headView:(UIImageView *)headView;
 
 @end

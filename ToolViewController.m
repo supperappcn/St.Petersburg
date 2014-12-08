@@ -218,19 +218,20 @@
         case 1113:
         {
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            if ([[defaults valueForKey:TYPE_ID] intValue] ==2) {
+            if ([[defaults valueForKey:TYPE_ID] intValue] ==2)
+            {
                 MessageViewController*consult=[MessageViewController new];
                 consult.title=@"在线咨询";
-                consult.userName = [defaults objectForKey:USER_NAME];
+                consult.userName = [defaults objectForKey:USER_NAME];//客服名
                 [self.navigationController pushViewController:consult animated:NO];
                 
-            }else if ([[defaults valueForKey:TYPE_ID] intValue]==1){
+            }else if ([[defaults valueForKey:TYPE_ID] intValue]==1)
+            {
                 FirstViewController *fvc = [FirstViewController new];
                 fvc.title = @"在线咨询";
-                fvc.type_id = [defaults objectForKey:TYPE_ID];
-                fvc.userid = [defaults objectForKey:QUSE_ID];
-                fvc.userName = [defaults objectForKey:USER_NAME];
-                NSLog(@"TYPE_ID %@ QUSE_ID %@",fvc.type_id,fvc.userid);
+                fvc.type_id = [defaults objectForKey:TYPE_ID];//用户
+                fvc.userid = [defaults objectForKey:QUSE_ID];//用户id
+                fvc.userName = [defaults objectForKey:USER_NAME];//用户名
                 [self.navigationController pushViewController:fvc animated:YES];
             } else {
                 UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"请登陆" message:@"您还没登陆，您确定要登录吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];

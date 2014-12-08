@@ -35,7 +35,6 @@
     lable.font=[UIFont systemFontOfSize:25];
     [self.view addSubview:lable];
    
-    
    
 //
 	// Do any additional setup after loading the view.

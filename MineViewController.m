@@ -967,6 +967,8 @@ GO_NET
     }//else  return [UIImage imageNamed:@"lack.jpg"];
 }
 
+
+
 postRequestAgency(datas)
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection

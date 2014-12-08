@@ -66,16 +66,17 @@
 //     normalImageNames=[[NSArray alloc]initWithObjects:@"home.png",@"tool.png",@"neighbo.png",@"mine.png",@"more.png", nil];
     
     
-    self.tittleArray=[NSArray arrayWithObjects:@"首页",@"工具箱",@"我的",@"更多",nil];
+    self.tittleArray=[NSArray arrayWithObjects:@"首页",@"工具箱",@"附近",@"我的",@"更多",nil];
     [self.view addSubview:self.customizedBar];
-    highbuttonArray=[NSArray arrayWithObjects:@"_home_11.png",@"tool_11.png",@"mine_11.png",@"more_11.png", nil];
+    
+//    highbuttonArray=[NSArray arrayWithObjects:@"home_h_1.png",@"tool_11.png",@"neighbo_h_1.png",@"mine_11.png",@"more_11.png", nil];
     //用一个for循环生成button
 
-    buttonArray=[NSArray arrayWithObjects:@"home_h_11.png",@"tool_h_11.png",@"mine_h_11.png",@"more_h_11.png", nil];
-//    buttonArray=[NSArray arrayWithObjects:@"_home_1.png",@"tool_1.png",@"neighbo_1.png",@"mine_1.png",@"more_1.png", nil];
-//    highbuttonArray=[NSArray arrayWithObjects:@"home_h_1.png",@"tool_h_1.png",@"neighbo_h_1.png",@"mine_h_1.png",@"more_h_1.png", nil];
+//    buttonArray=[NSArray arrayWithObjects:@"_home_1.png",@"tool_h_11.png",@"neighbo_1.png",@"mine_h_11.png",@"more_h_11.png", nil];
+    buttonArray=[NSArray arrayWithObjects:@"_home_1.png",@"tool_1.png",@"neighbo_1.png",@"mine_1.png",@"more_1.png", nil];
+    highbuttonArray=[NSArray arrayWithObjects:@"home_h_1.png",@"tool_h_1.png",@"neighbo_h_1.png",@"mine_h_1.png",@"more_h_1.png", nil];
     
-    count=4;
+    count=5;
     for (int i = 0; i<count; i++)
     {
         

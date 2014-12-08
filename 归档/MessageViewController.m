@@ -12,7 +12,17 @@
 #import "json.h"
 #import "AppDelegate.h"
 #import "NumberView.h"
+#import "ZXCell.h"
+
+
+#define IMG_KEY [NSString stringWithFormat:@"%@",GET_USER_DEFAUT(QUSE_ID)]
+
+
 @interface MessageViewController ()
+{
+    NSString *imgFilePath;
+    NSMutableArray *imgNameArr;
+}
 
 @end
 
@@ -32,7 +42,8 @@ backButton
     timer=[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(go) userInfo:nil repeats:YES];
 }
 
-- (void)changeNumber{
+- (void)changeNumber
+{
     NSMutableString *urlStr = RussiaUrl3;
     [urlStr appendString:@"getUserMessageCount"];
     NSString *argumentStr = [NSString stringWithFormat:@"cityid=%@&userid=%d&typeid=%@",@"2",[[[NSUserDefaults standardUserDefaults] objectForKey:QUSE_ID] intValue],[[NSUserDefaults standardUserDefaults] objectForKey:TYPE_ID]];
@@ -46,12 +57,19 @@ backButton
     GDataXMLDocument *document=[[GDataXMLDocument alloc] initWithData:receive options:0 error:nil];
     GDataXMLElement *e1=[document rootElement];
     NSString*result=[e1 stringValue];
-    if ([result intValue]>0) {
+    if ([result intValue]>0)
+    {
         _btnLab.hidden=NO;
         [_btnLab setText:[NSString stringWithFormat:@"(%@)",result]];
-    }else _btnLab.hidden=YES;
+    }
+    else
+    {
+        _btnLab.hidden=YES;
+        [arr removeAllObjects];
+    }
 }
-- (void)go{
+- (void)go
+{
     [self request1];
     [self request2];
 }
@@ -63,12 +81,14 @@ backButton
     
     NSURL *url = [NSURL URLWithString:urlStr3];
     NSMutableURLRequest *request1 = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-    [NSURLConnection sendAsynchronousRequest:request1 queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    [NSURLConnection sendAsynchronousRequest:request1 queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+     {
         dicResultTongbu(data, result, dic)
         if (result.length>11) {
             _messages =[dic objectForKey:@"ds"];
         }//else _messages=nil;
-        if (fromTag==0) {
+        if (fromTag==0)
+        {
             arr=_messages;
         }
         [self performSelectorOnMainThread:@selector(reload) withObject:result waitUntilDone:YES];
@@ -89,7 +109,7 @@ backButton
             _oldMessages =[dic objectForKey:@"ds"];
         }//else _oldMessages=nil;
         
-        [self performSelectorOnMainThread:@selector(reload) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(reload) withObject:nil waitUntilDone:YES];
     }];
     
 }
@@ -101,7 +121,7 @@ backButton
     [super viewDidLoad];
     hideTabbar
     // Do any additional setup after loading the view.
-    
+    imgNameArr = [[NSMutableArray alloc]init];
     defaults=[NSUserDefaults standardUserDefaults];
     queue = [[NSOperationQueue alloc]init];
     [queue setMaxConcurrentOperationCount:1];
@@ -157,7 +177,8 @@ backButton
         [btn2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         arr=_messages;
         [_tableView reloadData];
-    }else{
+    }else
+    {
         [btn setBackgroundImage:[UIImage imageNamed:@"messageleft1"] forState:UIControlStateNormal];
         [btn2 setBackgroundImage:[UIImage imageNamed:@"messageleft2"] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -174,26 +195,90 @@ backButton
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *indentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
+    ZXCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:indentifier];
+        cell = [[ZXCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indentifier];
         
     }
-    cell.imageView.image = [UIImage imageNamed:@"blueBackGround"];
-    cell.textLabel.text = [arr[indexPath.row] objectForKey:@"UserName"];
-    cell.textLabel.textColor = [UIColor colorWithRed:19.0/255 green:87.0/255 blue:169.0/255 alpha:1];
-    cell.detailTextLabel.text= [arr[indexPath.row] objectForKey:@"PTime"];
-    cell.detailTextLabel.textColor = [UIColor grayColor];
+
+//    cell.imageView.center = cell.imageView.center;
+    cell.ZXImgV.frame = CGRectMake(5, 5, 40, 40);
+    [self loadDataWithType_ID:@"2" andImgName:[arr[indexPath.row] objectForKey:@"ImgTouX"] headView:cell.ZXImgV];
+    
+    cell.ZXNameL.frame = CGRectMake(50, 5, 150, 20);
+    cell.ZXNameL.text = [arr[indexPath.row] objectForKey:@"UserName"];
+    cell.ZXNameL.textColor = [UIColor colorWithRed:19.0/255 green:87.0/255 blue:169.0/255 alpha:1];
+    
+    cell.ZXDateL.frame = CGRectMake(50, 25, 150, 20);
+    cell.ZXDateL.text= [arr[indexPath.row] objectForKey:@"PTime"];
+    cell.ZXDateL.textColor = [UIColor grayColor];
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     FirstViewController *first = [FirstViewController new];
-    first.userName= _userName;
-    first.userid = [arr[indexPath.row] objectForKey:@"UserID"];
-    first.type_id=@"2";
+    first.userName= _userName;//客户名
+    first.leftHeadImg = [arr[indexPath.row] objectForKey:@"ImgTouX"];
+    first.userid = [arr[indexPath.row] objectForKey:@"UserID"];//客户id
+    first.type_id=@"2";//客户
+    NSLog(@"fromTag = %d",fromTag);
     first.toTag=fromTag;
     [self.navigationController pushViewController:first animated:YES];
 }
+
+- (void)loadDataWithType_ID:(NSString *)type_ID andImgName:(NSString*)imgName headView:(UIImageView *)headView
+{
+    //NSLog(@"picid %@",picID);
+    if (imgName.length>4)
+    {
+        
+        NSArray*paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSString*documentsDirectory =[paths objectAtIndex:0];
+        NSString*plistPath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",imgName]];
+        NSData *pathData = [NSData dataWithContentsOfFile:plistPath];
+        
+        if (pathData.length==0)
+        {
+            //[headAiv  startAnimating];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+               NSString *picPath = [type_ID intValue]==2?@"service":@"Personal";
+                NSString *picUrl=[type_ID intValue]==2?PicUrl:PicUrlWWW;
+                NSString *urlStr = [NSString stringWithFormat:@"%@%@/%@",picUrl,picPath,imgName];
+                
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:urlStr]];
+                NSLog(@"data = %@",data);
+                [self storageAddName:imgName];
+                NSLog(@"img_name == %@",imgFilePath);
+                if (data)
+                {
+                    [data writeToFile:imgFilePath atomically:YES];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (data)
+                    {
+                        headView.image = [UIImage imageWithData:data];
+                        
+                        [NSThread sleepForTimeInterval:1];
+                        NSLog(@"data is yes");
+                    }
+                    else headView.image = [UIImage imageNamed:@"defaultSmall.gif"];
+                });
+            });
+        }
+        else headView.image = [UIImage imageWithData:pathData];
+        
+    }else headView.image = [UIImage imageNamed:@"defaultSmall.gif"];
+}
+
+#pragma -mark 创建文件
+- (void)storageAddName:(NSString *)fileName
+{
+    NSString *docPath=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
+    imgFilePath=[docPath stringByAppendingPathComponent:fileName];
+    NSLog(@"imgFilePath = %@",imgFilePath);
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
 }
