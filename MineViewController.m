@@ -245,6 +245,7 @@
         name.image = [UIImage imageNamed:@"login_name"];
         [logIn addSubview:name];
         textFieldName=[[UITextField alloc]initWithFrame:CGRectMake(40, 0, 220, 40)];
+        textFieldName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         textFieldName.delegate=self;
         textFieldName.placeholder=@"用户名/邮箱/手机号码";
 
@@ -260,6 +261,7 @@
         password.image = [UIImage imageNamed:@"password"];
         [passWord addSubview:password];
         textFieldPasscode=[[UITextField alloc]initWithFrame:CGRectMake(40, 0, 220, 40)];
+        textFieldPasscode.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         textFieldPasscode.secureTextEntry = YES;
         textFieldPasscode.delegate=self;
         textFieldPasscode.placeholder=@"6~20位密码";
@@ -774,37 +776,37 @@ GO_NET
         {
             //线路订单
             MyHoltelOredrViewController* myLineOrderVC = [MyHoltelOredrViewController new];
-            [self.navigationController pushViewController:myLineOrderVC animated:YES];
             myLineOrderVC.title = @"线路订单";
+            [self.navigationController pushViewController:myLineOrderVC animated:YES];
         }
             break;
         case 12:
         {
             //景点门票订单
             MyHoltelOredrViewController* myViewOrderVC = [MyHoltelOredrViewController new];
-            [self.navigationController pushViewController:myViewOrderVC animated:YES];
             myViewOrderVC.title = @"景点订单";
+            [self.navigationController pushViewController:myViewOrderVC animated:YES];
         }
             break;
         case 13:{
             //酒店订单
             MyHoltelOredrViewController* myHotelOrderVC = [MyHoltelOredrViewController new];
-            [self.navigationController pushViewController:myHotelOrderVC animated:YES];
             myHotelOrderVC.title = @"酒店订单";
+            [self.navigationController pushViewController:myHotelOrderVC animated:YES];
         }
             break;
         case 14:{
             //娱乐门票订单
             MyHoltelOredrViewController* myTicketOrderVC = [MyHoltelOredrViewController new];
-            [self.navigationController pushViewController:myTicketOrderVC animated:YES];
             myTicketOrderVC.title = @"娱乐订单";
+            [self.navigationController pushViewController:myTicketOrderVC animated:YES];
         }
             break;
         case 15:{
             //导游/租车订单
             MyHoltelOredrViewController* myGuideOrderVC = [MyHoltelOredrViewController new];
-            [self.navigationController pushViewController:myGuideOrderVC animated:YES];
             myGuideOrderVC.title = @"导游/租车订单";
+            [self.navigationController pushViewController:myGuideOrderVC animated:YES];
         }
             break;
         case 16:

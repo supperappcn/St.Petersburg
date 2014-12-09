@@ -41,8 +41,14 @@ backButton
     tittleArr = @[@"评论(99)",@"编辑",@"删除"];
     imageNameArr = @[@"travel_say.png",@"travel_pen.png",@"travel_trash.png"];
     
-    float height=35;UIButton *backbutton = [[UIButton alloc]init];backbutton.frame=CGRectMake(0, (44-height)/2, 40, height);[backbutton addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 16, 16)];imageView.image=[UIImage imageNamed:@"sendtravel"];[backbutton addSubview:imageView];
-    UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(17, 0, 40, 35)]; lable.font=[UIFont systemFontOfSize:15];
+    float height=35;
+    UIButton *backbutton = [[UIButton alloc]initWithFrame:CGRectMake(0, (44-height)/2, 40, height)];
+    [backbutton addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 16, 16)];
+    imageView.image=[UIImage imageNamed:@"sendtravel"];
+    [backbutton addSubview:imageView];
+    UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(12, 0, 35, 35)];
+    lable.font=[UIFont systemFontOfSize:15];
     lable.backgroundColor = [UIColor clearColor];
     lable.textColor=[UIColor whiteColor];
     lable.text=@"发布";[backbutton addSubview:lable];
@@ -252,8 +258,6 @@ postRequestAgency(datas)
 #pragma -mark- Changed...
 //        if ([[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Pic"] length]>4) {
         if ([[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"PicUrl"] length]>4) {
-            
-            
             if (pathData.length==0) {
                 [headAiv  startAnimating];
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -299,7 +303,7 @@ postRequestAgency(datas)
                 [say setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
                 say.showsTouchWhenHighlighted=YES;
                 say.titleLabel.textAlignment = NSTextAlignmentLeft;
-                say.frame = i==0?CGRectMake(126, 65, 70, 25):CGRectMake(160+55*i, 65, 30, 25);
+                say.frame = i==0?CGRectMake(120, 65, 70, 25):CGRectMake(160+55*i, 65, 30, 25);
                 [myCell.contentView addSubview:say];
                 
                 UIImageView *tittleIV=[[UIImageView alloc]init];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TabViewViewController_2 : UIViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDataDelegate,UIScrollViewDelegate,UISearchDisplayDelegate>
+@interface TabViewViewController_2 : UIViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDataDelegate,UIScrollViewDelegate,UISearchDisplayDelegate,UISearchBarDelegate>
 {
     UIButton* noNetButton;
 }

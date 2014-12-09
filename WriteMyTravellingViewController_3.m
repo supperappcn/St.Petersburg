@@ -90,6 +90,7 @@ backButton
     titleView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:titleView];
     self.titleTF = [[UITextField alloc]initWithFrame:CGRectMake(10, 0, self.view.bounds.size.width - 20, 40)];
+    self.titleTF.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.titleTF.placeholder = @"填写标题";
     if (self.titleTFText.length > 0) {
         self.titleTF.text = self.titleTFText;
@@ -266,6 +267,7 @@ backButton
 //保存游记
 -(void)saveTravelling {
     NSLog(@"self.titleTF.text:%@,self.textView.text:%@",self.titleTF.text,self.textView.text);
+    
     if (self.titleTF.text.length == 0) {
         UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"游记标题不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alertView show];
@@ -328,6 +330,7 @@ backButton
     NSData *data = [argumentStr dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPBody:data];
     [NSURLConnection connectionWithRequest:request delegate:self];
+    
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{

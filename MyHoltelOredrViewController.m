@@ -116,8 +116,14 @@ int pageindex = 1;
 #pragma mark -urlconnectiondelegate-
 postRequestAgency(datas)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
-    dicResultYiBu(datas, result, dic)
-    NSLog(@"dic  %@",dic);
+//    dicResultYiBu(datas, result, dic)
+    NSError*error=nil;
+    GDataXMLDocument *document=[[GDataXMLDocument alloc] initWithData:datas options:0 error:&error];
+    GDataXMLElement *e=[document rootElement];
+    NSString*result=[e stringValue];
+    NSData* xmlData = [result dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary*dic;
+    if (result.length>10) {dic=[[[NSString alloc]initWithData:xmlData encoding:NSUTF8StringEncoding]JSONValue];}
     if (result.length>11) {
         if (typeId==1) {
             tableArr=tableArrBtnOne=[dic valueForKey:@"ds"];
@@ -234,6 +240,7 @@ postRequestAgency(datas)
         [cell setModel:currentDic];
         [cell.goBtn setTitleColor:[UIColor colorWithRed:0 green:0.58 blue:0.98 alpha:1] forState:UIControlStateNormal];
         cell.goBtn.tag = indexPath.section;
+        
         if ([[currentDic valueForKey:@"Status"]length]>0) {
             //        1待支付, 2待处理, 3预订成功等待出游, 4已失效,
             //        5已完成, 6已取消, 7出游中,         8已点评;
@@ -296,6 +303,7 @@ postRequestAgency(datas)
         cell.goBtn.hidden = YES;
         [cell.goBtn setTitleColor:[UIColor colorWithRed:0 green:0.58 blue:0.98 alpha:1] forState:UIControlStateNormal];
         cell.goBtn.tag = indexPath.section;
+        cell.goBtn.titleLabel.backgroundColor = [UIColor clearColor];
         
         
 #pragma mark  -differences-
@@ -459,7 +467,6 @@ postRequestAgency(datas)
     //NSLog(@"height:%f contentYoffset:%f frame.y:%f",height,contentYoffset,scrollView.frame.origin.y);
     if(!aicv2.isAnimating && (scrollView.contentOffset.y > ((scrollView.contentSize.height - scrollView.frame.size.height+10)))) {
         [aicv2 startAnimating];
-        NSLog(@"end of table");
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             NSMutableString *urlStr =RussiaUrl4;
             if ([self.title isEqualToString:@"线路订单"]) {
@@ -474,7 +481,6 @@ postRequestAgency(datas)
                 [urlStr appendString:@"GuideOrderList"];
             }
             NSString *argumentStr = [NSMutableString stringWithFormat:@"cityid=2&userid=%@&typeid=%d&pagesize=%d&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),typeId,pageSize,pageindex ];
-            NSLog(@"%@",argumentStr);
             postRequestTongBu(argumentStr, urlStr, received)
             dicResultTongbu(received, result, dic)
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -659,6 +665,11 @@ postRequestAgency(datas)
         }else typeId=1;
         [self loadNewData:0];
     }
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [aicv removeFromSuperview];
 }
 
 @end

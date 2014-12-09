@@ -43,9 +43,9 @@
     textFieldView.backgroundColor=[UIColor whiteColor];
     [scrollView addSubview:textFieldView];
 
-   textField2=[[UITextField alloc]initWithFrame:CGRectMake(5, 183, 310, 40)];
+    textField2=[[UITextField alloc]initWithFrame:CGRectMake(5, 183, 310, 40)];
     textField2.delegate=self;
- 
+    textField2.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     textField2.backgroundColor=[UIColor whiteColor];
     textField2.borderStyle=UITextBorderStyleNone;
     textField2.keyboardAppearance=UIKeyboardAppearanceAlert;

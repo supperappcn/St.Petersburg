@@ -224,6 +224,7 @@ backButton
                 
                 zhong = [[UITextField alloc]initWithFrame:CGRectMake(30, 0, 41, 29)];
                 zhong.textAlignment = NSTextAlignmentCenter;
+                zhong.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                 zhong.textColor = [UIColor colorWithRed:0 green:109/255.0 blue:184/255.0 alpha:1];
                 zhong.enabled = NO;
                 zhong.layer.contents = (id)[UIImage imageNamed:@"zhong"].CGImage;
@@ -260,6 +261,7 @@ backButton
                 
                 zhong2 = [[UITextField alloc]initWithFrame:CGRectMake(30, 0, 41, 29)];
                 zhong2.textAlignment = NSTextAlignmentCenter;
+                zhong2.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                 zhong2.textColor = [UIColor colorWithRed:0 green:109/255.0 blue:184/255.0 alpha:1];
                 zhong2.enabled = NO;
                 zhong2.layer.contents = (id)[UIImage imageNamed:@"zhong"].CGImage;
@@ -503,6 +505,7 @@ backButton
                     [bv addSubview:contentBtn];
                 }else{
                     UITextField *file = [[UITextField alloc]initWithFrame:CGRectMake(100, 0, 200, 43)];
+                    file.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                     if (i==1||i==2) {
                         file.frame = CGRectMake(75, 0, 80, 43);
                         
@@ -519,6 +522,7 @@ backButton
                         [bv addSubview:fang2];
                         
                         UITextField *file2 = [[UITextField alloc]initWithFrame:CGRectMake(235, 0, 80, 43)];
+                        file2.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                         file2.delegate = self;
                         file2.tag = [NSString stringWithFormat:@"%d01%d",k,i].intValue;//1000/2000
                         file2.placeholder=i==2?@"拼音或英文":nil;
@@ -632,6 +636,7 @@ backButton
         
         if (i!=0) {
             UITextField *file = [[UITextField alloc] initWithFrame:CGRectMake(116, 0, 230, 43)];
+            file.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
             file.tag = [NSString stringWithFormat:@"10%d",i].intValue;
             file.font = [UIFont systemFontOfSize:16];
             file.delegate = self;
@@ -800,7 +805,7 @@ backButton
                 }else [roomInformationStr appendString:[NSString stringWithFormat:@",%@",btn.currentTitle]];
             }else{
                 UITextField *file = (UITextField*)[userDataView viewWithTag:[NSString stringWithFormat:@"%d00%d",i,j].intValue];
-                
+                file.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                 if (file.text.length==0) {
                     UIAlertView *av = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"%@不能为空",tittle[j-1]] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                     [av show];
@@ -814,6 +819,7 @@ backButton
             
             if (j==1||j==2) {
                 UITextField *file2 = (UITextField*)[userDataView viewWithTag:[NSString stringWithFormat:@"%d01%d",i,j].intValue];
+                file2.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                 if (file2.text.length==0) {
                     UIAlertView *av = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"%@不能为空",j==1?@"中文名":@"英文名"] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                     [av show];
@@ -832,7 +838,7 @@ backButton
     //判断联系人输入内容
     for (int i=1; i<=5; i++) {
         UITextField *file = (UITextField*)[sv viewWithTag:[NSString stringWithFormat:@"10%d",i].intValue];
-        NSLog(@"file %@",file.text);
+        file.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         if (file.text.length==0&&i<4) {
             NSString *name = i==1?@"姓名":i==2?@"联系电话":@"电子邮箱";
             UIAlertView *av = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"%@不能为空",name] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];

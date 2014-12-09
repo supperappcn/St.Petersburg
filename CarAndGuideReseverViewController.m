@@ -271,6 +271,7 @@ backButton
                 
                 zhong = [[UITextField alloc]initWithFrame:CGRectMake(30, 0, 41, 29)];
                 zhong.textAlignment = NSTextAlignmentCenter;
+                zhong.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                 zhong.textColor = [UIColor colorWithRed:0 green:109/255.0 blue:184/255.0 alpha:1];
                 zhong.enabled = NO;
                 zhong.layer.contents = (id)[UIImage imageNamed:@"zhong"].CGImage;
@@ -302,6 +303,7 @@ backButton
                 
                 zhong2 = [[UITextField alloc]initWithFrame:CGRectMake(30, 0, 41, 29)];
                 zhong2.textAlignment = NSTextAlignmentCenter;
+                zhong2.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                 zhong2.textColor = [UIColor colorWithRed:0 green:109/255.0 blue:184/255.0 alpha:1];
                 zhong2.enabled = NO;
                 zhong2.layer.contents = (id)[UIImage imageNamed:@"zhong"].CGImage;
@@ -476,6 +478,7 @@ backButton
         
         if (i!=0) {
             UITextField *file = [[UITextField alloc] initWithFrame:CGRectMake(116, 0, 230, 43)];
+            file.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
             file.tag = [NSString stringWithFormat:@"100%d",i].intValue;
             file.font = [UIFont systemFontOfSize:16];
             file.delegate = self;
@@ -633,7 +636,7 @@ backButton
     //判断联系人输入内容
     for (int i=1; i<=5; i++) {
         UITextField *file = (UITextField*)[sv viewWithTag:[NSString stringWithFormat:@"100%d",i].intValue];
-        NSLog(@"file %@",file.text);
+        file.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         if (file.text.length==0&&i<4) {
             NSString *name = i==1?@"姓名":i==2?@"联系电话":@"电子邮箱";
             UIAlertView *av = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"%@不能为空",name] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];

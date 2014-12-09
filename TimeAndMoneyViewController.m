@@ -106,9 +106,10 @@
     [Money addSubview:imageView];
    
     UITextField*textField=[[UITextField alloc]initWithFrame:CGRectMake(70, 25, 220, 30)];
+    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     textField.tag=10+i;
     textField.delegate=self;
-     textField.keyboardType=UIKeyboardTypeNumberPad;
+    textField.keyboardType=UIKeyboardTypeNumberPad;
     textField.font=[UIFont systemFontOfSize:20];
 //    textField.backgroundColor=[UIColor blueColor];
      textField.textColor=[UIColor whiteColor];

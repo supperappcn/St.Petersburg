@@ -54,6 +54,7 @@ hideTabbar
   
     textFieldName=[[UITextField alloc]initWithFrame:CGRectMake(100, 0, 220, 50)];
     //textFieldName.text=self.phoneNum;
+    textFieldName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     textFieldName.delegate=self;
     if ([self.pageTitle isEqualToString:@"注册"])
     {
@@ -71,6 +72,7 @@ hideTabbar
             l.font=[UIFont systemFontOfSize:14];
             [imageView addSubview:l];
             UITextField*textField=[[UITextField alloc]initWithFrame:CGRectMake(85, 0, 220, 40)];
+            textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
             textField.tag=30+i;
             textField.font=[UIFont systemFontOfSize:14];
             textField.placeholder=[zhuce1 objectAtIndex:i];
@@ -227,6 +229,7 @@ hideTabbar
             [logIn addSubview:lable];
             
            UITextField*textFieldName1=[[UITextField alloc]initWithFrame:CGRectMake(100, 0, 220, 50)];
+            textFieldName1.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
             textFieldName1.placeholder=[mi objectAtIndex:i];
             textFieldName1.delegate=self;
             textFieldName1.tag=10+i;

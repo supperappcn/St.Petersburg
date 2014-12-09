@@ -196,6 +196,7 @@ GO_NET
     
     
     textFile = [[UITextField alloc]initWithFrame:CGRectMake(10, 5, 240, 36)];
+    textFile.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     textFile.borderStyle = UITextBorderStyleRoundedRect;
     textFile.backgroundColor = [UIColor whiteColor];
     textFile.delegate = self;

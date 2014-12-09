@@ -41,7 +41,6 @@
 		0A0CB7A119F4F1A00013D763 /* calenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB79F19F4F1A00013D763 /* calenderView.m */; };
 		0A0CB7A719F4F37A0013D763 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB7A619F4F37A0013D763 /* GCPlaceholderTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0A0EBE671A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EBE661A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m */; };
-		0A0EF4751A2063180011FFAC /* WriteMyTravellingViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EF4741A2063180011FFAC /* WriteMyTravellingViewController_2.m */; };
 		0A0EF4771A20683F0011FFAC /* 游记_发布2_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0EF4761A20683F0011FFAC /* 游记_发布2_03.png */; };
 		0A27D4EE1A246CE0006A79F7 /* MyTravellingDetailViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A27D4ED1A246CE0006A79F7 /* MyTravellingDetailViewController_2.m */; };
 		0A6414761A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6414741A078E5200B5DEE6 /* MyLineOrderDetailTableViewCell.m */; };
@@ -884,8 +883,6 @@
 		0A0CB7A619F4F37A0013D763 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		0A0EBE651A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGuideAndCarOrderDetailTableViewCell.h; sourceTree = "<group>"; };
 		0A0EBE661A11BF2700E34396 /* MyGuideAndCarOrderDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGuideAndCarOrderDetailTableViewCell.m; sourceTree = "<group>"; };
-		0A0EF4731A2063180011FFAC /* WriteMyTravellingViewController_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteMyTravellingViewController_2.h; sourceTree = "<group>"; };
-		0A0EF4741A2063180011FFAC /* WriteMyTravellingViewController_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteMyTravellingViewController_2.m; sourceTree = "<group>"; };
 		0A0EF4761A20683F0011FFAC /* 游记_发布2_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "游记_发布2_03.png"; sourceTree = "<group>"; };
 		0A27D4EC1A246CE0006A79F7 /* MyTravellingDetailViewController_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTravellingDetailViewController_2.h; sourceTree = "<group>"; };
 		0A27D4ED1A246CE0006A79F7 /* MyTravellingDetailViewController_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTravellingDetailViewController_2.m; sourceTree = "<group>"; };
@@ -2182,8 +2179,6 @@
 				C4121FA21923782A0047DEFA /* MyTravelingDetailViewController.m */,
 				0A27D4EC1A246CE0006A79F7 /* MyTravellingDetailViewController_2.h */,
 				0A27D4ED1A246CE0006A79F7 /* MyTravellingDetailViewController_2.m */,
-				0A0EF4731A2063180011FFAC /* WriteMyTravellingViewController_2.h */,
-				0A0EF4741A2063180011FFAC /* WriteMyTravellingViewController_2.m */,
 				0A04EAD31A26C00700F96DBC /* WriteMyTravellingViewController_3.h */,
 				0A04EAD41A26C00700F96DBC /* WriteMyTravellingViewController_3.m */,
 				0A05544C1A281E280091760A /* CheckSelectedIVViewController.h */,
@@ -4586,7 +4581,6 @@
 				C4E19C2B19119DA800CE7B61 /* SupplierTableViewController.m in Sources */,
 				C4FE85B618ADB5CD00A579AE /* CityViewController.m in Sources */,
 				C416BD96196BA28C00196C75 /* SceneryReceverClass.m in Sources */,
-				0A0EF4751A2063180011FFAC /* WriteMyTravellingViewController_2.m in Sources */,
 				C4DFD5B218B1AA71007CF882 /* CustomCell2.m in Sources */,
 				C42C5CA218B7584200C31C7C /* RegexKitLite.m in Sources */,
 				C4871F531901287500C99431 /* IntroduceViewController.m in Sources */,

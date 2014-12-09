@@ -86,11 +86,10 @@
     infoLab.font = font;
     [self addSubview:infoLab];
     [self.cellSubviews addObject:infoLab];
-    UIImageView* jianTouIV = [[UIImageView alloc]initWithFrame:CGRectMake(DeviceWidth - 17, 43 + (self.orderTimeLabHeight - 21)/2, 17, 17)];
+    UIImageView* jianTouIV = [[UIImageView alloc]initWithFrame:CGRectMake(DeviceWidth - 16, 43 + (self.orderTimeLabHeight - 21)/2, 16, 16)];
     jianTouIV.image = [UIImage imageNamed:@"cellJianTou.png"];
     [self addSubview:jianTouIV];
     [self.cellSubviews addObject:jianTouIV];
-    
 }
 
 

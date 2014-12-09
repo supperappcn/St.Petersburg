@@ -16,15 +16,19 @@
 
 @implementation TravelViewController
 
+#define TravelURL [NSMutableString stringWithString:@"http://192.168.0.156:807/api/WebService.asmx/"];
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
+
 backButton
+
 #pragma mark--喜欢和收藏的代理方法
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -201,7 +205,7 @@ postRequestAgency(datas)
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     dicResultYiBu(datas, result, dic)
-     NSDictionary* _dic1=[[dic valueForKey:@"ds"]lastObject];
+    NSDictionary* _dic1=[[dic valueForKey:@"ds"]lastObject];
     if (_loadingMore==YES)
     {
         _loadingMore=NO;
@@ -429,7 +433,7 @@ postRequestAgency(datas)
         isLike=NO;
     }
     [refresh endRefreshing];
-        [_tableView reloadData];
+    [_tableView reloadData];
 
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -441,13 +445,15 @@ postRequestAgency(datas)
 -(void)viewDidDisappear:(BOOL)animated
 {
     [navActivity removeFromSuperview];
-    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 - (void)refreshData{
     [navActivity startAnimating];
     NSString*ID=[NSString stringWithFormat:@"%d",self.ID];
     NSString*canshu=[NSString stringWithFormat:@"ID=%@",ID];
-    NSMutableString*urlDomain=RussiaUrl2
+    NSMutableString* urlDomain = TravelURL //RussiaUrl2
     NSString *urlMethod=@"getTravelDetail";
     [urlDomain appendString:urlMethod];
     //        NSString *urlStr=[NSString stringWithFormat:@"%@Service1.asmx/UserLogin",RussiaUrl];
@@ -462,7 +468,6 @@ postRequestAgency(datas)
     navActivity.frame=CGRectMake(65+(8-4)*10, (44- navActivity.frame.size.height)/2, navActivity.frame.size.width,  navActivity.frame.size.height);
     [self.navigationController.navigationBar addSubview:navActivity];
     [navActivity startAnimating];
-   
     
     
     self.view.backgroundColor=GroupColor;
@@ -485,12 +490,11 @@ postRequestAgency(datas)
     
     NSString*ID=[NSString stringWithFormat:@"%d",self.ID];
     NSString*canshu=[NSString stringWithFormat:@"ID=%@",ID];
-    NSMutableString*urlDomain=RussiaUrl2
+    NSMutableString* urlDomain = TravelURL //RussiaUrl2
     NSString *urlMethod=@"getTravelDetail";
     [urlDomain appendString:urlMethod];
     //NSString *urlStr=[NSString stringWithFormat:@"%@Service1.asmx/UserLogin",RussiaUrl];
     postRequestYiBu(canshu, urlDomain)
-    
     
     
     
@@ -799,7 +803,6 @@ postRequestAgency(datas)
         if (![_texteView.text isEqualToString:@""])
         {
             NSString*ID=[NSString stringWithFormat:@"%d",self.ID];
-            NSLog(@"ID====%@",ID);
             NSString*canshu=[NSString stringWithFormat:@"ID=%@&userid=%d&username=%@&content=%@",ID,b,[defaults valueForKey:@"useName"],_texteView.text];
             NSMutableString*urlDomain=RussiaUrl2
             NSString *urlMethod=@"getAddTravelMessage";

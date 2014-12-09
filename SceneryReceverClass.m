@@ -198,6 +198,7 @@ backButton
                 
                 zhong = [[UITextField alloc]initWithFrame:CGRectMake(30, 0, 41, 29)];
                 zhong.textAlignment = NSTextAlignmentCenter;
+                zhong.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                 zhong.textColor = [UIColor colorWithRed:0 green:109/255.0 blue:184/255.0 alpha:1];
                 zhong.enabled = NO;
                 zhong.layer.contents = (id)[UIImage imageNamed:@"zhong"].CGImage;
@@ -335,6 +336,7 @@ backButton
         
         if (i!=0) {
             UITextField *file = [[UITextField alloc] initWithFrame:CGRectMake(116, 0, 230, 43)];
+            file.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
             file.tag = [NSString stringWithFormat:@"10%d",i].intValue;
             file.font = [UIFont systemFontOfSize:16];
             file.delegate = self;
@@ -491,7 +493,7 @@ backButton
     //判断联系人输入内容
     for (int i=1; i<=5; i++) {
         UITextField *file = (UITextField*)[sv viewWithTag:[NSString stringWithFormat:@"10%d",i].intValue];
-        NSLog(@"file %@",file.text);
+        file.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         if (file.text.length==0&&i<4) {
             NSString *name = i==1?@"姓名":i==2?@"联系电话":@"电子邮箱";
             UIAlertView *av = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"%@不能为空",name] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -512,7 +514,6 @@ backButton
     
 #pragma mark  Changed...     把 paytype = %@，paytype改为了 paytype = %d，0
     NSString *argStr = [NSString stringWithFormat:@"viewprodid=%@&userid=%@&username=%@&vdate=%@&vcount=%@&cmoney=%d&umoney=%d&uname=%@&phone=%@&email=%@&qq=%@&weixin=%@&paytype=%d",_ID,GET_USER_DEFAUT(QUSE_ID),GET_USER_DEFAUT(USER_NAME),_checkDate,zhong.text,d,r,[(UITextField*)[footerView viewWithTag:101] text],[(UITextField*)[footerView viewWithTag:102] text],[(UITextField*)[footerView viewWithTag:103] text],[(UITextField*)[footerView viewWithTag:104] text],[(UITextField*)[footerView viewWithTag:105] text],0];
-    NSLog(@"%@",argStr);
 
     postRequestYiBu(argStr, urlStr)
     

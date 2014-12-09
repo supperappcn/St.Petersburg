@@ -71,6 +71,7 @@ backButton
         
         _textField=[[UITextView alloc]initWithFrame:CGRectMake(10, 9.5, 233, 31)];
         _textField.layer.contents = (id)([UIImage imageNamed:@"travel_reply2.png"].CGImage);
+        _textField.textAlignment = NSTextAlignmentLeft;
         [tableFooterView addSubview:_textField];
         
         UIButton*send=[UIButton buttonWithType:UIButtonTypeCustom];

@@ -10,6 +10,8 @@
 
 @implementation MyGuideAndCarOrderDetailTableViewCell
 
+#define IS_IOS_7 [[[UIDevice currentDevice]systemVersion]floatValue]>=7.0
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -128,7 +130,12 @@
     self.titleLab.font = font;
     [self addSubview:self.titleLab];
     [self.cellSubviews addObject:self.titleLab];
-    UIImageView* jianTouIV = [[UIImageView alloc]initWithFrame:CGRectMake(DeviceWidth - 17, 124, 17, 17)];
+    UIImageView* jianTouIV = [[UIImageView alloc]init];//WithFrame:CGRectMake(DeviceWidth - 16, 124, 16, 16)];
+    if (IS_IOS_7) {//iOS7.0及以上的版本
+        jianTouIV.frame = CGRectMake(DeviceWidth - 16, 124, 16, 16);
+    }else {//iOS7.0以下的版本
+        jianTouIV.frame = CGRectMake(DeviceWidth - 21, 124, 16, 16);
+    }
     jianTouIV.image = [UIImage imageNamed:@"cellJianTou.png"];
     [self addSubview:jianTouIV];
     [self.cellSubviews addObject:jianTouIV];
@@ -204,7 +211,7 @@
         shanChangLab.font = [UIFont systemFontOfSize:12];
         [self addSubview:shanChangLab];
         [self.cellSubviews addObject:shanChangLab];
-        jianTouIV.frame = CGRectMake(DeviceWidth - 17, 146, 17, 17);
+        jianTouIV.frame = CGRectMake(jianTouIV.frame.origin.x, 146, jianTouIV.frame.size.width, jianTouIV.frame.size.height);
         line2.frame = CGRectMake(0, 210, DeviceWidth, 1);
         selectTimeTitle.frame = CGRectMake(10, 220, 70, 21);
         self.selectTimeLab.frame = CGRectMake(80, 220, DeviceWidth - 80 - 10, 21);

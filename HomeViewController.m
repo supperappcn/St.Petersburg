@@ -124,8 +124,8 @@ GO_NET
         case 1001:
         {
             TabViewViewController_2* tabViewVC = [TabViewViewController_2 new];
-            tabViewVC.title = @"咨询列表";
-            [self.navigationController pushViewController:tabViewVC animated:YES];
+            tabViewVC.title = @"资讯列表";
+            [self.navigationController pushViewController:tabViewVC animated:NO];
             
             
 //            TabViewViewController*tab=[TabViewViewController new];
@@ -139,7 +139,7 @@ GO_NET
         {
             TabViewViewController_2* tabViewVC = [TabViewViewController_2 new];
             tabViewVC.title = @"游记列表";
-            [self.navigationController pushViewController:tabViewVC animated:YES];
+            [self.navigationController pushViewController:tabViewVC animated:NO];
             
             
 //            TabViewViewController*tab=[TabViewViewController new];

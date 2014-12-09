@@ -219,7 +219,8 @@ GO_NET
     searchBar.tintColor=[UIColor brownColor];
     searchBar.placeholder=@"搜索";
     searchDisplayC=[[UISearchDisplayController alloc]initWithSearchBar:searchBar contentsController:self];
-    searchDisplayC.searchResultsTableView.backgroundColor=GroupColor;    searchDisplayC.searchResultsTableView.separatorColor=[UIColor clearColor];
+    searchDisplayC.searchResultsTableView.backgroundColor=GroupColor;
+    searchDisplayC.searchResultsTableView.separatorColor=[UIColor clearColor];
     
     searchDisplayC.delegate=self;
     

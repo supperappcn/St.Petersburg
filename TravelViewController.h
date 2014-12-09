@@ -22,7 +22,7 @@
     BOOL isComent;
     BOOL isCollect;
     BOOL isComentDone;
-    NSDictionary*dic1;
+    NSDictionary* dic1;
     UIView*_scrollView;
     
     UIToolbar*toolBar;
@@ -41,7 +41,7 @@
     BOOL checkCollect;
     NSString* checkLikeNum;
     
-      UIWebView*_webView;
+    UIWebView*_webView;
     UIButton*noNetButton;
     UIActivityIndicatorView* navActivity;
     UIRefreshControl*refresh;
