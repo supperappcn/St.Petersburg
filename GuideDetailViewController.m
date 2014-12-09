@@ -84,7 +84,12 @@ backButton
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( [textArr[indexPath.row]isEqualToString:@""]||[textArr[indexPath.row]isEqualToString:@"0人座  "])
+    
+    if ([textArr[indexPath.row]isEqualToString:@"0人座  "])
+    {
+        textArr[indexPath.row] = @"";
+    }
+    if ( [textArr[indexPath.row]isEqualToString:@""])
     {
     
         return 0;
@@ -349,7 +354,9 @@ postRequestAgency(_datas)
     checkCollectNum=@"没有收藏";
     //NSLog(@"%@",_gudieID);
     tableArr = [NSMutableArray array];
-    myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight-56) style:UITableViewStylePlain];
+    
+    myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight-64) style:UITableViewStylePlain];
+    [self changeViewFrame:CGRectMake(0, 0, 320, DeviceHeight- 64 - 49) withView:myTableView];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     myTableView.dataSource =self;
     myTableView.delegate = self;
@@ -475,9 +482,10 @@ postRequestAgency(_datas)
             }
 }
 - (void)creatbottomBar{
-    UIView*guding=[[UIView alloc]initWithFrame:CGRectMake(0,  DeviceHeight-64-50, 320, 50)];
-    guding.backgroundColor=[UIColor grayColor];
+    UIImageView*guding=[[UIImageView alloc]initWithFrame:CGRectMake(0,  DeviceHeight-64-45, 320, 45)];
+    guding.image=[UIImage imageNamed:@"guding.png"];
     [self.view addSubview:guding];
+    
     NSArray*tabfootImage=@[@"hotel_write.png",@"hotel_ like.png",@"hotel_ collect.png",@"hotel_ transmit.png"];
     NSArray*tabfootImagehight=@[@"hotel_write_h.png",@"hotel_ like_h.png",@"hotel_ collect_h.png",@"hotel_ transmit_h.png"];
     NSArray*titleArray=@[@"点评",@"喜欢",@"收藏",@"分享"];
@@ -775,7 +783,8 @@ postRequestAgency(_datas)
     return 7;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *cellID = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (cell==nil)
@@ -805,7 +814,8 @@ postRequestAgency(_datas)
     title.text = titleArr[indexPath.row];
     [cell.contentView addSubview:title];
     CGSize size;
-    if (textArr.count>0) {
+    if (textArr.count>0)
+    {
         RTLabel *text1 = [[RTLabel alloc]initWithFrame:CGRectMake(115, 12, 195, 44)];
         text1.text = [NSString stringWithFormat:@"%@",textArr[indexPath.row]];
         text1.font = [UIFont systemFontOfSize:16];
@@ -822,20 +832,23 @@ postRequestAgency(_datas)
             title.frame = CGRectMake(40, 5, 75, 30);
             text1.frame=CGRectMake(115, 10, 195, size.height);
             NSLog(@"title==========%@",textArr[indexPath.row]);
-            
+                
         }
         // NSLog(@"textArr  %@",textArr[indexPath.row]);
         [cell.contentView addSubview:text1];
     }
-    if (indexPath.row!=0) {
+    if (indexPath.row!=0)
+    {
         UIImageView *_link = [[UIImageView alloc]init];
         _link.image = [UIImage imageNamed:@"entainmentLink"];
         _link.frame = CGRectMake(10, 0, 300, 2);
         [cell.contentView addSubview:_link];
     }
     
-    if ([[textArr objectAtIndex:indexPath.row] length]==0) {
-        for (UIView *v in cell.subviews) {
+    if ([[textArr objectAtIndex:indexPath.row] length]==0)
+    {
+        for (UIView *v in cell.subviews)
+        {
             [v removeFromSuperview];
         }
     }

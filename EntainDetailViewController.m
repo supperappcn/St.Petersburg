@@ -403,6 +403,7 @@ GO_NET
     [remindAlert addSubview:act];
     
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight-64) style:UITableViewStylePlain];
+    [self changeViewFrame:CGRectMake(0, 0, 320, DeviceHeight-64 - 49) withView:_tableView];
     _tableView.delegate=self;
     _tableView.backgroundColor=GroupColor;
     _tableView.dataSource=self;
@@ -447,7 +448,7 @@ GO_NET
     
     //下bar
     {   UIImageView*guding=[[UIImageView alloc]initWithFrame:CGRectMake(0,  DeviceHeight-64-45, 320, 45)];
-        //    guding.alpha=0.8;
+    //    guding.alpha=0.8;
         guding.userInteractionEnabled=YES;
         guding.image=[UIImage imageNamed:@"guding.png"];
         
@@ -1393,7 +1394,7 @@ GO_NET
     [scrollView addSubview:roomApartmentImage];
     
     UILabel*roomApartmentLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, roomApartmentImage.frame.origin.y, 60, 15)];
-    roomApartmentImage.backgroundColor = [UIColor clearColor];
+    roomApartmentLable1.backgroundColor = [UIColor clearColor];
     roomApartmentLable1.text=@"房间设施";
     roomApartmentLable1.font=[UIFont boldSystemFontOfSize:13];
     [scrollView addSubview:roomApartmentLable1];
@@ -1415,7 +1416,7 @@ GO_NET
     [scrollView addSubview:roomOrderImage];
     
     UILabel*roomOrederLable1=[[UILabel alloc]initWithFrame:CGRectMake(33, roomOrderImage.frame.origin.y, 60, 15)];
-    roomOrderImage.backgroundColor = [UIColor clearColor];
+    roomOrederLable1.backgroundColor = [UIColor clearColor];
     roomOrederLable1.text=@"支付方式";
     roomOrederLable1.font=[UIFont boldSystemFontOfSize:13];
     [scrollView addSubview:roomOrederLable1];

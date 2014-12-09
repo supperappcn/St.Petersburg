@@ -47,10 +47,13 @@ backButton
         check_outLab.backgroundColor = [UIColor clearColor];
         price.text=[NSString stringWithFormat: @"<font size=20 color=orange >￥%d</font><font color=white>（$%d)</font>",_RMB.intValue*zhong.text.intValue ,_dollar.intValue*zhong.text.intValue];
     }
-    if (viewHeight >= DeviceHeight - 64-45) {
-        [sv setContentSize:CGSizeMake(320, sv.frame.size.height+45)];
-    }else {
-        [sv setContentSize:CGSizeMake(320, viewHeight)];
+    if (_reseverKnowStr.length>0)
+    {
+        [sv setContentSize:CGSizeMake(320, viewHeight + 64 + 49)];
+    }
+    else
+    {
+        [sv setContentSize:CGSizeMake(320, DeviceHeight+49)];
     }
 //    NSLog(@"%f   %f",viewHeight, DeviceHeight-64-45);
 }
@@ -63,7 +66,8 @@ backButton
     [_components setDay:1];
     
     //加入sv
-    sv = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    sv = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 44) withView:sv];
     sv.backgroundColor = BLACK_VIEW_COLOR;
     [self.view addSubview:sv];
     
@@ -364,7 +368,8 @@ backButton
 }
 - (void)addReseverKnowView{
     
-    if (_reseverKnowStr.length>0) {
+    if (_reseverKnowStr.length>0)
+    {
         RTLabel *content = [[RTLabel alloc] initWithFrame:CGRectMake(10, 43+10, 300, 0)];
         content.backgroundColor = [UIColor clearColor];
         content.text = _reseverKnowStr;
@@ -373,12 +378,13 @@ backButton
         
         UIView *rkv = [[UIView alloc] initWithFrame:CGRectMake(0, footerViewHeight+30, 320, 43+content.optimumSize.height+10)];
         
-        for (int i=0; i<2; i++) {
-            
+        for (int i=0; i<2; i++)
+        {
             UIImageView *bv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 43*i, 320, i==0?43:content.optimumSize.height+20)];
             [bv setImage:[UIImage imageNamed:i==0?@"MyDownCell":@"MyUpCell"]];
             [rkv addSubview:bv];
-            if (i==0) {
+            if (i==0)
+            {
                 UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 15, 15.5, 15.5)];
                 iv.image = [UIImage imageNamed:@"预订须知"];
                 [bv addSubview:iv];
@@ -390,10 +396,12 @@ backButton
                 [bv addSubview:name];
             }
         }
-        footerViewHeight = footerViewHeight+20+43+content.optimumSize.height+10;
+//        footerViewHeight = footerViewHeight+20+43+content.optimumSize.height+10;
         viewHeight = viewHeight+20+43+content.optimumSize.height+10;
         [footerView addSubview:rkv];
         [rkv addSubview:content];
+//        [sv setContentSize:CGSizeMake(320, DeviceHeight+45 + 53+content.optimumSize.height)];
+
 //        [sv setContentSize:CGSizeMake(320, 763+53+content.optimumSize.height+80)];
     }
     

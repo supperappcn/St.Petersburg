@@ -117,7 +117,8 @@ backButton
     [_components setDay:1];
     
     //加入sv
-    sv = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    sv = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight + 49)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight ) withView:sv];
     sv.backgroundColor = BLACK_VIEW_COLOR;
     [self.view addSubview:sv];
     
@@ -467,6 +468,7 @@ backButton
         [linkmanView addSubview:bv];
         
         UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(10, 13.5, 140, 16)];
+        name.backgroundColor = [UIColor clearColor];
         name.font = [UIFont systemFontOfSize:i==0?12.5:16];
         name.text = linkmanNames[i];
         name.textColor =  i==0?[UIColor blackColor]:[UIColor grayColor];

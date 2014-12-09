@@ -16,6 +16,7 @@
     if (self)
     {
         self.backgroundColor=[UIColor whiteColor];
+        
         self.backGround=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
         self.backGround.userInteractionEnabled=YES;
         [self addSubview: self.backGround];
@@ -49,12 +50,11 @@
         [_button setTitle:@"预订" forState:UIControlStateNormal];
         
         [self.backGround addSubview:_button];
-
         
-        
-        UIImageView*link=[[UIImageView alloc]initWithFrame:CGRectMake(0, 84, 320, 1)];
-        link.backgroundColor=[UIColor groupTableViewBackgroundColor];
+        UIImageView*link=[[UIImageView alloc]initWithFrame:CGRectMake(0, 84, 320, 2)];
+        link.image=[UIImage imageNamed:@"entainmentLink.png"];
         [self.backGround addSubview:link];
+    
     }
     return self;
 }

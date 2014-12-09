@@ -55,7 +55,8 @@ backButton
     [_components setDay:1];
     
     //加入sv
-    sv = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    sv = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 44) withView:sv];
     sv.backgroundColor = BLACK_VIEW_COLOR;
     [self.view addSubview:sv];
     
