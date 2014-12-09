@@ -273,7 +273,7 @@ postRequestAgency(datas)
                 [cell.goBtn addTarget:self action:@selector(clickGoBtn:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         return cell;
     }else {
         MyHotelOrederListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier ];
@@ -437,6 +437,7 @@ postRequestAgency(datas)
         if (![cell.goBtn isHidden]) {
             [cell.goBtn addTarget:self action:@selector(clickGoBtn:) forControlEvents:UIControlEventTouchUpInside];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         return cell;
     }
 }

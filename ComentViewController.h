@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ComentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDataDelegate,UIAlertViewDelegate>
+@interface ComentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDataDelegate,UIAlertViewDelegate,UITextViewDelegate>
 {
      UITableView*_tableView;
      NSMutableArray* array;

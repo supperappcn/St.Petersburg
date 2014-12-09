@@ -2022,6 +2022,19 @@
 			name = "我的订单(导游)";
 			sourceTree = "<group>";
 		};
+		0A0823181A36EBE1008E29F4 /* 消息 */ = {
+			isa = PBXGroup;
+			children = (
+				C4121F80192377F10047DEFA /* NewsCell.h */,
+				C4121F81192377F10047DEFA /* NewsCell.m */,
+				C4121F82192377F10047DEFA /* NewsViewController.h */,
+				C4121F83192377F10047DEFA /* NewsViewController.m */,
+				C4121F84192377F10047DEFA /* SetViewController.h */,
+				C4121F85192377F10047DEFA /* SetViewController.m */,
+			);
+			name = "消息";
+			sourceTree = "<group>";
+		};
 		0A0CB79B19F4F1A00013D763 /* 日历 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2950,9 +2963,9 @@
 		C49D17A018A5DBD40001E371 /* MineView */ = {
 			isa = PBXGroup;
 			children = (
-				C4121F8F192378080047DEFA /* 我的游记 */,
 				C4121F76192377F10047DEFA /* MineViewController.h */,
 				C4121F77192377F10047DEFA /* MineViewController.m */,
+				C4121F8F192378080047DEFA /* 我的游记 */,
 				0A071DEF1A1B1C2900803E7B /* 我的订单(导游) */,
 				0A0632E71A14B003000890C5 /* 支付页面 */,
 				0A0524F01A15AABE00553786 /* 支付成功界面 */,
@@ -2977,12 +2990,7 @@
 				C4E907F019495A2000BDECEE /* ClauseDetailView.m */,
 				C4121F7E192377F10047DEFA /* MineMemberViewController.h */,
 				C4121F7F192377F10047DEFA /* MineMemberViewController.m */,
-				C4121F80192377F10047DEFA /* NewsCell.h */,
-				C4121F81192377F10047DEFA /* NewsCell.m */,
-				C4121F82192377F10047DEFA /* NewsViewController.h */,
-				C4121F83192377F10047DEFA /* NewsViewController.m */,
-				C4121F84192377F10047DEFA /* SetViewController.h */,
-				C4121F85192377F10047DEFA /* SetViewController.m */,
+				0A0823181A36EBE1008E29F4 /* 消息 */,
 				188CD2CD1A1B374B00D2F1CA /* getlocation */,
 				C4121F8E192377F90047DEFA /* 我的收藏 */,
 				C4FE85B718ADB5E700A579AE /* Location */,

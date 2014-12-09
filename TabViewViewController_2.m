@@ -595,6 +595,7 @@ backButton
         cell.data.text=_str1;
         UIImageView*jiantou=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 10 - 20, 40, 20, 20)];
         jiantou.image=[UIImage imageNamed:@"cellJianTou.png"];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         return cell;
     }else if ([self.title isEqualToString:@"游记列表"]) {
         CustomCell3* cell = [tableView dequeueReusableCellWithIdentifier:str];
@@ -629,6 +630,7 @@ backButton
         _str1 = [_str1 stringByReplacingOccurrencesOfString:@"/" withString:@"."];
         cell.data.text = _str1;
         return cell;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }else {
         return nil;
     }

@@ -29,6 +29,7 @@ backButton
         NSLog(@"length %d",data.length);
         [data writeToFile:PathOfFile(@"MyTravelDatas") options:NSDataWritingAtomic error:nil];
     }
+    [aiv removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -335,6 +336,7 @@ postRequestAgency(datas)
             }
         }
     }
+    myCell.selectionStyle = UITableViewCellSelectionStyleGray;
     return myCell;
 }
 

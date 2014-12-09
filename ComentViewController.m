@@ -71,6 +71,7 @@ backButton
         
         _textField=[[UITextView alloc]initWithFrame:CGRectMake(10, 9.5, 233, 31)];
         _textField.layer.contents = (id)([UIImage imageNamed:@"travel_reply2.png"].CGImage);
+        _textField.delegate = self;
         _textField.textAlignment = NSTextAlignmentLeft;
         [tableFooterView addSubview:_textField];
         
@@ -144,7 +145,7 @@ backButton
 -(void)send
 {
     [_textField resignFirstResponder];
-
+    _textField.layer.contents = (id)([UIImage imageNamed:@"travel_reply2.png"].CGImage);
     NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
     int b=[defaults integerForKey:@"QuseID"];
     if (b)
@@ -210,6 +211,9 @@ postRequestAgencyAndRefesh(datas, refresh)
     _tableView.frame = CGRectMake(0, 0, containerFrame.size.width, containerFrame.size.height+keyboardBounds.size.height);
     tableFooterView.frame = CGRectMake(-.5, DeviceHeight-113.5, 321, 50);
 	[UIView commitAnimations];
+    if (_textField.text.length == 0) {
+        _textField.layer.contents = (id)([UIImage imageNamed:@"travel_reply2.png"].CGImage);
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -275,7 +279,6 @@ postRequestAgencyAndRefesh(datas, refresh)
             [self.navigationController pushViewController:mine animated:NO];
         }
     }
-  
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -348,6 +351,7 @@ postRequestAgencyAndRefesh(datas, refresh)
         {
             _textField.text=@"";
             UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"评论成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            alertView.tag = 2;
             [alertView show];
             NSString*canshu=[NSString stringWithFormat:@"ID=%d&classid=%d&pagesize=%d&pageindex=%d",self.ID,self.type,10,index1];
             NSMutableString*urlDomain=RussiaUrl2
@@ -373,6 +377,10 @@ postRequestAgencyAndRefesh(datas, refresh)
     
 }
 
+#pragma mark- UITextViewDelegate
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    _textField.layer.contents = nil;
+}
 
 - (void)didReceiveMemoryWarning
 {

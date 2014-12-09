@@ -149,7 +149,6 @@ backButton
     NSMutableString *urlStr = RussiaUrl4;
     [urlStr appendString:@"getUserCollectList"];
     NSString *argStr = [NSString stringWithFormat:@"cityid=2&typeid=%@&userid=%@&pagesize=5&pageindex=%d",_typeID,GET_USER_DEFAUT(QUSE_ID),0];
-    
     postRequestYiBu(argStr, urlStr)
 }
 postRequestAgency(datas)

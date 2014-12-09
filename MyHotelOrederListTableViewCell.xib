@@ -78,10 +78,6 @@
                         <rect key="frame" x="10" y="110" width="60" height="45"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cellJianTou.png" translatesAutoresizingMaskIntoConstraints="NO" id="y8T-Fx-XmE">
-                        <rect key="frame" x="298" y="122" width="17" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="links.png" translatesAutoresizingMaskIntoConstraints="NO" id="PBu-Ht-HMn">
                         <rect key="frame" x="0.0" y="165" width="325" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -149,7 +145,6 @@
                 <outlet property="downIV" destination="PBu-Ht-HMn" id="kKq-XO-I0X"/>
                 <outlet property="goBtn" destination="zAo-f7-e90" id="qqT-49-tSS"/>
                 <outlet property="headIV" destination="3TL-UZ-ZJC" id="ZVj-51-mVR"/>
-                <outlet property="moreIV" destination="y8T-Fx-XmE" id="xfH-01-fQp"/>
                 <outlet property="orderNumLab" destination="5mf-g1-i1M" id="rIP-HN-Qq9"/>
                 <outlet property="orderStatusLab" destination="Z2d-VU-l6F" id="zCq-BZ-cHz"/>
                 <outlet property="orderTimeLab" destination="uJu-bE-bdn" id="KCa-2K-aJ4"/>
@@ -162,7 +157,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cellJianTou.png" width="32" height="32"/>
         <image name="defaultSmall.gif" width="300" height="225"/>
         <image name="links.png" width="640" height="1"/>
     </resources>

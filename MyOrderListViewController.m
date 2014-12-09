@@ -122,7 +122,7 @@ postRequestAgency(self.datas)
     }
     NSDictionary* dic = self.tableArr[indexPath.section];
     [cell setModel:dic];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     if (cell.orderTimeLabHeight > 21) {//若“orderTimaLab”的高度超出，则调整cell的高度
         cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height + cell.orderTimeLabHeight - 21);
     }

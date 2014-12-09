@@ -27,7 +27,7 @@ backButton
     dataArr = [NSMutableArray array];
     myTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    myTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    myTableView.backgroundColor = [UIColor colorWithRed:248.0/255 green:248.0/255 blue:248.0/255 alpha:1];
     myTableView.delegate = self;
     myTableView.dataSource = self;
     [self.view addSubview:myTableView];

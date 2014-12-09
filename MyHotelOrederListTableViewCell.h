@@ -22,7 +22,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *goBtn;
 @property (strong, nonatomic) IBOutlet UILabel *dateLab;//日期
 @property (strong, nonatomic) IBOutlet UILabel *orderStatusLab;//订单状态
-@property (strong, nonatomic) IBOutlet UIImageView *moreIV;// >
+@property (strong, nonatomic) IBOutlet UIImageView *moreIV;// 箭头>
 @property (strong, nonatomic) IBOutlet UIImageView *downIV;
 
 @end
