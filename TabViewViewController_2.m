@@ -760,6 +760,7 @@ backButton
     [aiv startAnimating];
     [footerView addSubview:aiv];
     UILabel* lab = [[UILabel alloc]initWithFrame:CGRectMake(aiv.frame.origin.x+20, aiv.frame.origin.y, 70, aiv.frame.size.height)];
+    lab.backgroundColor = [UIColor clearColor];
     lab.text = @"加载中...";
     lab.textColor = [UIColor grayColor];
     lab.font = [UIFont systemFontOfSize:14];
