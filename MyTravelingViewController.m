@@ -386,6 +386,9 @@ postRequestAgency(datas)
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
     NSDictionary* dic = [_dataArr objectAtIndex:indexPath.row];
     if ([[dic valueForKey:@"IsPhone"]intValue] == 1) {
         MyTravellingDetailViewController_2* mtdVC = [MyTravellingDetailViewController_2 new];

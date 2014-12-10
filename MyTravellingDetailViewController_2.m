@@ -32,6 +32,7 @@ backButton
     [super viewDidLoad];
     self.title = @"游记详情";
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:self.scrollView];
     self.scrollView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.scrollView];
     NSString* imageStr = self.dic[@"Piclist"];

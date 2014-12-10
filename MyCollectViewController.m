@@ -16,6 +16,17 @@
 
 @implementation MyCollectViewController
 backButton
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSMutableString *urlStr = RussiaUrl4;
+    [urlStr appendString:@"GetTypeListCount"];
+    NSString *argStr = [NSString stringWithFormat:@"cityid=2&userid=%@",GET_USER_DEFAUT(QUSE_ID)];
+    postRequestYiBu(argStr, urlStr)
+
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -26,16 +37,13 @@ backButton
     titles=[NSArray arrayWithObjects:@"线路",@"景点",@"住宿",@"美食",@"购物",@"娱乐",@"导游",@"租车", nil];
     dataArr = [NSMutableArray array];
     myTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:myTableView];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     myTableView.backgroundColor = [UIColor colorWithRed:248.0/255 green:248.0/255 blue:248.0/255 alpha:1];
     myTableView.delegate = self;
     myTableView.dataSource = self;
     [self.view addSubview:myTableView];
     
-    NSMutableString *urlStr = RussiaUrl4;
-    [urlStr appendString:@"GetTypeListCount"];
-    NSString *argStr = [NSString stringWithFormat:@"cityid=2&userid=%@",GET_USER_DEFAUT(QUSE_ID)];
-    postRequestYiBu(argStr, urlStr)
     
     noNetButton=NoNetButton(noNetButton);
     

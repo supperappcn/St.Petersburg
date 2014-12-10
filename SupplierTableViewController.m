@@ -263,7 +263,7 @@ postRequestAgency(_datas)
         
         checkLike=NO;
     }
-    else if (checkCollect==YES)
+    else if(checkCollect==YES)
     {
         NSLog(@"checkCollect----------");
         if ([result intValue])
@@ -492,11 +492,10 @@ postRequestAgency(_datas)
             
         case 401:
         {
-            
+
             int f=[defaults integerForKey:@"QuseID"];
             if (f)
             {
-                
                 if ([checkLikeNum isEqualToString:@"没有喜欢"])
                 {
                     NSString*ID=[NSString stringWithFormat:@"%@",[dic2 objectForKey:@"GuideID"]];

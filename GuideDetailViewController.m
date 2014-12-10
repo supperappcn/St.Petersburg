@@ -94,7 +94,7 @@ backButton
     
         return 0;
     }
-    
+
     
     if ([titleArr[indexPath.row]isEqualToString:@"服务宗旨"]||[titleArr[indexPath.row]isEqualToString:@"擅长翻译"])
     {
@@ -132,73 +132,51 @@ backButton
 postRequestAgency(_datas)
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
     dicResultYiBu(_datas, result, dic)
-    NSLog(@"dic==%@",dic);
-    //dic2=[[dic objectForKey:@"ds"] lastObject];
    
-    NSLog(@" HotelRUName  %@",[[[dic valueForKey:@"ds"]lastObject]valueForKey:@"HotelRUName"]);
+    NSLog(@" result  =  %@",result);
     
     if (isLike==YES||isCollect==YES)
     {
-        
         if (isLike==YES)
         {
             if ([result intValue])
             {
-                
                 if ([result intValue]==-1)
                 {
                     UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"操作失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
-                    
                 }
                 else
                 {
-                    
                     if ([checkLikeNum isEqualToString:@"已经喜欢"])
                     {
-                        NSLog(@"checkLikeNum==%@",checkLikeNum);
                         checkLikeNum=@"没有喜欢";
-                        UIImageView*imageView=(UIImageView*)[self.view viewWithTag:411];
-                        imageView.image=[UIImage imageNamed:@"hotel_ like.png"];
-                        //              UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"取消喜欢成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                        //              [alertView show];
-                        
-                        
-                        NSLog(@"checkLikeNum==%@",checkLikeNum);
-                        
+                        UIButton*button=(UIButton*)[self.view viewWithTag:401];
+                        [button setImage:[UIImage imageNamed:@"Like.png"] forState:UIControlStateNormal];
                     }
                     else
                     {
-                        NSLog(@"checkLikeNum==%@",checkLikeNum);
                         checkLikeNum=@"已经喜欢";
-                        NSLog(@"checkLikeNum==%@",checkLikeNum);
                         UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"喜欢成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                         [alertView show];
                         
-                        UIImageView*_imageView=(UIImageView*)[self.view viewWithTag:411];
-                        _imageView.image=[UIImage imageNamed:@"hotel_ like_h.png"];
+                        UIButton*button=(UIButton*)[self.view viewWithTag:401];
+                        [button setImage:[UIImage imageNamed:@"Like_h.png"] forState:UIControlStateNormal];
                     }
-                    
                 }
-                
             }
             else
             {
-                
                 if ([checkLikeNum isEqualToString:@"已经喜欢"])
                 {
                     UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"操作失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
-                    
                 }
                 else
                 {
                     UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"已喜欢过" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
                 }
-                
-                
-                
             }
             isLike=NO;
         }
@@ -206,129 +184,90 @@ postRequestAgency(_datas)
         
         
         if (isCollect==YES)
-        {NSLog(@"isCollect----------");
+        {
             if ([result intValue])
             {
-                
                 if ([result intValue]==-1)
                 {
                     UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"收藏失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
-                    
                 }
                 else
                 {
                     if ([checkCollectNum isEqualToString:@"已经收藏"])
                     {
                         checkCollectNum=@"没有收藏";
-                        
-                        UIImageView*_imageView=(UIImageView*)[self.view viewWithTag:412];
-                        _imageView.image=[UIImage imageNamed:@"hotel_ collect.png"];
-                        
-                        
+                        UIButton*button=(UIButton*)[self.view viewWithTag:402];
+                        [button setImage:[UIImage imageNamed:@"Collect.png"] forState:UIControlStateNormal];
                     }
                     else
                     {
-                        UIImageView*_imageView=(UIImageView*)[self.view viewWithTag:412];
-                        _imageView.image=[UIImage imageNamed:@"hotel_ collect_h.png"];
+                        UIButton*button=(UIButton*)[self.view viewWithTag:402];
+                        [button setImage:[UIImage imageNamed:@"Collect_h.png"] forState:UIControlStateNormal];
+
                         checkCollectNum=@"已经收藏";
+                        
                         UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"收藏成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                         [alertView show];
                     }
-                    
-                    
                 }
-                
-                
-                
             }
             else
             {
-                
                 UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"已收藏过" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alertView show];
-                
-                
-                
             }
-            
             isCollect=NO;
         }
-        
     }
     
     else if(checkLike==YES)
     {
-        if ([result intValue])
+        if ([result intValue]==-1)
         {
-            
-            if ([result intValue]==-1)
-            {
-                UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"参数错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alertView show];
-                
-            }
-            else
-            {
-                
-                checkLikeNum=@"没有喜欢";
-                UIImageView*imageView=(UIImageView*)[self.view viewWithTag:411];
-                imageView.image=[UIImage imageNamed:@"hotel_ like.png"];
-                
-            }
-            
-            
-            
-        }
-        else
-        {
-            
-            checkLikeNum=@"已经喜欢";
-            UIImageView*imageView=(UIImageView*)[self.view viewWithTag:411];
-            imageView.image=[UIImage imageNamed:@"hotel_ like_h.png"];
-            
-            
-            
+            UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"参数错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
         }
         
+        else if([result intValue]==1)
+        {
+            checkLikeNum=@"没有喜欢";
+            UIButton*button=(UIButton*)[self.view viewWithTag:401];
+            [button setImage:[UIImage imageNamed:@"Like.png"] forState:UIControlStateNormal];
+        }
+        
+        else if ([result intValue]==0)
+        {
+            checkLikeNum=@"已经喜欢";
+            UIButton*button=(UIButton*)[self.view viewWithTag:401];
+            [button setImage:[UIImage imageNamed:@"Like_h.png"] forState:UIControlStateNormal];
+        }
         checkLike=NO;
     }
+    
     else if (checkCollect==YES)
     {
-        if ([result intValue])
+        if ([result intValue]==-1)
         {
-            
-            if ([result intValue]==-1)
-            {
-                UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"参数错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alertView show];
-                
-            }
-            else
-            {
-                
-                checkCollectNum=@"没有收藏";
-                UIImageView*imageView=(UIImageView*)[self.view viewWithTag:412];
-                imageView.image=[UIImage imageNamed:@"hotel_ collect.png"];
-            }
-            
-            
-            
+            UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"参数错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
         }
-        else
+        
+        else if ([result intValue]==1)
         {
-            
+            checkCollectNum=@"没有收藏";
+            UIButton*button=(UIButton*)[self.view viewWithTag:402];
+            [button setImage:[UIImage imageNamed:@"Collect.png"] forState:UIControlStateNormal];
+        }
+        
+        
+        else if ([result intValue]==0)
+        {
             checkCollectNum=@"已经收藏";
-            UIImageView*imageView=(UIImageView*)[self.view viewWithTag:412];
-            imageView.image=[UIImage imageNamed:@"hotel_ collect_h.png"];
-            
-            
-            
+            UIButton*button=(UIButton*)[self.view viewWithTag:402];
+            [button setImage:[UIImage imageNamed:@"Collect_h.png"] forState:UIControlStateNormal];
         }
-        
         checkCollect=NO;
-        
-        
     }
    
     [myTableView reloadData];
@@ -483,35 +422,27 @@ postRequestAgency(_datas)
 }
 - (void)creatbottomBar{
     UIImageView*guding=[[UIImageView alloc]initWithFrame:CGRectMake(0,  DeviceHeight-64-45, 320, 45)];
+    //    guding.alpha=0.8;
+    guding.userInteractionEnabled=YES;
     guding.image=[UIImage imageNamed:@"guding.png"];
-    [self.view addSubview:guding];
     
-    NSArray*tabfootImage=@[@"hotel_write.png",@"hotel_ like.png",@"hotel_ collect.png",@"hotel_ transmit.png"];
-    NSArray*tabfootImagehight=@[@"hotel_write_h.png",@"hotel_ like_h.png",@"hotel_ collect_h.png",@"hotel_ transmit_h.png"];
-    NSArray*titleArray=@[@"点评",@"喜欢",@"收藏",@"分享"];
+    [self.view addSubview:guding];
+    NSArray*tabfootImage=@[@"Coment.png",@"Like.png",@"Collect.png",@"Share.png"];
+    NSArray*tabfootImagehight=@[@"Coment_h.png",@"Like_h.png",@"Collect_h.png",@"Share_h.png"];
+    // NSArray*titleArray=@[@"点评",@"喜欢",@"收藏",@"分享"];
     for (int i=0; i<4; i++)
     {
         UIButton*button=[UIButton buttonWithType:UIButtonTypeCustom];
         button.tag=400+i;
-        button.frame=CGRectMake(0+80*i, 0, 80, 50);
+        button.frame=CGRectMake(12+80*i, 11, 56, 28);
+        [button setImage:[UIImage imageNamed:[tabfootImage objectAtIndex:i]] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:[tabfootImagehight objectAtIndex:i]] forState:UIControlStateHighlighted];
         [button addTarget:self action:@selector(touch2:) forControlEvents:UIControlEventTouchUpInside];
-        UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(55.0/2, 5, 25, 25)];
-        imageView.tag=410+i;
-        imageView.image=[UIImage imageNamed:[tabfootImage objectAtIndex:i]];
-        imageView.highlightedImage = [UIImage imageNamed:[tabfootImagehight objectAtIndex:i]];
-        UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(0, 30, 80, 20)];
-        lable.textColor=[UIColor whiteColor];
-        lable.backgroundColor = [UIColor clearColor];
-        lable.font=[UIFont systemFontOfSize:10];
-        lable.textAlignment=NSTextAlignmentCenter;
-        lable.text=[titleArray objectAtIndex:i];
-        [button addSubview:imageView];
-        [button addSubview:lable];
         [guding addSubview:button];
     }
-    
-    
-    
+
+
+
 //    UIView*guding=[[UIView alloc]initWithFrame:CGRectMake(0,  DeviceHeight-64-50, 320, 50)];
 //    guding.backgroundColor=[UIColor grayColor];
 //    [self.view addSubview:guding];
@@ -535,21 +466,15 @@ postRequestAgency(_datas)
 }
 -(void)touch2:(UIButton*)sender
 {
-    
-
-    
     NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
     switch (sender.tag)
     {
             
-            
         case 400:
         {
-            
             int f=[defaults integerForKey:@"QuseID"];
             if (f)
             {
-                
                 ComentViewController*text=[ComentViewController new];
                 text.pageName=@"导游评论";
                 text.head=[dic2 valueForKey:@"UName"];
@@ -557,91 +482,59 @@ postRequestAgency(_datas)
                 text.ID=[[dic2 valueForKey:@"GuideID"] intValue];
                 text.type=6;
                 [self.navigationController pushViewController:text animated:NO];
-                
             }
             else
             {
-                
-                
                 MineViewController*mine=[MineViewController new];
                 mine.tag=1;
                 [self.navigationController pushViewController:mine animated:NO];
-                
-                
             }
-            
-            
-            
-            
-            
-            
         }
             break;
             
+            
         case 401:
         {
-            
             int f=[defaults integerForKey:@"QuseID"];
             if (f)
             {
-                
                 if ([checkLikeNum isEqualToString:@"没有喜欢"])
                 {
                     NSString*ID=[NSString stringWithFormat:@"%@",[dic2 objectForKey:@"GuideID"]];
-                    NSString*canshu=[NSString stringWithFormat:@"ID=%@&userid=%d&username=%@&typeid=%d&classid=%d",ID,f,[defaults valueForKey:USER_NAME],1,8];
+                    NSString*canshu=[NSString stringWithFormat:@"cityid=%d&ID=%@&userid=%d&username=%@&typeid=%d&classid=%d",2,ID,f,[defaults valueForKey:USER_NAME],1,8];
                     NSLog(@"%@",canshu);
                     NSMutableString*urlDomain=RussiaUrl2
                     NSString *urlMethod=@"getTravelColloLike";
                     [urlDomain appendString:urlMethod];
                     postRequestYiBu(canshu, urlDomain)
                     isLike=YES;
-                    
                 }
                 else
                 {
-                    
                     UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"是不小心吗？" delegate:self cancelButtonTitle:@"是的" otherButtonTitles:@"不是", nil];
                     alertView.tag=20;
                     [alertView show];
-                    
-                    
-                    
-                    
-                    
                 }
-                
-                
             }
             else
             {
-                
-                
                 MineViewController*mine=[MineViewController new];
                 mine.tag=1;
                 [self.navigationController pushViewController:mine animated:NO];
-                
-                
             }
-            
-            
-            
-            
-            
-            
         }
             break;
+            
+            
         case 402:
         {
-            
             int f=[defaults integerForKey:@"QuseID"];
             if (f)
             {
-                
-                
                 if ([checkCollectNum isEqualToString:@"没有收藏"])
                 {
                     NSString*ID=[NSString stringWithFormat:@"%@",[dic2 objectForKey:@"GuideID"]];
-                    NSString*canshu=[NSString stringWithFormat:@"ID=%@&userid=%d&username=%@&typeid=%d&classid=%d",ID,f,[defaults valueForKey:USER_NAME],2,8];
+                    NSString*canshu=[NSString stringWithFormat:@"cityid=%d&ID=%@&userid=%d&username=%@&typeid=%d&classid=%d",2,ID,f,[defaults valueForKey:USER_NAME],2,8];
                     NSMutableString*urlDomain=RussiaUrl2
                     NSString *urlMethod=@"getTravelColloLike";
                     [urlDomain appendString:urlMethod];
@@ -649,41 +542,24 @@ postRequestAgency(_datas)
                 }
                 else
                 {
-                    
-                    
                     UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"是不小心吗？" delegate:self cancelButtonTitle:@"是的" otherButtonTitles:@"不是", nil];
                     alertView.tag=21;
                     [alertView show];
-                    
-                    
-                    
-                    
-                    
                 }
-                
                 isCollect=YES;
             }
             else
             {
-                
-                
                 MineViewController*mine=[MineViewController new];
                 mine.tag=1;
                 [self.navigationController pushViewController:mine animated:NO];
-                
-                
             }
-            
-            
-            
-            
-            
-            
         }
             break;
+            
+            
         case 403:
         {
-            
             NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
             
             //构造分享内容
@@ -711,11 +587,9 @@ postRequestAgency(_datas)
                                             NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
                                         }
                                     }];
-            
-            
-            
-        }
+            }
             break;
+            
             
         default:
             break;
@@ -761,7 +635,6 @@ postRequestAgency(_datas)
                     mvc.tabBarController.tabBar.hidden=YES;
                     mvc.tag=1;
                     [self.navigationController pushViewController:mvc animated:YES];
-                    
                 }
             }
             
