@@ -336,7 +336,6 @@ postRequestAgency(datas)
             }
         }
     }
-    myCell.selectionStyle = UITableViewCellSelectionStyleGray;
     return myCell;
 }
 

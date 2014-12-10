@@ -205,7 +205,13 @@ postRequestAgency(datas)
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     dicResultYiBu(datas, result, dic)
-    NSDictionary* _dic1=[[dic valueForKey:@"ds"]lastObject];
+    NSDictionary* _dic1;
+    if (result.intValue == 0 || result.intValue == 1) {
+        
+    }else {
+        _dic1 = [[dic valueForKey:@"ds"]lastObject];
+    }
+    NSLog(@"result:%@ \n  dic:%@ \n   _dic1:%@", result, dic, _dic1);
     if (_loadingMore==YES)
     {
         _loadingMore=NO;
