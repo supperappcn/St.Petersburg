@@ -36,7 +36,11 @@ backButton
     self.scrollView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.scrollView];
     NSString* imageStr = self.dic[@"Piclist"];
-    self.imageNames = [imageStr componentsSeparatedByString:@","];
+    NSLog(@"imageStr:%@",imageStr);
+    if (imageStr.length > 4) {
+        self.imageNames = [imageStr componentsSeparatedByString:@","];
+    }
+    NSLog(@"self.imageNames.count:%d,%@",self.imageNames.count,self.imageNames);
     for (int i = 0; i < self.imageNames.count; i++) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10 + 250*i, self.view.frame.size.width - 10 - 10, 240)];
@@ -87,7 +91,7 @@ backButton
     self.textView.text = self.dic[@"Content"];
     self.textView.allowsEditingTextAttributes = NO;
     self.textView.editable = NO;
-    CGSize size = [self.textView.text sizeWithFont:[UIFont systemFontOfSize:17]];
+    CGSize size = [self.textView.text sizeWithFont:[UIFont systemFontOfSize:17]constrainedToSize:CGSizeMake(self.textView.frame.size.width, 9999)];//textView自适应文字高度
     float height = size.height;
     self.textView.frame = CGRectMake(self.textView.frame.origin.x, self.textView.frame.origin.y, self.textView.frame.size.width, height);
     [self.scrollView addSubview:self.textView];

@@ -32,16 +32,7 @@ backButton
     [aiv removeFromSuperview];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self refresh];
-    self.title = @"我的游记";
-    hideTabbar;
-    datas = [NSMutableData data];
-    _dataArr= [NSMutableArray array];
-    tittleArr = @[@"评论(99)",@"编辑",@"删除"];
-    imageNameArr = @[@"travel_say.png",@"travel_pen.png",@"travel_trash.png"];
-    
+-(void)viewDidLoad {
     float height=35;
     UIButton *backbutton = [[UIButton alloc]initWithFrame:CGRectMake(0, (44-height)/2, 40, height)];
     [backbutton addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];
@@ -56,6 +47,7 @@ backButton
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];
     self.navigationItem.rightBarButtonItem =backItem;
     
+    
     _myTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _myTableView.dataSource = self;
     _myTableView.delegate = self;
@@ -67,6 +59,17 @@ backButton
     refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"下拉刷新..."];
     [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [_myTableView addSubview:refresh];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+//    [self refresh];
+    self.title = @"我的游记";
+    hideTabbar;
+    datas = [NSMutableData data];
+    _dataArr= [NSMutableArray array];
+    tittleArr = @[@"评论(99)",@"编辑",@"删除"];
+    imageNameArr = @[@"travel_say.png",@"travel_pen.png",@"travel_trash.png"];
 
     foolerView = [[UIView alloc]init];
     foolerView.frame = CGRectMake(0, 0, 320, 90);
@@ -393,6 +396,12 @@ postRequestAgency(datas)
         MyTravellingDetailViewController_2* mtdVC = [MyTravellingDetailViewController_2 new];
         mtdVC.dic = [_dataArr objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:mtdVC animated:YES];
+        
+//        MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
+//        mtdv.htmlStr = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Content"];
+//        mtdv.title =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Title"];
+//        NSLog(@"dataArr:%@",[_dataArr objectAtIndex:indexPath.row]);
+//        [self.navigationController pushViewController:mtdv animated:YES];
     }else {
         MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
         mtdv.htmlStr = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Content"];

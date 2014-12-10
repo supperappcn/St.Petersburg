@@ -316,6 +316,7 @@ backButton
                 iv.image = UIGraphicsGetImageFromCurrentImageContext();
                 UIGraphicsEndImageContext();
             }
+            NSLog(@"self.imageViewsNewArr:%@  \n  iv.image:%@",self.imageViewsNewArr,iv.image);
             NSData* imageData = UIImageJPEGRepresentation(iv.image, 0.5);
             NSString* imageStr = [imageData base64EncodedStringWithOptions:0];
             [self.imageStrArr addObject:imageStr];
