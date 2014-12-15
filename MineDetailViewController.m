@@ -1034,7 +1034,7 @@ backButton
     }
     NSString *encodedImageStr = [data1 base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
-//    NSLog(@"encodedImageStr = %@",encodedImageStr);
+    NSLog(@"encodedImageStr = %@",encodedImageStr);
     
     NSString *str = [NSString stringWithFormat:@"userid=%d&bytestr=%@",3,encodedImageStr];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];

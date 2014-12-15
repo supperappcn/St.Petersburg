@@ -9,7 +9,7 @@
 #import "TravelViewController_2.h"
 #import "GDataXMLNode.h"
 #import "JSON.h"
-//#import "CommentViewController.h"
+#import "CommentViewController.h"
 
 @interface TravelViewController_2 ()<NSURLConnectionDataDelegate,UITextViewDelegate,UIAlertViewDelegate,UIWebViewDelegate>
 @property (nonatomic, strong)UIActivityIndicatorView* naviActivity;
@@ -131,8 +131,11 @@ backButton
 -(void)touch:(UIButton* )sender {
     switch (sender.tag) {//点评
         case 400:
-            NSLog(@"分享部分待写");
-            
+        {
+            CommentViewController* commentVC = [CommentViewController new];
+            NSLog(@"跳至点评页面时参数待写");
+            [self.navigationController pushViewController:commentVC animated:YES];
+        }
             break;
         case 401:
             if (self.ISLike == YES) {

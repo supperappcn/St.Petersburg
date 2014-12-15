@@ -246,9 +246,9 @@ backButton
                 NSString *urlStr = [NSString stringWithFormat:@"%@%@/%@",picUrl,picPath,imgName];
                 
                 NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:urlStr]];
-                NSLog(@"data = %@",data);
+//                NSLog(@"data = %@",data);
                 [self storageAddName:imgName];
-                NSLog(@"img_name == %@",imgFilePath);
+//                NSLog(@"img_name == %@",imgFilePath);
                 if (data)
                 {
                     [data writeToFile:imgFilePath atomically:YES];
@@ -275,7 +275,7 @@ backButton
 {
     NSString *docPath=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
     imgFilePath=[docPath stringByAppendingPathComponent:fileName];
-    NSLog(@"imgFilePath = %@",imgFilePath);
+//    NSLog(@"imgFilePath = %@",imgFilePath);
 }
 
 

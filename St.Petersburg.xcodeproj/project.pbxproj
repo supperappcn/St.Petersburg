@@ -53,6 +53,8 @@
 		18650E9919E6655900209EB6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9119E6652900209EB6 /* libWeChatSDK.a */; };
 		18650E9A19E6655900209EB6 /* libYixinSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18650E9219E6652900209EB6 /* libYixinSDK.a */; };
 		1866C7261A32A4E6002AF324 /* ZXCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1866C7251A32A4E6002AF324 /* ZXCell.m */; };
+		187B91A31A398061007A5393 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187B91A21A398061007A5393 /* CommentCell.m */; };
+		187B91A61A3980B5007A5393 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187B91A51A3980B5007A5393 /* CommentViewController.m */; };
 		188CD28C1A1AE0A400D2F1CA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CD28B1A1AE0A400D2F1CA /* MapKit.framework */; };
 		188CD2D01A1B378900D2F1CA /* locationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CD2CF1A1B378900D2F1CA /* locationViewController.m */; };
 		188CD2D91A1DE5B100D2F1CA /* locationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CD2D81A1DE5B100D2F1CA /* locationCell.m */; };
@@ -901,6 +903,10 @@
 		18650E9219E6652900209EB6 /* libYixinSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYixinSDK.a; sourceTree = "<group>"; };
 		1866C7241A32A4E6002AF324 /* ZXCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXCell.h; sourceTree = "<group>"; };
 		1866C7251A32A4E6002AF324 /* ZXCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXCell.m; sourceTree = "<group>"; };
+		187B91A11A398061007A5393 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = "游记评论/CommentCell.h"; sourceTree = "<group>"; };
+		187B91A21A398061007A5393 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentCell.m; path = "游记评论/CommentCell.m"; sourceTree = "<group>"; };
+		187B91A41A3980B5007A5393 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = "游记评论/CommentViewController.h"; sourceTree = "<group>"; };
+		187B91A51A3980B5007A5393 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = "游记评论/CommentViewController.m"; sourceTree = "<group>"; };
 		188CD28B1A1AE0A400D2F1CA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		188CD2CE1A1B378900D2F1CA /* locationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = locationViewController.h; path = getlocation/locationViewController.h; sourceTree = "<group>"; };
 		188CD2CF1A1B378900D2F1CA /* locationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = locationViewController.m; path = getlocation/locationViewController.m; sourceTree = "<group>"; };
@@ -2102,6 +2108,17 @@
 				1866C7251A32A4E6002AF324 /* ZXCell.m */,
 			);
 			name = ZXCell;
+			sourceTree = "<group>";
+		};
+		187B91A01A397FF8007A5393 /* 游记评论 */ = {
+			isa = PBXGroup;
+			children = (
+				187B91A11A398061007A5393 /* CommentCell.h */,
+				187B91A21A398061007A5393 /* CommentCell.m */,
+				187B91A41A3980B5007A5393 /* CommentViewController.h */,
+				187B91A51A3980B5007A5393 /* CommentViewController.m */,
+			);
+			name = "游记评论";
 			sourceTree = "<group>";
 		};
 		188CD2CD1A1B374B00D2F1CA /* getlocation */ = {
@@ -3497,6 +3514,7 @@
 				C4E816F218B35030005C20D7 /* TravelViewController.m */,
 				0A09B2CA1A396E05005E0E17 /* TravelViewController_2.h */,
 				0A09B2CB1A396E05005E0E17 /* TravelViewController_2.m */,
+				187B91A01A397FF8007A5393 /* 游记评论 */,
 			);
 			name = "游记";
 			sourceTree = "<group>";
@@ -4536,6 +4554,7 @@
 				C4FB5B8E18F518A200DDBCA6 /* CustomSceneryCell.m in Sources */,
 				C4E19BC41911980200CE7B61 /* GeJuViewController.m in Sources */,
 				C47F753E198659D500B358FE /* MyHotelOrederListTableViewCell.m in Sources */,
+				187B91A31A398061007A5393 /* CommentCell.m in Sources */,
 				C49D177A18A5DAB70001E371 /* AppDelegate.m in Sources */,
 				0A071DFC1A1B323600803E7B /* MyOrderListTableViewCell.m in Sources */,
 				C440860B19471052001E2A47 /* LookDetailViewController.m in Sources */,
@@ -4611,6 +4630,7 @@
 				0A0CB7A719F4F37A0013D763 /* GCPlaceholderTextView.m in Sources */,
 				C4121F89192377F10047DEFA /* ModificViewController.m in Sources */,
 				C4E9E75E19191F9900DA8A76 /* GuideDetailViewController.m in Sources */,
+				187B91A61A3980B5007A5393 /* CommentViewController.m in Sources */,
 				C4121F88192377F10047DEFA /* UIScrollView+UItouch.m in Sources */,
 				C4264C2918A61FDE0098B6F8 /* NSObject+SBJSON.m in Sources */,
 				C402461C18F7E7D40016B360 /* SeceneryComentCell.m in Sources */,
