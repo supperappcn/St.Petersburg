@@ -11,6 +11,8 @@
 #import "GDataXMLNode.h"
 #import "ComentCell.h"
 @interface TravelViewController ()
+@property (nonatomic, strong)NSURLConnection* checkLike;
+@property (nonatomic, strong)NSURLConnection* checkCollect;
 
 @end
 
@@ -87,7 +89,7 @@ backButton
     }
     
     
-      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(netChange:) name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(netChange:) name:kReachabilityChangedNotification object:nil];
     
 }
 NetChange(noNetButton)
@@ -99,8 +101,15 @@ GO_NET
     NSString *urlMethod=@"CheckColloLike";
     [urlDomain appendString:urlMethod];
     
-    postRequestYiBu(canshu, urlDomain)
+//    postRequestYiBu(canshu, urlDomain)
     checkLike=YES;
+    
+    NSURL*url=[[NSURL alloc]initWithString:urlDomain];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [request setHTTPMethod:@"POST"];
+    NSData *data = [canshu dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:data];
+    self.checkLike = [NSURLConnection connectionWithRequest:request delegate:self];
     
     [self performSelector:@selector(checkCllecet:) withObject:[NSNumber numberWithInt:[f integerValue]] afterDelay:0.1];
     
@@ -114,11 +123,16 @@ GO_NET
     NSString *urlMethod=@"CheckColloLike";
     [urlDomain appendString:urlMethod];
     
-    postRequestYiBu(canshu, urlDomain)
+//    postRequestYiBu(canshu, urlDomain)
     checkCollect=YES;
-    
-    
+    NSURL*url=[[NSURL alloc]initWithString:urlDomain];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [request setHTTPMethod:@"POST"];
+    NSData *data = [canshu dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:data];
+    self.checkCollect = [NSURLConnection connectionWithRequest:request delegate:self];
 }
+
 -(UIView*)creatTabHead
 {
 
@@ -129,7 +143,7 @@ GO_NET
     head.text=[dic1 valueForKey:@"Title"];
     
     NSLog(@"%@----",[dic1 valueForKey:@"Title"]);
-    head.font=[UIFont systemFontOfSize:18];
+//    head.font=[UIFont systemFontOfSize:18];
     head.font=[UIFont boldSystemFontOfSize:18];
     
     CGSize headSize=[head optimumSize];
@@ -206,11 +220,18 @@ postRequestAgency(datas)
 {
     dicResultYiBu(datas, result, dic)
     NSDictionary* _dic1;
-    if (result.intValue == 0 || result.intValue == 1) {
+    if ([connection isEqual:self.checkLike]) {
+        
+    }else if ([connection isEqual:self.checkCollect]) {
         
     }else {
         _dic1 = [[dic valueForKey:@"ds"]lastObject];
     }
+//    if (result.intValue == 0 || result.intValue == 1) {
+//        
+//    }else {
+//        _dic1 = [[dic valueForKey:@"ds"]lastObject];
+//    }
     NSLog(@"result:%@ \n  dic:%@ \n   _dic1:%@", result, dic, _dic1);
     if (_loadingMore==YES)
     {

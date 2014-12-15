@@ -9,6 +9,7 @@
 #import "TabViewViewController_2.h"
 #import "GDataXMLNode.h"
 #import "JSON.h"
+#import "TravelViewController_2.h"
 
 @interface TabViewViewController_2 ()
 @property (nonatomic, strong)UIActivityIndicatorView* navActivity;
@@ -192,7 +193,8 @@ backButton
         inform.ID=[[self.topArr[tap.view.tag-1] valueForKey:@"ID"] integerValue];
         [self.navigationController pushViewController:inform animated:NO];
     }else if ([self.title isEqualToString:@"游记列表"]) {
-        TravelViewController* inform = [TravelViewController new];
+//        TravelViewController* inform = [TravelViewController new];
+        TravelViewController_2* inform = [TravelViewController_2 new];
         inform.ID = [[self.topArr[tap.view.tag-1] valueForKey:@"ID"] integerValue];
         [self.navigationController pushViewController:inform animated:NO];
     }
@@ -328,7 +330,12 @@ backButton
                     dispatch_queue_t queue1 = dispatch_queue_create("downloadUserHead", NULL);
                     dispatch_async(queue1, ^{
                         for (int i = 0; i < self.searchArr.count; i++) {
-                            NSString* userHeadPicName = [self.searchArr[i] valueForKey:@"ImgTouX"];
+                            NSString* userHeadPicName;
+                            if ([self.searchArr[i] valueForKey:@"CompanyID"] == 0) {//个人
+                                userHeadPicName = [self.searchArr[i] valueForKey:@"ImgTouX"];
+                            }else {//企业
+                                userHeadPicName = [self.searchArr[i] valueForKey:@"LogoImage"];
+                            }
                             NSString* userHeadPicPath = [NSString stringWithFormat:@"%@/%@",userHeadStr,userHeadPicName];
                             //[self downloadUserHeadPicWithHeadPicPath:userHeadPicPath Tag:i+1];
                             [self downloadUserHeadPicWithHeadPicPath:userHeadPicPath UserHeadPicName:userHeadPicName Tag:i+1];
@@ -457,7 +464,12 @@ backButton
                     dispatch_queue_t queue1 = dispatch_queue_create("downloadUserHead", NULL);
                     dispatch_async(queue1, ^{
                         for (int i = 0; i < self.tableArr.count; i++) {
-                            NSString* userHeadPicName = [self.tableArr[i] valueForKey:@"ImgTouX"];
+                            NSString* userHeadPicName;
+                            if ([self.tableArr[i] valueForKey:@"CompanyID"] == 0) {//个人
+                                userHeadPicName = [self.tableArr[i] valueForKey:@"ImgTouX"];
+                            }else {//企业
+                                userHeadPicName = [self.tableArr[i] valueForKey:@"LogoImage"];
+                            }
                             NSString* userHeadPicPath = [NSString stringWithFormat:@"%@/%@",userHeadStr,userHeadPicName];
                             //[self downloadUserHeadPicWithHeadPicPath:userHeadPicPath Tag:i+1];
                             [self downloadUserHeadPicWithHeadPicPath:userHeadPicPath UserHeadPicName:userHeadPicName Tag:i+1];
@@ -625,7 +637,15 @@ backButton
         cell.lableHead.text = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"Title"];
         CGSize size = [cell.lableHead sizeThatFits:CGSizeMake(195, 0)];
         cell.lableHead.frame = CGRectMake(115,15, 195, size.height);
-        cell.useName.text = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"UserName"];
+        if ([[[tempArr objectAtIndex:indexPath.row] valueForKey:@"CompanyID"]intValue] == 0) {//个人
+            cell.useName.text = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"UserName"];
+        }else {//企业
+            if ([[[tempArr objectAtIndex:indexPath.row] valueForKey:@"SimpleName"] length] > 0) {//有简称
+                cell.useName.text = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"SimpleName"];
+            }else {
+                cell.useName.text = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"Name"];
+            }
+        }
         NSString*_str1 = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"PTime"];
         _str1 = [_str1 stringByReplacingOccurrencesOfString:@"/" withString:@"."];
         cell.data.text = _str1;
@@ -648,7 +668,8 @@ backButton
         inform.ID=[[[tempArr objectAtIndex:indexPath.row]valueForKey:@"ID"]intValue];
         [self.navigationController pushViewController:inform animated:NO];
     }else if ([self.title isEqualToString:@"游记列表"]) {
-        TravelViewController*inform=[TravelViewController new];
+//        TravelViewController* inform = [TravelViewController new];
+        TravelViewController_2* inform = [TravelViewController_2 new];
         inform.ID=[[[tempArr objectAtIndex:indexPath.row]valueForKey:@"ID"]intValue];
         [self.navigationController pushViewController:inform animated:NO];
     }
@@ -723,7 +744,12 @@ backButton
                                 dispatch_queue_t queue1 = dispatch_queue_create("downloadUserHead", NULL);
                                 dispatch_async(queue1, ^{
                                     for (int i = 0; i < arr.count; i++) {
-                                        NSString* userHeadPicName = [arr[i] valueForKey:@"ImgTouX"];
+                                        NSString* userHeadPicName;
+                                        if ([arr[i] valueForKey:@"CompanyID"] == 0) {//个人
+                                            userHeadPicName = [arr[i] valueForKey:@"ImgTouX"];
+                                        }else {//企业
+                                            userHeadPicName = [arr[i] valueForKey:@"LogoImage"];
+                                        }
                                         NSString* userHeadPicPath = [NSString stringWithFormat:@"%@/%@",userHeadStr,userHeadPicName];
                                         //[self downloadUserHeadPicWithHeadPicPath:userHeadPicPath Tag:i+1+self.tableArr.count-arr.count];
                                         [self downloadUserHeadPicWithHeadPicPath:userHeadPicPath UserHeadPicName:userHeadPicName Tag:i+1+self.tableArr.count-arr.count];

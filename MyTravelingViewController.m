@@ -14,6 +14,7 @@
 #import "MyTravellingDetailViewController_2.h"
 #import "WriteMyTravellingViewController_3.h"
 #import "ComentViewController.h"
+#import "TravelViewController_2.h"
 
 @interface MyTravelingViewController ()
 
@@ -397,16 +398,21 @@ postRequestAgency(datas)
         mtdVC.dic = [_dataArr objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:mtdVC animated:YES];
         
+        
 //        MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
 //        mtdv.htmlStr = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Content"];
 //        mtdv.title =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Title"];
 //        NSLog(@"dataArr:%@",[_dataArr objectAtIndex:indexPath.row]);
 //        [self.navigationController pushViewController:mtdv animated:YES];
     }else {
-        MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
-        mtdv.htmlStr = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Content"];
-        mtdv.title =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Title"];
-        [self.navigationController pushViewController:mtdv animated:YES];
+//        MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
+//        mtdv.htmlStr = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Content"];
+//        mtdv.title =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Title"];
+//        [self.navigationController pushViewController:mtdv animated:YES];
+        
+        TravelViewController_2* travelVC = [TravelViewController_2 new];
+        travelVC.ID = [[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"ID"] intValue];
+        [self.navigationController pushViewController:travelVC animated:YES];
     }
 }
 

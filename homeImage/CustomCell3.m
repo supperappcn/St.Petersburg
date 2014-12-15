@@ -37,7 +37,7 @@
         self.headImage.image=BACK_IMAGE;
         [self addSubview:self.headImage];
         
-        self.useName=[[UILabel alloc]initWithFrame:CGRectMake(self.headImage.frame.origin.x+27, self.headImage.frame.origin.y, 100, 20)];
+        self.useName=[[UILabel alloc]initWithFrame:CGRectMake(self.headImage.frame.origin.x+27, self.headImage.frame.origin.y, DeviceWidth-self.headImage.frame.origin.x-27 - 20, 20)];
         self.useName.font=[UIFont systemFontOfSize:14];
         self.useName.backgroundColor = [UIColor clearColor];
         self.useName.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];

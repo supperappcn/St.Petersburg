@@ -32,6 +32,7 @@
 		0A071DFC1A1B323600803E7B /* MyOrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A071DFB1A1B323600803E7B /* MyOrderListTableViewCell.m */; };
 		0A071DFF1A1B48A000803E7B /* MyOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A071DFE1A1B48A000803E7B /* MyOrderDetailViewController.m */; };
 		0A09A3071A2EB9750054DA54 /* TabViewViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A09A3061A2EB9750054DA54 /* TabViewViewController_2.m */; };
+		0A09B2CC1A396E05005E0E17 /* TravelViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A09B2CB1A396E05005E0E17 /* TravelViewController_2.m */; };
 		0A0CB78919F4EED60013D763 /* libQYHMethod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CB78819F4EED60013D763 /* libQYHMethod.a */; };
 		0A0CB78B19F4EEE90013D763 /* libSinaWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CB78A19F4EEE90013D763 /* libSinaWeiboSDK.a */; };
 		0A0CB78F19F4EF020013D763 /* libTCWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CB78E19F4EF020013D763 /* libTCWeiboSDK.a */; };
@@ -870,6 +871,8 @@
 		0A071DFE1A1B48A000803E7B /* MyOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderDetailViewController.m; sourceTree = "<group>"; };
 		0A09A3051A2EB9750054DA54 /* TabViewViewController_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabViewViewController_2.h; sourceTree = "<group>"; };
 		0A09A3061A2EB9750054DA54 /* TabViewViewController_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabViewViewController_2.m; sourceTree = "<group>"; };
+		0A09B2CA1A396E05005E0E17 /* TravelViewController_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelViewController_2.h; sourceTree = "<group>"; };
+		0A09B2CB1A396E05005E0E17 /* TravelViewController_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelViewController_2.m; sourceTree = "<group>"; };
 		0A0CB78819F4EED60013D763 /* libQYHMethod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQYHMethod.a; path = "点a文件/libQYHMethod.a"; sourceTree = SOURCE_ROOT; };
 		0A0CB78A19F4EEE90013D763 /* libSinaWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSinaWeiboSDK.a; path = "点a文件/libSinaWeiboSDK.a"; sourceTree = SOURCE_ROOT; };
 		0A0CB78E19F4EF020013D763 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTCWeiboSDK.a; path = "点a文件/libTCWeiboSDK.a"; sourceTree = SOURCE_ROOT; };
@@ -3492,6 +3495,8 @@
 				C4FE8A0718C5A88500D299B0 /* travelImage */,
 				C4E816F118B35030005C20D7 /* TravelViewController.h */,
 				C4E816F218B35030005C20D7 /* TravelViewController.m */,
+				0A09B2CA1A396E05005E0E17 /* TravelViewController_2.h */,
+				0A09B2CB1A396E05005E0E17 /* TravelViewController_2.m */,
 			);
 			name = "游记";
 			sourceTree = "<group>";
@@ -4561,6 +4566,7 @@
 				C4121F86192377F10047DEFA /* MineViewController.m in Sources */,
 				C411BB171978FD3F00D83F0F /* CarAndGuideReseverViewController.m in Sources */,
 				C49D17A818A5DBF60001E371 /* NeighboViewController.m in Sources */,
+				0A09B2CC1A396E05005E0E17 /* TravelViewController_2.m in Sources */,
 				C4E19BC71911980900CE7B61 /* HuaJuViewController.m in Sources */,
 				C4E907F119495A2000BDECEE /* ClauseDetailView.m in Sources */,
 				C4DEABE818E1332A000607C1 /* EntainDetailViewController.m in Sources */,

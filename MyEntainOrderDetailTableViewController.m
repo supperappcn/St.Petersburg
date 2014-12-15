@@ -54,7 +54,7 @@ static NSString* cellIdentifier = @"Cell";
     UIButton *backbutton = [[UIButton alloc]init];
     backbutton.frame=CGRectMake(0, (44-height)/2, 55, height);
     [backbutton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(5, 10, 15, 15)];
+    UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 10, 15, 15)];
     imageView.image=[UIImage imageNamed:@"_back.png"];
     [backbutton addSubview:imageView];
     UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(15, 0, 40, 35)];
@@ -89,7 +89,6 @@ static NSString* cellIdentifier = @"Cell";
         NSString* argumentStr = [NSString stringWithFormat:@"ordernumber=%@&prodclass=%@", self.orderNum, self.prodClass];
         postRequestTongBu(argumentStr, urlStr, received)
         dicResultTongbu(received, result, dic)
-        NSLog(@"订单详情dic:%@",result);
         NSArray* arr = [dic valueForKey:@"ds"];
         self.currentDic = arr[0];
     }
@@ -556,17 +555,17 @@ static NSString* cellIdentifier = @"Cell";
         if (pathData.length==0) {
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 NSString *urlStr = [NSString stringWithFormat:@"%@%@/%@", PicUrl, picPath, self.currentDic[picName]];
-                NSLog(@"self.currentDic:%@jkieur  \n  picName;%@",self.currentDic, self.currentDic[picName]);
-                NSLog(@"pictureURL:%@",urlStr);
                 NSURL *url = [NSURL URLWithString:urlStr];
                 NSData *data = [NSData dataWithContentsOfURL:url];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (data) {
-                        [data writeToFile:PathOfFile(self.currentDic[picName]) atomically:YES];
                         self.headIV.image = [UIImage imageWithData:data];
+                        [data writeToFile:PathOfFile(self.currentDic[picName]) atomically:YES];
                     }
                 });
             });
+        }else {
+            self.headIV.image = [UIImage imageWithData:pathData];
         }
     }else {
         self.headIV.image = self.headImage;
@@ -1124,7 +1123,6 @@ static NSString* cellIdentifier = @"Cell";
             });
         });
     }else if ([sender.currentTitle isEqualToString:@"去支付"]) {
-        NSLog(@"去支付，跳转到支付界面");
         OrderViewController* ovc = [OrderViewController sharedOrderViewController];
         ovc.meodTVC = self;
         ovc.presentWay = 2;

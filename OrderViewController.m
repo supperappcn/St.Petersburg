@@ -24,6 +24,9 @@
 @property (nonatomic, assign)float bottomBarHeight;
 @property (nonatomic, retain)NSArray* names;
 @property (nonatomic, retain)NSMutableArray *pointIVArr;//存放选择支付方式按钮
+@property (nonatomic, copy)NSString* privateKey;
+@property (nonatomic, copy)NSString* publicKey;
+@property (nonatomic, copy)NSString* partnerID;
 
 @end
 
@@ -240,7 +243,7 @@ static OrderViewController* orderViewController = nil;
     }
     _selectPayWay = @"1";
 #pragma  mark-  Changed...
-    /*  将其它支付方式屏蔽
+    /*  将其它支付方式屏蔽  若要改，只需将上面的代码删掉，将下面的代码解开
      self.pointIVArr = [NSMutableArray array];
      int count = self.payWay.intValue==1?6:7;
      UIView *payWayView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topViewHeight + self.attentionViewHeight, 320, count*43)];
@@ -314,33 +317,73 @@ static OrderViewController* orderViewController = nil;
 
 #pragma mark  goToPay
 - (void)goToPay{
-    NSString* commitResult = [self commitOrder];
-    if (commitResult.intValue == 0) {   //获取失败
-        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"获取订单失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        alertView.tag = 600;
-        [alertView show];
-    }else if (commitResult.intValue == 1) { //提交订单成功
-        if (_selectPayWay.intValue == 1) {
-            NSLog(@"微信支付");
-            
-        }else if (_selectPayWay.intValue == 2 || _selectPayWay.intValue == 3) {
-            NSLog(@"支付宝客户端支付");
-            [self alixPay];
-        }else if (_selectPayWay.intValue == 4) {
-            NSLog(@"手机银联支付");
-            
-        }else if (_selectPayWay.intValue == 5) {
-            NSLog(@"信用卡支付");
-            
-        }else if (_selectPayWay.intValue == 6) {
-            NSLog(@"当面支付");
-            
+    NSDictionary* dic = [self getAliPayKey];
+    if (dic.count > 0) {
+        NSDictionary* aliPayInfo = [dic[@"ds"] firstObject];
+        if (aliPayInfo.count > 0) {
+            self.partnerID = aliPayInfo[@"partnerID"];
+            self.privateKey = aliPayInfo[@"private_key"];
+            self.publicKey = aliPayInfo[@"public_key"];
+            NSLog(@"partnerID:%@\n privateKey:%@\n publicKey:%@",self.partnerID,self.privateKey,self.publicKey);
+            if (self.partnerID.length>0 && self.privateKey.length>0 && self.publicKey.length>0) {
+                NSString* commitResult = [self commitOrder];
+                if (commitResult.intValue == 0) {   //获取失败
+                    UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"获取订单失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    alertView.tag = 600;
+                    [alertView show];
+                }else if (commitResult.intValue == 1) { //提交订单成功
+                    if (_selectPayWay.intValue == 1 || _selectPayWay.intValue == 2) {
+                        NSLog(@"支付宝客户端支付");
+                        [self alixPay];
+                    }else if (_selectPayWay.intValue == 3) {
+                        NSLog(@"当面支付");
+                    }
+#pragma  mark-  Changed...
+                    //  将其它支付方式屏蔽  若要改，只需将上面的代码删掉，将下面的代码解开
+                    /*
+                    if (_selectPayWay.intValue == 1) {
+                        NSLog(@"微信支付");
+                        
+                    }else if (_selectPayWay.intValue == 2 || _selectPayWay.intValue == 3) {
+                        NSLog(@"支付宝客户端支付");
+                        [self alixPay];
+                    }else if (_selectPayWay.intValue == 4) {
+                        NSLog(@"手机银联支付");
+                        
+                    }else if (_selectPayWay.intValue == 5) {
+                        NSLog(@"信用卡支付");
+                        
+                    }else if (_selectPayWay.intValue == 6) {
+                        NSLog(@"当面支付");
+                        
+                    }
+                     */
+                }else if (commitResult.intValue == 2) { //向服务器提交订单失败
+                    UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交订单失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    alertView.tag = 601;
+                    [alertView show];
+                }
+            }else {
+                UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"提示" message:@"获取支付信息失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [av show];
+            }
+        }else {
+            UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"提示" message:@"获取支付信息失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [av show];
         }
-    }else if (commitResult.intValue == 2) { //向服务器提交订单失败
-        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交订单失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        alertView.tag = 601;
-        [alertView show];
+    }else {
+        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"提示" message:@"获取支付信息失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [av show];
     }
+}
+
+-(NSDictionary* )getAliPayKey {
+    NSMutableString* urlStr = RussiaUrl4;
+    [urlStr appendString:@"GetAlipayinfo"];
+    NSString* argStr = @"";
+    postRequestTongBu(argStr, urlStr, received);
+    dicResultTongbu(received, result, dic);
+    return dic;
 }
 
 //点击“去支付”后给服务器提交订单
@@ -419,13 +462,13 @@ static OrderViewController* orderViewController = nil;
 
 -(NSString*)getOrderInfo {
     AlixPayOrder* order = [[AlixPayOrder alloc]init];
-    order.partner = PartnerID;
-    order.seller = SellerID;
+    order.partner = self.partnerID;
+    order.seller = self.partnerID;
     
     order.tradeNO = _orderNumber;
     order.productName = _productName;
     order.productDescription = _productDescription;
-    order.amount = self.RMB; //@"0.01";
+    order.amount = @"0.01";//self.RMB;
     NSLog(@"self.RMB:%@,_orderNumber:%@, _productName:%@, _productDescription:%@", self.RMB,_orderNumber, _productName, _productDescription);
     if (self.prodClass == 1) {
         order.notifyURL = @"http://t.russia-online.cn/linenotify_url.aspx";
@@ -443,7 +486,7 @@ static OrderViewController* orderViewController = nil;
 
 -(NSString*)doRsa:(NSString*)orderInfo {
     id<DataSigner> signer;
-    signer = CreateRSADataSigner(PrivateKey);
+    signer = CreateRSADataSigner(self.privateKey);
     NSString* signedString = [signer signString:orderInfo];
     return signedString;
 }
@@ -507,7 +550,7 @@ static OrderViewController* orderViewController = nil;
         if (alixPayResult.statusCode == 9000) {
             
             id<DataVerifier> verifier;
-            verifier = CreateRSADataVerifier(PublicKey);
+            verifier = CreateRSADataVerifier(self.publicKey);
             
             if ([verifier verifyString:alixPayResult.resultString withSign:alixPayResult.signString]) {
                 return YES;

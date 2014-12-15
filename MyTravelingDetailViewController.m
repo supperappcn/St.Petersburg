@@ -47,7 +47,7 @@ backButton
     pt.y += scrollPositionY;
     
     NSString *js = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).tagName", pt.x, pt.y];
-     NSLog(@"js  %@",js);
+    NSLog(@"js  %@",js);
     NSString * tagName = [wv stringByEvaluatingJavaScriptFromString:js];
     NSLog(@"tagName  %@",tagName);
     if ([tagName isEqualToString:@"IMG"]) {
