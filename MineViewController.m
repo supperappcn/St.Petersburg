@@ -18,6 +18,8 @@
 #import "locationViewController.h"
 #import "MyOrderListViewController.h"
 
+#import "CommentViewController.h"
+
 #define SEVERICE_IMAGE @"serviceHeardImage"
 #define IMG_KEY [NSString stringWithFormat:@"%@",GET_USER_DEFAUT(QUSE_ID)]
 
@@ -751,8 +753,8 @@ GO_NET
         case 8:
         {
             //开始更新范围
-            locationViewController *location = [[locationViewController alloc]init];
-            location.mine = self;
+            CommentViewController *location = [[CommentViewController alloc]init];
+//            location.mine = self;
             [self.navigationController pushViewController:location animated:NO];
             
         }

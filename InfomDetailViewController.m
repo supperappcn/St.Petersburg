@@ -130,10 +130,15 @@ NetChange(noNetButton)
     _webView.scrollView.bounces=YES;
     _webView.scrollView.scrollEnabled=NO;
     _webView.backgroundColor = [UIColor clearColor];
-    NSString *HTMLData=[NSString stringWithFormat:@"<div id='foo' style='line-height:1.5'><font size=3 >%@</font></div>",[dic1 valueForKey:@"Content"]] ;
+    
+
+    
+    
     
     //    [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]
-    [_webView loadHTMLString:HTMLData baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+    
+    
+
     [_scrollView addSubview:_webView];
     
     noNetButton=NoNetButton(noNetButton);
