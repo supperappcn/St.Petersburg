@@ -753,8 +753,8 @@ GO_NET
         case 8:
         {
             //开始更新范围
-            CommentViewController *location = [[CommentViewController alloc]init];
-//            location.mine = self;
+            locationViewController *location = [[locationViewController alloc]init];
+            location.mine = self;
             [self.navigationController pushViewController:location animated:NO];
             
         }
