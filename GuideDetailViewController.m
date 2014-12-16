@@ -139,7 +139,7 @@ postRequestAgency(_datas)
     {
         if (isLike==YES)
         {
-            if ([result intValue])
+            if (![result isEqualToString:@"0"])
             {
                 if ([result intValue]==-1)
                 {
@@ -185,7 +185,7 @@ postRequestAgency(_datas)
         
         if (isCollect==YES)
         {
-            if ([result intValue])
+            if (![result isEqualToString:@"0"])
             {
                 if ([result intValue]==-1)
                 {
@@ -236,7 +236,7 @@ postRequestAgency(_datas)
             [button setImage:[UIImage imageNamed:@"Like.png"] forState:UIControlStateNormal];
         }
         
-        else if ([result intValue]==0)
+        else if ([result isEqualToString:@"0"])
         {
             checkLikeNum=@"已经喜欢";
             UIButton*button=(UIButton*)[self.view viewWithTag:401];
@@ -261,7 +261,7 @@ postRequestAgency(_datas)
         }
         
         
-        else if ([result intValue]==0)
+        else if ([result isEqualToString:@"0"])
         {
             checkCollectNum=@"已经收藏";
             UIButton*button=(UIButton*)[self.view viewWithTag:402];

@@ -25,7 +25,7 @@ backButton
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, -35, 320, DeviceHeight) style:UITableViewStyleGrouped];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
     _tableView.delegate=self;
     _tableView.dataSource=self;
