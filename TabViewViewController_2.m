@@ -189,14 +189,15 @@ backButton
 //点击置顶游记图片
 -(void)tapTopImageView:(UITapGestureRecognizer* )tap {
     if ([self.title isEqualToString:@"资讯列表"]) {
-        InfomDetailViewController*inform=[InfomDetailViewController new];
-        inform.ID=[[self.topArr[tap.view.tag-1] valueForKey:@"ID"] integerValue];
+        InfomDetailViewController* inform = [InfomDetailViewController new];
+        inform.ID = [[self.topArr[tap.view.tag-1] valueForKey:@"ID"] integerValue];
+        inform.pageName = @"资讯正文";
         [self.navigationController pushViewController:inform animated:NO];
     }else if ([self.title isEqualToString:@"游记列表"]) {
 //        TravelViewController* inform = [TravelViewController new];
-        TravelViewController_2* inform = [TravelViewController_2 new];
-        inform.ID = [[self.topArr[tap.view.tag-1] valueForKey:@"ID"] integerValue];
-        [self.navigationController pushViewController:inform animated:NO];
+        TravelViewController_2* travelVC_2 = [TravelViewController_2 new];
+        travelVC_2.ID = [[self.topArr[tap.view.tag-1] valueForKey:@"ID"] integerValue];
+        [self.navigationController pushViewController:travelVC_2 animated:NO];
     }
 }
 
@@ -657,6 +658,8 @@ backButton
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
     NSMutableArray* tempArr;
     if (tableView == self.tableView) {
         tempArr = [NSMutableArray arrayWithArray:self.tableArr];
@@ -666,12 +669,15 @@ backButton
     if ([self.title isEqualToString:@"资讯列表"]) {
         InfomDetailViewController*inform=[InfomDetailViewController new];
         inform.ID=[[[tempArr objectAtIndex:indexPath.row]valueForKey:@"ID"]intValue];
+        inform.pageName = @"资讯正文";
         [self.navigationController pushViewController:inform animated:NO];
     }else if ([self.title isEqualToString:@"游记列表"]) {
 //        TravelViewController* inform = [TravelViewController new];
-        TravelViewController_2* inform = [TravelViewController_2 new];
-        inform.ID=[[[tempArr objectAtIndex:indexPath.row]valueForKey:@"ID"]intValue];
-        [self.navigationController pushViewController:inform animated:NO];
+        
+        TravelViewController_2* travelVC_2 = [TravelViewController_2 new];
+        travelVC_2.ID=[[[tempArr objectAtIndex:indexPath.row]valueForKey:@"ID"]intValue];
+        travelVC_2.presentWay = 0;
+        [self.navigationController pushViewController:travelVC_2 animated:NO];
     }
 }
 

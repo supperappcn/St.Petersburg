@@ -21,7 +21,7 @@ NetChange(noNetButton)
 -(void)viewWillAppear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(netChange:) name:kReachabilityChangedNotification object:nil];
-    [self.navigationItem setNewTitle:@"资讯正文"];
+    [self.navigationItem setNewTitle:self.pageName];
     
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -29,19 +29,15 @@ NetChange(noNetButton)
 }
 - (void)relodata:(UIRefreshControl*)refresh{
     [navActivity startAnimating];
-    NSDictionary*dic1 ;
+    NSDictionary* dic1;
     NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
-    if ([self.pageName isEqualToString:@"消息中心"])
-    {
+    if ([self.pageName isEqualToString:@"消息中心"]) {
         dataArray=[defaults objectForKey:@"dataArray"];
         
         
         dic1=[dataArray objectAtIndex:self.ID];
         
-    }
-    else
-    {
-        
+    }else {
         NSString*ID=[NSString stringWithFormat:@"%d",self.ID];
         NSString*canshu=[NSString stringWithFormat:@"ID=%@",ID];
         NSMutableString*urlDomain=RussiaUrl2
@@ -51,12 +47,10 @@ NetChange(noNetButton)
         postRequestTongBu(canshu, urlDomain, received)
         dicResultTongbu(received, result, dic)
         
-        
         dic1=[[dic valueForKey:@"ds"]lastObject];
     }
     NSString *HTMLData=[NSString stringWithFormat:@"<div id='foo' style='line-height:1.5'><font size=3 >%@</font></div>",[dic1 valueForKey:@"Content"]] ;
     [_webView loadHTMLString:HTMLData baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-    
 }
 
 //NoNetButton(noNetButton)
@@ -64,28 +58,18 @@ NetChange(noNetButton)
 {
     [super viewDidLoad];
     
-    
     navActivity=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     navActivity.frame=CGRectMake(65+(8-4)*10, (44- navActivity.frame.size.height)/2, navActivity.frame.size.width,  navActivity.frame.size.height);
     [self.navigationController.navigationBar addSubview:navActivity];
     [navActivity startAnimating];
     
-    
-    
-    NSLog(@"received====");
     NSDictionary*dic1 ;
     NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
-    if ([self.pageName isEqualToString:@"消息中心"])
-    {
+    if ([self.pageName isEqualToString:@"消息中心"]) {
         dataArray=[defaults objectForKey:@"dataArray"];
         
-        
         dic1=[dataArray objectAtIndex:self.ID];
-        
-    }
-    else
-    {
-        
+    }else {
         NSString*ID=[NSString stringWithFormat:@"%d",self.ID];
         NSString*canshu=[NSString stringWithFormat:@"ID=%@",ID];
         NSMutableString*urlDomain=RussiaUrl2
@@ -95,10 +79,10 @@ NetChange(noNetButton)
         postRequestTongBu(canshu, urlDomain, received)
         dicResultTongbu(received, result, dic)
         
-        
+        NSLog(@"Tongbu_dic:%@",dic);
         dic1=[[dic valueForKey:@"ds"]lastObject];
     }
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight)];
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, DeviceHeight)];
     _scrollView.backgroundColor=[UIColor clearColor];
     
     [self.view addSubview:_scrollView];
@@ -114,7 +98,6 @@ NetChange(noNetButton)
     time.backgroundColor = [UIColor clearColor];
     NSString*strtime=[dic1 valueForKey:@"PTime"];
     
-    
     time.text=[strtime stringByReplacingOccurrencesOfString:@"/" withString:@"."];
     
     time.textColor=[UIColor grayColor];
@@ -124,32 +107,24 @@ NetChange(noNetButton)
     [_scrollView addSubview:time];
     
     
-    
     _webView=[[UIWebView alloc]initWithFrame:CGRectMake(10, time.frame.origin.y+time.frame.size.height, 300, 20)];
     _webView.delegate=self;
     _webView.scrollView.bounces=YES;
     _webView.scrollView.scrollEnabled=NO;
     _webView.backgroundColor = [UIColor clearColor];
-    
-
-    
-    
-    
-    //    [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]
+    NSString *HTMLData=[NSString stringWithFormat:@"<div id='foo' style='line-height:1.5'><font size=3 >%@</font></div>",[dic1 valueForKey:@"Content"]] ;
+    [_webView loadHTMLString:HTMLData baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+    NSLog(@"bundlePath:%@",[[NSBundle mainBundle] bundlePath]);
     
     
-
     [_scrollView addSubview:_webView];
     
     noNetButton=NoNetButton(noNetButton);
     
-    Reachability*rea2 =[Reachability reachabilityWithHostName:@"www.baidu.com"];if ([rea2  currentReachabilityStatus]==NotReachable)
-    {
-        
+    Reachability*rea2 =[Reachability reachabilityWithHostName:@"www.baidu.com"];
+    if ([rea2  currentReachabilityStatus]==NotReachable) {
         noNetButton.hidden=NO;
-    }
-    else
-    {
+    }else {
         noNetButton.hidden=YES;
     }
     
@@ -160,7 +135,7 @@ NetChange(noNetButton)
     
     //在 WebView 中显示本地的字符串
     
-	// Do any additional setup after loading the view.
+	
 }
 GO_NET
 -(void)viewDidDisappear:(BOOL)animated
@@ -174,18 +149,14 @@ GO_NET
     [refresh endRefreshing];
     [QYHMeThod changeImageWidthHeight:webView];
     
-    
     NSString *htmlHeight = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"foo\").offsetHeight;"];
     _scrollView.contentSize = CGSizeMake(320, 120+[htmlHeight intValue]);
     CGRect frame=_webView.frame;
     [_webView setFrame:CGRectMake(0, frame.origin.y, 320, [htmlHeight intValue]+100)];
     
     //    _scrollView.contentSize=CGSizeMake(320, _webView.frame.origin.y+_webView.frame.size.height+20);
-    
-    
-    
-    
 }
+
 backButton
 postRequestAgency(datas)
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -193,8 +164,6 @@ postRequestAgency(datas)
     //dicResultYiBu(datas, result, dic)
     dicResultYiBuNoDic(datas, result)
     NSLog(@"result=%@",result);
-    
-    
 }
 
 

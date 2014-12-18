@@ -10,4 +10,6 @@
 
 @interface TravelViewController_2 : UIViewController
 @property (nonatomic, assign)int ID;
+@property (nonatomic, strong)NSDictionary* dic;
+@property (nonatomic, assign)int presentWay;//0 “游记攻略”-“游记列表”-“游记正文”跳转过来; 1 “我的”-“游记”-“游记列表”-“游记正文”跳转过来
 @end

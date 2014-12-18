@@ -10,12 +10,9 @@
 
 @interface NewsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
-
-    UITableView *_tableView;
-    NSString*weidu;
-    UILabel*backbuttonlable;
-
-    NSMutableArray*dataArray;
-
+    UITableView* _tableView;
+    NSString* weidu;
+    UILabel* backbuttonlable;
+    NSMutableArray* dataArray;
 }
 @end

@@ -30,7 +30,7 @@ backButton
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"游记详情";
+    self.title = @"游记正文";
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:self.scrollView];
     self.scrollView.backgroundColor = [UIColor whiteColor];
@@ -40,7 +40,7 @@ backButton
     if (imageStr.length > 4) {
         self.imageNames = [imageStr componentsSeparatedByString:@","];
     }
-    NSLog(@"self.imageNames.count:%d,%@",self.imageNames.count,self.imageNames);
+//    NSLog(@"self.imageNames.count:%d,%@",self.imageNames.count,self.imageNames);
     for (int i = 0; i < self.imageNames.count; i++) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10 + 250*i, self.view.frame.size.width - 10 - 10, 240)];
@@ -62,7 +62,7 @@ backButton
                 }
             });
         });
-}
+    }
     [self addTextLab];
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.textView.frame.size.height + self.textView.frame.origin.y+20);
 }

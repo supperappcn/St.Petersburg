@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A035CF81A4129BC00F9D000 /* no_news.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A035CF71A4129BC00F9D000 /* no_news.png */; };
 		0A041E8819F64B7900320F8E /* AlipayRsaLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A041E6C19F64B7900320F8E /* AlipayRsaLib.a */; };
 		0A041E8919F64B7900320F8E /* Alixpay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A041E6E19F64B7900320F8E /* Alixpay.bundle */; };
 		0A041E8A19F64B7900320F8E /* AlixPaylib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A041E6F19F64B7900320F8E /* AlixPaylib.a */; };
@@ -832,6 +833,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A035CF71A4129BC00F9D000 /* no_news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_news.png; sourceTree = "<group>"; };
 		0A041E6C19F64B7900320F8E /* AlipayRsaLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlipayRsaLib.a; sourceTree = "<group>"; };
 		0A041E6D19F64B7900320F8E /* AlixLibService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixLibService.h; sourceTree = "<group>"; };
 		0A041E6E19F64B7900320F8E /* Alixpay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Alixpay.bundle; sourceTree = "<group>"; };
@@ -1924,6 +1926,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A035CF91A41370500F9D000 /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				C4121F84192377F10047DEFA /* SetViewController.h */,
+				C4121F85192377F10047DEFA /* SetViewController.m */,
+			);
+			name = "设置";
+			sourceTree = "<group>";
+		};
 		0A041E6B19F64B7900320F8E /* alipay */ = {
 			isa = PBXGroup;
 			children = (
@@ -2034,12 +2045,11 @@
 		0A0823181A36EBE1008E29F4 /* 消息 */ = {
 			isa = PBXGroup;
 			children = (
+				0A035CF71A4129BC00F9D000 /* no_news.png */,
 				C4121F80192377F10047DEFA /* NewsCell.h */,
 				C4121F81192377F10047DEFA /* NewsCell.m */,
 				C4121F82192377F10047DEFA /* NewsViewController.h */,
 				C4121F83192377F10047DEFA /* NewsViewController.m */,
-				C4121F84192377F10047DEFA /* SetViewController.h */,
-				C4121F85192377F10047DEFA /* SetViewController.m */,
 			);
 			name = "消息";
 			sourceTree = "<group>";
@@ -3011,6 +3021,7 @@
 				C4121F7E192377F10047DEFA /* MineMemberViewController.h */,
 				C4121F7F192377F10047DEFA /* MineMemberViewController.m */,
 				0A0823181A36EBE1008E29F4 /* 消息 */,
+				0A035CF91A41370500F9D000 /* 设置 */,
 				188CD2CD1A1B374B00D2F1CA /* getlocation */,
 				C4121F8E192377F90047DEFA /* 我的收藏 */,
 				C4FE85B718ADB5E700A579AE /* Location */,
@@ -4365,6 +4376,7 @@
 				C4E19B7319111E0600CE7B61 /* 108.png in Resources */,
 				C440546918D2A4F800983D58 /* hotel_03-00.png in Resources */,
 				C44D91F3194EA35100B9C0C1 /* greenGou.png in Resources */,
+				0A035CF81A4129BC00F9D000 /* no_news.png in Resources */,
 				C440545218D2966000983D58 /* line_jiantou.png in Resources */,
 				C4E00C7318BF353400712AFA /* buttonTime.png in Resources */,
 				C47F753F198659D500B358FE /* MyHotelOrederListTableViewCell.xib in Resources */,
