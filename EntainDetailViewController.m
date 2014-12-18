@@ -66,6 +66,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    NSLog(@"connection == %@",connection);
     
     [navActivity stopAnimating];
     [remindAlert dismissWithClickedButtonIndex:0 animated:NO];//取消
@@ -150,59 +151,36 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         }
     }
     
-  
-    
-    
-    
-
-    
-    
-    
-    
-    
     if (checkCollect==YES)
     {
-        if ([result intValue])
+        NSLog(@"result.intVlue == %d",[result intValue]);
+        if (![result isEqualToString:@"0"])
         {
             
             if ([result intValue]==-1)
             {
                 UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"参数错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alertView show];
-                
             }
             else
             {
-                
                 checkCollectNum=@"没有收藏";
                 UIButton*imageView=(UIButton*)[self.view viewWithTag:402];
                 [imageView setImage:[UIImage imageNamed:@"Collect.png"] forState:UIControlStateNormal];
-                
             }
-            
-            
-            
         }
         else
         {
-            
             checkCollectNum=@"已经收藏";
             UIButton*imageView=(UIButton*)[self.view viewWithTag:402];
             [imageView setImage:[UIImage imageNamed:@"Collect_h.png"] forState:UIControlStateNormal];
-            
-            
-            
         }
-        
         checkCollect=NO;
-        
-        
-        
     }
     if (checkLike==YES)
     {
         
-        if ([result intValue])
+        if (![result isEqualToString:@"0"])
         {
             
             if ([result intValue]==-1)
@@ -213,59 +191,37 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
             }
             else
             {
-                
                 checkLikeNum=@"没有喜欢";
                 UIButton*imageView=(UIButton*)[self.view viewWithTag:401];
                 [imageView setImage:[UIImage imageNamed:@"Like.png"] forState:UIControlStateNormal];
-                
             }
-            
-            
-            
         }
         else
         {
-            
             checkLikeNum=@"已经喜欢";
             UIButton*imageView=(UIButton*)[self.view viewWithTag:401];
             [imageView setImage:[UIImage imageNamed:@"Like_h.png"] forState:UIControlStateNormal];
-            
-            
-            
-            
-            
         }
-        
         checkLike=NO;
         [_tableView reloadData];
-        
     }
-    
     
     if (isCollect==YES)
     {
-        if ([result intValue])
+        if (![result isEqualToString:@"0"])
         {
-            
             if ([result intValue]==-1)
             {
                 UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"收藏失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alertView show];
-                
             }
             else
             {
                 if ([checkCollectNum isEqualToString:@"已经收藏"])
                 {
                     checkCollectNum=@"没有收藏";
-                    
-                    
                     UIButton*imageView=(UIButton*)[self.view viewWithTag:402];
                     [imageView setImage:[UIImage imageNamed:@"Collect.png"] forState:UIControlStateNormal];
-                    
-                    
-                    
-                    
                 }
                 else
                 {
@@ -275,36 +231,25 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
                     UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"收藏成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
                 }
-                
-                
             }
-            
-            
-            
         }
         else
         {
-            
             UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"已收藏过" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alertView show];
-            
-            
-            
         }
-        
         isCollect=NO;
     }
     
     if (isLike==YES)
     {
-        if ([result intValue])
+        if (![result isEqualToString:@"0"])
         {
             
             if ([result intValue]==-1)
             {
                 UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"操作失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alertView show];
-                
             }
             else
             {
@@ -316,11 +261,9 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
                     UIButton*imageView=(UIButton*)[self.view viewWithTag:401];
                     [imageView setImage:[UIImage imageNamed:@"Like.png"] forState:UIControlStateNormal];
                     NSLog(@"checkLikeNum==%@",checkLikeNum);
-                    
                 }
                 else
                 {
-                    
                     NSLog(@"checkLikeNum==%@",checkLikeNum);
                     checkLikeNum=@"已经喜欢";
                     NSLog(@"checkLikeNum==%@",checkLikeNum);
@@ -331,32 +274,23 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
                     UIButton*imageView=(UIButton*)[self.view viewWithTag:401];
                     [imageView setImage:[UIImage imageNamed:@"Like_h.png"] forState:UIControlStateNormal];
                 }
-                
             }
-            
         }
         else
         {
-            
             if ([checkLikeNum isEqualToString:@"已经喜欢"])
             {
                 UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"操作失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alertView show];
-                
             }
             else
             {
                 UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"已喜欢过" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alertView show];
             }
-            
-            
-            
         }
         isLike=NO;
     }
-    
-    
 }
 
 
@@ -710,10 +644,8 @@ GO_NET
             [urlDomain2 appendString:urlMethod];
             postRequestYiBu(canshu, urlDomain2)
             checkCollect=YES;
-            
         }
         [self performSelector:@selector(checkLike:) withObject:[NSNumber numberWithInt:_f] afterDelay:0.2];
-        
     }
     
     

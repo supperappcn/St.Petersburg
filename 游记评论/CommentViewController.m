@@ -150,6 +150,7 @@ backButton
         
         RTLabel *ContentL = [[RTLabel alloc]initWithFrame: CGRectMake(0, 0, DeviceWidth - 60 - 40, 0)];
         ContentL.font = [UIFont systemFontOfSize:12];
+        NSString *strUrl = [[DataArr[indexPath.section] valueForKey:@"Content"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"/n"];
         ContentL.text = [NSString stringWithFormat:@"%@",[DataArr[indexPath.section] valueForKey:@"Content"]];
         ContentL.lineSpacing = 5;
         Csize = [ContentL optimumSize];
