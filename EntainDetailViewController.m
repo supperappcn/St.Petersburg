@@ -2800,7 +2800,7 @@ GO_NET
                 roomOrederLable3.text = [NSString stringWithFormat:@"               %@",[dataDic objectForKey:@"OrderMark"]];
                 roomOrederLable3.font=[UIFont systemFontOfSize:13];
                 roomOrederLable3.textColor=[UIColor grayColor];
-                roomOrederLable3.frame = CGRectMake(133.5, roomOrderImage.frame.origin.y+25, 157, roomOrederLable3.optimumSize.height);
+                roomOrederLable3.frame = CGRectMake(133.5, roomOrderImage.frame.origin.y+27, 157, roomOrederLable3.optimumSize.height);
 
                 [tabHead2 addSubview:roomOrederLable3];
                 c =  roomOrederLable3.frame.origin.y+roomOrederLable3.frame.size.height;

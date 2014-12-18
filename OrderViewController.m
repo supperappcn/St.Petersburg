@@ -51,32 +51,28 @@ static OrderViewController* orderViewController = nil;
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //如果页面不是从 首页 跳转来的  则先判断价格和数量是否发生变化
-    if (self.presentWay > 0) {
-        NSString* roomNumberAndPrice = [self checkOutRoomNumberAndPrice];
-        if (roomNumberAndPrice.intValue == 0) { //请求失败
-            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"获取数据失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alertView setTag:798];
+    //先判断价格和数量是否发生变化
+    NSString* roomNumberAndPrice = [self checkOutRoomNumberAndPrice];
+    NSLog(@"roomNumberAndPrice:%@",roomNumberAndPrice);
+    if (roomNumberAndPrice.intValue == 0) { //请求失败
+        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"获取数据失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView setTag:798];
+        [alertView show];
+    }else if (roomNumberAndPrice.intValue == -1) {  //数量不够
+        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"检测到剩余数量不够，请重新预订" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新预订", nil];
+        [alertView setTag:799];
+        [alertView show];
+    }else {
+        NSArray* array = [roomNumberAndPrice componentsSeparatedByString:@","];
+        self.RMB = array[2];
+        self.dollar = array[3];
+        NSString* p = array[1];
+        self.payWay = array[4];
+        if (p.intValue == 2) {//价格发生变动
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"检测到订单中价格已发生变化，是否继续" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续", nil];
+            [alertView setTag:800];
             [alertView show];
-        }else if (roomNumberAndPrice.intValue == -1) {  //数量不够
-            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"检测到剩余数量不够，请重新预订" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新预订", nil];
-            [alertView setTag:799];
-            [alertView show];
-        }else {
-            NSArray* array = [roomNumberAndPrice componentsSeparatedByString:@","];
-            self.RMB = array[2];
-            self.dollar = array[3];
-            NSString* p = array[1];
-            self.payWay = array[4];
-            if (p.intValue == 2) {//价格发生变动
-                UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"检测到订单中价格已发生变化，是否继续" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续", nil];
-                [alertView setTag:800];
-                [alertView show];
-            }
         }
-        
-    }else if (self.presentWay == 0) {   //从 首页->住宿->酒店列表 跳转过来
-        
     }
     
     //添加scrollView，将topView、attentionView、payView全部放在scrollView中
@@ -130,6 +126,7 @@ static OrderViewController* orderViewController = nil;
     NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
     int ID = [defaults integerForKey:@"QuseID"];
     NSString* argStr = [NSString stringWithFormat:@"ordernumber=%@&userid=%d&prodclass=%d",_orderNumber,ID,self.prodClass];
+    NSLog(@"argStr:%@",argStr);
     postRequestTongBu(argStr, urlStr, received);
     dicResultTongbuNoDic(received, result);
     return result;
@@ -337,6 +334,7 @@ static OrderViewController* orderViewController = nil;
                         [self alixPay];
                     }else if (_selectPayWay.intValue == 3) {
                         NSLog(@"当面支付");
+                        [self goToPaySuccessfullyViewController];
                     }
 #pragma  mark-  Changed...
                     //  将其它支付方式屏蔽  若要改，只需将上面的代码删掉，将下面的代码解开
@@ -355,7 +353,7 @@ static OrderViewController* orderViewController = nil;
                         
                     }else if (_selectPayWay.intValue == 6) {
                         NSLog(@"当面支付");
-                        
+                        [self goToPaySuccessfullyViewController];
                     }
                      */
                 }else if (commitResult.intValue == 2) { //向服务器提交订单失败
@@ -528,6 +526,15 @@ static OrderViewController* orderViewController = nil;
     
     NSString* zhiFuFangShi = @"";
     if (_selectPayWay.intValue == 1) {
+        zhiFuFangShi = @"支付宝客户端支付";
+    }else if (_selectPayWay.intValue == 2) {
+        zhiFuFangShi = @"支付宝网页支付";
+    }else if (_selectPayWay.intValue == 3) {
+        zhiFuFangShi = @"当面支付";
+    }
+#pragma mark- Changed...    
+    /*  将其它支付方式屏蔽  若要改，只需将上面的代码删掉，将下面的代码解开
+    if (_selectPayWay.intValue == 1) {
         zhiFuFangShi = @"微信支付";
     }else if (_selectPayWay.intValue == 2) {
         zhiFuFangShi = @"支付宝客户端支付";
@@ -540,6 +547,7 @@ static OrderViewController* orderViewController = nil;
     }else if (_selectPayWay.intValue == 6) {
         zhiFuFangShi = @"当面支付";
     }
+     */
     payedVC.payWay = zhiFuFangShi;
     [self.navigationController pushViewController:payedVC animated:YES];
 }
