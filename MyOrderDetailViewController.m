@@ -204,7 +204,7 @@ backButton
 }
 
 -(void)setScrollViewContentSize {
-    self.sv.contentSize = CGSizeMake(self.view.frame.size.width, self.topViewHeight + self.orderInfoViewHeight + self.linkerManViewHeight);
+    self.sv.contentSize = CGSizeMake(self.view.frame.size.width, self.topViewHeight + self.orderInfoViewHeight + self.linkerManViewHeight+16);
 }
 
 - (void)didReceiveMemoryWarning
