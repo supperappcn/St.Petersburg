@@ -51,6 +51,7 @@
     hideTabbar
 }
 
+
 -(void)viewDidAppear:(BOOL)animated {
     float height=35;UIButton* backbutton = [[UIButton alloc]init];
     backbutton.frame=CGRectMake(0, (44-height)/2, 55, height);
@@ -71,11 +72,12 @@
 -(void)back {
     NSIndexPath* tempIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     locationCell *cell_0 = (locationCell*)[locationTV cellForRowAtIndexPath:tempIndexPath];
-    NSLog(@"cell_0.text:%@",cell_0.textLabel.text);
     if ([cell_0.textLabel.text isEqualToString:@" 显示位置"]) {
         self.mine.locText = @"获取我的位置";
+        [self sendMyLocation];
+    }else {
+        [self.navigationController popViewControllerAnimated:NO];
     }
-    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)viewDidLoad
@@ -304,7 +306,7 @@ GO_NET
     else
     {
         //                NSLog(@"创造一个警告框,告诉用户去设置里面开启定位服务");
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"您好，请先打开位置定位！" delegate:self cancelButtonTitle:@"好的，谢谢" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"您好，请先打开位置定位！" delegate:nil cancelButtonTitle:@"好的，谢谢" otherButtonTitles: nil];
         [alert show];
     }
     //精确度
@@ -413,13 +415,13 @@ static NSInteger alertFlag = 0;
         {
             if (alertFlag < 2)
             {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"抱歉，您获取的当前位置失败" delegate:self cancelButtonTitle:@"好的，谢谢" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"抱歉，获取当前位置失败" delegate:nil cancelButtonTitle:@"好的，谢谢" otherButtonTitles:nil, nil];
                 [alert show];
                 alertFlag ++;
             }
             else
             {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"出现莫名错误，要不..待会儿再试！！" delegate:self cancelButtonTitle:@"好的，谢谢" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"出现莫名错误，要不..待会儿再试！！" delegate:nil cancelButtonTitle:@"好的，谢谢" otherButtonTitles:nil, nil];
                 [alert show];
             }
        }
@@ -447,16 +449,19 @@ static NSInteger alertFlag = 0;
     else
     {
         self.mine.locText = cityArr[indexPath.row - 1];
-        
-        NSURL *url1 = [[NSURL alloc]initWithString:@"http://t.russia-online.cn/ListServiceg.asmx/AddLocation"];
-        NSMutableURLRequest *request1 = [[NSMutableURLRequest alloc]initWithURL:url1 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-        [request1 setHTTPMethod:@"POST"];
-        NSString *str = [NSString stringWithFormat:@"guideid=%d&location=%@&typeid=1",[[[NSUserDefaults standardUserDefaults] valueForKey:QUSE_ID]intValue],self.mine.locText];
-        NSData *data1 = [str dataUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"str = %@",str);
-        [request1 setHTTPBody:data1];
-        locConn = [[NSURLConnection alloc]initWithRequest:request1 delegate:self];
+        [self sendMyLocation];
     }
+}
+
+-(void)sendMyLocation {
+    NSURL *url1 = [[NSURL alloc]initWithString:@"http://t.russia-online.cn/ListServiceg.asmx/AddLocation"];
+    NSMutableURLRequest *request1 = [[NSMutableURLRequest alloc]initWithURL:url1 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [request1 setHTTPMethod:@"POST"];
+    NSString *str = [NSString stringWithFormat:@"guideid=%d&location=%@&typeid=1",[[[NSUserDefaults standardUserDefaults] valueForKey:QUSE_ID]intValue],self.mine.locText];
+    NSData *data1 = [str dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"str = %@",str);
+    [request1 setHTTPBody:data1];
+    locConn = [[NSURLConnection alloc]initWithRequest:request1 delegate:self];
 }
 
 - (void)didReceiveMemoryWarning
