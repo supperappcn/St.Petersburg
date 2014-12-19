@@ -102,11 +102,7 @@ static OrderViewController* orderViewController = nil;
     lable.backgroundColor = [UIColor clearColor];
     lable.font=[UIFont systemFontOfSize:15];
     lable.textColor=[UIColor whiteColor];
-    if (self.presentWay == 0) {
-        lable.text=@"首页";
-    }else {
-        lable.text=@"返回";
-    }
+    lable.text=@"返回";
     [backbutton addSubview:lable];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];self.navigationItem.leftBarButtonItem =backItem;
 }
@@ -466,7 +462,7 @@ static OrderViewController* orderViewController = nil;
     order.tradeNO = _orderNumber;
     order.productName = _productName;
     order.productDescription = _productDescription;
-    order.amount = @"0.01";//self.RMB;
+    order.amount = self.RMB;//@"0.01";//订单金额（订单价格）
     NSLog(@"self.RMB:%@,_orderNumber:%@, _productName:%@, _productDescription:%@", self.RMB,_orderNumber, _productName, _productDescription);
     if (self.prodClass == 1) {
         order.notifyURL = @"http://t.russia-online.cn/linenotify_url.aspx";

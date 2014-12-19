@@ -61,11 +61,7 @@ static NSString* cellIdentifier = @"Cell";
     lable.backgroundColor = [UIColor clearColor];
     lable.font=[UIFont systemFontOfSize:15];
     lable.textColor=[UIColor whiteColor];
-    if (self.pushWay == 1) {
-        lable.text=@"我的";
-    }else {
-        lable.text=@"返回";
-    }
+    lable.text=@"返回";
     [backbutton addSubview:lable];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem =backItem;
@@ -89,6 +85,7 @@ static NSString* cellIdentifier = @"Cell";
         NSString* argumentStr = [NSString stringWithFormat:@"ordernumber=%@&prodclass=%@", self.orderNum, self.prodClass];
         postRequestTongBu(argumentStr, urlStr, received)
         dicResultTongbu(received, result, dic)
+        NSLog(@"dic0000:%@",dic);
         NSArray* arr = [dic valueForKey:@"ds"];
         self.currentDic = arr[0];
     }

@@ -15,7 +15,28 @@
 
 @implementation PaySuccessfullyViewController
 
-backButton
+//自定义“返回”按钮
+-(void)viewDidAppear:(BOOL)animated {
+    float height=35;
+    UIButton *backbutton = [[UIButton alloc]init];
+    backbutton.frame=CGRectMake(0, (44-height)/2, 55, height);
+    [backbutton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 15, 15)];
+    imageView.image=[UIImage imageNamed:@"_back.png"];
+    [backbutton addSubview:imageView];
+    UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 40, 35)];
+    lable.backgroundColor = [UIColor clearColor];
+    lable.font=[UIFont systemFontOfSize:15];
+    lable.textColor=[UIColor whiteColor];
+    lable.text=@"返回";
+    [backbutton addSubview:lable];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];self.navigationItem.leftBarButtonItem =backItem;
+}
+
+-(void)back {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
