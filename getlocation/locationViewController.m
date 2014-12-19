@@ -51,8 +51,32 @@
     hideTabbar
 }
 
-backButton
+-(void)viewDidAppear:(BOOL)animated {
+    float height=35;UIButton* backbutton = [[UIButton alloc]init];
+    backbutton.frame=CGRectMake(0, (44-height)/2, 55, height);
+    [backbutton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 15, 15)];
+    [self changeViewFrame:CGRectMake(5, 10, 15, 15) withView:imageView];
+    imageView.image=[UIImage imageNamed:@"_back.png"];
+    [backbutton addSubview:imageView];
+    UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 40, 35)]; [self changeViewFrame:CGRectMake(15, 0, 40, 35) withView:lable];
+    lable.font=[UIFont systemFontOfSize:15];
+    lable.textColor=[UIColor whiteColor];
+    lable.backgroundColor=[UIColor clearColor];
+    lable.text=@"返回";[backbutton addSubview:lable];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];
+    self.navigationItem.leftBarButtonItem =backItem;
+}
 
+-(void)back {
+    NSIndexPath* tempIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    locationCell *cell_0 = (locationCell*)[locationTV cellForRowAtIndexPath:tempIndexPath];
+    NSLog(@"cell_0.text:%@",cell_0.textLabel.text);
+    if ([cell_0.textLabel.text isEqualToString:@" 显示位置"]) {
+        self.mine.locText = @"获取我的位置";
+    }
+    [self.navigationController popViewControllerAnimated:NO];
+}
 
 - (void)viewDidLoad
 {

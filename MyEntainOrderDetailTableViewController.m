@@ -1005,8 +1005,7 @@ static NSString* cellIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
+#pragma mark- UITableViewDataSourceDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -1068,6 +1067,10 @@ static NSString* cellIdentifier = @"Cell";
         return nil;
     }
     
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 //  改变分区头的高度

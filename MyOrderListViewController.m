@@ -130,6 +130,7 @@ postRequestAgency(self.datas)
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     MyOrderDetailViewController* modVC = [MyOrderDetailViewController new];
     modVC.currentDic = self.tableArr[indexPath.section];
     [self.navigationController pushViewController:modVC animated:YES];

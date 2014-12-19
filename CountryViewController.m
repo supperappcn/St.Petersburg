@@ -103,7 +103,8 @@ backButton
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        static  NSString*str=@"cell";
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    static  NSString*str=@"cell";
     CustomCell*cell=[tableView dequeueReusableCellWithIdentifier:str];
     if (cell==nil)
     {
