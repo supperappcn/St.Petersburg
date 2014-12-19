@@ -386,9 +386,23 @@ static OrderViewController* orderViewController = nil;
     [urlStr appendString:@"getAddOrderSecond"];
     NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
     int ID = [defaults integerForKey:@"QuseID"];
-    NSString* argStr = [NSString stringWithFormat:@"ordernumber=%@&userid=%d&prodclass=%d&paytype=%@",_orderNumber,ID,self.prodClass,_selectPayWay];
+    int tempSelectPayWay = 0;
+    if (self.names.count == 4) {
+        if (_selectPayWay.intValue == 1) {
+            tempSelectPayWay = 2;
+        }else if (_selectPayWay.intValue == 2) {
+            tempSelectPayWay = 3;
+        }else if (_selectPayWay.intValue == 3) {
+            tempSelectPayWay = 6;
+        }
+    }else if (self.names.count == 7) {
+        tempSelectPayWay = _selectPayWay.intValue;
+    }
+    NSString* argStr = [NSString stringWithFormat:@"ordernumber=%@&userid=%d&prodclass=%d&paytype=%d",_orderNumber,ID,self.prodClass,tempSelectPayWay];
+    NSLog(@"commitOrder_argStr:%@",argStr);
     postRequestTongBu(argStr, urlStr, received);
     dicResultTongbuNoDic(received, result);
+    NSLog(@"commitOrder_result:%@",result);
     return result;
 }
 

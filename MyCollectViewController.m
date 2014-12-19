@@ -121,7 +121,7 @@ postRequestAgency(datas);
     UILabel *detailLab = [[UILabel alloc]initWithFrame:CGRectMake(270, 10, 15, 17)];
     detailLab.backgroundColor = [UIColor clearColor];
     detailLab.text = [NSString stringWithFormat:@"(%@)",numberArr.count>1?[numberArr objectAtIndex:indexPath.row]:@"0"];
-    
+    NSLog(@"detailLab.text:%@",detailLab.text);
    
     detailLab.textColor = [UIColor lightGrayColor];
     detailLab.font = [UIFont systemFontOfSize:11];
