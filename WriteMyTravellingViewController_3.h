@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ZYQAssetPickerController.h"
 
-@interface WriteMyTravellingViewController_3 : UIViewController<UINavigationControllerDelegate,ZYQAssetPickerControllerDelegate,NSURLConnectionDataDelegate,UIAlertViewDelegate,UIActionSheetDelegate>
+@interface WriteMyTravellingViewController_3 : UIViewController<UINavigationControllerDelegate,ZYQAssetPickerControllerDelegate,NSURLConnectionDataDelegate,UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic, assign)int type;// 0发布，1更改
 @property (nonatomic, assign)int ID;//游记ID
 @property (nonatomic, copy)NSString *titleTFText;
