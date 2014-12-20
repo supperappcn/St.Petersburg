@@ -212,24 +212,6 @@ backButton
     [self.navigationController pushViewController:cSIVVC animated:YES];
 }
 
-//-(void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//    float height=35;
-//    UIButton *backbutton = [[UIButton alloc]init];
-//    backbutton.frame=CGRectMake(0, (44-height)/2, 55, height);
-//    [backbutton addTarget:self action:@selector(remindSave) forControlEvents:UIControlEventTouchUpInside];
-//    UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-5, 10, 15, 15)];
-//    imageView.image=[UIImage imageNamed:@"_back.png"];
-//    [backbutton addSubview:imageView];
-//    UILabel*lable=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 40, 35)];
-//    lable.backgroundColor=[UIColor clearColor];
-//    lable.font=[UIFont systemFontOfSize:15];
-//    lable.textColor=[UIColor whiteColor];
-//    lable.text=@"返回";[backbutton addSubview:lable];
-//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];
-//    self.navigationItem.leftBarButtonItem =backItem;
-//}
-
 -(void)pickPhotos {
     ZYQAssetPickerController* picker =  [[ZYQAssetPickerController alloc] init];
     picker.maximumNumberOfSelection = 8 - self.imageViewsArr.count;
@@ -257,11 +239,6 @@ backButton
         [self.imageViewsArr addObject:imageView];
         [self.imageViewsNewArr addObject:imageView];
     }
-}
-
-//提示是否保存
--(void)remindSave {
-    
 }
 
 //保存游记
@@ -362,6 +339,7 @@ backButton
     }
 }
 
+#pragma mark- UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag==1 && buttonIndex == 0) {
         [self.navigationController popViewControllerAnimated:YES];
@@ -375,12 +353,35 @@ backButton
     [actionSheet showInView:self.view];
 }
 
+#pragma mark- UIActionSheetDelegate
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {//拍照
-//        [self shootPhoto];
+        [self shootPhoto];
     }else if (buttonIndex == 1) {//从手机相册选择
         [self pickPhotos];
     }
+}
+
+//拍照
+-(void)shootPhoto {
+    UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    imagePicker.allowsEditing = YES;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        UIImage *tempImage= [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, IMAGEVIEWWIDTH, IMAGEVIEWWIDTH)];
+        imageView.image = tempImage;
+        [self.imageViewsArr addObject:imageView];
+        [self.imageViewsNewArr addObject:imageView];
+    }    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

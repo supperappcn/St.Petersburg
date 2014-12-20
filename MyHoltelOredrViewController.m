@@ -157,6 +157,7 @@ postRequestAgency(datas)
 
 #pragma mark -tableView-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if ([self.title isEqualToString:@"线路订单"]) {
         MyEntainOrderDetailTableViewController* mlodtvc = [MyEntainOrderDetailTableViewController new];
         mlodtvc.currentDic = tableArr[indexPath.section];

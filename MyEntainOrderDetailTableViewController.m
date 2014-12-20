@@ -61,11 +61,7 @@ static NSString* cellIdentifier = @"Cell";
     lable.backgroundColor = [UIColor clearColor];
     lable.font=[UIFont systemFontOfSize:15];
     lable.textColor=[UIColor whiteColor];
-    if (self.pushWay == 1) {
-        lable.text=@"我的";
-    }else {
-        lable.text=@"返回";
-    }
+    lable.text=@"返回";
     [backbutton addSubview:lable];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem =backItem;
@@ -89,6 +85,7 @@ static NSString* cellIdentifier = @"Cell";
         NSString* argumentStr = [NSString stringWithFormat:@"ordernumber=%@&prodclass=%@", self.orderNum, self.prodClass];
         postRequestTongBu(argumentStr, urlStr, received)
         dicResultTongbu(received, result, dic)
+        NSLog(@"dic0000:%@",dic);
         NSArray* arr = [dic valueForKey:@"ds"];
         self.currentDic = arr[0];
     }
@@ -1008,8 +1005,7 @@ static NSString* cellIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
+#pragma mark- UITableViewDataSourceDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -1071,6 +1067,10 @@ static NSString* cellIdentifier = @"Cell";
         return nil;
     }
     
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 //  改变分区头的高度

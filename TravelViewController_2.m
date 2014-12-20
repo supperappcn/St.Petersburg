@@ -22,11 +22,12 @@
 @property (nonatomic, strong)NSURLConnection* like;
 @property (nonatomic, strong)NSURLConnection* collect;
 @property (nonatomic, strong)NSURLConnection* webViewConnection;
-@property (nonatomic, strong)NSDictionary* dic;
 @property (nonatomic, strong)NSMutableData* datas;
 @property (nonatomic, assign)BOOL ISLike;
 @property (nonatomic, assign)BOOL ISCollect;
 
+@property (nonatomic, strong)NSArray* imageNames;
+@property (nonatomic, strong)UITextView* textView;
 @end
 
 @implementation TravelViewController_2
@@ -56,8 +57,11 @@ backButton
     [self addFooterBar];
     [self checkLikeMethod];
     [self checkCollectMethod];
-    [self loadWebViewData];
-    
+    if (self.presentWay == 0) {
+        [self loadWebViewData];
+    }else if (self.presentWay == 1) {
+        [self addTitleAndUserInfoView];
+    }
 }
 
 -(void)addNaviActivityView {
@@ -192,7 +196,7 @@ backButton
                                    content:publishContent
                              statusBarTips:YES
                                authOptions:nil
-                              shareOptions: nil
+                              shareOptions:nil
                                     result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
                                         if (state == SSResponseStateSuccess)
                                         {
@@ -291,7 +295,13 @@ backButton
     UIImageView* headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, titleLab.frame.origin.y+titleLab.frame.size.height+10, 24, 24)];
     [self.scrollView addSubview:headIV];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSString* headImageStr = [NSString stringWithFormat:@"http://www.russia-online.cn/Upload/Personal/%@",self.dic[@"ImgTouX"]];
+        NSString* imageName;
+        if ([[self.dic valueForKey:@"LogoImage"]length] > 4) {
+            imageName = [self.dic valueForKey:@"LogoImage"];
+        }else {
+            imageName = [self.dic valueForKey:@"ImgTouX"];
+        }
+        NSString* headImageStr = [NSString stringWithFormat:@"http://www.russia-online.cn/Upload/Personal/%@",imageName];
         NSURL* headImageURL = [NSURL URLWithString:headImageStr];
         NSData* imageData = [NSData dataWithContentsOfURL:headImageURL];
         UIImage* headImage;
@@ -305,8 +315,15 @@ backButton
         });
     });
     UILabel* nameLab = [[UILabel alloc]initWithFrame:CGRectMake(10+24+10, headIV.frame.origin.y, self.view.frame.size.width-44-10, headIV.frame.size.height)];
-    nameLab.text = self.dic[@"UserName"];
+    if ([self.dic[@"SimpleName"]length]>0) {
+        nameLab.text = self.dic[@"SimpleName"];
+    }else if ([self.dic[@"Name"]length]>0) {
+        nameLab.text = self.dic[@"Name"];
+    }else {
+        nameLab.text = self.dic[@"UserName"];
+    }
     nameLab.textColor=[UIColor blueColor];
+    nameLab.font = [UIFont systemFontOfSize:14];
     [self.scrollView addSubview:nameLab];
     RTLabel* timeLab = [[RTLabel alloc]initWithFrame:CGRectMake(10,headIV.frame.origin.y+headIV.frame.size.height+5, self.view.frame.size.width - 20,20)];
     timeLab.backgroundColor = [UIColor clearColor];
@@ -315,12 +332,16 @@ backButton
     timeLab.text=strtime;
     timeLab.textColor=[UIColor grayColor];
     [self.scrollView addSubview:timeLab];
-    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(10, timeLab.frame.origin.y+timeLab.frame.size.height, self.view.frame.size.width - 20, 20)];
-    self.webView.delegate=self;
-    self.webView.scrollView.bounces=YES;
-    self.webView.scrollView.scrollEnabled=NO;
-    self.webView.backgroundColor = [UIColor greenColor];
-    [self.scrollView addSubview:self.webView];
+    if (self.presentWay == 0) {
+        self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(10, timeLab.frame.origin.y+timeLab.frame.size.height, self.view.frame.size.width - 20, 20)];
+        self.webView.delegate=self;
+        self.webView.scrollView.bounces=YES;
+        self.webView.scrollView.scrollEnabled=NO;
+        self.webView.backgroundColor = [UIColor greenColor];
+        [self.scrollView addSubview:self.webView];
+    }else if (self.presentWay == 1) {
+        [self addImagesWithHeight:timeLab.frame.origin.y+timeLab.frame.size.height];
+    }
 }
 
 #pragma mark- UIWebViewDelegate
@@ -361,8 +382,52 @@ backButton
             self.unCollect = [NSURLConnection connectionWithRequest:request delegate:self];
         }
     }
-    
-    
+}
+
+-(void)addImagesWithHeight:(CGFloat )height {
+    NSString* imageStr = self.dic[@"Piclist"];
+    NSLog(@"imageStr:%@",imageStr);
+    if (imageStr.length > 4) {
+        self.imageNames = [imageStr componentsSeparatedByString:@","];
+    }
+    for (int i = 0; i < self.imageNames.count; i++) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, height + 10 + 250*i, self.view.frame.size.width - 10 - 10, 240)];
+            [self.scrollView addSubview:imageView];
+            UIActivityIndicatorView* aiv = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            aiv.frame = CGRectMake((imageView.frame.size.width - 20)/2, 110 + height + 10 + 250*i, 20, 20);
+            [imageView addSubview:aiv];
+            [aiv startAnimating];
+            NSString* picURL = self.imageNames[i];
+            NSString *urlStr = [NSString stringWithFormat:@"http://192.168.0.156:807/Upload/SelfManual/travel/%@",picURL];
+            NSURL *url = [NSURL URLWithString:urlStr];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (data) {
+                    imageView.image = [UIImage imageWithData:data];
+                    [aiv stopAnimating];
+                    [aiv removeFromSuperview];
+                    if (i == self.imageNames.count-1) {
+                        [self.naviActivity stopAnimating];
+                    }
+                }
+            });
+        });
+    }
+    [self addTextLabWithHeight:height];
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.textView.frame.size.height + self.textView.frame.origin.y+50);
+}
+
+-(void)addTextLabWithHeight:(CGFloat )tempHeight {
+    self.textView = [[UITextView alloc]initWithFrame:CGRectMake(10, tempHeight + 10 + 250*self.imageNames.count, self.view.frame.size.width - 10 - 10, 100)];
+    self.textView.text = self.dic[@"Content"];
+    self.textView.allowsEditingTextAttributes = NO;
+    self.textView.editable = NO;
+    CGSize size = [self.textView.text sizeWithFont:[UIFont systemFontOfSize:17]constrainedToSize:CGSizeMake(self.textView.frame.size.width, 9999)];//textView自适应文字高度
+    float height = size.height;
+    self.textView.frame = CGRectMake(self.textView.frame.origin.x, self.textView.frame.origin.y, self.textView.frame.size.width, height);
+    [self.scrollView addSubview:self.textView];
 }
 
 - (void)didReceiveMemoryWarning

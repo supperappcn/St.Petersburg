@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface NewsCell : UITableViewCell
-@property(nonatomic,strong)UILabel*title;
-@property(nonatomic,strong)UILabel*content;
-@property(nonatomic,strong)UILabel*time;
-@property(nonatomic,strong)UILabel*weidu;
-@property(nonatomic,strong)UIImageView*_imgeView;
+@property (nonatomic, strong) UILabel* title;
+@property (nonatomic, strong) RTLabel* summary;
+@property (nonatomic, strong) UILabel* time;
+@property (nonatomic, strong) UIImageView* jianTouIV;
+@property (nonatomic, strong) UIImageView* line;
+@property(nonatomic,strong)UILabel* weidu;//未读
+
 @end

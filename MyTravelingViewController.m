@@ -394,15 +394,21 @@ postRequestAgency(datas)
     
     NSDictionary* dic = [_dataArr objectAtIndex:indexPath.row];
     if ([[dic valueForKey:@"IsPhone"]intValue] == 1) {
-        MyTravellingDetailViewController_2* mtdVC = [MyTravellingDetailViewController_2 new];
-        mtdVC.dic = [_dataArr objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:mtdVC animated:YES];
+        TravelViewController_2* travelVC_2 = [TravelViewController_2 new];
+        travelVC_2.ID = [[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"ID"] intValue];
+        travelVC_2.dic = dic;
+        travelVC_2.presentWay = 1;
+        [self.navigationController pushViewController:travelVC_2 animated:NO];
+        
+        
+//        MyTravellingDetailViewController_2* mtdVC = [MyTravellingDetailViewController_2 new];
+//        mtdVC.dic = [_dataArr objectAtIndex:indexPath.row];
+//        [self.navigationController pushViewController:mtdVC animated:YES];
         
         
 //        MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
 //        mtdv.htmlStr = [[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Content"];
 //        mtdv.title =[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"Title"];
-//        NSLog(@"dataArr:%@",[_dataArr objectAtIndex:indexPath.row]);
 //        [self.navigationController pushViewController:mtdv animated:YES];
     }else {
 //        MyTravelingDetailViewController *mtdv = [MyTravelingDetailViewController new];
@@ -412,7 +418,8 @@ postRequestAgency(datas)
         
         TravelViewController_2* travelVC = [TravelViewController_2 new];
         travelVC.ID = [[[_dataArr objectAtIndex:indexPath.row] objectForKey:@"ID"] intValue];
-        [self.navigationController pushViewController:travelVC animated:YES];
+        travelVC.presentWay = 1;
+        [self.navigationController pushViewController:travelVC animated:NO];
     }
 }
 
