@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CommentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface CommentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIWebViewDelegate>
 
+@property(nonatomic , retain)NSString *ID;
 @end

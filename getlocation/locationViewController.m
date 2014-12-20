@@ -76,7 +76,7 @@ backButton
 - (void)addtableView
 {
     locFlag = YES;
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor = GroupColor;
     cityArr = [[NSMutableArray alloc]init];
     raingeArr = [[NSMutableArray alloc]init];
     reloadCA = [[NSMutableArray alloc]init];
@@ -103,7 +103,7 @@ backButton
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *index = [NSString stringWithFormat:@"Cell%d%d", [indexPath section], [indexPath row]];//以indexPath来唯一确定cell
+    NSString *index = [NSString stringWithFormat:@"Cell%d-%d", [indexPath section], [indexPath row]];//以indexPath来唯一确定cell
     locationCell *cell = [tableView dequeueReusableCellWithIdentifier:index];
     if (cell == nil)
     {

@@ -134,6 +134,7 @@ backButton
         {
             CommentViewController* commentVC = [CommentViewController new];
             NSLog(@"跳至点评页面时参数待写");
+            commentVC.ID = [NSString stringWithFormat:@"%d",self.ID];
             [self.navigationController pushViewController:commentVC animated:YES];
         }
             break;

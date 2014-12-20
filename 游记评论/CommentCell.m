@@ -16,14 +16,16 @@
     if (self) {
         self.backgroundColor=GroupColor;
         
+        self.ContentL = [[UIWebView alloc]initWithFrame:CGRectZero];
+        self.ContentL.scrollView.scrollEnabled = NO;
+        self.ContentL.scrollView.contentSize = CGSizeMake(0, 0);
+        [self.contentView addSubview:self.ContentL];
+        
         self.imgTouX = [[UIImageView alloc]initWithFrame:CGRectZero];
         [self.contentView addSubview:self.imgTouX];
     
         self.UserL = [[RTLabel alloc]initWithFrame:CGRectZero];
         [self.contentView addSubview:self.UserL];
-        
-        self.ContentL = [[RTLabel alloc]initWithFrame:CGRectZero];
-        [self.contentView addSubview:self.ContentL];
         
         self.replyB = [[UIButton alloc]initWithFrame:CGRectZero];
         [self.contentView addSubview:self.replyB];
@@ -35,9 +37,11 @@
     return self;
 }
 
+
 - (void)awakeFromNib
 {
     // Initialization code
+//    UIWebView/
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

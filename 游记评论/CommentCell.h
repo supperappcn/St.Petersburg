@@ -14,7 +14,7 @@
 
 @property (retain , nonatomic) RTLabel *UserL;//用户的那一行包日期
 
-@property (retain , nonatomic) RTLabel *ContentL;//内容
+@property (retain , nonatomic) UIWebView *ContentL;//内容
 
 @property (retain , nonatomic) UIButton *replyB;//回复
 

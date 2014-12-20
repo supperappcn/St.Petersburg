@@ -62,7 +62,8 @@ backButton
     
     
     //下bar
-    if (GET_USER_DEFAUT(USER_NAME)) {
+    if (GET_USER_DEFAUT(USER_NAME))
+    {
         tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(-.5, DeviceHeight-113.5, 321, 50)];
         tableFooterView.backgroundColor=[UIColor colorWithRed:235.0/255 green:235.0/255 blue:241.0/255 alpha:1];
         tableFooterView.layer.borderWidth = .5;
@@ -163,7 +164,6 @@ backButton
         else
         {
             UIAlertView*alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"评论不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];[alertView show];
-            
         }
         
     }
@@ -218,7 +218,6 @@ postRequestAgencyAndRefesh(datas, refresh)
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     return array.count;
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -379,7 +378,8 @@ postRequestAgencyAndRefesh(datas, refresh)
 
 #pragma mark- UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    _textField.layer.contents = nil;
+    _textField.layer.contents = (id)
+    ([UIImage imageNamed:@"点评（未）_04.png"].CGImage);
 }
 
 - (void)didReceiveMemoryWarning
