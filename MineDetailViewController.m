@@ -70,8 +70,8 @@ backButton
     [super viewDidLoad];
     array=[NSArray arrayWithObjects:@"邮箱",@"手机号",@"性别", @"出生日期",@"所在地",@"详细地址",@"邮政编码",@"个人介绍",nil];
 
-    scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight - 64 )];
-//    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:scrollView];
+    scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight - 64 + 44)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:scrollView];
     [self.view addSubview:scrollView];
     scrollView.contentSize=CGSizeMake(320, 520);
     scrollView.userInteractionEnabled = YES;
@@ -1001,7 +1001,7 @@ backButton
 {
 //    NSLog(@"确认");
     //#pragma - mark 上传图片
-    NSURL *url = [[NSURL alloc]initWithString:@"http://192.168.0.156:807/api/WebService.asmx/FileUploadImage"];
+    NSURL *url = [[NSURL alloc]initWithString:@"http://www.russia-online.cn/api/WebService.asmx/FileUploadImage"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"POST"];
     

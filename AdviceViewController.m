@@ -185,8 +185,6 @@ backButton
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     datas=[[NSMutableData alloc]init];
-    
-    
 }
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {

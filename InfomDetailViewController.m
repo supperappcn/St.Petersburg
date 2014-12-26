@@ -57,6 +57,7 @@ NetChange(noNetButton)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    hideTabbar
     
     navActivity=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     navActivity.frame=CGRectMake(65+(8-4)*10, (44- navActivity.frame.size.height)/2, navActivity.frame.size.width,  navActivity.frame.size.height);
@@ -82,7 +83,8 @@ NetChange(noNetButton)
         NSLog(@"Tongbu_dic:%@",dic);
         dic1=[[dic valueForKey:@"ds"]lastObject];
     }
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, DeviceHeight)];
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 20)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:_scrollView];
     _scrollView.backgroundColor=[UIColor clearColor];
     
     [self.view addSubview:_scrollView];
@@ -107,11 +109,13 @@ NetChange(noNetButton)
     [_scrollView addSubview:time];
     
     
-    _webView=[[UIWebView alloc]initWithFrame:CGRectMake(10, time.frame.origin.y+time.frame.size.height, 300, 20)];
+    _webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, time.frame.origin.y+time.frame.size.height, 320, 20)];
     _webView.delegate=self;
+//    [_webView setScalesPageToFit:YES];//自动缩放以适应屏幕
+//
     _webView.scrollView.bounces=YES;
     _webView.scrollView.scrollEnabled=NO;
-    _webView.backgroundColor = [UIColor clearColor];
+//    _webView.backgroundColor = [UIColor clearColor];
     NSString *HTMLData=[NSString stringWithFormat:@"<div id='foo' style='line-height:1.5'><font size=3 >%@</font></div>",[dic1 valueForKey:@"Content"]] ;
     [_webView loadHTMLString:HTMLData baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     NSLog(@"bundlePath:%@",[[NSBundle mainBundle] bundlePath]);
@@ -147,12 +151,44 @@ GO_NET
 {
     [navActivity stopAnimating];
     [refresh endRefreshing];
-    [QYHMeThod changeImageWidthHeight:webView];
+//    [QYHMeThod changeImageWidthHeight:webView];
+    //拦截网页图片 并修改图片大小
+    [webView stringByEvaluatingJavaScriptFromString:
+     @"var script = document.createElement('script');"
+     "script.type = 'text/javascript';"
+     "script.text = \"function ResizeImages() { "
+     "var myimg,oldwidth;"
+     "var maxwidth=300;" //缩放系数
+     "for(i=0;i <document.images.length;i++){"
+     "myimg = document.images[i];"
+     "if(myimg.width > maxwidth){"
+     "oldwidth = myimg.width;"
+     "myimg.width = maxwidth;"
+     "myimg.height = myimg.height * (maxwidth/oldwidth);"
+     "}"
+     "}"
+     "}\";"
+     "document.getElementsByTagName('head')[0].appendChild(script);"];
     
-    NSString *htmlHeight = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"foo\").offsetHeight;"];
-    _scrollView.contentSize = CGSizeMake(320, 120+[htmlHeight intValue]);
-    CGRect frame=_webView.frame;
-    [_webView setFrame:CGRectMake(0, frame.origin.y, 320, [htmlHeight intValue]+100)];
+    [webView stringByEvaluatingJavaScriptFromString:@"ResizeImages();"];
+    //字体大小
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"];
+    //字体颜色
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= 'black'"];
+    //页面背景色
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#FFFFFF'"];
+    
+
+    //修改服务器页面的meta的值
+    //    NSString *meta = [NSString stringWithFormat:@"document.getElementsByName(\"viewport\")[0].content = \"width=%f, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no\"", webView.frame.size.width];
+    //    [webView stringByEvaluatingJavaScriptFromString:meta];
+
+    
+    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue] + 10;
+    
+    _webView.frame = CGRectMake(_webView.frame.origin.x, _webView.frame.origin.y, _webView.frame.size.width, height + 4);
+    _scrollView.contentSize = CGSizeMake(0, 90+_webView.frame.size.height);
+
     
     //    _scrollView.contentSize=CGSizeMake(320, _webView.frame.origin.y+_webView.frame.size.height+20);
 }

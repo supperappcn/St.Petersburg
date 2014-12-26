@@ -22,14 +22,14 @@
 @property (nonatomic, strong)UIButton* addPhotoBtn;//"+"添加照片按钮
 @property (nonatomic, strong)NSMutableArray* imageViewsNewArr;//“更新游记”时，存放新添加的imageview
 @property (nonatomic, strong)NSMutableArray* imageStrArr;//存放base64编码字符串
-@property (nonatomic, strong)NSData* datas;
+@property (nonatomic, strong)NSMutableData* datas;
 @end
 
 @implementation WriteMyTravellingViewController_3
 
 backButton
 #define IMAGEVIEWWIDTH (self.view.frame.size.width-50)/4
-#define urlStr [NSMutableString stringWithString: @"http://192.168.0.156:807/"];
+#define urlStr [NSMutableString stringWithString: @"http://www.russia-online.cn/"];
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -311,8 +311,13 @@ backButton
     
 }
 
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    self.datas=[[NSMutableData alloc]init];
+}
+
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
-    self.datas = data;
+    [self.datas appendData:data];
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {

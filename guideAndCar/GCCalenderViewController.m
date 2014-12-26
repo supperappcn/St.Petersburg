@@ -92,10 +92,15 @@ backButton
 
 }
 
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    datas=[[NSMutableData alloc]init];
+}
+
+
 #pragma -mark 接收数据
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    datas = [[NSMutableData alloc]init];
     [datas appendData:data];
 }
 

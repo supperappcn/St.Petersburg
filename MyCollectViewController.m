@@ -10,8 +10,14 @@
 #import "MyCollectDetailViewController.h"
 #import "GDataXMLNode.h"
 #import "json.h"
-@interface MyCollectViewController ()
 
+#define TravelURL [NSMutableString stringWithString:@"http://www.russia-online.cn/api/WebService.asmx/"];
+
+@interface MyCollectViewController ()
+{
+    NSURLConnection *countConn;
+    NSURLConnection *listConn;
+}
 @end
 
 @implementation MyCollectViewController
@@ -24,7 +30,6 @@ backButton
     [urlStr appendString:@"GetTypeListCount"];
     NSString *argStr = [NSString stringWithFormat:@"cityid=2&userid=%@",GET_USER_DEFAUT(QUSE_ID)];
     postRequestYiBu(argStr, urlStr)
-
 }
 
 - (void)viewDidLoad
@@ -32,7 +37,7 @@ backButton
     [super viewDidLoad];
     hideTabbar
     self.title = @"我的收藏";
-    numberArr = [NSArray array];
+    numberArr = [NSMutableArray array];
     images=[NSArray arrayWithObjects:@"homeLine1.png",@"homeLine2.png",@"homeLine3.png",@"homeLine4.png",@"homeLine5.png",@"homeLine6.png",@"homeLine7.png",@"homeLine8.png", nil];
     titles=[NSArray arrayWithObjects:@"线路",@"景点",@"住宿",@"美食",@"购物",@"娱乐",@"导游",@"租车", nil];
     dataArr = [NSMutableArray array];
@@ -60,20 +65,35 @@ backButton
 }
 NetChange(noNetButton)
 GO_NET
-postRequestAgency(datas);
+
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    datas=[[NSMutableData alloc]init];
+}
+
+#pragma -mark 接收数据
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [datas appendData:data];
+}
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
    // dicResultYiBu(datas, result, dic)
     GDataXMLDocument *document = [[GDataXMLDocument alloc]initWithData:datas options:0 error:nil];
     GDataXMLElement *e = [document rootElement];
     if ([[e stringValue] componentsSeparatedByString:@","].count >1) {
-        numberArr=[[e stringValue] componentsSeparatedByString:@","];
+        numberArr=(NSMutableArray *)[[e stringValue] componentsSeparatedByString:@","];
+        
+        NSMutableString *countStr =[NSMutableString stringWithFormat:@"%@",@"http://www.russia-online.cn/api/WebService.asmx/"];
+        [countStr appendString:@"GetCollectLinkCount"];
+        NSString *countAStr = [NSString stringWithFormat:@"userid=%@",GET_USER_DEFAUT(QUSE_ID)];
+        postRequestTongBu(countAStr, countStr, received);
+        dicResultTongbuNoDic(received,result);
+        
+        [numberArr removeLastObject];
+        [numberArr addObject:result];
         [myTableView reloadData];
     }
-    
-    NSLog(@"%@",numberArr);
-    NSLog(@" e  %@",[e stringValue]);
-    
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -14,7 +14,7 @@
     NSArray*titles;
     
     NSMutableArray *dataArr;
-    NSArray *numberArr;
+    NSMutableArray *numberArr;
     NSMutableData *datas;
     
     UIButton *noNetButton;

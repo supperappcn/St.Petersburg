@@ -31,7 +31,7 @@ NetChange(noNetButton)
 GO_NET
 backButton
 //游记URL
-#define ListURL [NSMutableString stringWithString:@"http://192.168.0.156:807/api/WebService.asmx/"];
+#define ListURL [NSMutableString stringWithString:@"http://www.russia-online.cn/api/WebService.asmx/"];
 //游记图片URL
 #define TravelPicURL [NSMutableString stringWithString:@"http://www.russia-online.cn/Upload/"];
 //游记列表中的图
@@ -190,13 +190,13 @@ backButton
 -(void)tapTopImageView:(UITapGestureRecognizer* )tap {
     if ([self.title isEqualToString:@"资讯列表"]) {
         InfomDetailViewController* inform = [InfomDetailViewController new];
-        inform.ID = [[self.topArr[tap.view.tag-1] valueForKey:@"ID"] integerValue];
+        inform.ID = [[self.topArr[tap.view.tag-1] objectForKey:@"ID"] integerValue];
         inform.pageName = @"资讯正文";
         [self.navigationController pushViewController:inform animated:NO];
     }else if ([self.title isEqualToString:@"游记列表"]) {
 //        TravelViewController* inform = [TravelViewController new];
         TravelViewController_2* travelVC_2 = [TravelViewController_2 new];
-        travelVC_2.ID = [[self.topArr[tap.view.tag-1] valueForKey:@"ID"] integerValue];
+        travelVC_2.ID = [[self.topArr[tap.view.tag-1] objectForKey:@"ID"] integerValue];
         [self.navigationController pushViewController:travelVC_2 animated:NO];
     }
 }
@@ -302,7 +302,7 @@ backButton
     }
     dicResultYiBu(self.datas, result, dic)
 
-    NSArray* array = [dic valueForKey:@"ds"];
+    NSArray* array = [dic objectForKey:@"ds"];
 
     if (self.searchBar) {//搜索状态时
         [self.searchArr addObjectsFromArray:array];
@@ -315,7 +315,7 @@ backButton
                     dispatch_queue_t queue2 = dispatch_queue_create("downloadList", NULL);
                     dispatch_async(queue2, ^{
                         for (int i = 0; i < self.searchArr.count; i++) {
-                            NSString* listPicName = [self.searchArr[i] valueForKey:@"Pic"];
+                            NSString* listPicName = [self.searchArr[i] objectForKey:@"Pic"];
                             NSString* listPicPath = [NSString stringWithFormat:@"%@/%@",listPicStr,listPicName];
                             //[self downloadTravelListPicWithListPicPath:listPicPath Tag:i+1];
                             [self downloadTravelListPicWithListPicPath:listPicPath PicName:listPicName Tag:i+1];
@@ -332,13 +332,12 @@ backButton
                     dispatch_async(queue1, ^{
                         for (int i = 0; i < self.searchArr.count; i++) {
                             NSString* userHeadPicName;
-                            if ([self.searchArr[i] valueForKey:@"CompanyID"] == 0) {//个人
-                                userHeadPicName = [self.searchArr[i] valueForKey:@"ImgTouX"];
+                            if ([[self.searchArr[i] objectForKey:@"CompanyID"] integerValue] == 0) {//个人
+                                userHeadPicName = [self.searchArr[i] objectForKey:@"ImgTouX"];
                             }else {//企业
-                                userHeadPicName = [self.searchArr[i] valueForKey:@"LogoImage"];
+                                userHeadPicName = [self.searchArr[i] objectForKey:@"LogoImage"];
                             }
                             NSString* userHeadPicPath = [NSString stringWithFormat:@"%@/%@",userHeadStr,userHeadPicName];
-                            //[self downloadUserHeadPicWithHeadPicPath:userHeadPicPath Tag:i+1];
                             [self downloadUserHeadPicWithHeadPicPath:userHeadPicPath UserHeadPicName:userHeadPicName Tag:i+1];
                         }
                     });
@@ -349,9 +348,8 @@ backButton
                     dispatch_queue_t queue2 = dispatch_queue_create("downloadList", NULL);
                     dispatch_async(queue2, ^{
                         for (int i = 0; i < self.searchArr.count; i++) {
-                            NSString* listPicName = [self.searchArr[i] valueForKey:@"PicUrl"];
+                            NSString* listPicName = [self.searchArr[i] objectForKey:@"PicUrl"];
                             NSString* listPicPath = [NSString stringWithFormat:@"%@/%@",listPicStr,listPicName];
-                            //[self downloadTravelListPicWithListPicPath:listPicPath Tag:i+1];
                             [self downloadTravelListPicWithListPicPath:listPicPath PicName:listPicName Tag:i+1];
                         }
                     });
@@ -367,9 +365,9 @@ backButton
                 [self.listPicArr removeAllObjects];
             }
             for (int i = 0; i < array.count; i++) {
-                if ([[array[i] valueForKey:@"IsTop"]intValue] == 1) {
+                if ([[array[i] objectForKey:@"IsTop"]intValue] == 1) {
                     [self.topArr addObject:array[i]];
-                }else if ([[array[i] valueForKey:@"IsTop"]intValue] == 0) {
+                }else if ([[array[i] objectForKey:@"IsTop"]intValue] == 0) {
                     [self.tableArr addObject:array[i]];
                 }
             }
@@ -392,11 +390,11 @@ backButton
                         [self.scrollView addSubview:imageView];
                         RTLabel* titleLab=[[RTLabel alloc]initWithFrame:CGRectMake(5, imageView.frame.size.height-20, 200, 20)];
                         titleLab.backgroundColor = [UIColor clearColor];
-                        titleLab.text=[self.topArr[i] valueForKey:@"Title"];
+                        titleLab.text=[self.topArr[i] objectForKey:@"Title"];
                         titleLab.font=[UIFont systemFontOfSize:15];
                         titleLab.textColor=[UIColor whiteColor];
                         [imageView addSubview:titleLab];
-                        NSString* picName = [self.topArr[i] valueForKey:@"Pic"];
+                        NSString* picName = [self.topArr[i] objectForKey:@"Pic"];
                         NSString* picPath = [NSString stringWithFormat:@"%@/big/%@",ZhiDingStr,picName];
                         [self downloadZhiDingPicWithPicPath:picPath Tag:imageView.tag];
                     }
@@ -409,7 +407,7 @@ backButton
                     dispatch_queue_t queue2 = dispatch_queue_create("downloadList", NULL);
                     dispatch_async(queue2, ^{
                     for (int i = 0; i < self.tableArr.count; i++) {
-                        NSString* listPicName = [self.tableArr[i] valueForKey:@"Pic"];
+                        NSString* listPicName = [self.tableArr[i] objectForKey:@"Pic"];
                         NSString* listPicPath = [NSString stringWithFormat:@"%@/%@",listPicStr,listPicName];
 //                        NSLog(@"picPath:%@,picName:%@,tag:%d",listPicPath,listPicName,i+1);
                         [self downloadTravelListPicWithListPicPath:listPicPath PicName:listPicName Tag:i+1];
@@ -423,9 +421,9 @@ backButton
             [self.userHeadPicArr removeAllObjects];
             [self.listPicArr removeAllObjects];
             for (int i = 0; i < array.count; i++) {
-                if ([[array[i] valueForKey:@"Recom"]intValue] == 1) {
+                if ([[array[i] objectForKey:@"Recom"]intValue] == 1) {
                     [self.topArr addObject:array[i]];//置顶游记的数据
-                }else if ([[array[i] valueForKey:@"Recom"]intValue] == 0) {
+                }else if ([[array[i] objectForKey:@"Recom"]intValue] == 0) {
                     [self.tableArr addObject:array[i]];//非置顶游记的数据
                 }
             }
@@ -448,11 +446,11 @@ backButton
                         [self.scrollView addSubview:imageView];
                         RTLabel* titleLab=[[RTLabel alloc]initWithFrame:CGRectMake(5, imageView.frame.size.height-20, 200, 20)];
                         titleLab.backgroundColor = [UIColor clearColor];
-                        titleLab.text=[self.topArr[i] valueForKey:@"Title"];
+                        titleLab.text=[self.topArr[i] objectForKey:@"Title"];
                         titleLab.font=[UIFont systemFontOfSize:15];
                         titleLab.textColor=[UIColor whiteColor];
                         [imageView addSubview:titleLab];
-                        NSString* picName = [self.topArr[i] valueForKey:@"PicUrl"];
+                        NSString* picName = [self.topArr[i] objectForKey:@"PicUrl"];
                         NSString* picPath = [NSString stringWithFormat:@"%@/big/%@",ZhiDingStr,picName];
                         [self downloadZhiDingPicWithPicPath:picPath Tag:imageView.tag];
                     }
@@ -464,15 +462,16 @@ backButton
                     [userHeadStr appendString:@"Personal"];
                     dispatch_queue_t queue1 = dispatch_queue_create("downloadUserHead", NULL);
                     dispatch_async(queue1, ^{
-                        for (int i = 0; i < self.tableArr.count; i++) {
+                        for (int i = 0; i < self.tableArr.count; i++)
+                        {
                             NSString* userHeadPicName;
-                            if ([self.tableArr[i] valueForKey:@"CompanyID"] == 0) {//个人
-                                userHeadPicName = [self.tableArr[i] valueForKey:@"ImgTouX"];
+                            if ([[self.tableArr[i] objectForKey:@"CompanyID"] integerValue] == 0)
+                            {//个人
+                                userHeadPicName = [self.tableArr[i] objectForKey:@"ImgTouX"];
                             }else {//企业
-                                userHeadPicName = [self.tableArr[i] valueForKey:@"LogoImage"];
+                                userHeadPicName = [self.tableArr[i] objectForKey:@"LogoImage"];
                             }
                             NSString* userHeadPicPath = [NSString stringWithFormat:@"%@/%@",userHeadStr,userHeadPicName];
-                            //[self downloadUserHeadPicWithHeadPicPath:userHeadPicPath Tag:i+1];
                             [self downloadUserHeadPicWithHeadPicPath:userHeadPicPath UserHeadPicName:userHeadPicName Tag:i+1];
                         }
                     });
@@ -483,7 +482,7 @@ backButton
                     dispatch_queue_t queue2 = dispatch_queue_create("downloadList", NULL);
                     dispatch_async(queue2, ^{
                     for (int i = 0; i < self.tableArr.count; i++) {
-                        NSString* listPicName = [self.tableArr[i] valueForKey:@"PicUrl"];
+                        NSString* listPicName = [self.tableArr[i] objectForKey:@"PicUrl"];
                         NSString* listPicPath = [NSString stringWithFormat:@"%@/%@",listPicStr,listPicName];
                         //[self downloadTravelListPicWithListPicPath:listPicPath Tag:i+1];
                         [self downloadTravelListPicWithListPicPath:listPicPath PicName:listPicName Tag:i+1];
@@ -574,7 +573,7 @@ backButton
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString* str = @"cell";
+    NSString* str = [NSString stringWithFormat:@"cell%d-%d",indexPath.row,indexPath.section];
     NSMutableArray* tempArr;
     NSMutableArray* tempPicArr;
     NSMutableArray* tempUserHeadArr;
@@ -600,10 +599,10 @@ backButton
                 cell._imageView.image = iv.image;
             }
         }
-        cell.lableHead.text=[[tempArr objectAtIndex:indexPath.row]valueForKey:@"Title"];
-        cell.lableDetail.text=[[tempArr objectAtIndex:indexPath.row]valueForKey:@"Summary"];
+        cell.lableHead.text=[[tempArr objectAtIndex:indexPath.row]objectForKey:@"Title"];
+        cell.lableDetail.text=[[tempArr objectAtIndex:indexPath.row]objectForKey:@"Summary"];
         cell.lableDetail.frame=CGRectMake(8+100+5, 30+8, 310-100-15, 30);
-        NSString*_str1=[[tempArr objectAtIndex:indexPath.row]valueForKey:@"PTime"];
+        NSString*_str1=[[tempArr objectAtIndex:indexPath.row]objectForKey:@"PTime"];
         _str1=[_str1 stringByReplacingOccurrencesOfRegex:@"/" withString:@"."];
         cell.data.text=_str1;
         UIImageView*jiantou=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 10 - 20, 40, 20, 20)];
@@ -635,19 +634,19 @@ backButton
                 cell.headImage.image = userHeadiv.image;
             }
         }
-        cell.lableHead.text = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"Title"];
+        cell.lableHead.text = [[tempArr objectAtIndex:indexPath.row]objectForKey:@"Title"];
         CGSize size = [cell.lableHead sizeThatFits:CGSizeMake(195, 0)];
         cell.lableHead.frame = CGRectMake(115,15, 195, size.height);
-        if ([[[tempArr objectAtIndex:indexPath.row] valueForKey:@"CompanyID"]intValue] == 0) {//个人
-            cell.useName.text = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"UserName"];
+        if ([[[tempArr objectAtIndex:indexPath.row] objectForKey:@"CompanyID"]intValue] == 0) {//个人
+            cell.useName.text = [[tempArr objectAtIndex:indexPath.row]objectForKey:@"UserName"];
         }else {//企业
-            if ([[[tempArr objectAtIndex:indexPath.row] valueForKey:@"SimpleName"] length] > 0) {//有简称
-                cell.useName.text = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"SimpleName"];
+            if ([[[tempArr objectAtIndex:indexPath.row] objectForKey:@"SimpleName"] length] > 0) {//有简称
+                cell.useName.text = [[tempArr objectAtIndex:indexPath.row]objectForKey:@"SimpleName"];
             }else {
-                cell.useName.text = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"Name"];
+                cell.useName.text = [[tempArr objectAtIndex:indexPath.row]objectForKey:@"Name"];
             }
         }
-        NSString*_str1 = [[tempArr objectAtIndex:indexPath.row]valueForKey:@"PTime"];
+        NSString*_str1 = [[tempArr objectAtIndex:indexPath.row]objectForKey:@"PTime"];
         _str1 = [_str1 stringByReplacingOccurrencesOfString:@"/" withString:@"."];
         cell.data.text = _str1;
         return cell;
@@ -668,14 +667,14 @@ backButton
     }
     if ([self.title isEqualToString:@"资讯列表"]) {
         InfomDetailViewController*inform=[InfomDetailViewController new];
-        inform.ID=[[[tempArr objectAtIndex:indexPath.row]valueForKey:@"ID"]intValue];
+        inform.ID=[[[tempArr objectAtIndex:indexPath.row]objectForKey:@"ID"]intValue];
         inform.pageName = @"资讯正文";
         [self.navigationController pushViewController:inform animated:NO];
     }else if ([self.title isEqualToString:@"游记列表"]) {
 //        TravelViewController* inform = [TravelViewController new];
         
         TravelViewController_2* travelVC_2 = [TravelViewController_2 new];
-        travelVC_2.ID=[[[tempArr objectAtIndex:indexPath.row]valueForKey:@"ID"]intValue];
+        travelVC_2.ID=[[[tempArr objectAtIndex:indexPath.row]objectForKey:@"ID"]intValue];
         travelVC_2.presentWay = 0;
         [self.navigationController pushViewController:travelVC_2 animated:NO];
     }
@@ -705,7 +704,7 @@ backButton
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (result.length > 11) {
-                            NSArray* arr = [dic valueForKey:@"ds"];
+                            NSArray* arr = [dic objectForKey:@"ds"];
                             [self.tableArr addObjectsFromArray:arr];
                             {
                                 NSMutableString* listPicStr = PicUrl;
@@ -713,7 +712,7 @@ backButton
                                 dispatch_queue_t queue2 = dispatch_queue_create("downloadList", NULL);
                                 dispatch_async(queue2, ^{
                                     for (int i = 0; i < self.tableArr.count; i++) {
-                                        NSString* listPicName = [self.tableArr[i] valueForKey:@"Pic"];
+                                        NSString* listPicName = [self.tableArr[i] objectForKey:@"Pic"];
                                         NSString* listPicPath = [NSString stringWithFormat:@"%@/%@",listPicStr,listPicName];
                                         //[self downloadTravelListPicWithListPicPath:listPicPath Tag:i+1+self.tableArr.count-arr.count];
                                         [self downloadTravelListPicWithListPicPath:listPicPath PicName:listPicName Tag:i+1+self.tableArr.count-arr.count];
@@ -742,7 +741,7 @@ backButton
 
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (result.length > 11) {
-                            NSArray* arr = [dic valueForKey:@"ds"];
+                            NSArray* arr = [dic objectForKey:@"ds"];
                             [self.tableArr addObjectsFromArray:arr];
                             {
                                 NSMutableString* userHeadStr = TravelPicURL
@@ -751,13 +750,12 @@ backButton
                                 dispatch_async(queue1, ^{
                                     for (int i = 0; i < arr.count; i++) {
                                         NSString* userHeadPicName;
-                                        if ([arr[i] valueForKey:@"CompanyID"] == 0) {//个人
-                                            userHeadPicName = [arr[i] valueForKey:@"ImgTouX"];
+                                        if ([arr[i] objectForKey:@"CompanyID"] == 0) {//个人
+                                            userHeadPicName = [arr[i] objectForKey:@"ImgTouX"];
                                         }else {//企业
-                                            userHeadPicName = [arr[i] valueForKey:@"LogoImage"];
+                                            userHeadPicName = [arr[i] objectForKey:@"LogoImage"];
                                         }
                                         NSString* userHeadPicPath = [NSString stringWithFormat:@"%@/%@",userHeadStr,userHeadPicName];
-                                        //[self downloadUserHeadPicWithHeadPicPath:userHeadPicPath Tag:i+1+self.tableArr.count-arr.count];
                                         [self downloadUserHeadPicWithHeadPicPath:userHeadPicPath UserHeadPicName:userHeadPicName Tag:i+1+self.tableArr.count-arr.count];
                                     }
                                 });
@@ -768,9 +766,8 @@ backButton
                                 dispatch_queue_t queue2 = dispatch_queue_create("downloadList", NULL);
                                 dispatch_async(queue2, ^{
                                     for (int i = 0; i < arr.count; i++) {
-                                        NSString* listPicName = [arr[i] valueForKey:@"PicUrl"];
+                                        NSString* listPicName = [arr[i] objectForKey:@"PicUrl"];
                                         NSString* listPicPath = [NSString stringWithFormat:@"%@/%@",listPicStr,listPicName];
-                                        //[self downloadTravelListPicWithListPicPath:listPicPath Tag:i+1+self.tableArr.count-arr.count];
                                         [self downloadTravelListPicWithListPicPath:listPicPath PicName:listPicName Tag:i+1+self.tableArr.count-arr.count];
                                     }
                                 });

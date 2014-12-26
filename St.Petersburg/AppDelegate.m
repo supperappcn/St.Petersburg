@@ -59,9 +59,9 @@
     UINavigationController *nav2= [[UINavigationController alloc] initWithNavigationBarClass:[Navbar class] toolbarClass:nil];
     nav2.viewControllers=[NSArray arrayWithObject:naV22];
     
-    NeighboViewController*naV33=[[NeighboViewController alloc]init];
-    UINavigationController *nav3 = [[UINavigationController alloc] initWithNavigationBarClass:[Navbar class] toolbarClass:nil];
-    nav3.viewControllers=[NSArray arrayWithObject:naV33];
+//    NeighboViewController*naV33=[[NeighboViewController alloc]init];
+//    UINavigationController *nav3 = [[UINavigationController alloc] initWithNavigationBarClass:[Navbar class] toolbarClass:nil];
+//    nav3.viewControllers=[NSArray arrayWithObject:naV33];
     
    UINavigationController *nav4 = [[UINavigationController alloc] initWithNavigationBarClass:[Navbar class] toolbarClass:nil];
     
@@ -79,7 +79,7 @@
     
     
    
-    NSArray*array=[NSArray arrayWithObjects:nav1,nav2,nav3,nav4,nav5, nil];
+    NSArray*array=[NSArray arrayWithObjects:nav1,nav2,nav4,nav5, nil];
     
     MainTabarController*main=[MainTabarController new];
     main.buttonImageArray=[NSArray arrayWithObjects:@"_home_1.png",@"tool_1.png",@"neighbo_1.png",@"mine_1.png",@"more_1.png", nil];

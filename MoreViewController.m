@@ -27,10 +27,15 @@
     [self.navigationItem setNewTitle:@"更多"];
     MainTabarController*main=(MainTabarController*)self.tabBarController;
     main.customizedBar.hidden=NO;
-    datas = [NSMutableData data];
    
 
 }
+
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    datas=[[NSMutableData alloc]init];
+}
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     [datas appendData:data];
 }

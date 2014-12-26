@@ -851,7 +851,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
 - (void)loadPic_tableViewDataArray:(NSMutableArray*)mainDataArr objectAtIndex:(int)indexTag objectForKey:(NSString*)dicKey picHeadUrlStr:(NSMutableString*)picUrl picUrlPathStr:(NSString*)picPathStr PicLoadName:(NSString*)name headView:(UIImageView *)headView{
     
     if (mainDataArr.count>0&&[[[mainDataArr objectAtIndex:indexTag] objectForKey:dicKey] length]>4) {
-        NSLog(@"[[_dataArr objectAtIndex:indexPath.row] objectForKey:Pic]   %@",[[mainDataArr objectAtIndex:indexTag] objectForKey:dicKey]);
+//        NSLog(@"name = %@",[[LineViewController new] filePath:name]);
         NSData *pathData = [NSData dataWithContentsOfFile:PathOfFile(name)];
         
         if (pathData.length==0) {
@@ -868,7 +868,8 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
                     }
                 });
             });
-        }else headView.image = [UIImage imageWithData:pathData];
+        }
+        else headView.image = [UIImage imageWithData:pathData];
         
     }
 }
@@ -882,7 +883,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
     //[[NSFileManager defaultManager]   createDirectoryAtPath:[NSString stringWithFormat:@"%@/myData",docPath] withIntermediateDirectories:YES attributes:nil error:nil];
     
     NSString *path = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"myData/%@",text]];
-   // NSLog(@"filePath %@",path);
+//     NSLog(@"filePath %@",path);
     
     return path;
 }

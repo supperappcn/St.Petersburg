@@ -33,7 +33,7 @@
 @implementation TravelViewController_2
 
 backButton
-#define TravelURL [NSMutableString stringWithString:@"http://192.168.0.156:807/api/WebService.asmx/"];
+#define TravelURL [NSMutableString stringWithString:@"http://www.russia-online.cn/api/WebService.asmx/"];
 #define USERID [[NSUserDefaults standardUserDefaults] integerForKey:@"QuseID"];
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -55,8 +55,13 @@ backButton
     [self addNaviActivityView];
     [self addScrollView];
     [self addFooterBar];
-    [self checkLikeMethod];
-    [self checkCollectMethod];
+    NSUserDefaults*defaults=[NSUserDefaults standardUserDefaults];
+    int userID=[defaults integerForKey:@"QuseID"];
+    if (userID)
+    {
+        [self checkLikeMethod];
+        [self checkCollectMethod];
+    }
     if (self.presentWay == 0) {
         [self loadWebViewData];
     }else if (self.presentWay == 1) {
@@ -72,7 +77,8 @@ backButton
 }
 
 -(void)addScrollView {
-    self.scrollView = [[UIScrollView alloc]initWithFrame:self.view.frame];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64 + 44)];
+    [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64 ) withView:self.scrollView];
     [self.view addSubview:self.scrollView];
 }
 
@@ -93,12 +99,13 @@ backButton
         [guding addSubview:button];
     }
 }
-
--(void)checkLikeMethod {
+#pragma - mark 检查是否喜欢
+-(void)checkLikeMethod
+{
     int userID = USERID
-    NSMutableString* urlDomain = RussiaUrl2
-    [urlDomain appendString:@"CheckColloLike"];
-    NSString*canshu=[NSString stringWithFormat:@"ID=%d&userid=%d&typeid=%d&classid=%d",self.ID,userID,1,1];
+    NSMutableString* urlDomain = TravelURL
+    [urlDomain appendString:@"ChcekCollect"];
+    NSString*canshu=[NSString stringWithFormat:@"ID=%d&userid=%d&typeid=%d",self.ID,userID,1];
     NSURL* url = [[NSURL alloc]initWithString:urlDomain];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"POST"];
@@ -107,11 +114,13 @@ backButton
     self.checkLike = [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
--(void)checkCollectMethod {
+#pragma -mark 检查是否收藏
+-(void)checkCollectMethod
+{
     int userID = USERID
-    NSMutableString* urlDomain = RussiaUrl2
-    [urlDomain appendString:@"CheckColloLike"];
-    NSString*canshu=[NSString stringWithFormat:@"ID=%d&userid=%d&typeid=%d&classid=%d",self.ID,userID,2,1];
+    NSMutableString* urlDomain = TravelURL
+    [urlDomain appendString:@"ChcekCollect"];
+    NSString*canshu=[NSString stringWithFormat:@"ID=%d&userid=%d&typeid=%d",self.ID,userID,2];
     NSURL*url=[[NSURL alloc]initWithString:urlDomain];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"POST"];
@@ -120,7 +129,9 @@ backButton
     self.checkCollect = [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
--(void)loadWebViewData {
+#pragma -mark 加载webView数据
+-(void)loadWebViewData
+{
     NSMutableString* urlDomain = TravelURL
     [urlDomain appendString:@"getTravelDetail"];
     NSString* canshu = [NSString stringWithFormat:@"ID=%d",self.ID];
@@ -132,53 +143,89 @@ backButton
     self.webViewConnection = [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
--(void)touch:(UIButton* )sender {
+-(void)touch:(UIButton* )sender
+{
+    
     switch (sender.tag) {//点评
         case 400:
         {
-            CommentViewController* commentVC = [CommentViewController new];
-            NSLog(@"跳至点评页面时参数待写");
-            commentVC.ID = [NSString stringWithFormat:@"%d",self.ID];
-            [self.navigationController pushViewController:commentVC animated:YES];
+            if (GET_USER_DEFAUT(QUSE_ID))
+            {
+                CommentViewController* commentVC = [CommentViewController new];
+                NSLog(@"跳至点评页面时参数待写");
+                commentVC.ID = [NSString stringWithFormat:@"%d",self.ID];
+                [self.navigationController pushViewController:commentVC animated:YES];
+            }
+            else
+            {
+                MineViewController*mine=[MineViewController new];
+                mine.tag=1;
+                [self.navigationController pushViewController:mine animated:NO];
+            }
         }
             break;
         case 401:
-            if (self.ISLike == YES) {
-                UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是不小心的吗？" delegate:self cancelButtonTitle:@"是的" otherButtonTitles:@"不是",nil];
-                alertView.tag = 100;
-                [alertView show];
-            }else {//添加“喜欢”
-                int userid = USERID
-                NSString* userName = [[NSUserDefaults standardUserDefaults]valueForKey:@"useName"];
-                NSString*canshu=[NSString stringWithFormat:@"cityid=%d&ID=%d&userid=%d&username=%@&typeid=%d&classid=%d",2,self.ID,userid,userName,1,1];
-                NSMutableString*urlDomain2=RussiaUrl2
-                [urlDomain2 appendString:@"getTravelColloLike"];
-                NSURL* url = [[NSURL alloc]initWithString:urlDomain2];
-                NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-                [request setHTTPMethod:@"POST"];
-                NSData* data = [canshu dataUsingEncoding:NSUTF8StringEncoding];
-                [request setHTTPBody:data];
-                self.like = [NSURLConnection connectionWithRequest:request delegate:self];
+        {
+            if (GET_USER_DEFAUT(QUSE_ID))
+            {
+                if (self.ISLike == YES)
+                {
+                    UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是不小心的吗？" delegate:self cancelButtonTitle:@"是的" otherButtonTitles:@"不是",nil];
+                    alertView.tag = 100;
+                    [alertView show];
+                }else
+                {//添加“喜欢”
+                    int userid = USERID
+                    NSString* userName = [[NSUserDefaults standardUserDefaults]valueForKey:@"useName"];
+                    NSString*canshu=[NSString stringWithFormat:@"ID=%d&userid=%d&username=%@&typeid=%d",self.ID,userid,userName,1];
+                    NSMutableString*urlDomain2=TravelURL
+                    [urlDomain2 appendString:@"CollectTravel"];
+                    NSURL* url = [[NSURL alloc]initWithString:urlDomain2];
+                    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+                    [request setHTTPMethod:@"POST"];
+                    NSData* data = [canshu dataUsingEncoding:NSUTF8StringEncoding];
+                    [request setHTTPBody:data];
+                    self.like = [NSURLConnection connectionWithRequest:request delegate:self];
+                }
             }
+            else
+            {
+                MineViewController*mine=[MineViewController new];
+                mine.tag=1;
+                [self.navigationController pushViewController:mine animated:NO];
+            }
+        }
             break;
         case 402:
-            if (self.ISCollect == YES) {
-                UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是不小心的吗？" delegate:self cancelButtonTitle:@"是的" otherButtonTitles:@"不是",nil];
-                alertView.tag = 101;
-                [alertView show];
-            }else {//添加“收藏”
-                int userid = USERID
-                NSString* userName = [[NSUserDefaults standardUserDefaults]valueForKey:@"useName"];
-                NSString*canshu=[NSString stringWithFormat:@"cityid=%d&ID=%d&userid=%d&username=%@&typeid=%d&classid=%d",2,self.ID,userid,userName,2,1];
-                NSMutableString*urlDomain2=RussiaUrl2
-                [urlDomain2 appendString:@"getTravelColloLike"];
-                NSURL* url = [[NSURL alloc]initWithString:urlDomain2];
-                NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-                [request setHTTPMethod:@"POST"];
-                NSData* data = [canshu dataUsingEncoding:NSUTF8StringEncoding];
-                [request setHTTPBody:data];
-                self.collect = [NSURLConnection connectionWithRequest:request delegate:self];
+        {
+            if (GET_USER_DEFAUT(QUSE_ID))
+            {
+                if (self.ISCollect == YES)
+                {
+                    UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是不小心的吗？" delegate:self cancelButtonTitle:@"是的" otherButtonTitles:@"不是",nil];
+                    alertView.tag = 101;
+                    [alertView show];
+                }else {//添加“收藏”
+                    int userid = USERID
+                    NSString* userName = [[NSUserDefaults standardUserDefaults]valueForKey:@"useName"];
+                    NSString*canshu=[NSString stringWithFormat:@"ID=%d&userid=%d&username=%@&typeid=%d",self.ID,userid,userName,2];
+                    NSMutableString*urlDomain2=TravelURL
+                    [urlDomain2 appendString:@"CollectTravel"];
+                    NSURL* url = [[NSURL alloc]initWithString:urlDomain2];
+                    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+                    [request setHTTPMethod:@"POST"];
+                    NSData* data = [canshu dataUsingEncoding:NSUTF8StringEncoding];
+                    [request setHTTPBody:data];
+                    self.collect = [NSURLConnection connectionWithRequest:request delegate:self];
+                }
             }
+            else
+            {
+                MineViewController*mine=[MineViewController new];
+                mine.tag=1;
+                [self.navigationController pushViewController:mine animated:NO];
+            }
+        }
             break;
         case 403://分享
         {
@@ -215,66 +262,91 @@ backButton
 }
 
 #pragma mark-  NSURLConnectionDataDelegate
--(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
     self.datas=[[NSMutableData alloc]init];
 }
 
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
     [self.datas appendData:data];
 }
 
--(void)connectionDidFinishLoading:(NSURLConnection *)connection {
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
     dicResultYiBu(self.datas, result, dictionary)
+    NSLog(@"result = %@",result);
     if ([connection isEqual:self.checkLike]) {
-        if (result.intValue == 0) {
+        if (result.intValue == 2) {
             UIButton* btn = (UIButton*)[self.view viewWithTag:401];
-            [btn setImage:[UIImage imageNamed:@"Like_h.png"] forState:UIControlStateHighlighted];
+            [btn setImage:[UIImage imageNamed:@"Like_h.png"] forState:UIControlStateNormal];
             self.ISLike = YES;
         }else if (result.intValue == 1) {
             self.ISLike = NO;
+        }else if (result.intValue == 0) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"操作失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
         }
     }else if ([connection isEqual:self.checkCollect]) {
-        if (result.intValue == 0) {
+        if (result.intValue == 2) {
             UIButton* btn = (UIButton*)[self.view viewWithTag:402];
-            [btn setImage:[UIImage imageNamed:@"Collect_h.png"] forState:UIControlStateHighlighted];
+            [btn setImage:[UIImage imageNamed:@"Collect_h.png"] forState:UIControlStateNormal];
             self.ISCollect = YES;
         }else if (result.intValue == 1) {
             self.ISCollect = NO;
+        }else if (result.intValue == 0) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"操作失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
         }
     }else if ([connection isEqual:self.unLike]) {
         if (result.intValue == 1) {
             UIButton* btn = (UIButton*)[self.view viewWithTag:401];
-            [btn setImage:[UIImage imageNamed:@"Like.png"] forState:UIControlStateHighlighted];
+            [btn setImage:[UIImage imageNamed:@"Like.png"] forState:UIControlStateNormal];
             self.ISLike = NO;
-        }else if (result.intValue == -1) {
+        }else if (result.intValue == 0) {
             UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"操作失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];
         }
     }else if ([connection isEqual:self.unCollect]) {
         if (result.intValue == 1) {
-            UIButton* btn = (UIButton*)[self.view viewWithTag:401];
-            [btn setImage:[UIImage imageNamed:@"Collect.png"] forState:UIControlStateHighlighted];
+            UIButton* btn = (UIButton*)[self.view viewWithTag:402];
+            [btn setImage:[UIImage imageNamed:@"Collect.png"] forState:UIControlStateNormal];
             self.ISCollect = NO;
-        }else if (result.intValue == -1) {
+        }else if (result.intValue == 0) {
             UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"操作失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];
         }
     }else if ([connection isEqual:self.like]) {
-        if (result.intValue == 0) {
+        if (result.intValue == 1 ) {
             UIButton* btn = (UIButton*)[self.view viewWithTag:401];
-            [btn setImage:[UIImage imageNamed:@"Like_h.png"] forState:UIControlStateHighlighted];
+            [btn setImage:[UIImage imageNamed:@"Like_h.png"] forState:UIControlStateNormal];
             self.ISLike = YES;
-        }else if (result.intValue == 1) {
+        }else if (result.intValue == 0) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"操作失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+
             self.ISLike = NO;
-        }
-    }else if ([connection isEqual:self.collect]) {
-        if (result.intValue == 0) {
-            UIButton* btn = (UIButton*)[self.view viewWithTag:402];
-            [btn setImage:[UIImage imageNamed:@"Collect_h.png"] forState:UIControlStateHighlighted];
-            self.ISCollect = YES;
-        }else if (result.intValue == 1) {
+        }else if (result.intValue == 2) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已经喜欢" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
             self.ISCollect = NO;
         }
+    }else if ([connection isEqual:self.collect]) {
+        if (result.intValue == 1 ) {
+            UIButton* btn = (UIButton*)[self.view viewWithTag:402];
+            [btn setImage:[UIImage imageNamed:@"Collect_h.png"] forState:UIControlStateNormal];
+            self.ISCollect = YES;
+        }else if (result.intValue == 0) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"操作失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+            self.ISCollect = NO;
+        }
+        else if (result.intValue == 2) {
+            UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已经收藏" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+            self.ISCollect = NO;
+        }
+
     }else if ([connection isEqual:self.webViewConnection]) {
         self.dic = [dictionary[@"ds"]firstObject];
         if (self.dic.count > 0) {
@@ -285,7 +357,8 @@ backButton
     }
 }
 
--(void)addTitleAndUserInfoView {
+-(void)addTitleAndUserInfoView
+{
     RTLabel* titleLab = [[RTLabel alloc]initWithFrame:CGRectMake(10, 10, self.view.frame.size.width - 20, 20)];
     titleLab.text = self.dic[@"Title"];
     titleLab.font = [UIFont boldSystemFontOfSize:18];
@@ -333,11 +406,12 @@ backButton
     timeLab.textColor=[UIColor grayColor];
     [self.scrollView addSubview:timeLab];
     if (self.presentWay == 0) {
-        self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(10, timeLab.frame.origin.y+timeLab.frame.size.height, self.view.frame.size.width - 20, 20)];
+        self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, timeLab.frame.origin.y+timeLab.frame.size.height, DeviceWidth, 20)];
+        
         self.webView.delegate=self;
         self.webView.scrollView.bounces=YES;
         self.webView.scrollView.scrollEnabled=NO;
-        self.webView.backgroundColor = [UIColor greenColor];
+//        self.webView.backgroundColor = [UIColor greenColor];
         [self.scrollView addSubview:self.webView];
     }else if (self.presentWay == 1) {
         [self addImagesWithHeight:timeLab.frame.origin.y+timeLab.frame.size.height];
@@ -349,8 +423,40 @@ backButton
 {
     [self.naviActivity stopAnimating];
     [QYHMeThod changeImageWidthHeight:webView];
-    NSString* htmlHeight = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"foo\").offsetHeight;"];
-    self.webView.frame = CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y, self.webView.frame.size.width, htmlHeight.intValue+100);
+    
+    [webView stringByEvaluatingJavaScriptFromString:
+     @"var script = document.createElement('script');"
+     "script.type = 'text/javascript';"
+     "script.text = \"function ResizeImages() { "
+     "var myimg,oldwidth;"
+     "var maxwidth=300;" //缩放系数
+     "for(i=0;i <document.images.length;i++){"
+     "myimg = document.images[i];"
+     "if(myimg.width > maxwidth){"
+     "oldwidth = myimg.width;"
+     "myimg.width = maxwidth;"
+     "myimg.height = myimg.height * (maxwidth/oldwidth);"
+     "}"
+     "}"
+     "}\";"
+     "document.getElementsByTagName('head')[0].appendChild(script);"];
+    
+    [webView stringByEvaluatingJavaScriptFromString:@"ResizeImages();"];
+    
+    //字体大小
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"];
+    //字体颜色
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= 'black'"];
+    //页面背景色
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#FFFFFF'"];
+    
+    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue] + 10;
+    
+
+    
+//    NSString* htmlHeight = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"foo\").offsetHeight;"];
+    self.webView.frame = CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y, self.webView.frame.size.width, height + 4);
+    self.scrollView.contentSize = CGSizeMake(0, 150+self.webView.frame.size.height);
 }
 
 #pragma mark- UIAlertViewDelegate
@@ -358,9 +464,9 @@ backButton
     if (alertView.tag == 100) {
         if (buttonIndex == 1) {//取消“喜欢”
             int userid = USERID
-            NSMutableString* urlDomain2 = RussiaUrl2
-            [urlDomain2 appendString:@"UnColloLike"];
-            NSString* canshu = [NSString stringWithFormat:@"ID=%d&userid=%d&typeid=%d&classid=%d",self.ID,userid,1,1];
+            NSMutableString* urlDomain2 = TravelURL
+            [urlDomain2 appendString:@"UnCollectTravel"];
+            NSString* canshu = [NSString stringWithFormat:@"ID=%d&userid=%d&typeid=%d",self.ID,userid,1];
             NSURL* url = [[NSURL alloc]initWithString:urlDomain2];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
             [request setHTTPMethod:@"POST"];
@@ -371,9 +477,9 @@ backButton
     }else if (alertView.tag == 101) {
         if (buttonIndex == 1) {//取消“收藏”
             int userid = USERID
-            NSMutableString* urlDomain2 = RussiaUrl2
-            [urlDomain2 appendString:@"UnColloLike"];
-            NSString* canshu = [NSString stringWithFormat:@"ID=%d&userid=%d&typeid=%d&classid=%d",self.ID,userid,2,1];
+            NSMutableString* urlDomain2 = TravelURL
+            [urlDomain2 appendString:@"UnCollectTravel"];
+            NSString* canshu = [NSString stringWithFormat:@"ID=%d&userid=%d&typeid=%d",self.ID,userid,2];
             NSURL* url = [[NSURL alloc]initWithString:urlDomain2];
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
             [request setHTTPMethod:@"POST"];
@@ -399,7 +505,7 @@ backButton
             [imageView addSubview:aiv];
             [aiv startAnimating];
             NSString* picURL = self.imageNames[i];
-            NSString *urlStr = [NSString stringWithFormat:@"http://192.168.0.156:807/Upload/SelfManual/travel/%@",picURL];
+            NSString *urlStr = [NSString stringWithFormat:@"http://www.russia-online.cn/Upload/SelfManual/travel/%@",picURL];
             NSURL *url = [NSURL URLWithString:urlStr];
             NSData *data = [NSData dataWithContentsOfURL:url];
             
@@ -417,6 +523,7 @@ backButton
     }
     [self addTextLabWithHeight:height];
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.textView.frame.size.height + self.textView.frame.origin.y+50);
+    NSLog(@"size = %@",NSStringFromCGSize( CGSizeMake(self.scrollView.frame.size.width, self.textView.frame.size.height + self.textView.frame.origin.y+50)));
 }
 
 -(void)addTextLabWithHeight:(CGFloat )tempHeight {

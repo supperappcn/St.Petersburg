@@ -31,7 +31,7 @@ backButton
 {
     [super viewDidLoad];
     self.title = @"游记正文";
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64 + 44)];
     [self changeViewFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64) withView:self.scrollView];
     self.scrollView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.scrollView];
@@ -50,7 +50,7 @@ backButton
             [imageView addSubview:aiv];
             [aiv startAnimating];
             NSString* picURL = self.imageNames[i];
-            NSString *urlStr = [NSString stringWithFormat:@"http://192.168.0.156:807/Upload/SelfManual/travel/%@",picURL];
+            NSString *urlStr = [NSString stringWithFormat:@"http://www.russia-online.cn/Upload/SelfManual/travel/%@",picURL];
             NSURL *url = [NSURL URLWithString:urlStr];
             NSData *data = [NSData dataWithContentsOfURL:url];
             
@@ -65,6 +65,7 @@ backButton
     }
     [self addTextLab];
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.textView.frame.size.height + self.textView.frame.origin.y+20);
+    NSLog(@"size = %@",NSStringFromCGSize(self.scrollView.contentSize));
 }
 /*
 -(void)addImageView:(int)number {
@@ -86,7 +87,8 @@ backButton
     }
 }
 */
--(void)addTextLab {
+-(void)addTextLab
+{
     self.textView = [[UITextView alloc]initWithFrame:CGRectMake(10, 10 + 250*self.imageNames.count, self.view.frame.size.width - 10 - 10, 100)];
     self.textView.text = self.dic[@"Content"];
     self.textView.allowsEditingTextAttributes = NO;

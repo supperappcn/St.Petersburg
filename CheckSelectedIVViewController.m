@@ -13,7 +13,7 @@
 @interface CheckSelectedIVViewController ()
 @property (nonatomic, strong)UIScrollView* scrollView;
 @property (nonatomic, strong)UIPageControl* pageControl;
-@property (nonatomic, strong)NSData* datas;//请求删除图片时返回的结果
+@property (nonatomic, strong)NSMutableData* datas;//请求删除图片时返回的结果
 @property (nonatomic, assign)BOOL isFullScreen;//1为全屏  0为非全屏
 @end
 
@@ -109,7 +109,7 @@ backButton
 -(void)deleteSeletedImageView {
     NSLog(@"currentPage:%d, imageNamesArr.count:%d",self.pageControl.currentPage,self.imageNamesArr.count);
     if (self.pageControl.currentPage < self.imageNamesArr.count) {
-        NSMutableString* mutableStr = [NSMutableString stringWithString: @"http://192.168.0.156:807/"];
+        NSMutableString* mutableStr = [NSMutableString stringWithString: @"http://www.russia-online.cn/"];
         [mutableStr appendString:@"api/WebService.asmx/getDeleteTravelPic"];
         NSString* argumentStr = [NSString stringWithFormat:@"id=%d&userid=%@&picname=%@",self.ID,GET_USER_DEFAUT(QUSE_ID),self.imageNamesArr[self.pageControl.currentPage]];
         NSLog(@"argumentStr:%@",argumentStr);
@@ -140,9 +140,15 @@ backButton
     }
 }
 
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    self.datas = nil;
+    self.datas=[[NSMutableData alloc]init];
+}
+
 #pragma mark-  NSURLConnectionDataDelegate
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
-    self.datas = data;
+    [self.datas appendData:data];
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {

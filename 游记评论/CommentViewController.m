@@ -34,6 +34,9 @@
     NSString *replyName;
     UIRefreshControl *refresh;
     UIView *notCommV;
+    UIView *tableFooterV;
+    UILabel* tableFooterL;
+    UIActivityIndicatorView* aiv;
 }
 @end
 
@@ -106,7 +109,7 @@ backButton
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"POST"];
-    NSString *str = [NSString stringWithFormat:@"ID=%@&rowscount=%d&userid=%@&username=%@&content=%@",self.ID,DataArr.count + 1,GET_USER_DEFAUT(QUSE_ID),GET_USER_DEFAUT(USER_NAME),CTextView.text];
+    NSString *str = [NSString stringWithFormat:@"ID=%@&rowscount=%d&userid=%@&username=%@&content=%@",self.ID,1,GET_USER_DEFAUT(QUSE_ID),GET_USER_DEFAUT(USER_NAME),CTextView.text];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPBody:data];
     commentConn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
@@ -114,7 +117,7 @@ backButton
 
 - (void)addReplyConnection
 {
-    NSURL *url = [[NSURL alloc]initWithString:@"http://www.russia-online.cn/api/WebService.asmx/AddTravelReply "];
+    NSURL *url = [[NSURL alloc]initWithString:@"http://www.russia-online.cn/api/WebService.asmx/AddTravelReply"];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"POST"];
@@ -124,12 +127,14 @@ backButton
     replyConn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
 }
 
-
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    datas=[[NSMutableData alloc]init];
+}
 
 #pragma -mark 接收数据
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    datas = [[NSMutableData alloc]init];
     [datas appendData:data];
 }
 
@@ -137,13 +142,16 @@ backButton
 #pragma -mark 数据接收完成
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+//    NSLog(@"datas = %@",[[NSString alloc]initWithData:datas encoding:NSUTF8StringEncoding]);
+
     NSError *error = nil;
     GDataXMLDocument *document = [[GDataXMLDocument alloc]initWithData:datas options:0 error:&error];
     GDataXMLElement *element = [document rootElement];
     NSString *resule = [element stringValue];
     NSData *data = [resule dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *dic = [[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]JSONValue];
-    NSLog(@"resule = %@",resule);
+
+//    NSLog(@"resule = %@",resule);
     if (![resule isEqualToString:@"0"])
     {
         [notCommV removeFromSuperview];
@@ -152,13 +160,25 @@ backButton
             DataArr = [dic objectForKey:@"ds"];
             [indexPathArr removeAllObjects];
             [rowHeightArr removeAllObjects];
+            refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"下拉刷新"];
+            tableFooterL.text = @"";
+            if (pageIndex != 0)
+            {
+                CommentTV.contentSize = CGSizeMake(0, 0);
+                [aiv stopAnimating];
+                if (DataArr.count<10)
+                {
+                    pageIndex --;
+                }
+            }
         }
         else if (connection == commentConn)
         {
             NSArray *arr = [dic objectForKey:@"ds"][0];
-            [DataArr addObject:arr];
+            [DataArr insertObject:arr atIndex:0];
             [indexPathArr removeAllObjects];
             [rowHeightArr removeAllObjects];
+            [CommentTV scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
         }
         else if (connection == replyConn)
         {
@@ -174,7 +194,7 @@ backButton
                 [DataArr[[s_row[0] integerValue] - 1] addEntriesFromDictionary:dict];
             }
         }
-        NSLog(@"DataArr = %@",DataArr);
+//        NSLog(@"DataArr = %@",DataArr);
         if (DataArr)
         {
             [CommentTV reloadData];
@@ -187,6 +207,12 @@ backButton
             if (pageIndex == 0)
             {
                 [self notComment];
+            }
+            else
+            {
+                [aiv stopAnimating];
+                tableFooterL.text = @"";
+                [CommentTV reloadData];
             }
         }
         else if (replyConn == connection)
@@ -210,6 +236,7 @@ backButton
     replyName = [[NSString alloc]init];
     replyUserId = [[NSString alloc]init];
     rowsCount = [[NSString alloc]init];
+    tableFooterV = [[UIView alloc]initWithFrame:CGRectZero];
     pageIndex = 0;
     
     CommentTV = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHeight - 64 ) style:UITableViewStylePlain];
@@ -218,31 +245,33 @@ backButton
     CommentTV.dataSource = self;
     CommentTV.delegate = self;
     CommentTV.backgroundColor=GroupColor;
+    [self addTableFooterView];
+    CommentTV.tableFooterView = tableFooterV;
     [self.view addSubview:CommentTV];
     
     //创建下拉更多
     refresh = [[UIRefreshControl alloc]init];
     refresh.tintColor = [UIColor grayColor];
+    refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"下拉刷新"];
     [refresh addTarget:self action:@selector(controlEventValueChanged:) forControlEvents:UIControlEventValueChanged];
     [CommentTV addSubview:refresh];
 }
 
 - (void)controlEventValueChanged:(id)sender
 {
+
     if (refresh.refreshing)
     {
         refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"刷新中"];
-        
         [self performSelector:@selector(refreshData) withObject:nil afterDelay:0.5];
     }
 }
 
 - (void)refreshData
 {
-    pageIndex ++;
+    pageIndex = 0;
     [self addStartConnection];
     [refresh endRefreshing];
-    refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"下拉刷新"];
 }
 
 - (void)addfooterView
@@ -277,6 +306,73 @@ backButton
     [CommentTV addGestureRecognizer:tap];
 }
 
+#pragma 添加下拉加载更
+-(void )addTableFooterView
+{
+    aiv = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    aiv.frame = CGRectZero;
+    [tableFooterV addSubview:aiv];
+    tableFooterL = [[UILabel alloc]initWithFrame:CGRectMake((DeviceWidth - 100)/2, 10   , 100, 30)];
+    tableFooterL.backgroundColor = [UIColor clearColor];
+    tableFooterL.textAlignment = NSTextAlignmentCenter;
+    tableFooterL.textColor = [UIColor grayColor];
+    tableFooterL.font = [UIFont systemFontOfSize:14];
+    [tableFooterV addSubview:tableFooterL];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y < 0)
+    {
+        tableFooterL.text = @"";
+    }
+    else if(scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < 30)
+    {
+        tableFooterL.text = @"lift me up ...";
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    NSLog(@"contentSize.h = %f",scrollView.contentSize.height);
+    NSLog(@"CommentTV.tableFooterView.frame = %@",NSStringFromCGRect(CommentTV.tableFooterView.frame));
+    
+
+    if (CommentTV.contentSize.height < DeviceHeight - 64 - 44)
+    {
+        CommentTV.contentSize = CGSizeMake(0, DeviceHeight - 64 - 44);
+        CommentTV.tableFooterView.frame = CGRectMake(0, CommentTV.contentSize.height, DeviceWidth, 50);
+    }
+    
+    NSLog(@"contentSize.h = %f",scrollView.contentSize.height);
+    NSLog(@"CommentTV.tableFooterView.frame = %@",NSStringFromCGRect(CommentTV.tableFooterView.frame));
+
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    CGFloat height = 44;
+    if ([[[UIDevice currentDevice]systemVersion]floatValue]<7.0)
+    {
+        height = 0;
+    }
+    
+    NSLog(@"scrollView.contentOffset.y = %f",scrollView.contentOffset.y);
+    NSLog(@"scrollView.contentSize.height = %f",scrollView.contentSize.height);
+    NSLog(@"scrollView.contentSize.height = %f",scrollView.contentSize.height-CommentTV.frame.size.height + height);
+    if (scrollView.contentSize.height-CommentTV.frame.size.height + 50 + height < scrollView.contentOffset.y && scrollView.contentOffset.y>0)
+    {
+        [aiv startAnimating];
+        aiv.frame = CGRectMake((DeviceWidth - 100)/2 + 80, 10, 30, 30);
+        tableFooterL.text = @"loading...";
+        CommentTV.contentSize = CGSizeMake(0, scrollView.contentSize.height + 50);
+        pageIndex ++;
+        [self addStartConnection];
+    }
+
+}
+
 
 - (void)hiddKeyboard
 {
@@ -298,7 +394,15 @@ backButton
         {
             if ([sendOrReply.titleLabel.text isEqualToString:@"回复"])
             {
-                [self addReplyConnection];
+                if ([replyUserId isEqual:GET_USER_DEFAUT(QUSE_ID)])
+                {
+                    UIAlertView *AV = [[UIAlertView alloc]initWithTitle:@"不好意思!!不能对自己的评论进行回复" message:nil delegate:self cancelButtonTitle:@"好的，谢谢" otherButtonTitles: nil];
+                    [AV show];
+                }
+                else
+                {
+                    [self addReplyConnection];
+                }
             }
             else if ([sendOrReply.titleLabel.text isEqualToString:@"发送"])
             {
@@ -475,6 +579,7 @@ backButton
 }
 
 
+#pragma -mark webView数据接收完之后
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     //字体大小
@@ -483,7 +588,7 @@ backButton
     [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= 'black'"];
     //页面背景色
     [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#F1F1F1'"];
-
+    
     CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue] + 10;
     
     
@@ -513,6 +618,7 @@ backButton
     
 }
 
+#pragma -mark tableViewCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -548,7 +654,8 @@ backButton
         [CCell.ContentL loadHTMLString:[NSString stringWithFormat:@"<font size=1 color='#010101'>%@</font></b>",[DataArr[indexPath.section] valueForKey:@"Content"]] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
         CCell.ContentL.tag = (indexPath.section + 1) *1000 + indexPath.row;
         CCell.ContentL.delegate = self;
-        CCell.ContentL.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        [CCell.ContentL setScalesPageToFit:NO];
+//        CCell.ContentL.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         
         CGFloat replyHeight = [CCell.UserL optimumSize].height + CCell.ContentL.frame.size.height + 10;
 
@@ -610,7 +717,8 @@ backButton
             [CCell.ContentL loadHTMLString:[NSString stringWithFormat:@"<font size=1 color='#010101'>%@</font></b>",[arr valueForKey:@"Contents"]] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
             CCell.ContentL.tag = (indexPath.section + 1) *1000 + indexPath.row;
             CCell.ContentL.delegate = self;
-            CCell.ContentL.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+            [CCell.ContentL setScalesPageToFit:NO];
+//            CCell.ContentL.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
             
             CGFloat replyHeight = [CCell.UserL optimumSize].height + CCell.ContentL.frame.size.height + 10;
             if (replyHeight < 60)

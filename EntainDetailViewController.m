@@ -337,7 +337,7 @@ GO_NET
     [remindAlert addSubview:act];
     
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight-64) style:UITableViewStylePlain];
-    [self changeViewFrame:CGRectMake(0, 0, 320, DeviceHeight-64 - 49) withView:_tableView];
+    [self changeViewFrame:CGRectMake(0, 0, 320, DeviceHeight-64 - 44) withView:_tableView];
     _tableView.delegate=self;
     _tableView.backgroundColor=GroupColor;
     _tableView.dataSource=self;
@@ -1555,65 +1555,78 @@ GO_NET
     {
         case 400:
         {
-            
-            ComentViewController*text=[ComentViewController new];
-            if ([self.navName isEqualToString:@"酒店介绍"])
+            int ss=[defaults integerForKey:@"QuseID"];
+            if (ss)
             {
-                text.pageName=@"酒店评论";
-                NSLog(@"dataDic == %@",dataDic);
-                NSLog(@"%@  \n%@",[dataDic valueForKey:@"HotelCNName"] ,[dataDic valueForKey:@"HotelRUName"] );
-                text.head = [dataDic valueForKey:@"HotelCNName"];
-                text.eTittle = [dataDic valueForKey:@"HotelRUName"];
-                text.type=2;
+                
+                ComentViewController*text=[ComentViewController new];
+                if ([self.navName isEqualToString:@"酒店介绍"])
+                {
+                    text.pageName=@"酒店评论";
+                    NSLog(@"dataDic == %@",dataDic);
+                    NSLog(@"%@  \n%@",[dataDic valueForKey:@"HotelCNName"] ,[dataDic valueForKey:@"HotelRUName"] );
+                    text.head = [dataDic valueForKey:@"HotelCNName"];
+                    text.eTittle = [dataDic valueForKey:@"HotelRUName"];
+                    text.type=2;
+                    
+                }
+                if (self.tag==1)
+                {
+                    text.pageName=@"娱乐评论";
+                    text.head=[dataDic valueForKey:@"TicketCName"];
+                    text.eTittle=[dataDic valueForKey:@"TicketRName"];
+                    text.type=3;
+                }
+                if ([self.navName isEqualToString:@"线路介绍"])
+                {
+                    text.pageName=@"线路评论";
+                    text.head=[dataDic valueForKey:@"Title"];
+                    text.type=1;
+                }
+                
+                if ([self.navName isEqualToString:@"餐厅介绍"])
+                {
+                    text.pageName=@"餐厅评论";
+                    text.head=[dataDic valueForKey:@"RestCName"];
+                    text.eTittle=[dataDic valueForKey:@"RestRName"];
+                    text.type=4;
+                }
+                if ([self.navName isEqualToString:@"购物介绍"])
+                {
+                    text.pageName=@"购物评论";
+                    text.head=[dataDic valueForKey:@"ShopCName"];
+                    text.eTittle=[dataDic valueForKey:@"ShopRName"];
+                    text.type=5;
+                }
+                if ([self.navName isEqualToString:@"景点介绍"])
+                {
+                    text.pageName=@"景点评论";
+                    text.head=[dataDic valueForKey:@"ViewCNName"];
+                    text.eTittle=[dataDic valueForKey:@"ViewRUName"];
+                    text.type=8;
+                }
+                if ([self.navName isEqualToString:[NSString stringWithFormat:@"%@租车",[_dataDic2 valueForKey:@"UName"]]])
+                {
+                    text.pageName=@"租车评论";
+                    text.head=[_dataDic2 valueForKey:@"UName"];
+                    //  text.eTittle=[dataDic valueForKey:@"ViewRUName"];
+                    text.type=7;
+                }
+                
+                text.ID=self.hotelID;
+                NSLog(@"text.ID:%d",text.ID);
+                [self.navigationController pushViewController:text animated:NO];
+            }
+            else
+            {
+                
+                
+                MineViewController*mine=[MineViewController new];
+                mine.tag=1;
+                [self.navigationController pushViewController:mine animated:NO];
+                
                 
             }
-            if (self.tag==1)
-            {
-                text.pageName=@"娱乐评论";
-                text.head=[dataDic valueForKey:@"TicketCName"];
-                text.eTittle=[dataDic valueForKey:@"TicketRName"];
-                text.type=3;
-            }
-            if ([self.navName isEqualToString:@"线路介绍"])
-            {
-                text.pageName=@"线路评论";
-                text.head=[dataDic valueForKey:@"Title"];
-                text.type=1;
-            }
-            
-            if ([self.navName isEqualToString:@"餐厅介绍"])
-            {
-                text.pageName=@"餐厅评论";
-                text.head=[dataDic valueForKey:@"RestCName"];
-                text.eTittle=[dataDic valueForKey:@"RestRName"];
-                text.type=4;
-            }
-            if ([self.navName isEqualToString:@"购物介绍"])
-            {
-                text.pageName=@"购物评论";
-                text.head=[dataDic valueForKey:@"ShopCName"];
-                text.eTittle=[dataDic valueForKey:@"ShopRName"];
-                text.type=5;
-            }
-            if ([self.navName isEqualToString:@"景点介绍"])
-            {
-                text.pageName=@"景点评论";
-                text.head=[dataDic valueForKey:@"ViewCNName"];
-                text.eTittle=[dataDic valueForKey:@"ViewRUName"];
-                text.type=8;
-            }
-            if ([self.navName isEqualToString:[NSString stringWithFormat:@"%@租车",[_dataDic2 valueForKey:@"UName"]]])
-            {
-                text.pageName=@"租车评论";
-                text.head=[_dataDic2 valueForKey:@"UName"];
-                //  text.eTittle=[dataDic valueForKey:@"ViewRUName"];
-                text.type=7;
-            }
-            
-            text.ID=self.hotelID;
-            NSLog(@"text.ID:%d",text.ID);
-            [self.navigationController pushViewController:text animated:NO];
-            
         }
             break;
             

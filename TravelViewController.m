@@ -18,7 +18,7 @@
 
 @implementation TravelViewController
 
-#define TravelURL [NSMutableString stringWithString:@"http://192.168.0.156:807/api/WebService.asmx/"];
+#define TravelURL [NSMutableString stringWithString:@"http://www.russia-online.cn/api/WebService.asmx/"];
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

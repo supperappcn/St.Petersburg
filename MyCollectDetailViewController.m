@@ -17,8 +17,12 @@
 
 #import "GuideDetailViewController.h"
 #import "SupplierTableViewController.h"
-@interface MyCollectDetailViewController ()
+#import "TravelViewController_2.h"
 
+
+#define TravelURL [NSMutableString stringWithString:@"http://www.russia-online.cn/api/WebService.asmx/"];
+
+@interface MyCollectDetailViewController ()
 @end
 
 @implementation MyCollectDetailViewController
@@ -90,13 +94,9 @@ backButton
     }
     if ([self.title isEqualToString:@"游记"])
     {
-        picPath=@"travel";
+        picPath=@"SelfManual";
        // picName=@"TicketCName";
-        picID=@"Pic";
-        
-        
-        
-        
+        picID=@"PicUrl";
     }
     if ([self.title isEqualToString:@"导游"])
     {
@@ -147,10 +147,20 @@ backButton
 }
 - (void)viewWillAppear:(BOOL)animated{
     NSLog(@"typeid %@",_typeID);
-    NSMutableString *urlStr = RussiaUrl4;
-    [urlStr appendString:@"getUserCollectList"];
-    NSString *argStr = [NSString stringWithFormat:@"cityid=2&typeid=%@&userid=%@&pagesize=5&pageindex=%d",_typeID,GET_USER_DEFAUT(QUSE_ID),0];
-    postRequestYiBu(argStr, urlStr)
+    if (_typeID.integerValue == 1)
+    {
+        NSMutableString *urlStr = TravelURL;
+        [urlStr appendString:@"GetCollectTravellist"];
+        NSString *argStr = [NSString stringWithFormat:@"userid=%@&cityname=圣彼得堡&pagesize=5&pageindex=%d",GET_USER_DEFAUT(QUSE_ID),0];
+        postRequestYiBu(argStr, urlStr)
+    }
+    else
+    {
+        NSMutableString *urlStr = RussiaUrl4;
+        [urlStr appendString:@"getUserCollectList"];
+        NSString *argStr = [NSString stringWithFormat:@"cityid=2&typeid=%@&userid=%@&pagesize=5&pageindex=%d",_typeID,GET_USER_DEFAUT(QUSE_ID),0];
+        postRequestYiBu(argStr, urlStr)
+    }
 }
 postRequestAgency(datas)
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -187,11 +197,11 @@ postRequestAgency(datas)
         
         return;
     }else if ([self.title isEqualToString:@"游记"]){
-          CustomCell3*cell=(CustomCell3*)[tableView cellForRowAtIndexPath:indexPath];
+//          CustomCell3*cell=(CustomCell3*)[tableView cellForRowAtIndexPath:indexPath];
         
-        TravelViewController*inform=[TravelViewController new];
-        inform.ID=[[[dataArr objectAtIndex:indexPath.row]valueForKey:@"ID"]intValue];
-          inform.userImage=cell.headImage.image;
+        TravelViewController_2*inform=[TravelViewController_2 new];
+        inform.ID = [[dataArr[indexPath.row] objectForKey:@"ID"] integerValue];
+        inform.presentWay = 0;
         [self.navigationController pushViewController:inform animated:NO];
         
     }else{
@@ -719,12 +729,14 @@ postRequestAgency(datas)
         }
         
         cell.lableHead.text=[[dataArr objectAtIndex:indexPath.row]valueForKey:@"Title"];
-    [self loadPic_tableViewIndexPath:indexPath headLabName:cell.lableHead.text headView:cell._imageView];
+    
+        [LINE_VIEW_C loadPic_tableViewDataArray:dataArr objectAtIndex:indexPath.row objectForKey:@"PicUrl" picHeadUrlStr:PicUrlWWW picUrlPathStr:@"SelfManual" PicLoadName:cell.lableHead.text headView:cell._imageView];
+        
+        [LINE_VIEW_C loadPic_tableViewDataArray:dataArr objectAtIndex:indexPath.row objectForKey:@"ImgTouX" picHeadUrlStr:PicUrlWWW picUrlPathStr:@"Personal" PicLoadName:[NSString stringWithFormat:@"head%@",cell.lableHead.text] headView:cell.headImage];
+
         CGSize size=[cell.lableHead sizeThatFits:CGSizeMake(195, 0)];
         cell.lableHead.frame=CGRectMake(115,15, 195, size.height);
-        
-        
-        
+    
         cell.useName.text=[[dataArr objectAtIndex:indexPath.row]valueForKey:@"UserName"];
         NSString*_str1=[[dataArr objectAtIndex:indexPath.row]valueForKey:@"PTime"];
         _str1=[_str1 stringByReplacingOccurrencesOfString:@"/" withString:@"."];
@@ -745,6 +757,7 @@ postRequestAgency(datas)
             //[headAiv  startAnimating];
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 NSString *urlStr = [NSString stringWithFormat:@"%@%@/%@",PicUrl,picPath,[[dataArr objectAtIndex:indexPath.row] objectForKey:picID]];
+
                 NSLog(@"picurl %@",urlStr);
                 NSURL *url = [NSURL URLWithString:urlStr];
                 NSData *data = [NSData dataWithContentsOfURL:url];

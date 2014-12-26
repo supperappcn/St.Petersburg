@@ -295,7 +295,7 @@ postRequestAgency(_datas)
     tableArr = [NSMutableArray array];
     
     myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight-64) style:UITableViewStylePlain];
-    [self changeViewFrame:CGRectMake(0, 0, 320, DeviceHeight- 64 - 49) withView:myTableView];
+    [self changeViewFrame:CGRectMake(0, 0, 320, DeviceHeight- 64 - 44) withView:myTableView];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     myTableView.dataSource =self;
     myTableView.delegate = self;
@@ -421,7 +421,7 @@ postRequestAgency(_datas)
             }
 }
 - (void)creatbottomBar{
-    UIImageView*guding=[[UIImageView alloc]initWithFrame:CGRectMake(0,  DeviceHeight-64-45, 320, 45)];
+    UIImageView*guding=[[UIImageView alloc]initWithFrame:CGRectMake(0,  DeviceHeight-64-44, 320, 44)];
     //    guding.alpha=0.8;
     guding.userInteractionEnabled=YES;
     guding.image=[UIImage imageNamed:@"guding.png"];

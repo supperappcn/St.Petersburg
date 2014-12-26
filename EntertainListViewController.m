@@ -607,8 +607,8 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
 -(void)creatTableView
 {
 
-    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 40.5, 320, DeviceHeight-44-20-45) style:UITableViewStylePlain];
-    
+    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 40.5, DeviceWidth, DeviceHeight-44-20-44) style:UITableViewStylePlain];
+    [self changeViewFrame:CGRectMake(0, 40.5, DeviceWidth, DeviceHeight-44-20) withView:_tabView];
     if ([self.navName isEqualToString:@"歌舞剧"])
     {
         
