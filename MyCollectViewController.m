@@ -187,7 +187,7 @@ GO_NET
         }else mcdv.count = [numberArr[8] intValue]==0?1000:[numberArr[indexPath.row] intValue];
         
     }else mcdv.count = 1000;
-    [self.navigationController pushViewController:mcdv animated:YES];
+    [self.navigationController pushViewController:mcdv animated:NO];
 
    }
 

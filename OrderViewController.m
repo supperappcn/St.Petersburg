@@ -109,9 +109,9 @@ static OrderViewController* orderViewController = nil;
 
 -(void)back{
     if (self.presentWay == 0) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:NO];
     }else {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
     }
 }
 
@@ -424,7 +424,7 @@ static OrderViewController* orderViewController = nil;
             EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
             entainDetailVC.hotelID = self.orderNumber.intValue;
             entainDetailVC.navName = @"酒店介绍";
-            [self.navigationController pushViewController:entainDetailVC animated:YES];
+            [self.navigationController pushViewController:entainDetailVC animated:NO];
         }else if (alertView.tag == 800) {
             NSString* modifyResult = [self modifyOrderPrice];
             if (modifyResult.intValue == 1) {   //接受价格变化，继续
@@ -449,9 +449,9 @@ static OrderViewController* orderViewController = nil;
             
         }else { //返回
             if (self.presentWay == 0) { //从首页->选择支付方式  则返回到首页
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self.navigationController popToRootViewControllerAnimated:NO];
             }else {
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:NO];
             }
         }
     }
@@ -559,7 +559,7 @@ static OrderViewController* orderViewController = nil;
     }
      */
     payedVC.payWay = zhiFuFangShi;
-    [self.navigationController pushViewController:payedVC animated:YES];
+    [self.navigationController pushViewController:payedVC animated:NO];
 }
 
 //查看支付宝给app返回结果

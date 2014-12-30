@@ -29,7 +29,7 @@
 //        self.dayCount.image=[UIImage imageNamed:@"lineDay_one.png"];
         
         
-        self.price=[[RTLabel alloc]initWithFrame:CGRectMake(220, 220, 80, 20)];
+        self.price=[[RTLabel alloc]initWithFrame:CGRectMake(215, 220, 80, 20)];
         self.price.textAlignment=RTTextAlignmentRight;
 //        self.price.font=[UIFont systemFontOfSize:13];
 //        self.price.textColor=[UIColor grayColor];

@@ -154,7 +154,7 @@ backButton
                 CommentViewController* commentVC = [CommentViewController new];
                 NSLog(@"跳至点评页面时参数待写");
                 commentVC.ID = [NSString stringWithFormat:@"%d",self.ID];
-                [self.navigationController pushViewController:commentVC animated:YES];
+                [self.navigationController pushViewController:commentVC animated:NO];
             }
             else
             {
@@ -351,7 +351,8 @@ backButton
         self.dic = [dictionary[@"ds"]firstObject];
         if (self.dic.count > 0) {
             [self addTitleAndUserInfoView];
-            NSString *HTMLData=[NSString stringWithFormat:@"<div id='foo' style='line-height:1.5'><font size=3 line-height=25>%@</font></div>",[self.dic valueForKey:@"Content"]];
+            NSString *str = [[self.dic valueForKey:@"Content"] stringByReplacingOccurrencesOfString:@"|,|,|,|,|,|" withString:@" "];
+            NSString *HTMLData=[NSString stringWithFormat:@"<div id='foo' style='line-height:1.5'><font size=3 line-height=25>%@</font></div>",str];
             [self.webView loadHTMLString:HTMLData baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
         }
     }

@@ -96,7 +96,7 @@ backButton
 -(void)NavPopControllerSelf
 {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
     
     
 }

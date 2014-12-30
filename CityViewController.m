@@ -95,7 +95,7 @@ backButton
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
           NSString*str=[NSString stringWithFormat:@"%@ %@ %@",@"中国",self.province,[city objectAtIndex:indexPath.row]];
     
         Location*location=[Location shareLocation];

@@ -133,7 +133,7 @@ postRequestAgency(self.datas)
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     MyOrderDetailViewController* modVC = [MyOrderDetailViewController new];
     modVC.currentDic = self.tableArr[indexPath.section];
-    [self.navigationController pushViewController:modVC animated:YES];
+    [self.navigationController pushViewController:modVC animated:NO];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

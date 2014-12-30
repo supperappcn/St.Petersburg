@@ -168,7 +168,7 @@ postRequestAgency(datas)
         mlodtvc.prodClass = @"1";
         mlodtvc.pushWay = 0;
         mlodtvc.hotelID = [self.hotelIDs[indexPath.section]intValue];
-        [self.navigationController pushViewController:mlodtvc animated:YES];
+        [self.navigationController pushViewController:mlodtvc animated:NO];
     }else if ([self.title isEqualToString:@"景点订单"]) {
         MyEntainOrderDetailTableViewController* mvodtvc = [MyEntainOrderDetailTableViewController new];
         mvodtvc.currentDic = tableArr[indexPath.section];
@@ -179,7 +179,7 @@ postRequestAgency(datas)
         mvodtvc.prodClass = @"2";
         mvodtvc.pushWay = 0;
         mvodtvc.hotelID = [self.hotelIDs[indexPath.section]intValue];
-        [self.navigationController pushViewController:mvodtvc animated:YES];
+        [self.navigationController pushViewController:mvodtvc animated:NO];
     }else if ([self.title isEqualToString:@"酒店订单"]) {
         MyEntainOrderDetailTableViewController* mhodtvc = [MyEntainOrderDetailTableViewController new];
         mhodtvc.currentDic = tableArr[indexPath.section];
@@ -190,7 +190,7 @@ postRequestAgency(datas)
         mhodtvc.prodClass = @"3";
         mhodtvc.pushWay = 0;
         mhodtvc.hotelID = [self.hotelIDs[indexPath.section]intValue];
-        [self.navigationController pushViewController:mhodtvc animated:YES];
+        [self.navigationController pushViewController:mhodtvc animated:NO];
     }else if ([self.title isEqualToString:@"娱乐订单"]) {
         MyEntainOrderDetailTableViewController* mtodtvc = [MyEntainOrderDetailTableViewController new];
         mtodtvc.currentDic = tableArr[indexPath.section];
@@ -201,7 +201,7 @@ postRequestAgency(datas)
         mtodtvc.prodClass = @"4";
         mtodtvc.pushWay = 0;
         mtodtvc.hotelID = [self.hotelIDs[indexPath.section]intValue];
-        [self.navigationController pushViewController:mtodtvc animated:YES];
+        [self.navigationController pushViewController:mtodtvc animated:NO];
     }else if ([self.title isEqualToString:@"导游/租车订单"]) {
         NSDictionary* dic = tableArr[indexPath.section];
         MyEntainOrderDetailTableViewController* mgodtvc = [MyEntainOrderDetailTableViewController new];
@@ -217,7 +217,7 @@ postRequestAgency(datas)
             mgodtvc.prodClass = @"6";
         }
         mgodtvc.hotelID = [self.hotelIDs[indexPath.section]intValue];
-        [self.navigationController pushViewController:mgodtvc animated:YES];
+        [self.navigationController pushViewController:mgodtvc animated:NO];
     }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -565,7 +565,7 @@ postRequestAgency(datas)
         }
         
 //        1线路、2景点、3酒店、4门票、5导游、6租车
-        [self.navigationController pushViewController:ovc animated:YES];
+        [self.navigationController pushViewController:ovc animated:NO];
     }else if ([[sender titleForState:UIControlStateNormal]isEqualToString:@"重新预订"]) {
         if ([self.title isEqualToString:@"线路订单"]) {
             EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
@@ -574,26 +574,26 @@ postRequestAgency(datas)
             MyHotelOrederListTableViewCell* cell = (MyHotelOrederListTableViewCell*)[_myTableview cellForRowAtIndexPath:indexPath];
             entainDetailVC.fromeImage = cell.headIV.image;
             entainDetailVC.navName = @"线路介绍";
-            [self.navigationController pushViewController:entainDetailVC animated:YES];
+            [self.navigationController pushViewController:entainDetailVC animated:NO];
         }else if ([self.title isEqualToString:@"景点订单"]) {
             EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
             entainDetailVC.hotelID = [self.hotelIDs[sender.tag]intValue];
             entainDetailVC.classID = 7;
             entainDetailVC.navName = @"景点介绍";
-            [self.navigationController pushViewController:entainDetailVC animated:YES];
+            [self.navigationController pushViewController:entainDetailVC animated:NO];
         }else if ([self.title isEqualToString:@"酒店订单"]) {
             EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
             entainDetailVC.hotelID = [self.hotelIDs[sender.tag]intValue];
             entainDetailVC.classID = 3;
             entainDetailVC.navName = @"酒店介绍";
-            [self.navigationController pushViewController:entainDetailVC animated:YES];
+            [self.navigationController pushViewController:entainDetailVC animated:NO];
         }else if ([self.title isEqualToString:@"娱乐订单"]) {
             EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
             entainDetailVC.hotelID = [self.hotelIDs[sender.tag]intValue];
             entainDetailVC.classID = 4;
             entainDetailVC.tag = 1;
             entainDetailVC.navName = @"娱乐介绍";
-            [self.navigationController pushViewController:entainDetailVC animated:YES];
+            [self.navigationController pushViewController:entainDetailVC animated:NO];
         }else if ([self.title isEqualToString:@"导游/租车订单"]) {
             GuideDetailViewController* guideDetailVC = [GuideDetailViewController new];
             guideDetailVC.gudieID = self.hotelIDs[sender.tag];
@@ -605,7 +605,7 @@ postRequestAgency(datas)
             }else if (cell.headIV.frame.size.height == 45) {
                 guideDetailVC.title = @"租车介绍";
             }
-            [self.navigationController pushViewController:guideDetailVC animated:YES];
+            [self.navigationController pushViewController:guideDetailVC animated:NO];
         }
     }else if ([[sender titleForState:UIControlStateNormal]isEqualToString:@"去点评"]) {
         ComentViewController* text = [ComentViewController new];
@@ -649,7 +649,7 @@ postRequestAgency(datas)
                 text.type = 7;
             }
         }
-        [self.navigationController pushViewController:text animated:YES];
+        [self.navigationController pushViewController:text animated:NO];
     }
 }
 

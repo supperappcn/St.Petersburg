@@ -747,7 +747,7 @@ GO_NET
             MineDetailViewController*detail=[MineDetailViewController new];
             detail.severiceImage=name_image.image;
             detail.pageTitle=@"我的账号";
-            [self.navigationController pushViewController:detail animated:YES];
+            [self.navigationController pushViewController:detail animated:NO];
         }
             break;
         case 8:
@@ -763,7 +763,7 @@ GO_NET
         {
             //设置客服务日期
             calendarViewController *calender = [[calendarViewController alloc]init];
-            [self.navigationController pushViewController:calender animated:YES];
+            [self.navigationController pushViewController:calender animated:NO];
         }
             break;
         case 10:
@@ -771,7 +771,7 @@ GO_NET
             //我的订单
             MyOrderListViewController* molVC = [MyOrderListViewController new];
             molVC.title = @"我的订单";
-            [self.navigationController pushViewController:molVC animated:YES];
+            [self.navigationController pushViewController:molVC animated:NO];
         }
             break;
         case 11:
@@ -779,7 +779,7 @@ GO_NET
             //线路订单
             MyHoltelOredrViewController* myLineOrderVC = [MyHoltelOredrViewController new];
             myLineOrderVC.title = @"线路订单";
-            [self.navigationController pushViewController:myLineOrderVC animated:YES];
+            [self.navigationController pushViewController:myLineOrderVC animated:NO];
         }
             break;
         case 12:
@@ -787,47 +787,47 @@ GO_NET
             //景点门票订单
             MyHoltelOredrViewController* myViewOrderVC = [MyHoltelOredrViewController new];
             myViewOrderVC.title = @"景点订单";
-            [self.navigationController pushViewController:myViewOrderVC animated:YES];
+            [self.navigationController pushViewController:myViewOrderVC animated:NO];
         }
             break;
         case 13:{
             //酒店订单
             MyHoltelOredrViewController* myHotelOrderVC = [MyHoltelOredrViewController new];
             myHotelOrderVC.title = @"酒店订单";
-            [self.navigationController pushViewController:myHotelOrderVC animated:YES];
+            [self.navigationController pushViewController:myHotelOrderVC animated:NO];
         }
             break;
         case 14:{
             //娱乐门票订单
             MyHoltelOredrViewController* myTicketOrderVC = [MyHoltelOredrViewController new];
             myTicketOrderVC.title = @"娱乐订单";
-            [self.navigationController pushViewController:myTicketOrderVC animated:YES];
+            [self.navigationController pushViewController:myTicketOrderVC animated:NO];
         }
             break;
         case 15:{
             //导游/租车订单
             MyHoltelOredrViewController* myGuideOrderVC = [MyHoltelOredrViewController new];
             myGuideOrderVC.title = @"导游/租车订单";
-            [self.navigationController pushViewController:myGuideOrderVC animated:YES];
+            [self.navigationController pushViewController:myGuideOrderVC animated:NO];
         }
             break;
         case 16:
         {
             //游记
-            [self.navigationController pushViewController:[MyTravelingViewController new] animated:YES];            
+            [self.navigationController pushViewController:[MyTravelingViewController new] animated:NO];
         }
             break;
         case 17:
         {
             //收藏
-            [self.navigationController pushViewController:[MyCollectViewController new] animated:YES];
+            [self.navigationController pushViewController:[MyCollectViewController new] animated:NO];
         }
             break;
         case 18:
         {
             //消息
             NewsViewController*detail=[NewsViewController new];
-            [self.navigationController pushViewController:detail animated:YES];
+            [self.navigationController pushViewController:detail animated:NO];
             
             UILabel*lable=(UILabel*)[self.view viewWithTag:30];
             lable.backgroundColor = [UIColor clearColor];
@@ -838,7 +838,7 @@ GO_NET
         {
             //设置
             SetViewController*set=[SetViewController new];
-            [self.navigationController pushViewController:set animated:YES];
+            [self.navigationController pushViewController:set animated:NO];
         }
             break;
    
@@ -1312,7 +1312,7 @@ postRequestAgency(datas)
 }
 -(void)back
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {

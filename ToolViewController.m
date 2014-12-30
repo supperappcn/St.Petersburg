@@ -232,7 +232,7 @@
                 fvc.type_id = [defaults objectForKey:TYPE_ID];//用户
                 fvc.userid = [defaults objectForKey:QUSE_ID];//用户id
                 fvc.userName = [defaults objectForKey:USER_NAME];//用户名
-                [self.navigationController pushViewController:fvc animated:YES];
+                [self.navigationController pushViewController:fvc animated:NO];
             } else {
                 UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"请登陆" message:@"您还没登陆，您确定要登录吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 [alertView show];
@@ -274,7 +274,7 @@
         MineViewController *mvc = [MineViewController new];
         mvc.tabBarController.tabBar.hidden=YES;
         mvc.tag=1;
-        [self.navigationController pushViewController:mvc animated:YES];
+        [self.navigationController pushViewController:mvc animated:NO];
         
     }
 }

@@ -740,7 +740,8 @@ backButton
                     dicResultTongbu(received, result, dic)
 
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        if (result.length > 11) {
+                        if (result.length > 11)
+                        {
                             NSArray* arr = [dic objectForKey:@"ds"];
                             [self.tableArr addObjectsFromArray:arr];
                             {
@@ -748,11 +749,14 @@ backButton
                                 [userHeadStr appendString:@"Personal"];
                                 dispatch_queue_t queue1 = dispatch_queue_create("downloadUserHead", NULL);
                                 dispatch_async(queue1, ^{
-                                    for (int i = 0; i < arr.count; i++) {
+                                    for (int i = 0; i < arr.count; i++)
+                                    {
                                         NSString* userHeadPicName;
-                                        if ([arr[i] objectForKey:@"CompanyID"] == 0) {//个人
+                                        if ([[arr[i] objectForKey:@"CompanyID"] integerValue] == 0)
+                                        {//个人
                                             userHeadPicName = [arr[i] objectForKey:@"ImgTouX"];
-                                        }else {//企业
+                                        }else
+                                        {//企业
                                             userHeadPicName = [arr[i] objectForKey:@"LogoImage"];
                                         }
                                         NSString* userHeadPicPath = [NSString stringWithFormat:@"%@/%@",userHeadStr,userHeadPicName];
@@ -775,11 +779,20 @@ backButton
                             self.pageIndex++;
                             [self.tableView.tableFooterView removeFromSuperview];
                         }
+                        else
+                        {
+                            NSTimer *timer  =[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(deleteTabelFooterView) userInfo:nil repeats:NO];
+                        }
                     });
                 });
             }
         }
     }
+}
+
+- (void)deleteTabelFooterView
+{
+    self.tableView.tableFooterView = nil;
 }
 
 -(UIView* )addTableFooterView {

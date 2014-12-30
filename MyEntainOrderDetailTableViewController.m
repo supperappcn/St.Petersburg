@@ -69,9 +69,9 @@ static NSString* cellIdentifier = @"Cell";
 
 -(void)back{
     if (self.pushWay == 1) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:NO];
     }else {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
     }
 }
 
@@ -1172,27 +1172,27 @@ static NSString* cellIdentifier = @"Cell";
             entainDetailVC.hotelID = self.hotelID;
 //            entainDetailVC.classID =
             entainDetailVC.navName = @"线路介绍";
-            [self.navigationController pushViewController:entainDetailVC animated:YES];
+            [self.navigationController pushViewController:entainDetailVC animated:NO];
         }else if (self.prodClass.intValue == 2) {
             EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
 //            entainDetailVC.fromeImage = self.headImage;
             entainDetailVC.hotelID = self.hotelID;
             entainDetailVC.classID = 7;
             entainDetailVC.navName = @"景点介绍";
-            [self.navigationController pushViewController:entainDetailVC animated:YES];
+            [self.navigationController pushViewController:entainDetailVC animated:NO];
         }else if (self.prodClass.intValue == 3) {
             EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
             entainDetailVC.hotelID = self.hotelID;
             entainDetailVC.classID = 3;
             entainDetailVC.navName = @"酒店介绍";
-            [self.navigationController pushViewController:entainDetailVC animated:YES];
+            [self.navigationController pushViewController:entainDetailVC animated:NO];
         }else if (self.prodClass.intValue == 4) {
             EntainDetailViewController* entainDetailVC = [EntainDetailViewController new];
             entainDetailVC.hotelID = self.hotelID;
             entainDetailVC.classID = 4;
             entainDetailVC.tag = 1;
             entainDetailVC.navName = @"娱乐介绍";
-            [self.navigationController pushViewController:entainDetailVC animated:YES];
+            [self.navigationController pushViewController:entainDetailVC animated:NO];
         }else if (self.prodClass.intValue == 5 || self.prodClass.intValue == 6) {
             GuideDetailViewController* guideDetailVC = [GuideDetailViewController new];
             guideDetailVC.gudieID = [NSString stringWithFormat:@"%d", self.hotelID];
@@ -1202,7 +1202,7 @@ static NSString* cellIdentifier = @"Cell";
             }else if ([[self.currentDic valueForKey:@"ProdType"]intValue] == 2) {
                 guideDetailVC.title = @"租车介绍";
             }
-            [self.navigationController pushViewController:guideDetailVC animated:YES];
+            [self.navigationController pushViewController:guideDetailVC animated:NO];
         }
     }else if ([sender.currentTitle isEqualToString:@"去点评"]) {
         ComentViewController* text = [ComentViewController new];
@@ -1239,7 +1239,7 @@ static NSString* cellIdentifier = @"Cell";
             text.ID = self.hotelID;
             text.type = 7;
         }
-        [self.navigationController pushViewController:text animated:YES];
+        [self.navigationController pushViewController:text animated:NO];
     }
 }
 

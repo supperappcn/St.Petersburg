@@ -172,7 +172,7 @@ postRequestAgency(datas)
             gdvc.title = [NSString stringWithFormat:@"%@%@",[dataArr[indexPath.row]objectForKey:@"UName"],[dataArr[indexPath.row]objectForKey:@"GuideClass"]];
             GuideTableViewCell *cell=(GuideTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
             gdvc.picImage = cell.iv.image;
-            [self.navigationController pushViewController:gdvc animated:YES];
+            [self.navigationController pushViewController:gdvc animated:NO];
         }else{
             NSArray *guideAndTransitionTittleArr = @[@"中国留学生导游",@"专业俄籍导游",@"普通俄籍导游",@"专业中国导游",@"随行简单翻译",@"专业翻译",@"公务、商务翻译",@"专家翻译"];
             NSArray *guideAndTransitionKeyArr = @[@"CNUStudent",@"CNUSpasice",@"RUUPutong",@"RUUSpasice",@"SuiUFanyi",@"ZYUFanYi",@"GWUFanyi",@"ZJUFanYi"];
@@ -190,7 +190,7 @@ postRequestAgency(datas)
             sdvc.title = @"导游/翻译预订";
             sdvc.tableArr=guideAndTransitionArr;
             sdvc.picImage = cell.iv.image;
-            [self.navigationController pushViewController:sdvc animated:YES];
+            [self.navigationController pushViewController:sdvc animated:NO];
             
         }
         

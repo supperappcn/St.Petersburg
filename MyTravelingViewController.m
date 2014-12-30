@@ -137,7 +137,7 @@ GO_NET
 - (void)send{
     WriteMyTravellingViewController_3* wmtVC = [WriteMyTravellingViewController_3 new];
     wmtVC.type = 0;
-    [self.navigationController pushViewController:wmtVC animated:YES];
+    [self.navigationController pushViewController:wmtVC animated:NO];
 }
 
 postRequestAgency(datas)
@@ -388,7 +388,7 @@ postRequestAgency(datas)
             wmtVC.imageNamesArr = nil;
         }
         NSLog(@"imageNames.length:%d,imageNames:%@,imageNamesArr.count:%d,imageNamesArr:%@",imageNames.length,imageNames,wmtVC.imageNamesArr.count, wmtVC.imageNamesArr);
-        [self.navigationController pushViewController:wmtVC animated:YES];
+        [self.navigationController pushViewController:wmtVC animated:NO];
     }else if
         ([btn.currentTitle isEqualToString:@"删除"])
     {

@@ -223,7 +223,7 @@ backButton
     first.type_id=@"2";//客户
     NSLog(@"fromTag = %d",fromTag);
     first.toTag=fromTag;
-    [self.navigationController pushViewController:first animated:YES];
+    [self.navigationController pushViewController:first animated:NO];
 }
 
 - (void)loadDataWithType_ID:(NSString *)type_ID andImgName:(NSString*)imgName headView:(UIImageView *)headView

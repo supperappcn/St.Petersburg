@@ -128,7 +128,7 @@ backButton
             pageNumber = pageNumber-1;
         }else if (pageNumber == 0) {
             if (self.imageViewsArr.count == 0) {
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:NO];
             }else {
                 
             }
@@ -165,7 +165,7 @@ backButton
             pageNumber = pageNumber-1;
         }else if (pageNumber == 0) {
             if (self.imageViewsArr.count == 0) {
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:NO];
             }else {
                 
             }

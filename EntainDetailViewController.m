@@ -2576,6 +2576,10 @@ GO_NET
         
         
         NSLog(@"%@",date);
+        if ([date isEqualToString:@"0"])
+        {
+            date = @"不确定";
+        }
         
         if ([[dataDic valueForKey:@"TicketClass"] isEqualToString:@"游船"])
         {
@@ -3070,7 +3074,7 @@ GO_NET
             mydelegate.isTime=YES;
         }
         
-        NSLog( @"touchTimerArray");
+//        NSLog( @"touchTimerArray");
         
     }
     
@@ -3080,8 +3084,8 @@ GO_NET
 -(void)time
 {
     ImageScrollView *imgScrollView = (ImageScrollView *)[_scrollView viewWithTag:610+pre];
-    NSLog(@"width==%f",imgScrollView.imageView.frame.size.width);
-    NSLog(@"imgeHeight==%f",imgeHeight);
+//    NSLog(@"width==%f",imgScrollView.imageView.frame.size.width);
+//    NSLog(@"imgeHeight==%f",imgeHeight);
     
     if (imgScrollView.imageView.frame.size.width==imgeHeight)
     {

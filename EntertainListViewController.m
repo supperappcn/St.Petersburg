@@ -1394,7 +1394,7 @@ postRequestAgencyAndRefeshAndAlert(datas, refresh, remindAlert,navActivity)
         cell2.type.text=[[_array objectAtIndex:indexPath.row] valueForKey:@"RestType"];
         cell2.type.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];
         cell2.type.textColor=[UIColor grayColor];
-        cell2.gradeCount.text=[NSString stringWithFormat:@"人均消费:$%@", [[_array objectAtIndex:indexPath.row] valueForKey:@"USPrice"]];
+        cell2.gradeCount.text=[NSString stringWithFormat:@"人均消费:$%@", [[_array objectAtIndex:indexPath.row] valueForKey:@"Price"]];
         cell2.gradeImage.image=nil;
         cell2.gradeCount.frame=CGRectMake(cell2._imageView.frame.origin.x+cell2._imageView.frame.size.width+5, cell2.type.frame.origin.y+cell2.type.frame.size.height,200 , 15);
         cell2.gradeCount.textColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"blueBackGround.png"]];

@@ -307,7 +307,13 @@ postRequestAgency(_datas)
     _iv = [[UIImageView alloc]init];
    // _iv.image = [UIImage imageNamed:@"blueBackGround"];
     _iv.image = self.picImage;
+//    NSLog(@"self.picimage.size = %@",NSStringFromCGSize(self.picImage.size));
     _iv.frame = CGRectMake(10, 10, 100, 130);
+    if ([self.title hasSuffix:@"租车"])
+    {
+        _iv.frame = CGRectMake(10, 10, 100, 90);
+        headView.frame = CGRectMake(0, 0, 320, 155);
+    }
     [headView addSubview:_iv];
     
     _nameLab = [[RTLabel alloc]initWithFrame:CGRectMake(115, 10, 200, 20)];
@@ -345,6 +351,10 @@ postRequestAgency(_datas)
         UIImageView *_link = [[UIImageView alloc]init];
         _link.image = [UIImage imageNamed:@"entainmentLink"];
         _link.frame = CGRectMake(0, 160-2+44*i, 320, 2);
+        if ([self.title hasSuffix:@"租车"])
+        {
+            _link.frame = CGRectMake(0, 110-2+44*i, 320, 2);
+        }
         [headView addSubview:_link];
     }
     _dayLab = [[RTLabel alloc]initWithFrame:CGRectMake(10, 170, 100, 30)];
@@ -355,6 +365,11 @@ postRequestAgency(_datas)
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(240, 168, 59, 25);
+    if ([self.title hasSuffix:@"租车"])
+    {
+        _dayLab.frame = CGRectMake(10, 120, 100, 30);
+        btn.frame = CGRectMake(240, 118, 59, 25);
+    }
     btn.layer.cornerRadius=4;
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
     btn.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"LineDetail_reserve.png"]];
@@ -634,7 +649,7 @@ postRequestAgency(_datas)
                     MineViewController *mvc = [MineViewController new];
                     mvc.tabBarController.tabBar.hidden=YES;
                     mvc.tag=1;
-                    [self.navigationController pushViewController:mvc animated:YES];
+                    [self.navigationController pushViewController:mvc animated:NO];
                 }
             }
             

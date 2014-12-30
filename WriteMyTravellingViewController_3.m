@@ -209,7 +209,7 @@ backButton
     cSIVVC.selectedIV = iv;
     cSIVVC.ID = self.ID;
     cSIVVC.imageNamesArr = self.imageNamesArr;
-    [self.navigationController pushViewController:cSIVVC animated:YES];
+    [self.navigationController pushViewController:cSIVVC animated:NO];
 }
 
 -(void)pickPhotos {
@@ -227,7 +227,7 @@ backButton
             return YES;
         }
     }];
-    [self presentViewController:picker animated:YES completion:nil];
+    [self presentViewController:picker animated:NO completion:nil];
 }
 
 -(void)assetPickerController:(ZYQAssetPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
@@ -347,7 +347,7 @@ backButton
 #pragma mark- UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag==1 && buttonIndex == 0) {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
     }
     
 }

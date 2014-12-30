@@ -34,7 +34,7 @@
 }
 
 -(void)back {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 - (void)viewDidLoad
@@ -115,7 +115,7 @@
     meodTVC.orderPrice = self.orderPrice;
     meodTVC.payStr = self.payWay;
     meodTVC.pushWay = 1;
-    [self.navigationController pushViewController:meodTVC animated:YES];
+    [self.navigationController pushViewController:meodTVC animated:NO];
 }
 
 - (void)didReceiveMemoryWarning

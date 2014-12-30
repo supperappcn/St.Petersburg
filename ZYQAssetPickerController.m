@@ -1007,7 +1007,7 @@ static UIColor *titleColor;
     ZYQAssetViewController *vc = [[ZYQAssetViewController alloc] init];
     vc.assetsGroup = [self.groups objectAtIndex:indexPath.row];
     
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 #pragma mark - Actions
