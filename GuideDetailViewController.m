@@ -311,7 +311,7 @@ postRequestAgency(_datas)
     _iv.frame = CGRectMake(10, 10, 100, 130);
     if ([self.title hasSuffix:@"租车"])
     {
-        _iv.frame = CGRectMake(10, 10, 100, 90);
+        _iv.frame = CGRectMake(10, 10, 100, 75);
         headView.frame = CGRectMake(0, 0, 320, 155);
     }
     [headView addSubview:_iv];
@@ -435,6 +435,7 @@ postRequestAgency(_datas)
                 [alertView show];
             }
 }
+
 - (void)creatbottomBar{
     UIImageView*guding=[[UIImageView alloc]initWithFrame:CGRectMake(0,  DeviceHeight-64-44, 320, 44)];
     //    guding.alpha=0.8;

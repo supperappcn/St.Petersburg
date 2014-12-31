@@ -68,7 +68,8 @@ backButton
 }
 
 -(void)addTableView {
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, -35, 320, DeviceHeight) style:UITableViewStyleGrouped];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DeviceHeight - 24) style:UITableViewStyleGrouped];
+    [self changeViewFrame:CGRectMake(0, 0, 320, DeviceHeight - 64 ) withView:_tableView];
     [self.view addSubview:_tableView];
     _tableView.delegate=self;
     _tableView.dataSource=self;
@@ -78,6 +79,11 @@ backButton
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return dataArray.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.1;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
